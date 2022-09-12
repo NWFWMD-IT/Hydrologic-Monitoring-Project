@@ -7,6 +7,7 @@
 #	model
 #
 # Environment:
+#	ArcGIS Pro 3.0.1
 #	Python 3.9.11, with:
 #		arcpy 3.0 (build py39_arcgispro_36045)
 #
@@ -90,7 +91,7 @@ DOMAIN_NAMES = (
 	,'ADVM Maintenance'
 	,'Battery Condition'
 	,'Battery Replacement Exception'
-	,'Battery Replacement Time Adjustment'
+	,'Battery Replacement Time Adjustment' # Obsolete
 	,'Conductivity Adjustment Exception'
 	,'Conductivity Serial Number'
 	,'Conductivity Standard'
@@ -105,6 +106,8 @@ DOMAIN_NAMES = (
 	,'Stage Adjustment Exception'
 	,'Temperature Serial Number'
 	,'Temperature Source'
+	,'Temperature Units'
+	,'Time Adjustment Type'
 	,'Yes/No'
 )
 

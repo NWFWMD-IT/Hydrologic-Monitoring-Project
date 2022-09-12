@@ -7,7 +7,7 @@
 --	geodatabase
 --
 -- Environment:
---	ArcGIS 10.8.1
+--	ArcGIS Enterprise 10.8.1
 --	SQL Server 2019
 --
 -- Notes:

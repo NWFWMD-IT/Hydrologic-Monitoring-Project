@@ -7,6 +7,7 @@
 #	model
 #
 # Environment:
+#	ArcGIS Pro 3.0.1
 #	Python 3.9.11, with:
 #		arcpy 3.0 (build py39_arcgispro_36045)
 #
@@ -125,12 +126,6 @@ def create_domains(
 			)
 		)
 		,(
-			'Battery Replacement Time Adjustment', 'TEXT', (
-				('Verified', 'Verified')
-				,('Adjusted', 'Adjusted')
-			)
-		)
-		,(
 			'Conductivity Adjustment Exception', 'TEXT', (
 				('Missing standard', 'Missing standard')
 				,('Sensor failed', 'Sensor failed')
@@ -238,6 +233,18 @@ def create_domains(
 				('ADVM', 'ADVM')
 				,('Conductivity', 'Conductivity')
 				,('Transducer', 'Transducer')
+			)
+		)
+		,(
+			'Temperature Units', 'TEXT', (
+				('Celsius', 'Celsius')
+				,('Fahrenheit', 'Fahrenheit')
+			)
+		)
+		,(
+			'Time Adjustment Type', 'TEXT', (
+				('Drift', 'Drift')
+				,('Clock default', 'Clock default')
 			)
 		)
 		,(
@@ -407,10 +414,10 @@ def create_table_conductivitymeasurement(
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,'Conductivity Serial Number'		,None)
-		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement'		,True		,False		,None					,None)
-		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
+		,('ManualLevel'			,'LONG'		,None		,None	,None		,'Manual Measurement'		,True		,False		,None					,None)
+		,('SensorLevel'			,'LONG'		,None		,None	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
 		,('CalibrationStandard'		,'LONG'		,None		,None	,None		,'Calibration Standard'		,True		,False		,'Conductivity Standard'		,None)
-		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Sensor Adjustment Amount'	,True		,False		,None					,None)
+		,('SensorAdjustmentAmount'	,'LONG'		,None		,None	,None		,'Sensor Adjustment Amount'	,True		,False		,None					,None)
 		,('SensorAdjusted'		,'TEXT'		,None		,None	,3		,'Sensor Adjusted'		,True		,False		,'Yes/No'				,None)
 		,('SensorAdjustmentException'	,'TEXT'		,None		,None	,32		,'Sensor Adjustment Exception'	,True		,False		,'Conductivity Adjustment Exception'	,None)
 		,('SensorAdjustmentDate'	,'DATE'		,None		,None	,None		,'Sensor Adjustment Date'	,True		,False		,None					,None)
@@ -529,7 +536,7 @@ def create_table_groundwatermeasurement(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
-		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement'		,True		,False		,None					,None)
+		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
 		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Computed Manual Water Level'	,True		,False		,None					,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
 		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Sensor Adjustment Amount'	,True		,False		,None					,None)
@@ -654,13 +661,14 @@ def create_table_locationvisit(
 		,('BatteryReplaced'		,'TEXT'		,None		,None	,3		,'Battery Replaced'		,True		,False		,'Yes/No'				,None)
 		,('BatteryReplacementException'	,'TEXT'		,None		,None	,32		,'Battery Replacement Exception'	,True	,False		,'Battery Replacement Exception'	,None)
 		,('BatteryReplacementDate'	,'DATE'		,None		,None	,None		,'Battery Replacement Date'	,True		,False		,None					,None)
-		,('BatteryReplacementTimeAdjustment'	,'TEXT'	,None		,None	,32		,'Battery Replacement Time Adjustment'	,True	,False		,'Battery Replacement Time Adjustment'	,None)
 		,('DessicantEnclosure'		,'TEXT'		,None		,None	,32		,'Enclosure Dessicant'		,True		,False		,'Dessicant Maintenance'		,None)
 		,('DessicantStage'		,'TEXT'		,None		,None	,32		,'Stage Sensor Dessicant'	,True		,False		,'Dessicant Maintenance'		,None)
 		,('DessicantGroundwater'	,'TEXT'		,None		,None	,32		,'Groundwater Sensor Dessicant'	,True		,False		,'Dessicant Maintenance'		,None)
 		,('DataLoggerRecordStart'	,'DATE'		,None		,None	,None		,'Data Logger Record Start'	,True		,False		,None					,None)
 		,('DataLoggerRecordEnd'		,'DATE'		,None		,None	,None		,'Data Logger Record End'	,True		,False		,None					,None)
-		,('DataLoggerTimeAdjustment'	,'LONG'		,None		,None	,None		,'Data Logger Time Adjustment (minutes)'	,True	,False	,None					,None)
+		,('DataLoggerTimeAdjustmentType'	,'TEXT'	,None		,None	,32		,'Data Logger Time Adjustment Type'	,True	,False		,'Time Adjustment Type'			,None)
+		,('DataLoggerTimeAdjustmentAmount'	,'LONG'	,None		,None	,None		,'Data Logger Time Adjustment (minutes)'	,True	,False	,None					,None)
+		,('DataLoggerTimeAdjustmentDate'	,'DATE'	,None		,None	,None		,'Data Logger Time Adjustment Date'	,True	,False		,None					,None)
 		,('RainfallBucketCleaned'	,'TEXT'		,None		,None	,3		,'Rainfall Bucket Cleaned'	,True		,False		,'Yes/No'				,None)
 		,('RainfallBucketException'	,'TEXT'		,None		,None	,32		,'Rainfall Bucket Exception'	,True		,False		,'Rainfall Exception'			,None)
 		,('RainfallMechanismCleaned'	,'TEXT'		,None		,None	,3		,'Tipping Mechanism Cleaned'	,True		,False		,'Yes/No'				,None)
@@ -747,7 +755,7 @@ def create_table_measuringpoint(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Name'				,'TEXT'		,None		,None	,32		,'Name'				,True		,False		,None					,None)
 		,('AquariusID'			,'GUID'		,None		,None	,None		,'Aquarius ID'			,True		,False		,None					,None)
-		,('Description'			,'TEXT'		,None		,None	,128		,'Serial Number'		,True		,False		,None					,None)
+		,('Description'			,'TEXT'		,None		,None	,1024		,'Serial Number'		,True		,False		,None					,None)
 		,('Elevation'			,'DOUBLE'	,38		,2	,None		,'Elevation'			,True		,False		,None					,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
@@ -919,7 +927,7 @@ def create_table_stagemeasurement(
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
-		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement'		,True		,False		,None					,None)
+		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
 		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Computed Manual Water Level'	,True		,False		,None					,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
 		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Sensor Adjustment Amount'	,True		,False		,None					,None)
@@ -985,6 +993,7 @@ def create_table_temperaturemeasurement(
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,'Temperature Serial Number'		,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement'		,True		,False		,None					,None)
+		,('ManualLevelUnits'		,'TEXT'		,None		,None	,32		,'Manual Measurement Units'	,True		,False		,'Temperature Units'			,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
 		,('SensorSource'		,'TEXT'		,None		,None	,32		,'Sensor Source'		,True		,False		,'Temperature Source'			,None)
 		,('SensorFailed'		,'TEXT'		,None		,None	,3		,'Sensor Failed'		,True		,False		,'Yes/No'				,None)
