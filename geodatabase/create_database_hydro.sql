@@ -14,10 +14,17 @@
 --
 --	AUTHENTICATION
 --
---	Shared administrative accounts use SQL Server authentication.
+--	[hydro] database users are based on Windows users and groups in the
+--	NWFWMD `HQ` domain. The following domain accounts must exist before
+--	running this script:
 --
---	End user accounts use Windows authentication
+--		Users
+--			hydro
+--			mapserver
+--			sde
 --
+--		Groups
+--			<none>
 --
 --
 --	CONTAINMENT
@@ -41,14 +48,21 @@
 --	instead defers to a separate, preliminary decision/action, presumably
 --	with informed consideration by the administrator.
 --
+--
+--	DEVELOPMENT
+--
+--	To run in the development environment, find and replace:
+--
+--		D:\sqldata		C:\data\sqldata
+--		HQ\			CITRA\
+--
 -- History:
 --	2022-07-18 MCM Created
+--	2022-09-13 MCM Change users from database to Windows authentication (Hydro #17)
+--	               Updated file paths for NWFWMD production environment
 --
 -- To do:
 --	Localize for NWFWMD environment:
---
---		Update file paths
---
 --		Add end users
 --
 -- Copyright 2003-2022. Mannion Geosystems, LLC. http://www.manniongeo.com
@@ -63,14 +77,14 @@ CREATE DATABASE [hydro]
 CONTAINMENT = PARTIAL
 ON PRIMARY (
 	NAME = 'hydro_01.mdf'
-	,FILENAME = 'C:\data\sqldata\MSSQLSERVER\hydro\hydro_01.mdf'
+	,FILENAME = 'D:\sqldata\MSSQLSERVER\hydro_01.mdf'
 	,SIZE = 16 GB
 	,MAXSIZE = UNLIMITED
 	,FILEGROWTH = 4 GB
 )
 LOG ON (
 	NAME = 'hydro_01.ldf'
-	,FILENAME = 'C:\data\sqldata\MSSQLSERVER\hydro\hydro_01.ldf'
+	,FILENAME = 'D:\sqldata\MSSQLSERVER\hydro_01.ldf'
 	,SIZE = 1 GB
 	,MAXSIZE = 16 GB
 	,FILEGROWTH = 1 GB
@@ -79,6 +93,8 @@ WITH
 	DB_CHAINING OFF
 	,TRUSTWORTHY OFF
 ;
+
+GO
 
 
 
@@ -91,7 +107,6 @@ SET
 	,AUTO_UPDATE_STATISTICS_ASYNC ON
 	,RECOVERY FULL
 ;
-
 
 GO
 
@@ -131,21 +146,10 @@ GO
 
 -- Geodatabase administrator
 
-CREATE USER [sde]
+CREATE USER [HQ\sde]
 WITH
-	PASSWORD = 'sde'
-	,DEFAULT_SCHEMA = [sde]
+	DEFAULT_SCHEMA = [sde]
 ;
-
-
-
-RAISERROR(
-	'***** Change password for [sde] user *****'
-	,0
-	,0
-)
-;
-
 
 GO
 
@@ -157,8 +161,11 @@ GRANT
 	,CREATE TABLE
 	,CREATE VIEW
 TO
-	[sde]
+	[HQ\sde]
 ;
+
+GO
+
 
 
 GRANT
@@ -166,7 +173,7 @@ GRANT
 ON
 	DATABASE::[hydro]
 TO
-	[sde]
+	[HQ\sde]
 ;
 
 GO
@@ -175,21 +182,10 @@ GO
 
 -- Data owner
 
-CREATE USER [hydro]
+CREATE USER [HQ\hydro]
 WITH
-	PASSWORD = 'hydro'
-	,DEFAULT_SCHEMA = [hydro]
+	DEFAULT_SCHEMA = [hydro]
 ;
-
-
-
-RAISERROR(
-	'***** Change password for [hydro] user *****'
-	,0
-	,0
-)
-;
-
 
 GO
 
@@ -200,9 +196,8 @@ GRANT
 	,CREATE TABLE
 	,CREATE VIEW
 TO
-	[hydro]
+	[HQ\hydro]
 ;
-
 
 GO
 
@@ -210,35 +205,24 @@ GO
 
 -- Service user
 
-CREATE USER [mapserver]
+CREATE USER [HQ\mapserver]
 WITH
-	PASSWORD = 'mapserver'
-	,DEFAULT_SCHEMA = [dbo]
+	DEFAULT_SCHEMA = [dbo]
 ;
-
-
-
-RAISERROR(
-	'***** Change password for [mapserver] user *****'
-	,0
-	,0
-)
-;
-
 
 GO
 
 
 
 ALTER ROLE db_datareader
-ADD MEMBER [mapserver]
+ADD MEMBER [HQ\mapserver]
 ;
 
 GO
 
 
 ALTER ROLE db_datawriter
-ADD MEMBER [mapserver]
+ADD MEMBER [HQ\mapserver]
 ;
 
 GO
@@ -266,7 +250,7 @@ GO
 --
 
 CREATE SCHEMA [sde]
-AUTHORIZATION [sde]
+AUTHORIZATION [HQ\sde]
 ;
 
 GO
@@ -278,7 +262,7 @@ GO
 --
 
 CREATE SCHEMA [hydro]
-AUTHORIZATION [hydro]
+AUTHORIZATION [HQ\hydro]
 ;
 
 GO
