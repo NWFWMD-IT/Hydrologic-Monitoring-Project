@@ -1,75 +1,42 @@
 --------------------------------------------------------------------------------
--- Name:
---	create_database_hydro.sql
+-- Temporary workaround for create_database_hydro.sql until Esri Support case
+-- #03150260 is resolved
 --
--- Purpose:
---	Create SQL Server database [hydro] and configure for hosting a
---	geodatabase
---
--- Environment:
---	ArcGIS Enterprise 10.8.1
---	SQL Server 2019
---
--- Notes:
---
---	AUTHENTICATION
---
---	[hydro] database users are based on Windows users and groups in the
---	NWFWMD `HQ` domain. The following domain accounts must exist before
---	running this script:
---
---		Users
---			hydro
---			mapserver
---			sde
---
---		Groups
---			<none>
---
---
---	CONTAINMENT
---
---	All users are created as contained database users, per current Microsoft
---	recommendations, and to facilitate deploying during data model
---	development and testing.
---
---	In the target SQL Server release, contained authentication is disabled
---	by default at the instance level. Enabling contained authentication is
---	required before running this script. To enable this feature, run the
---	following statements:
---
---		sp_configure 'contained database authentication',  1;
---
---		RECONFIGURE;
---
---	Enabling contained authentication affects various security and
---	functional aspects of the instance/database. Therefore, this script does
---	not attempt to automatically enable contained authentication and
---	instead defers to a separate, preliminary decision/action, presumably
---	with informed consideration by the administrator.
---
---
---	DEVELOPMENT
---
---	To run in the development environment, find and replace:
---
---		D:\sqldata		C:\data\sqldata
---		HQ\			CITRA\
---
--- History:
---	2022-07-18 MCM Created
---	2022-09-13 MCM Change users from database to Windows authentication (Hydro #17)
---	               Updated file paths for NWFWMD production environment
---
--- To do:
---	*** Resolve Esri Support case #03150260 before using this security model ***
---		Use create_database_hydro_WITH_LOGINS.sql until then
---
---	Localize for NWFWMD environment:
---		Add end users
---
--- Copyright 2003-2022. Mannion Geosystems, LLC. http://www.manniongeo.com
+-- Uses login-based users instead of contained database users for system/service
+-- accounts.
 --------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+-- Logins
+--------------------------------------------------------------------------------
+
+USE [master]
+GO
+
+
+-- Geodtabase administrator
+
+CREATE LOGIN [HQ\sde]
+FROM WINDOWS
+;
+
+
+
+-- Data owner
+
+CREATE LOGIN [HQ\hydro]
+FROM WINDOWS
+;
+
+
+
+-- Web services
+
+CREATE LOGIN [HQ\mapserver]
+FROM WINDOWS
+;
+
 
 
 --------------------------------------------------------------------------------
@@ -149,7 +116,8 @@ GO
 
 -- Geodatabase administrator
 
-CREATE USER [HQ\sde]
+CREATE USER [sde]
+FOR LOGIN [HQ\sde]
 WITH
 	DEFAULT_SCHEMA = [sde]
 ;
@@ -164,7 +132,7 @@ GRANT
 	,CREATE TABLE
 	,CREATE VIEW
 TO
-	[HQ\sde]
+	[sde]
 ;
 
 GO
@@ -176,7 +144,7 @@ GRANT
 ON
 	DATABASE::[hydro]
 TO
-	[HQ\sde]
+	[sde]
 ;
 
 GO
@@ -185,7 +153,8 @@ GO
 
 -- Data owner
 
-CREATE USER [HQ\hydro]
+CREATE USER [hydro]
+FOR LOGIN [HQ\hydro]
 WITH
 	DEFAULT_SCHEMA = [hydro]
 ;
@@ -199,7 +168,7 @@ GRANT
 	,CREATE TABLE
 	,CREATE VIEW
 TO
-	[HQ\hydro]
+	[hydro]
 ;
 
 GO
@@ -208,7 +177,8 @@ GO
 
 -- Service user
 
-CREATE USER [HQ\mapserver]
+CREATE USER [mapserver]
+FOR LOGIN [HQ\mapserver]
 WITH
 	DEFAULT_SCHEMA = [dbo]
 ;
@@ -218,14 +188,14 @@ GO
 
 
 ALTER ROLE db_datareader
-ADD MEMBER [HQ\mapserver]
+ADD MEMBER [mapserver]
 ;
 
 GO
 
 
 ALTER ROLE db_datawriter
-ADD MEMBER [HQ\mapserver]
+ADD MEMBER [mapserver]
 ;
 
 GO
@@ -253,7 +223,7 @@ GO
 --
 
 CREATE SCHEMA [sde]
-AUTHORIZATION [HQ\sde]
+AUTHORIZATION [sde]
 ;
 
 GO
@@ -265,7 +235,7 @@ GO
 --
 
 CREATE SCHEMA [hydro]
-AUTHORIZATION [HQ\hydro]
+AUTHORIZATION [hydro]
 ;
 
 GO
