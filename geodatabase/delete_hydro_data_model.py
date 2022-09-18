@@ -53,6 +53,7 @@ import datetime
 import logging
 import os
 import sys
+import tempfile
 
 
 # Custom
@@ -64,6 +65,15 @@ import mg
 #
 # Constants
 #
+
+
+# General
+
+CONNECTION_FILE_NAME = 'connection.sde'
+
+
+
+# Geodatabase object names
 
 ATTACHMENT_TABLE_NAMES = (
 	'Location_ATTACH'
@@ -91,7 +101,6 @@ DOMAIN_NAMES = (
 	,'ADVM Maintenance'
 	,'Battery Condition'
 	,'Battery Replacement Exception'
-	,'Battery Replacement Time Adjustment' # Obsolete
 	,'Conductivity Adjustment Exception'
 	,'Conductivity Serial Number'
 	,'Conductivity Standard'
@@ -109,6 +118,8 @@ DOMAIN_NAMES = (
 	,'Temperature Units'
 	,'Time Adjustment Type'
 	,'Yes/No'
+	# Obsolete
+	,'Battery Replacement Time Adjustment'
 )
 
 FC_NAMES = (
@@ -288,14 +299,14 @@ def _configure_arguments():
 
 
 	g.add_argument(
-		'-g'
-		,'--geodatabase'
-		,dest = 'gdb'
-		,help = 'Path to ArcGIS geodatabase connection file (.sde) for data model owner'
-		,metavar = '<geodatabase>'
+		'-s'
+		,'--server'
+		,dest = 'server'
+		,help = 'SQL Server hostname'
+		,metavar = '<server>'
 		,required = True
 	)
-	
+
 	g.add_argument(
 		'-L'
 		,'--log-level'
@@ -381,6 +392,95 @@ def _configure_log_file(
 	
 
 
+def _connect_gdb(
+	server
+):
+	'''
+	Create temporary geodatabase connection using OS authentication
+	
+	Returns tempfile.TemporaryDirectory object, along with geodatabase
+	connection file. You must retain a reference to the returned
+	TemporaryDirectory, else it will go out-of-scope and automatically
+	delete itself - including the connection file it contains. Retaining
+	a reference to the file, itself, is not sufficient to prevent automatic
+	cleanup.
+	'''
+	
+	
+	# Create connection
+	
+	temp_dir = tempfile.TemporaryDirectory()
+	logging.debug(f'Created temporary directory {temp_dir.name}')
+	
+	
+	
+	arcpy.management.CreateDatabaseConnection(
+		out_folder_path = temp_dir.name
+		,out_name = CONNECTION_FILE_NAME
+		,database_platform = 'SQL_SERVER'
+		,instance = server
+		,account_authentication = 'OPERATING_SYSTEM_AUTH'
+		,database = 'hydro'
+	)
+	
+	
+	gdb = os.path.join(
+		temp_dir.name
+		,CONNECTION_FILE_NAME
+	)
+	logging.debug(f'Created database connection file: {gdb}')
+	
+	
+	
+	# Validate geodatabase connection
+	#
+	# Creating connection file does not appear to test connection, just
+	# write properties to file
+
+	logging.debug('Validating geodatabase connection')
+	try:
+
+		# Describe raises:
+		#	IOError if target is not a recognized object type
+		#	OSError if target does not exist
+
+		d = arcpy.Describe(gdb)
+		logging.debug(f'Describe type: {d.dataType}')
+
+
+
+		# Referencing workspaceType raises AttributeError if target is not a workspace
+
+		if not d.workspaceType == 'RemoteDatabase':
+
+			# Explicitly raise exception if target is not an enterprise geodatabase
+
+			raise TypeError(f'Expected RemoteDatabase type; got {d.workspaceType} type')
+
+
+	except (
+		IOError
+		,OSError
+		,AttributeError
+		,TypeError
+	) as e:
+
+		logging.error(f'Invalid enterprise geodatabase')
+		
+		raise RuntimeError('Invalid enterprise geodatabase') from e
+
+
+	
+	# Return connection file AND TemporaryDirectory; see function header
+	# comments for details
+	
+	return(
+		gdb
+		,temp_dir
+	)
+	
+
+
 def _initialize_logging(
 	level = logging.NOTSET
 ):
@@ -449,7 +549,7 @@ def _print_banner(
 		f'{mg.BANNER_DELIMITER_1}\n'
 		f'Hydrologic Data Model Deletion\n'
 		f'{mg.BANNER_DELIMITER_2}\n'
-		f'Target database:         {args.gdb}\n'
+		f'Target database server:  {args.server}\n'
 		f'Log level:               {args.log_level}\n'
 		f'Keep domains:            {args.keep_domains}\n'
 		f'{mg.BANNER_DELIMITER_1}'
@@ -517,37 +617,6 @@ def _process_arguments(
 	
 	
 	
-	# Validate target geodatabase
-	
-	try:
-
-		# Describe raises:
-		#	IOError if target is not a recognized object type
-		#	OSError if target does not exist
-
-		d = arcpy.Describe(args.gdb)
-
-
-		# Referencing workspaceType raises AttributeError if target is not a workspace
-
-		if not d.workspaceType == u'RemoteDatabase':
-
-			# Explicitly raise exception if target is not an enterprise geodatabase
-
-			raise TypeError(f'Expected RemoteDatabase type; got {d.workspaceType} type')
-
-
-	except (
-		IOError
-		,OSError
-		,AttributeError
-		,TypeError
-	) as e:
-
-		raise RuntimeError(f'Invalid enterprise geodatabase\n{e}')
-	
-	
-	
 	#
 	# Return
 	#
@@ -600,6 +669,17 @@ if __name__ == '__main__':
 	_print_banner(args)
 
 
+
+	# Connect to geodatabase
+	
+	logging.info('Connecting to geodatabase')
+
+	(
+		gdb
+		,temp_dir
+	) = _connect_gdb(args.server)
+	
+	
 	
 	#
 	# Delete feature classes
@@ -608,7 +688,7 @@ if __name__ == '__main__':
 	logging.info('Deleting feature classes')
 	
 	delete_fcs(
-		gdb = args.gdb
+		gdb = gdb
 		,fc_names = FC_NAMES
 		,indent_level = 1
 	)
@@ -622,7 +702,7 @@ if __name__ == '__main__':
 	logging.info('Deleting attribute tables')
 	
 	delete_tables(
-		gdb = args.gdb
+		gdb = gdb
 		,table_names = ATTRIBUTE_TABLE_NAMES
 		,indent_level = 1
 	)
@@ -645,16 +725,12 @@ if __name__ == '__main__':
 		logging.info('Deleting domains')
 
 		delete_domains(
-			gdb = args.gdb
+			gdb = gdb
 			,domain_names = DOMAIN_NAMES
 			,indent_level = 1
 		)
 	
 
-
-
-
-	
 	
 	#
 	# Cleanup

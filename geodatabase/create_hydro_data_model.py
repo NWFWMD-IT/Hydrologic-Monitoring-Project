@@ -59,7 +59,6 @@ import mg
 
 CONNECTION_FILE_NAME = 'connection.sde'
 
-
 DATA_OWNER = 'hydro'
 
 SR_UTM16N_NAD83 = arcpy.SpatialReference(26916) # NAD_1983_UTM_Zone_16N
@@ -1534,11 +1533,9 @@ if __name__ == '__main__':
 
 
 
-	#
 	# Connect to geodatabase
-	#
 	
-	logging.info('Creating database connection file')
+	logging.info('Connecting to geodatabase')
 
 	(
 		gdb
