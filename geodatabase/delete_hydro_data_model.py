@@ -97,7 +97,7 @@ DOMAIN_NAMES = (
 	,'Conductivity Standard'
 	,'Data Logger Type'
 	,'Dessicant Maintenance'
-	,'Groundwater Adjustement Exception'
+	,'Groundwater Adjustment Exception'
 	,'Hydro Staff'
 	,'Location Issue Type'
 	,'Rainfall Exception'

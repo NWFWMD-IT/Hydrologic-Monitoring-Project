@@ -11,7 +11,9 @@
 #		arcpy 3.0 (build py39_arcgispro_36045)
 #
 # Notes:
-#
+#	This script connects to the target `hydro` database using Windows
+#	authentication. You must run this script from a Python session running
+#	as the Windows `sde` user on which the database `sde` user is based.
 #
 # History:
 #	2022-07-18 MCM Created
@@ -32,7 +34,6 @@
 
 import arcpy
 import argparse
-import getpass
 import logging
 import os
 import tempfile
@@ -97,15 +98,6 @@ def _configure_arguments():
 	)
 	
 	g.add_argument(
-		'-p'
-		,'--password'
-		,dest = 'password'
-		,help = '[sde] user password'
-		,metavar = '<password>'
-		,required = False
-	)
-	
-	g.add_argument(
 		'-a'
 		,'--authorization-file'
 		,dest = 'auth_file'
@@ -115,7 +107,7 @@ def _configure_arguments():
 	)
 	
 	g.add_argument(
-		'-l'
+		'-L'
 		,'--log-level'
 		,choices = (
 			'CRITICAL'
@@ -263,15 +255,6 @@ def _process_arguments(
 	
 	
 	
-	# Get password, if required
-
-	if args.password is None:
-
-		logging.debug('Prompting for password')
-		args.password = getpass.getpass('[sde] user password: ')
-	
-	
-	
 	#
 	# Return
 	#
@@ -330,17 +313,13 @@ if __name__ == '__main__':
 	
 		logging.debug(f'Temporary directory: {temp_dir}')
 	
-	
 		logging.info('Creating database connection')
 		arcpy.management.CreateDatabaseConnection(
 			out_folder_path = temp_dir
 			,out_name = CONNECTION_FILE_NAME
 			,database_platform = 'SQL_SERVER'
 			,instance = args.server
-			,account_authentication = 'DATABASE_AUTH'
-			,username = 'sde'
-			,password = args.password
-			,save_user_pass = True
+			,account_authentication = 'OPERATING_SYSTEM_AUTH'
 			,database = 'hydro'
 		)
 		
@@ -350,9 +329,9 @@ if __name__ == '__main__':
 			,CONNECTION_FILE_NAME
 		)
 		logging.debug(f'Connection file: {gdb}')
-		
-		
-	
+
+
+
 		logging.info('Enabling enterprise geodatabase')
 		arcpy.management.EnableEnterpriseGeodatabase(
 			input_database = gdb

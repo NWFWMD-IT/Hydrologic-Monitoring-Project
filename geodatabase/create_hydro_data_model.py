@@ -44,6 +44,7 @@ import datetime
 import logging
 import os
 import sys
+import tempfile
 
 
 # Custom
@@ -55,6 +56,11 @@ import mg
 #
 # Constants
 #
+
+CONNECTION_FILE_NAME = 'connection.sde'
+
+
+DATA_OWNER = 'hydro'
 
 SR_UTM16N_NAD83 = arcpy.SpatialReference(26916) # NAD_1983_UTM_Zone_16N
 
@@ -163,7 +169,7 @@ def create_domains(
 			)
 		)
 		,(
-			'Groundwater Adjustement Exception', 'TEXT', (
+			'Groundwater Adjustment Exception', 'TEXT', (
 				('Before water quality sample', 'Before water quality sample')
 				,('Low conductivity', 'Low conductivity')
 				,('Time', 'Time')
@@ -653,53 +659,53 @@ def create_table_locationvisit(
 	)
 
 	attributes = (
-		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
-		('VisitDate'			,'DATE'		,None		,None	,None		,'Visit Date'			,True		,False		,None					,None)
-		,('BatteryDOA'			,'TEXT'		,None		,None	,3		,'Battery DOA'			,True		,False		,'Yes/No'				,None)
-		,('BatteryCondition'		,'TEXT'		,None		,None	,32		,'Battery Condition'		,True		,False		,'Battery Condition'			,None)
-		,('BatteryVoltage'		,'DOUBLE'	,38		,2	,None		,'Battery Voltage'		,True		,False		,None					,None)
-		,('BatteryReplaced'		,'TEXT'		,None		,None	,3		,'Battery Replaced'		,True		,False		,'Yes/No'				,None)
-		,('BatteryReplacementException'	,'TEXT'		,None		,None	,32		,'Battery Replacement Exception'	,True	,False		,'Battery Replacement Exception'	,None)
-		,('BatteryReplacementDate'	,'DATE'		,None		,None	,None		,'Battery Replacement Date'	,True		,False		,None					,None)
-		,('DessicantEnclosure'		,'TEXT'		,None		,None	,32		,'Enclosure Dessicant'		,True		,False		,'Dessicant Maintenance'		,None)
-		,('DessicantStage'		,'TEXT'		,None		,None	,32		,'Stage Sensor Dessicant'	,True		,False		,'Dessicant Maintenance'		,None)
-		,('DessicantGroundwater'	,'TEXT'		,None		,None	,32		,'Groundwater Sensor Dessicant'	,True		,False		,'Dessicant Maintenance'		,None)
-		,('DataLoggerRecordStart'	,'DATE'		,None		,None	,None		,'Data Logger Record Start'	,True		,False		,None					,None)
-		,('DataLoggerRecordEnd'		,'DATE'		,None		,None	,None		,'Data Logger Record End'	,True		,False		,None					,None)
-		,('DataLoggerTimeAdjustmentType'	,'TEXT'	,None		,None	,32		,'Data Logger Time Adjustment Type'	,True	,False		,'Time Adjustment Type'			,None)
-		,('DataLoggerTimeAdjustmentAmount'	,'LONG'	,None		,None	,None		,'Data Logger Time Adjustment (minutes)'	,True	,False	,None					,None)
-		,('DataLoggerTimeAdjustmentDate'	,'DATE'	,None		,None	,None		,'Data Logger Time Adjustment Date'	,True	,False		,None					,None)
-		,('RainfallBucketCleaned'	,'TEXT'		,None		,None	,3		,'Rainfall Bucket Cleaned'	,True		,False		,'Yes/No'				,None)
-		,('RainfallBucketException'	,'TEXT'		,None		,None	,32		,'Rainfall Bucket Exception'	,True		,False		,'Rainfall Exception'			,None)
-		,('RainfallMechanismCleaned'	,'TEXT'		,None		,None	,3		,'Tipping Mechanism Cleaned'	,True		,False		,'Yes/No'				,None)
-		,('RainfallMechanismException'	,'TEXT'		,None		,None	,32		,'Tipping Mechanism Exception'	,True		,False		,'Rainfall Exception'			,None)
-		,('ADVMBatteryDOA'		,'TEXT'		,None		,None	,3		,'ADVM Battery DOA'		,True		,False		,'Yes/No'				,None)
-		,('ADVMBatteryCondition'	,'TEXT'		,None		,None	,32		,'ADVM Battery Condition'	,True		,False		,'Battery Condition'			,None)
-		,('ADVMBatteryVoltage'		,'DOUBLE'	,38		,2	,None		,'ADVM Battery Voltage'		,True		,False		,None					,None)
-		,('ADVMBatteryReplaced'		,'TEXT'		,None		,None	,3		,'ADVM Battery Replaced'	,True		,False		,'Yes/No'				,None)
-		,('ADVMBatteryReplacementException'	,'TEXT'	,None		,None	,32		,'ADVM Battery Replacement Exception'	,True	,False		,'Battery Replacement Exception'	,None)
-		,('ADVMBatteryReplacementDate'	,'DATE'		,None		,None	,None		,'ADVM Battery Replacement Date'	,True	,False		,None					,None)
-		,('ADVMRecordStart'		,'DATE'		,None		,None	,None		,'ADVM Record Start'		,True		,False		,None					,None)
-		,('ADVMRecordEnd'		,'DATE'		,None		,None	,None		,'ADVM Record End'		,True		,False		,None					,None)
-		,('ADVMBeamCheckedInitial'	,'TEXT'		,None		,None	,3		,'ADVM Initial Beam Checked'	,True		,False		,'Yes/No'				,None)
-		,('ADVMBeamCheckInitialException'	,'TEXT'	,None		,None	,32		,'ADVM Initial Beam Check Exception'	,True	,False		,'ADVM Beam Check Initial Exception'	,None)
-		,('ADVMBeamCheckedSecondary'	,'TEXT'		,None		,None	,3		,'ADVM Secondary Beam Checked'	,True		,False		,'Yes/No'				,None)
-		,('ADVMBeamCheckSecondaryException'	,'TEXT'	,None		,None	,32		,'ADVM Secondary Beam Check Exception'	,True	,False		,'ADVM Beam Check Secondary Exception'	,None)
-		,('ADVMCleaned'			,'TEXT'		,None		,None	,3		,'ADVM Cleaned'			,True		,False		,'Yes/No'				,None)
-		,('ADVMCleanedException'	,'TEXT'		,None		,None	,32		,'ADVM Cleaned Exception'	,True		,False		,'ADVM Cleaned Exception'		,None)
-		,('ADVMMaintenance'		,'TEXT'		,None		,None	,32		,'ADVM Additional Maintenace'	,True		,False		,'ADVM Maintenance'			,None)
-		,('DischargeRecordStart'	,'DATE'		,None		,None	,None		,'Discharge Record Start'	,True		,False		,None					,None)
-		,('DischargeRecordEnd'		,'DATE'		,None		,None	,None		,'Discharge Record End'		,True		,False		,None					,None)
-		,('DischargeStageStart'		,'DATE'		,None		,None	,None		,'Discharge Stage Start'	,True		,False		,None					,None)
-		,('DischargeStageEnd'		,'DATE'		,None		,None	,None		,'Discharge Stage End'		,True		,False		,None					,None)
-		,('DischargeVolume'		,'DOUBLE'	,38		,2	,None		,'Discharge Volume'		,True		,False		,None					,None)
-		,('DischargeUncertainty'	,'DOUBLE'	,38		,2	,None		,'Discharge Uncertainty'	,True		,False		,None					,None)
-		,('WaterQualitySensorPulled'	,'TEXT'		,None		,None	,3		,'Water Quality Sensor Pulled'	,True		,False		,'Yes/No'				,None)
-		,('WaterQualitySensorPulledDate'	,'DATE'	,None		,None	,None		,'Water Quality Sensor Pulled Date'	,True	,False		,None					,None)
-		,('WaterQualityPurgeStart'	,'DATE'		,None		,None	,None		,'Water Quality Purge Start'	,True		,False		,None					,None)
-		,('WaterQualitySamplingEnd'	,'DATE'		,None		,None	,None		,'Water Quality Sampling End'	,True		,False		,None					,None)
-		,('WaterQualitySensorReinstalled'	,'DATE'	,None		,None	,None		,'Water Quality Sensor Reinstall Date'	,True	,False		,None					,None)
-		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
+		#name					,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
+		('VisitDate'				,'DATE'		,None		,None	,None		,'Visit Date'				,True		,False		,None					,None)
+		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
+		,('BatteryCondition'			,'TEXT'		,None		,None	,32		,'Battery Condition'			,True		,False		,'Battery Condition'			,None)
+		,('BatteryVoltage'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage'			,True		,False		,None					,None)
+		,('BatteryReplaced'			,'TEXT'		,None		,None	,3		,'Battery Replaced'			,True		,False		,'Yes/No'				,None)
+		,('BatteryReplacementException'		,'TEXT'		,None		,None	,32		,'Battery Replacement Exception'	,True		,False		,'Battery Replacement Exception'	,None)
+		,('BatteryReplacementDate'		,'DATE'		,None		,None	,None		,'Battery Replacement Date'		,True		,False		,None					,None)
+		,('DessicantEnclosure'			,'TEXT'		,None		,None	,32		,'Enclosure Dessicant'			,True		,False		,'Dessicant Maintenance'		,None)
+		,('DessicantStage'			,'TEXT'		,None		,None	,32		,'Stage Sensor Dessicant'		,True		,False		,'Dessicant Maintenance'		,None)
+		,('DessicantGroundwater'		,'TEXT'		,None		,None	,32		,'Groundwater Sensor Dessicant'		,True		,False		,'Dessicant Maintenance'		,None)
+		,('DataLoggerRecordStart'		,'DATE'		,None		,None	,None		,'Data Logger Record Start'		,True		,False		,None					,None)
+		,('DataLoggerRecordEnd'			,'DATE'		,None		,None	,None		,'Data Logger Record End'		,True		,False		,None					,None)
+		,('DataLoggerTimeAdjustmentType'	,'TEXT'		,None		,None	,32		,'Data Logger Time Adjustment Type'	,True		,False		,'Time Adjustment Type'			,None)
+		,('DataLoggerTimeAdjustmentAmount'	,'LONG'		,None		,None	,None		,'Data Logger Time Adjustment (minutes)'	,True	,False		,None					,None)
+		,('DataLoggerTimeAdjustmentDate'	,'DATE'		,None		,None	,None		,'Data Logger Time Adjustment Date'	,True		,False		,None					,None)
+		,('RainfallBucketCleaned'		,'TEXT'		,None		,None	,3		,'Rainfall Bucket Cleaned'		,True		,False		,'Yes/No'				,None)
+		,('RainfallBucketException'		,'TEXT'		,None		,None	,32		,'Rainfall Bucket Exception'		,True		,False		,'Rainfall Exception'			,None)
+		,('RainfallMechanismCleaned'		,'TEXT'		,None		,None	,3		,'Tipping Mechanism Cleaned'		,True		,False		,'Yes/No'				,None)
+		,('RainfallMechanismException'		,'TEXT'		,None		,None	,32		,'Tipping Mechanism Exception'		,True		,False		,'Rainfall Exception'			,None)
+		,('ADVMBatteryDOA'			,'TEXT'		,None		,None	,3		,'ADVM Battery DOA'			,True		,False		,'Yes/No'				,None)
+		,('ADVMBatteryCondition'		,'TEXT'		,None		,None	,32		,'ADVM Battery Condition'		,True		,False		,'Battery Condition'			,None)
+		,('ADVMBatteryVoltage'			,'DOUBLE'	,38		,2	,None		,'ADVM Battery Voltage'			,True		,False		,None					,None)
+		,('ADVMBatteryReplaced'			,'TEXT'		,None		,None	,3		,'ADVM Battery Replaced'		,True		,False		,'Yes/No'				,None)
+		,('ADVMBatteryReplacementException'	,'TEXT'		,None		,None	,32		,'ADVM Battery Replacement Exception'	,True		,False		,'Battery Replacement Exception'	,None)
+		,('ADVMBatteryReplacementDate'		,'DATE'		,None		,None	,None		,'ADVM Battery Replacement Date'	,True		,False		,None					,None)
+		,('ADVMRecordStart'			,'DATE'		,None		,None	,None		,'ADVM Record Start'			,True		,False		,None					,None)
+		,('ADVMRecordEnd'			,'DATE'		,None		,None	,None		,'ADVM Record End'			,True		,False		,None					,None)
+		,('ADVMBeamCheckedInitial'		,'TEXT'		,None		,None	,3		,'ADVM Initial Beam Checked'		,True		,False		,'Yes/No'				,None)
+		,('ADVMBeamCheckInitialException'	,'TEXT'		,None		,None	,32		,'ADVM Initial Beam Check Exception'	,True		,False		,'ADVM Beam Check Initial Exception'	,None)
+		,('ADVMBeamCheckedSecondary'		,'TEXT'		,None		,None	,3		,'ADVM Secondary Beam Checked'		,True		,False		,'Yes/No'				,None)
+		,('ADVMBeamCheckSecondaryException'	,'TEXT'		,None		,None	,32		,'ADVM Secondary Beam Check Exception'	,True		,False		,'ADVM Beam Check Secondary Exception'	,None)
+		,('ADVMCleaned'				,'TEXT'		,None		,None	,3		,'ADVM Cleaned'				,True		,False		,'Yes/No'				,None)
+		,('ADVMCleanedException'		,'TEXT'		,None		,None	,32		,'ADVM Cleaned Exception'		,True		,False		,'ADVM Cleaned Exception'		,None)
+		,('ADVMMaintenance'			,'TEXT'		,None		,None	,32		,'ADVM Additional Maintenace'		,True		,False		,'ADVM Maintenance'			,None)
+		,('DischargeRecordStart'		,'DATE'		,None		,None	,None		,'Discharge Record Start'		,True		,False		,None					,None)
+		,('DischargeRecordEnd'			,'DATE'		,None		,None	,None		,'Discharge Record End'			,True		,False		,None					,None)
+		,('DischargeStageStart'			,'DATE'		,None		,None	,None		,'Discharge Stage Start'		,True		,False		,None					,None)
+		,('DischargeStageEnd'			,'DATE'		,None		,None	,None		,'Discharge Stage End'			,True		,False		,None					,None)
+		,('DischargeVolume'			,'DOUBLE'	,38		,2	,None		,'Discharge Volume'			,True		,False		,None					,None)
+		,('DischargeUncertainty'		,'DOUBLE'	,38		,2	,None		,'Discharge Uncertainty'		,True		,False		,None					,None)
+		,('WaterQualitySensorPulled'		,'TEXT'		,None		,None	,3		,'Water Quality Sensor Pulled'		,True		,False		,'Yes/No'				,None)
+		,('WaterQualitySensorPulledDate'	,'DATE'		,None		,None	,None		,'Water Quality Sensor Pulled Date'	,True		,False		,None					,None)
+		,('WaterQualityPurgeStart'		,'DATE'		,None		,None	,None		,'Water Quality Purge Start'		,True		,False		,None					,None)
+		,('WaterQualitySamplingEnd'		,'DATE'		,None		,None	,None		,'Water Quality Sampling End'		,True		,False		,None					,None)
+		,('WaterQualitySensorReinstalled'	,'DATE'		,None		,None	,None		,'Water Quality Sensor Reinstall Date'	,True		,False		,None					,None)
+		,('LocationGlobalID'			,'GUID'		,None		,None	,None		,'Related Location'			,True		,False		,None					,None)
 	)
 
 	subtypes = None
@@ -1160,11 +1166,11 @@ def _configure_arguments():
 
 
 	g.add_argument(
-		'-g'
-		,'--geodatabase'
-		,dest = 'gdb'
-		,help = 'Path to ArcGIS geodatabase connection file (.sde) for data model owner'
-		,metavar = '<geodatabase>'
+		'-s'
+		,'--server'
+		,dest = 'server'
+		,help = 'SQL Server hostname'
+		,metavar = '<server>'
 		,required = True
 	)
 
@@ -1253,6 +1259,95 @@ def _configure_log_file(
 
 
 
+def _connect_gdb(
+	server
+):
+	'''
+	Create temporary geodatabase connection using OS authentication
+	
+	Returns tempfile.TemporaryDirectory object, along with geodatabase
+	connection file. You must retain a reference to the returned
+	TemporaryDirectory, else it will go out-of-scope and automatically
+	delete itself - including the connection file it contains. Retaining
+	a reference to the file, itself, is not sufficient to prevent automatic
+	cleanup.
+	'''
+	
+	
+	# Create connection
+	
+	temp_dir = tempfile.TemporaryDirectory()
+	logging.debug(f'Created temporary directory {temp_dir.name}')
+	
+	
+	
+	arcpy.management.CreateDatabaseConnection(
+		out_folder_path = temp_dir.name
+		,out_name = CONNECTION_FILE_NAME
+		,database_platform = 'SQL_SERVER'
+		,instance = server
+		,account_authentication = 'OPERATING_SYSTEM_AUTH'
+		,database = 'hydro'
+	)
+	
+	
+	gdb = os.path.join(
+		temp_dir.name
+		,CONNECTION_FILE_NAME
+	)
+	logging.debug(f'Created database connection file: {gdb}')
+	
+	
+	
+	# Validate geodatabase connection
+	#
+	# Creating connection file does not appear to test connection, just
+	# write properties to file
+
+	logging.debug('Validating geodatabase connection')
+	try:
+
+		# Describe raises:
+		#	IOError if target is not a recognized object type
+		#	OSError if target does not exist
+
+		d = arcpy.Describe(gdb)
+		logging.debug(f'Describe type: {d.dataType}')
+
+
+
+		# Referencing workspaceType raises AttributeError if target is not a workspace
+
+		if not d.workspaceType == 'RemoteDatabase':
+
+			# Explicitly raise exception if target is not an enterprise geodatabase
+
+			raise TypeError(f'Expected RemoteDatabase type; got {d.workspaceType} type')
+
+
+	except (
+		IOError
+		,OSError
+		,AttributeError
+		,TypeError
+	) as e:
+
+		logging.error(f'Invalid enterprise geodatabase')
+		
+		raise RuntimeError('Invalid enterprise geodatabase') from e
+
+
+	
+	# Return connection file AND TemporaryDirectory; see function header
+	# comments for details
+	
+	return(
+		gdb
+		,temp_dir
+	)
+	
+
+
 def _initialize_logging(
 	level = logging.NOTSET
 ):
@@ -1321,7 +1416,7 @@ def _print_banner(
 		f'{mg.BANNER_DELIMITER_1}\n'
 		f'Hydrologic Data Model Geodatabase Deployment\n'
 		f'{mg.BANNER_DELIMITER_2}\n'
-		f'Target database:         {args.gdb}\n'
+		f'Target database server:  {args.server}\n'
 		f'Log level:               {args.log_level}\n'
 		f'Disable domain creation: {args.disable_domains}\n'
 		f'{mg.BANNER_DELIMITER_1}'
@@ -1389,37 +1484,6 @@ def _process_arguments(
 
 
 
-	# Validate target geodatabase
-
-	try:
-
-		# Describe raises:
-		#	IOError if target is not a recognized object type
-		#	OSError if target does not exist
-
-		d = arcpy.Describe(args.gdb)
-
-
-		# Referencing workspaceType raises AttributeError if target is not a workspace
-
-		if not d.workspaceType == u'RemoteDatabase':
-
-			# Explicitly raise exception if target is not an enterprise geodatabase
-
-			raise TypeError(f'Expected RemoteDatabase type; got {d.workspaceType} type')
-
-
-	except (
-		IOError
-		,OSError
-		,AttributeError
-		,TypeError
-	) as e:
-
-		raise RuntimeError(f'Invalid enterprise geodatabase\n{e}')
-
-
-
 	#
 	# Return
 	#
@@ -1471,6 +1535,19 @@ if __name__ == '__main__':
 
 
 	#
+	# Connect to geodatabase
+	#
+	
+	logging.info('Creating database connection file')
+
+	(
+		gdb
+		,temp_dir
+	) = _connect_gdb(args.server)
+	
+	
+	
+	#
 	# Create domains
 	#
 
@@ -1487,7 +1564,7 @@ if __name__ == '__main__':
 		logging.info('Creating domains')
 
 		create_domains(
-			gdb = args.gdb
+			gdb = gdb
 			,indent_level = 1
 		)
 
@@ -1500,7 +1577,7 @@ if __name__ == '__main__':
 	logging.info('Creating feature classes')
 
 	create_fcs(
-		gdb = args.gdb
+		gdb = gdb
 		,indent_level = 1
 	)
 
@@ -1513,7 +1590,7 @@ if __name__ == '__main__':
 	logging.info('Creating attribute tables')
 
 	create_tables(
-		gdb = args.gdb
+		gdb = gdb
 		,indent_level = 1
 	)
 
@@ -1526,7 +1603,7 @@ if __name__ == '__main__':
 	logging.info('Creating relationship classes')
 
 	create_rcs(
-		gdb = args.gdb
+		gdb = gdb
 		,indent_level = 1
 	)
 
