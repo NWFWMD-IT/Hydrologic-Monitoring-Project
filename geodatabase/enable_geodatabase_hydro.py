@@ -17,6 +17,7 @@
 #
 # History:
 #	2022-07-18 MCM Created
+#	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
 #
 # To do:
 #	none
@@ -37,6 +38,8 @@ import argparse
 import logging
 import os
 import tempfile
+import sys
+
 
 
 # Custom
@@ -67,6 +70,32 @@ CONNECTION_FILE_NAME = 'connection.sde'
 #
 # Private
 #
+
+def _check_credentials():
+	'''
+	The target SQL Server instance uses Windows authentication, so we need
+	to ensure that this Python process is running as the correct user
+	'''
+
+	domain = os.environ.get('USERDOMAIN')
+	user = os.environ.get('USERNAME')
+	
+	username = f'{domain}\\{user}' # Leave default string case, for display
+	
+	
+	
+	if not username.upper() in (
+		'HQ\SDE' # NWFWMD production
+		,'CITRA\SDE' # MannionGeo development
+		,'PORTER\SDE' # MannionGeo development
+	):
+	
+		raise RuntimeError(
+			'Invalid Windows credentials'
+			f'\nThis script must run in a Python session as the HQ\sde user, but is running as {username}'
+		)
+		
+
 
 def _configure_arguments():
 	'''
@@ -305,6 +334,23 @@ if __name__ == '__main__':
 	
 	
 	
+	#
+	# Check Windows credentials
+	#
+	
+	try:
+	
+		_check_credentials()
+		
+	
+	except RuntimeError as e:
+	
+		logging.error(e)
+		
+		sys.exit(mg.EXIT_FAILURE)
+		
+
+
 	#
 	# Enable geodatabase
 	#

@@ -23,6 +23,7 @@
 #
 # History:
 #	2022-07-18 MCM Created
+#	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
 #
 # To do:
 #	none
@@ -1144,6 +1145,32 @@ def create_rcs(
 ################################################################################
 
 
+def _check_credentials():
+	'''
+	The target SQL Server instance uses Windows authentication, so we need
+	to ensure that this Python process is running as the correct user
+	'''
+
+	domain = os.environ.get('USERDOMAIN')
+	user = os.environ.get('USERNAME')
+	
+	username = f'{domain}\\{user}' # Leave default string case, for display
+	
+	
+	
+	if not username.upper() in (
+		'HQ\HYDRO' # NWFWMD production
+		,'CITRA\HYDRO' # MannionGeo development
+		,'PORTER\HYDRO' # MannionGeo development
+	):
+	
+		raise RuntimeError(
+			'Invalid Windows credentials'
+			f'\nThis script must run in a Python session as the HQ\sde user, but is running as {username}'
+		)
+
+
+
 def _configure_arguments():
 	'''
 	Configure arguments when running in script mode
@@ -1273,6 +1300,19 @@ def _connect_gdb(
 	'''
 	
 	
+	# Check Windows credentials
+	
+	try:
+	
+		_check_credentials()
+		
+	
+	except RuntimeError as e:
+	
+		raise
+		
+
+	
 	# Create connection
 	
 	temp_dir = tempfile.TemporaryDirectory()
@@ -1331,8 +1371,6 @@ def _connect_gdb(
 		,TypeError
 	) as e:
 
-		logging.error(f'Invalid enterprise geodatabase')
-		
 		raise RuntimeError('Invalid enterprise geodatabase') from e
 
 
@@ -1417,6 +1455,7 @@ def _print_banner(
 		f'{mg.BANNER_DELIMITER_2}\n'
 		f'Target database server:  {args.server}\n'
 		f'Log level:               {args.log_level}\n'
+		f'Log file:                {args.log_file_name}\n'
 		f'Disable domain creation: {args.disable_domains}\n'
 		f'{mg.BANNER_DELIMITER_1}'
 	)
@@ -1537,11 +1576,20 @@ if __name__ == '__main__':
 	
 	logging.info('Connecting to geodatabase')
 
-	(
-		gdb
-		,temp_dir
-	) = _connect_gdb(args.server)
+	try:
 	
+		(
+			gdb
+			,temp_dir
+		) = _connect_gdb(args.server)
+		
+		
+	except RuntimeError as e:
+	
+		logging.error(e)
+		
+		sys.exit(mg.EXIT_FAILURE)
+
 	
 	
 	#
