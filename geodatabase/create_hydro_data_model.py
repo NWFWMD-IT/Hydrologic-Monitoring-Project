@@ -701,10 +701,10 @@ def create_table_locationvisit(
 		,('DischargeVolume'			,'DOUBLE'	,38		,2	,None		,'Discharge Volume'			,True		,False		,None					,None)
 		,('DischargeUncertainty'		,'DOUBLE'	,38		,2	,None		,'Discharge Uncertainty'		,True		,False		,None					,None)
 		,('WaterQualitySensorPulled'		,'TEXT'		,None		,None	,3		,'Water Quality Sensor Pulled'		,True		,False		,'Yes/No'				,None)
-		,('WaterQualitySensorPulledDate'	,'DATE'		,None		,None	,None		,'Water Quality Sensor Pulled Date'	,True		,False		,None					,None)
+		,('WaterQualitySensorPullDate'		,'DATE'		,None		,None	,None		,'Water Quality Sensor Pull Date'	,True		,False		,None					,None)
 		,('WaterQualityPurgeStart'		,'DATE'		,None		,None	,None		,'Water Quality Purge Start'		,True		,False		,None					,None)
 		,('WaterQualitySamplingEnd'		,'DATE'		,None		,None	,None		,'Water Quality Sampling End'		,True		,False		,None					,None)
-		,('WaterQualitySensorReinstalled'	,'DATE'		,None		,None	,None		,'Water Quality Sensor Reinstall Date'	,True		,False		,None					,None)
+		,('WaterQualitySensorReinstallDate'	,'DATE'		,None		,None	,None		,'Water Quality Sensor Reinstall Date'	,True		,False		,None					,None)
 		,('LocationGlobalID'			,'GUID'		,None		,None	,None		,'Related Location'			,True		,False		,None					,None)
 	)
 
