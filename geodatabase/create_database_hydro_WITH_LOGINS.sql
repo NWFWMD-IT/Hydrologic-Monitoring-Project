@@ -9,6 +9,8 @@
 
 --------------------------------------------------------------------------------
 -- Logins
+--
+-- For object owners only. Readers/editors are contained database users.
 --------------------------------------------------------------------------------
 
 USE [master]
@@ -17,24 +19,30 @@ GO
 
 -- Geodtabase administrator
 
-CREATE LOGIN [HQ\sde]
-FROM WINDOWS
+IF NOT EXISTS (
+	SELECT
+		sid
+	FROM sys.server_principals
+	WHERE
+		name = 'HQ\sde'
+)
+	CREATE LOGIN [HQ\sde]
+	FROM WINDOWS
 ;
 
 
 
 -- Data owner
 
-CREATE LOGIN [HQ\hydro]
-FROM WINDOWS
-;
-
-
-
--- Web services
-
-CREATE LOGIN [HQ\mapserver]
-FROM WINDOWS
+IF NOT EXISTS (
+	SELECT
+		sid
+	FROM sys.server_principals
+	WHERE
+		name = 'HQ\hydro'
+)
+	CREATE LOGIN [HQ\hydro]
+	FROM WINDOWS
 ;
 
 
@@ -177,25 +185,9 @@ GO
 
 -- Service user
 
-CREATE USER [mapserver]
-FOR LOGIN [HQ\mapserver]
+CREATE USER [HQ\arcgis]
 WITH
 	DEFAULT_SCHEMA = [dbo]
-;
-
-GO
-
-
-
-ALTER ROLE db_datareader
-ADD MEMBER [mapserver]
-;
-
-GO
-
-
-ALTER ROLE db_datawriter
-ADD MEMBER [mapserver]
 ;
 
 GO

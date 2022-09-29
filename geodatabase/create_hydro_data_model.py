@@ -345,7 +345,7 @@ def create_fc_location(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -436,7 +436,7 @@ def create_table_conductivitymeasurement(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -493,7 +493,7 @@ def create_table_datalogger(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -557,7 +557,7 @@ def create_table_groundwatermeasurement(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -613,7 +613,7 @@ def create_table_locationissue(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -712,7 +712,7 @@ def create_table_locationvisit(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -771,7 +771,7 @@ def create_table_measuringpoint(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -828,7 +828,7 @@ def create_table_rainfalltips(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -885,7 +885,7 @@ def create_table_sensor(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -948,7 +948,7 @@ def create_table_stagemeasurement(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -1010,7 +1010,7 @@ def create_table_temperaturemeasurement(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -1065,7 +1065,7 @@ def create_table_visitstaff(
 
 	privileges = (
 		#user		read		write
-		('mapserver'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -1160,7 +1160,7 @@ def _check_credentials():
 	
 	if not username.upper() in (
 		'HQ\HYDRO' # NWFWMD production
-		,'CITRA\HYDRO' # MannionGeo development
+		,'HQ\\HYDRO' # MannionGeo development
 		,'PORTER\HYDRO' # MannionGeo development
 	):
 	
