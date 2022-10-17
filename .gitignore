@@ -2,3 +2,4 @@
 *.~vsdx
 *.pyc
 *.log
+geodatabase/hydro_service/*
