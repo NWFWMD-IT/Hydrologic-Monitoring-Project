@@ -19,8 +19,8 @@
 --	running this script:
 --
 --		Users
+--			arcgis
 --			hydro
---			mapserver
 --			sde
 --
 --		Groups
@@ -149,7 +149,8 @@ GO
 
 -- Geodatabase administrator
 
-CREATE USER [HQ\sde]
+CREATE USER [sde]
+FOR LOGIN [HQ\sde]
 WITH
 	DEFAULT_SCHEMA = [sde]
 ;
@@ -164,7 +165,7 @@ GRANT
 	,CREATE TABLE
 	,CREATE VIEW
 TO
-	[HQ\sde]
+	[sde]
 ;
 
 GO
@@ -176,7 +177,7 @@ GRANT
 ON
 	DATABASE::[hydro]
 TO
-	[HQ\sde]
+	[sde]
 ;
 
 GO
@@ -185,7 +186,8 @@ GO
 
 -- Data owner
 
-CREATE USER [HQ\hydro]
+CREATE USER [hydro]
+FOR LOGIN [HQ\hydro]
 WITH
 	DEFAULT_SCHEMA = [hydro]
 ;
@@ -199,7 +201,7 @@ GRANT
 	,CREATE TABLE
 	,CREATE VIEW
 TO
-	[HQ\hydro]
+	[hydro]
 ;
 
 GO
@@ -208,28 +210,12 @@ GO
 
 -- Service user
 
-CREATE USER [HQ\mapserver]
+CREATE USER [HQ\arcgis]
 WITH
 	DEFAULT_SCHEMA = [dbo]
 ;
 
 GO
-
-
-
-ALTER ROLE db_datareader
-ADD MEMBER [HQ\mapserver]
-;
-
-GO
-
-
-ALTER ROLE db_datawriter
-ADD MEMBER [HQ\mapserver]
-;
-
-GO
-
 
 
 --
@@ -253,7 +239,7 @@ GO
 --
 
 CREATE SCHEMA [sde]
-AUTHORIZATION [HQ\sde]
+AUTHORIZATION [sde]
 ;
 
 GO
@@ -265,7 +251,7 @@ GO
 --
 
 CREATE SCHEMA [hydro]
-AUTHORIZATION [HQ\hydro]
+AUTHORIZATION [hydro]
 ;
 
 GO

@@ -1160,13 +1160,13 @@ def _check_credentials():
 	
 	if not username.upper() in (
 		'HQ\HYDRO' # NWFWMD production
-		,'HQ\\HYDRO' # MannionGeo development
+		,'CITRA\HYDRO' # MannionGeo development
 		,'PORTER\HYDRO' # MannionGeo development
 	):
 	
 		raise RuntimeError(
 			'Invalid Windows credentials'
-			f'\nThis script must run in a Python session as the HQ\sde user, but is running as {username}'
+			f'\nThis script must run in a Python session as the HQ\hydro user, but is running as {username}'
 		)
 
 
