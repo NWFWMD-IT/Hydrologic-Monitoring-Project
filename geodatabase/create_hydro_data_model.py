@@ -186,6 +186,7 @@ def create_domains(
 		,(
 			'Location Issue Type', 'TEXT', (
 				('Conduit', 'Conduit')
+				,('Incorrect inventory', 'Incorrect inventory')
 				,('Invalid punch', 'Invalid punch')
 				,('Solar panel', 'Solar panel')
 				,('Vandalism', 'Vandalism')
@@ -604,7 +605,7 @@ def create_table_locationissue(
 
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
-		('IssueType'			,'TEXT'		,None		,None	,32		,'Issue Type'			,True		,False		,'Location Issue Type'			,None)
+		('Type'				,'TEXT'		,None		,None	,32		,'Issue Type'			,True		,False		,'Location Issue Type'			,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
 	)
@@ -677,7 +678,7 @@ def create_table_locationvisit(
 		,('DataLoggerTimeAdjustmentDate'	,'DATE'		,None		,None	,None		,'Data Logger Time Adjustment Date'	,True		,False		,None					,None)
 		,('RainfallBucketCleaned'		,'TEXT'		,None		,None	,3		,'Rainfall Bucket Cleaned'		,True		,False		,'Yes/No'				,None)
 		,('RainfallBucketException'		,'TEXT'		,None		,None	,32		,'Rainfall Bucket Exception'		,True		,False		,'Rainfall Exception'			,None)
-		,('RainfallMechanismCleaned'		,'TEXT'		,None		,None	,3		,'Tipping Mechanism Cleaned'		,True		,False		,'Yes/No'				,None)
+		,('RainfallMechanismChecked'		,'TEXT'		,None		,None	,3		,'Tipping Mechanism Checked'		,True		,False		,'Yes/No'				,None)
 		,('RainfallMechanismException'		,'TEXT'		,None		,None	,32		,'Tipping Mechanism Exception'		,True		,False		,'Rainfall Exception'			,None)
 		,('ADVMBatteryDOA'			,'TEXT'		,None		,None	,3		,'ADVM Battery DOA'			,True		,False		,'Yes/No'				,None)
 		,('ADVMBatteryCondition'		,'TEXT'		,None		,None	,32		,'ADVM Battery Condition'		,True		,False		,'Battery Condition'			,None)
