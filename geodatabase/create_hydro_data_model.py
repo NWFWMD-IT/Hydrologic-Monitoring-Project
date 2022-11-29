@@ -24,6 +24,8 @@
 # History:
 #	2022-07-18 MCM Created
 #	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
+#	2022-11-21 MCM Upgraded attachment format (Hydro 55)
+#	               Added LocationVisit.InventoryVerifed column (Hydro 59)
 #
 # To do:
 #	none
@@ -320,6 +322,7 @@ def create_fc_location(
 	editor_tracking = True
 	archiving = True
 	attachments = True
+	attachments_upgrade = True
 
 	fc = os.path.join(
 		gdb
@@ -367,6 +370,7 @@ def create_fc_location(
 		,editor_tracking = editor_tracking
 		,archiving = archiving
 		,attachments = attachments
+		,attachments_upgrade = attachments_upgrade
 		,privileges = privileges
 		,indent_level = indent_level
 	)
@@ -478,6 +482,7 @@ def create_table_datalogger(
 	editor_tracking = True
 	archiving = True
 	attachments = True
+	attachments_upgrade = True
 
 	table = os.path.join(
 		gdb
@@ -514,6 +519,7 @@ def create_table_datalogger(
 		,editor_tracking = editor_tracking
 		,archiving = archiving
 		,attachments = attachments
+		,attachments_upgrade = attachments_upgrade
 		,privileges = privileges
 		,indent_level = indent_level
 	)
@@ -599,6 +605,7 @@ def create_table_locationissue(
 	editor_tracking = True
 	archiving = True
 	attachments = True
+	attachments_upgrade = True
 
 	table = os.path.join(
 		gdb
@@ -634,6 +641,7 @@ def create_table_locationissue(
 		,editor_tracking = editor_tracking
 		,archiving = archiving
 		,attachments = attachments
+		,attachments_upgrade = attachments_upgrade
 		,privileges = privileges
 		,indent_level = indent_level
 	)
@@ -655,6 +663,7 @@ def create_table_locationvisit(
 	editor_tracking = True
 	archiving = True
 	attachments = True
+	attachments_upgrade = True
 
 	table = os.path.join(
 		gdb
@@ -662,8 +671,9 @@ def create_table_locationvisit(
 	)
 
 	attributes = (
-		#name					,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
+		#name					,type		,precision	,scale	,length		,alias					,nullable	,required	,domain					,default
 		('VisitDate'				,'DATE'		,None		,None	,None		,'Visit Date'				,True		,False		,None					,None)
+		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,None)
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
 		,('BatteryCondition'			,'TEXT'		,None		,None	,32		,'Battery Condition'			,True		,False		,'Battery Condition'			,None)
 		,('BatteryVoltage'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage'			,True		,False		,None					,None)
@@ -733,6 +743,7 @@ def create_table_locationvisit(
 		,editor_tracking = editor_tracking
 		,archiving = archiving
 		,attachments = attachments
+		,attachments_upgrade = attachments_upgrade
 		,privileges = privileges
 		,indent_level = indent_level
 	)
@@ -754,6 +765,7 @@ def create_table_measuringpoint(
 	editor_tracking = True
 	archiving = True
 	attachments = True
+	attachments_upgrade = True
 
 	table = os.path.join(
 		gdb
@@ -792,6 +804,7 @@ def create_table_measuringpoint(
 		,editor_tracking = editor_tracking
 		,archiving = archiving
 		,attachments = attachments
+		,attachments_upgrade = attachments_upgrade
 		,privileges = privileges
 		,indent_level = indent_level
 	)

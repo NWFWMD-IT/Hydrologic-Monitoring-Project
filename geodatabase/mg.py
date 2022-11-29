@@ -39,6 +39,7 @@
 #
 # History:
 #	2022-07-18 MCM Created
+#	2022-11-21 MCM Added attachment upgrade support (Hydro 55)
 #
 # To do:
 #	none
@@ -433,6 +434,7 @@ def create_fc(
 	,editor_tracking = True
 	,archiving = True
 	,attachments = True
+	,attachments_upgrade = False
 	,privileges = None
 	,indent_level = 0
 ):
@@ -598,6 +600,19 @@ def create_fc(
 		arcpy.management.EnableAttachments(
 			in_dataset = fc
 		)
+		
+		
+		
+		if attachments_upgrade:
+		
+			logging.info(
+				'Upgrading attachments format'
+				,extra = {'indent_level': indent_level + 1}
+			)
+			
+			arcpy.management.UpgradeAttachments(
+				in_dataset = fc
+			)
 
 
 
@@ -742,6 +757,7 @@ def create_table(
 	,editor_tracking = True
 	,archiving = True
 	,attachments = True
+	,attachments_upgrade = False
 	,privileges = None
 	,indent_level = 0
 ):
@@ -905,6 +921,19 @@ def create_table(
 		arcpy.management.EnableAttachments(
 			in_dataset = table
 		)
+		
+		
+		
+		if attachments_upgrade:
+		
+			logging.info(
+				'Upgrading attachments format'
+				,extra = {'indent_level': indent_level + 1}
+			)
+			
+			arcpy.management.UpgradeAttachments(
+				in_dataset = table
+			)
 
 
 
