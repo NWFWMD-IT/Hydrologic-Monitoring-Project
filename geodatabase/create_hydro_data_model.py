@@ -26,6 +26,7 @@
 #	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
 #	2022-11-21 MCM Upgraded attachment format (Hydro 55)
 #	               Added LocationVisit.InventoryVerifed column (Hydro 59)
+#	2022-12-07 MCM Moved VisitStaff table to delimited text column (Hydro 60)
 #
 # To do:
 #	none
@@ -396,7 +397,6 @@ def create_tables(
 	create_table_sensor(gdb, indent_level)
 	create_table_stagemeasurement(gdb, indent_level)
 	create_table_temperaturemeasurement(gdb, indent_level)
-	create_table_visitstaff(gdb, indent_level)
 
 
 
@@ -673,6 +673,7 @@ def create_table_locationvisit(
 	attributes = (
 		#name					,type		,precision	,scale	,length		,alias					,nullable	,required	,domain					,default
 		('VisitDate'				,'DATE'		,None		,None	,None		,'Visit Date'				,True		,False		,None					,None)
+		,('VisitStaff'				,'TEXT'		,None		,None	,1024		,'Visit Staff'				,True		,False		,'Hydro Staff'				,None)
 		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,None)
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
 		,('BatteryCondition'			,'TEXT'		,None		,None	,32		,'Battery Condition'			,True		,False		,'Battery Condition'			,None)
@@ -1050,61 +1051,6 @@ def create_table_temperaturemeasurement(
 
 
 
-def create_table_visitstaff(
-	gdb
-	,indent_level = 0
-):
-
-
-	# Configuration
-
-	table_name = 'VisitStaff'
-	alias = 'Visit Staff'
-
-	global_id = True
-	editor_tracking = True
-	archiving = True
-	attachments = False
-
-	table = os.path.join(
-		gdb
-		,table_name
-	)
-
-	attributes = (
-		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
-		('Name'				,'TEXT'		,None		,None	,32		,'Name'				,True		,False		,'Hydro Staff'				,None)
-		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
-	)
-
-	subtypes = None
-
-	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
-		,
-	)
-
-
-
-	# Create table
-
-	mg.create_table(
-		gdb = gdb
-		,table_name = table_name
-		,alias = alias
-		,attributes = attributes
-		,subtypes = subtypes
-		,global_id = global_id
-		,editor_tracking = editor_tracking
-		,archiving = archiving
-		,attachments = attachments
-		,privileges = privileges
-		,indent_level = indent_level
-	)
-
-
-
 ####################
 # Relationship Classes
 ####################
@@ -1121,7 +1067,6 @@ def create_rcs(
 		,('Location'		,'LocationVisit'		,'Location__LocationVisit'			,'SIMPLE'	,'Location Visit'		,'Location'		,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationGlobalID'		,None		,None			,None)
 		,('Location'		,'MeasuringPoint'		,'Location__MeasuringPoint'			,'SIMPLE'	,'Measuring Point'		,'Location'		,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationGlobalID'		,None		,None			,None)
 		,('LocationVisit'	,'LocationIssue'		,'LocationVisit__LocationIssue'			,'SIMPLE'	,'Location Issue'		,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)
-		,('LocationVisit'	,'VisitStaff'			,'LocationVisit__VisitStaff'			,'SIMPLE'	,'Visit Staff'			,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)
 		,('LocationVisit'	,'RainfallTips'			,'LocationVisit__RainfallTips'			,'SIMPLE'	,'Rainfall Tips'		,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)
 		,('LocationVisit'	,'StageMeasurement'		,'LocationVisit__StageMeasurement'		,'SIMPLE'	,'Stage Measurement'		,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)
 		,('LocationVisit'	,'GroundwaterMeasurement'	,'LocationVisit__GroundwaterMeasurement'	,'SIMPLE'	,'Groundwater Measurement'	,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)

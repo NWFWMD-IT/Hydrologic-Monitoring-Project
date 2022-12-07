@@ -92,6 +92,7 @@ ATTRIBUTE_TABLE_NAMES = (
 	,'Sensor'
 	,'StageMeasurement'
 	,'TemperatureMeasurement'
+	# Obsolete
 	,'VisitStaff'
 )
 
