@@ -26,7 +26,8 @@
 #	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
 #	2022-11-21 MCM Upgraded attachment format (Hydro 55)
 #	               Added LocationVisit.InventoryVerifed column (Hydro 59)
-#	2022-12-07 MCM Moved VisitStaff table to delimited text column (Hydro 60)
+#	2022-12-07 MCM Moved VisitStaff table to delimited text column
+#	                LocationVisit.Staff (Hydro 60)
 #
 # To do:
 #	none
@@ -673,7 +674,7 @@ def create_table_locationvisit(
 	attributes = (
 		#name					,type		,precision	,scale	,length		,alias					,nullable	,required	,domain					,default
 		('VisitDate'				,'DATE'		,None		,None	,None		,'Visit Date'				,True		,False		,None					,None)
-		,('VisitStaff'				,'TEXT'		,None		,None	,1024		,'Visit Staff'				,True		,False		,'Hydro Staff'				,None)
+		,('Staff'				,'TEXT'		,None		,None	,1024		,'Visit Staff'				,True		,False		,'Hydro Staff'				,None)
 		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,None)
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
 		,('BatteryCondition'			,'TEXT'		,None		,None	,32		,'Battery Condition'			,True		,False		,'Battery Condition'			,None)
