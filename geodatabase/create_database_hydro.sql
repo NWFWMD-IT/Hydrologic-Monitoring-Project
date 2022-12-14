@@ -60,11 +60,9 @@
 --	2022-07-18 MCM Created
 --	2022-09-13 MCM Change users from database to Windows authentication (Hydro #17)
 --	               Updated file paths for NWFWMD production environment
+--	2022-12-14 MCM Switch to [master] at end, to facilitae development testing
 --
 -- To do:
---	*** Resolve Esri Support case #03150260 before using this security model ***
---		Use create_database_hydro_WITH_LOGINS.sql until then
---
 --	Localize for NWFWMD environment:
 --		Add end users
 --
@@ -256,6 +254,23 @@ AUTHORIZATION [hydro]
 
 GO
 
+
+
+--------------------------------------------------------------------------------
+-- Cleanup
+----------
+
+
+-- Release lock on [hydro] database
+--
+-- Useful for testing, so we can immediately drop > recreate database
+
+USE [master]
+
+GO
+
+
+----------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 -- END

@@ -66,6 +66,12 @@ CONNECTION_FILE_NAME = 'connection.sde'
 
 DATA_OWNER = 'hydro'
 
+OS_USERNAMES = (
+	'HQ\HYDRO' # NWFWMD production
+	,'CITRA\HYDRO' # MannionGeo development
+	,'PORTER\HYDRO' # MannionGeo development
+)
+
 SR_UTM16N_NAD83 = arcpy.SpatialReference(26916) # NAD_1983_UTM_Zone_16N
 
 
@@ -1120,11 +1126,8 @@ def _check_credentials():
 	
 	
 	
-	if not username.upper() in (
-		'HQ\HYDRO' # NWFWMD production
-		,'CITRA\HYDRO' # MannionGeo development
-		,'PORTER\HYDRO' # MannionGeo development
-	):
+	logging.debug('Checking OS username')
+	if not username.upper() in OS_USERNAMES:
 	
 		raise RuntimeError(
 			'Invalid Windows credentials'

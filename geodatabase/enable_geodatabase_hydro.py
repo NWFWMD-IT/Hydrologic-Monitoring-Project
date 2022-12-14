@@ -18,6 +18,7 @@
 # History:
 #	2022-07-18 MCM Created
 #	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
+#	2022-12-14 MCM Moved literals to constant OS_USERNAMES
 #
 # To do:
 #	none
@@ -54,6 +55,12 @@ import mg
 
 CONNECTION_FILE_NAME = 'connection.sde'
 
+OS_USERNAMES = (
+	'HQ\SDE' # NWFWMD production
+	,'CITRA\SDE' # MannionGeo development
+	,'PORTER\SDE' # MannionGeo development
+)
+
 
 
 ################################################################################
@@ -84,11 +91,8 @@ def _check_credentials():
 	
 	
 	
-	if not username.upper() in (
-		'HQ\SDE' # NWFWMD production
-		,'CITRA\SDE' # MannionGeo development
-		,'PORTER\SDE' # MannionGeo development
-	):
+	logging.debug('Checking OS username')
+	if not username.upper() in OS_USERNAMES:
 	
 		raise RuntimeError(
 			'Invalid Windows credentials'

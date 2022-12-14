@@ -72,6 +72,12 @@ import mg
 
 CONNECTION_FILE_NAME = 'connection.sde'
 
+OS_USERNAMES = (
+	'HQ\HYDRO' # NWFWMD production
+	,'CITRA\HYDRO' # MannionGeo development
+	,'PORTER\HYDRO' # MannionGeo development
+)
+
 
 
 # Geodatabase object names
@@ -293,11 +299,8 @@ def _check_credentials():
 	
 	
 	
-	if not username.upper() in (
-		'HQ\HYDRO' # NWFWMD production
-		,'CITRA\HYDRO' # MannionGeo development
-		,'PORTER\HYDRO' # MannionGeo development
-	):
+	logging.debug('Checking OS username')
+	if not username.upper() in OS_USERNAMES:
 	
 		raise RuntimeError(
 			'Invalid Windows credentials'
