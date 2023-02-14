@@ -28,6 +28,11 @@
 #	               Added LocationVisit.InventoryVerifed column (Hydro 59)
 #	2022-12-07 MCM Moved VisitStaff table to delimited text column
 #	                LocationVisit.Staff (Hydro 60)
+#	2022-12-14 MCM Moved literals to constant OS_USERNAMES
+#	               Removed extraneous `datetime` import
+#	2023-02-13 MCM Added Location.HasADVMBattery (Hydro 67)
+#	               Removed column TemperatureMeasurement.ManualLevelUnits
+#	                 and domain Temperature Units (Hydro 68)
 #
 # To do:
 #	none
@@ -45,7 +50,6 @@
 
 import arcpy
 import argparse
-import datetime
 import logging
 import os
 import sys
@@ -253,12 +257,6 @@ def create_domains(
 			)
 		)
 		,(
-			'Temperature Units', 'TEXT', (
-				('Celsius', 'Celsius')
-				,('Fahrenheit', 'Fahrenheit')
-			)
-		)
-		,(
 			'Time Adjustment Type', 'TEXT', (
 				('Drift', 'Drift')
 				,('Clock default', 'Clock default')
@@ -348,6 +346,7 @@ def create_fc_location(
 		,('HasGroundwater'		,'TEXT'		,None		,None	,3		,'Has Groundwater'		,True		,False		,'Yes/No'				,None)
 		,('HasConductivity'		,'TEXT'		,None		,None	,3		,'Has Conductivity'		,True		,False		,'Yes/No'				,None)
 		,('HasADVM'			,'TEXT'		,None		,None	,3		,'Has ADVM'			,True		,False		,'Yes/No'				,None)
+		,('HasADVMBattery'		,'TEXT'		,None		,None	,3		,'Has ADVM Battery'		,True		,False		,'Yes/No'				,None)
 		,('HasDischarge'		,'TEXT'		,None		,None	,3		,'Has Discharge'		,True		,False		,'Yes/No'				,None)
 		,('HasTemperature'		,'TEXT'		,None		,None	,3		,'Has Temperature'		,True		,False		,'Yes/No'				,None)
 		,('HasWaterQuality'		,'TEXT'		,None		,None	,3		,'Has Water Quality'		,True		,False		,'Yes/No'				,None)
@@ -358,7 +357,7 @@ def create_fc_location(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -450,7 +449,7 @@ def create_table_conductivitymeasurement(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -508,7 +507,7 @@ def create_table_datalogger(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -573,7 +572,7 @@ def create_table_groundwatermeasurement(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -630,7 +629,7 @@ def create_table_locationissue(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -733,7 +732,7 @@ def create_table_locationvisit(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -794,7 +793,7 @@ def create_table_measuringpoint(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -852,7 +851,7 @@ def create_table_rainfalltips(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -909,7 +908,7 @@ def create_table_sensor(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -972,7 +971,7 @@ def create_table_stagemeasurement(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -1023,7 +1022,6 @@ def create_table_temperaturemeasurement(
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,'Temperature Serial Number'		,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement'		,True		,False		,None					,None)
-		,('ManualLevelUnits'		,'TEXT'		,None		,None	,32		,'Manual Measurement Units'	,True		,False		,'Temperature Units'			,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
 		,('SensorSource'		,'TEXT'		,None		,None	,32		,'Sensor Source'		,True		,False		,'Temperature Source'			,None)
 		,('SensorFailed'		,'TEXT'		,None		,None	,3		,'Sensor Failed'		,True		,False		,'Yes/No'				,None)
@@ -1034,7 +1032,7 @@ def create_table_temperaturemeasurement(
 
 	privileges = (
 		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 

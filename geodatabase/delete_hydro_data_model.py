@@ -33,6 +33,7 @@
 # History:
 #	2022-07-18 MCM Created
 #	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
+#	2022-12-14 MCM Moved literals to constant OS_USERNAMES
 #
 # To do:
 #	none
@@ -123,11 +124,11 @@ DOMAIN_NAMES = (
 	,'Stage Adjustment Exception'
 	,'Temperature Serial Number'
 	,'Temperature Source'
-	,'Temperature Units'
 	,'Time Adjustment Type'
 	,'Yes/No'
 	# Obsolete
 	,'Battery Replacement Time Adjustment'
+	,'Temperature Units'
 )
 
 FC_NAMES = (
