@@ -7,7 +7,7 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.0.1
+#	ArcGIS Pro 3.0.4
 #	Python 3.9.11, with:
 #		arcpy 3.0 (build py39_arcgispro_36045)
 #
@@ -34,6 +34,7 @@
 #	2022-07-18 MCM Created
 #	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
 #	2022-12-14 MCM Moved literals to constant OS_USERNAMES
+#	2023-02-22 MCM Moved constants to constants.py
 #
 # To do:
 #	none
@@ -60,6 +61,7 @@ import tempfile
 
 # Custom
 
+import constants as C
 import mg
 
 
@@ -67,18 +69,9 @@ import mg
 #
 # Constants
 #
-
-
-# General
-
-CONNECTION_FILE_NAME = 'connection.sde'
-
-OS_USERNAMES = (
-	'HQ\HYDRO' # NWFWMD production
-	,'CITRA\HYDRO' # MannionGeo development
-	,'PORTER\HYDRO' # MannionGeo development
-)
-
+# These constants are specific to this cleanup module. For stability and
+# readability, define them here instead of in the shared constants.py module.
+#
 
 
 # Geodatabase object names
@@ -301,11 +294,11 @@ def _check_credentials():
 	
 	
 	logging.debug('Checking OS username')
-	if not username.upper() in OS_USERNAMES:
+	if not username.upper() in C.OS_USERNAMES_HYDRO:
 	
 		raise RuntimeError(
 			'Invalid Windows credentials'
-			f'\nThis script must run in a Python session as the HQ\sde user, but is running as {username}'
+			f'\nThis script must run in a Python session as the HQ\hydro user, but is running as {username}'
 		)
 
 
@@ -461,7 +454,7 @@ def _connect_gdb(
 	
 	arcpy.management.CreateDatabaseConnection(
 		out_folder_path = temp_dir.name
-		,out_name = CONNECTION_FILE_NAME
+		,out_name = C.CONNECTION_FILE_NAME
 		,database_platform = 'SQL_SERVER'
 		,instance = server
 		,account_authentication = 'OPERATING_SYSTEM_AUTH'
@@ -471,7 +464,7 @@ def _connect_gdb(
 	
 	gdb = os.path.join(
 		temp_dir.name
-		,CONNECTION_FILE_NAME
+		,C.CONNECTION_FILE_NAME
 	)
 	logging.debug(f'Created database connection file: {gdb}')
 	

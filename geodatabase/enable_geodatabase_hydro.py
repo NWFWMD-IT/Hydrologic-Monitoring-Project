@@ -6,7 +6,7 @@
 #	Enable geodatabae functionality in the [hydro] database
 #
 # Environment:
-#	ArcGIS Pro 3.0.1
+#	ArcGIS Pro 3.0.4
 #	Python 3.9.11, with:
 #		arcpy 3.0 (build py39_arcgispro_36045)
 #
@@ -19,6 +19,7 @@
 #	2022-07-18 MCM Created
 #	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
 #	2022-12-14 MCM Moved literals to constant OS_USERNAMES
+#	2023-02-22 MCM Moved constants to constants.py
 #
 # To do:
 #	none
@@ -45,21 +46,8 @@ import sys
 
 # Custom
 
+import constants as C
 import mg
-
-
-
-#
-# Constants
-#
-
-CONNECTION_FILE_NAME = 'connection.sde'
-
-OS_USERNAMES = (
-	'HQ\SDE' # NWFWMD production
-	,'CITRA\SDE' # MannionGeo development
-	,'PORTER\SDE' # MannionGeo development
-)
 
 
 
@@ -92,7 +80,7 @@ def _check_credentials():
 	
 	
 	logging.debug('Checking OS username')
-	if not username.upper() in OS_USERNAMES:
+	if not username.upper() in C.OS_USERNAMES_SDE:
 	
 		raise RuntimeError(
 			'Invalid Windows credentials'
@@ -366,7 +354,7 @@ if __name__ == '__main__':
 		logging.info('Creating database connection')
 		arcpy.management.CreateDatabaseConnection(
 			out_folder_path = temp_dir
-			,out_name = CONNECTION_FILE_NAME
+			,out_name = C.CONNECTION_FILE_NAME
 			,database_platform = 'SQL_SERVER'
 			,instance = args.server
 			,account_authentication = 'OPERATING_SYSTEM_AUTH'
@@ -376,7 +364,7 @@ if __name__ == '__main__':
 		
 		gdb = os.path.join(
 			temp_dir
-			,CONNECTION_FILE_NAME
+			,C.CONNECTION_FILE_NAME
 		)
 		logging.debug(f'Connection file: {gdb}')
 

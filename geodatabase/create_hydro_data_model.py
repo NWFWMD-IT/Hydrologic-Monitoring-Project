@@ -7,7 +7,7 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.0.1
+#	ArcGIS Pro 3.0.4
 #	Python 3.9.11, with:
 #		arcpy 3.0 (build py39_arcgispro_36045)
 #
@@ -33,6 +33,7 @@
 #	2023-02-13 MCM Added Location.HasADVMBattery (Hydro 67)
 #	               Removed column TemperatureMeasurement.ManualLevelUnits
 #	                 and domain Temperature Units (Hydro 68)
+#	2023-02-22 MCM Moved constants to constants.py
 #
 # To do:
 #	none
@@ -58,25 +59,8 @@ import tempfile
 
 # Custom
 
+import constants as C
 import mg
-
-
-
-#
-# Constants
-#
-
-CONNECTION_FILE_NAME = 'connection.sde'
-
-DATA_OWNER = 'hydro'
-
-OS_USERNAMES = (
-	'HQ\HYDRO' # NWFWMD production
-	,'CITRA\HYDRO' # MannionGeo development
-	,'PORTER\HYDRO' # MannionGeo development
-)
-
-SR_UTM16N_NAD83 = arcpy.SpatialReference(26916) # NAD_1983_UTM_Zone_16N
 
 
 
@@ -322,7 +306,7 @@ def create_fc_location(
 	alias = 'Location'
 
 	geometry = 'POINT'
-	sr = SR_UTM16N_NAD83
+	sr = C.SR_UTM16N_NAD83
 
 	global_id = True
 	editor_tracking = True
@@ -357,7 +341,7 @@ def create_fc_location(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -449,7 +433,7 @@ def create_table_conductivitymeasurement(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -507,7 +491,7 @@ def create_table_datalogger(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -572,7 +556,7 @@ def create_table_groundwatermeasurement(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -629,7 +613,7 @@ def create_table_locationissue(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -732,7 +716,7 @@ def create_table_locationvisit(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -793,7 +777,7 @@ def create_table_measuringpoint(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -851,7 +835,7 @@ def create_table_rainfalltips(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -908,7 +892,7 @@ def create_table_sensor(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -971,7 +955,7 @@ def create_table_stagemeasurement(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -1032,7 +1016,7 @@ def create_table_temperaturemeasurement(
 
 	privileges = (
 		#user		read		write
-		('CITRA\\arcgis'	,'GRANT'	,'GRANT')
+		('HQ\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -1125,7 +1109,7 @@ def _check_credentials():
 	
 	
 	logging.debug('Checking OS username')
-	if not username.upper() in OS_USERNAMES:
+	if not username.upper() in C.OS_USERNAMES_HYDRO:
 	
 		raise RuntimeError(
 			'Invalid Windows credentials'
@@ -1285,7 +1269,7 @@ def _connect_gdb(
 	
 	arcpy.management.CreateDatabaseConnection(
 		out_folder_path = temp_dir.name
-		,out_name = CONNECTION_FILE_NAME
+		,out_name = C.CONNECTION_FILE_NAME
 		,database_platform = 'SQL_SERVER'
 		,instance = server
 		,account_authentication = 'OPERATING_SYSTEM_AUTH'
@@ -1295,7 +1279,7 @@ def _connect_gdb(
 	
 	gdb = os.path.join(
 		temp_dir.name
-		,CONNECTION_FILE_NAME
+		,C.CONNECTION_FILE_NAME
 	)
 	logging.debug(f'Created database connection file: {gdb}')
 	

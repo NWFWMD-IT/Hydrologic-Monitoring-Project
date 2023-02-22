@@ -3,3 +3,4 @@
 *.pyc
 *.log
 geodatabase/hydro_service/*
+documents/esri_support/*
