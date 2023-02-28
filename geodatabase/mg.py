@@ -40,6 +40,7 @@
 # History:
 #	2022-07-18 MCM Created
 #	2022-11-21 MCM Added attachment upgrade support (Hydro 55)
+#	2023-02-23 MCM Added custom logging levels DATA and DATADEBUG
 #
 # To do:
 #	none
@@ -74,12 +75,15 @@ EXIT_FAILURE = -1
 
 
 #
-# Console banner
+# Message formatting
 #
 
 BANNER_WIDTH = 80
 BANNER_DELIMITER_1 = '=' * BANNER_WIDTH
 BANNER_DELIMITER_2 = '-' * BANNER_WIDTH
+
+JSON_FORMAT_DATE = '%Y-%m-%d %H:%M:%S'
+JSON_INDENT = 4
 
 
 
@@ -90,6 +94,8 @@ BANNER_DELIMITER_2 = '-' * BANNER_WIDTH
 LOG_FORMAT = '%(asctime)s.%(msecs)-3d %(levelname)-9s %(message)s' # msecs occasionally returns two digits instead of three; right-pad with space character to preserve alignment, if necessary
 LOG_FORMAT_DATE = '%Y-%m-%d %H:%M:%S'
 LOG_INDENT_HEADER = 34 # For indenting multi-line messages; currently set to line header length
+LOG_LEVEL_DATA = logging.DEBUG - 1
+LOG_LEVEL_DATADEBUG = logging.DEBUG - 2
 
 
 
