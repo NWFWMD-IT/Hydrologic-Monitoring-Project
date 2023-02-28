@@ -321,7 +321,7 @@ def create_fc_location(
 
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
-		('NWFID'			,'TEXT'		,None		,None	,32		,'NWFID'			,True		,False		,None					,None)
+		('NWFID'			,'TEXT'		,None		,None	,6		,'NWFID'			,True		,False		,None					,None)
 		,('Name'			,'TEXT'		,None		,None	,128		,'Name'				,True		,False		,None					,None)
 		,('Project'			,'LONG'		,None		,None	,None		,'Project Number'		,True		,False		,None					,None)
 		,('HasDataLogger'		,'TEXT'		,None		,None	,3		,'Has Data Logger'		,True		,False		,'Yes/No'				,None)
