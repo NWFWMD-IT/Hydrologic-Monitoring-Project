@@ -71,28 +71,159 @@ import mg
 # Classes
 ################################################################################
 
-class Location:
+
+class DataLogger:
 	'''
-	Hydro monitoring location
-	
-	Accepts content from multiple sources, correlates, and
-	transforms/validates for use with hydro monitoring geodatabase
+	Data logger
 	'''
-	
+
 
 	########################################################################
 	# Class attributes
 	########################################################################
 
-	
+
 	#
 	# Public
 	#
-	
-	
+
+
 	# Properties in the target hydro geodatabase data model, to use as
 	# instance attributes
-	
+
+	ATTRIBUTES = (
+		'Type'
+		,'SerialNumber'
+		,'Comments'
+	)
+
+
+
+	########################################################################
+	# Instance methods
+	########################################################################
+
+
+	#
+	# Public
+	#
+
+	def __init__(
+		self
+		,type_
+		,serial_number
+	):
+
+		logging.debug(f'Initializing {__class__.__name__}')
+
+
+
+		# Store values passed by caller
+
+		self._type = type_
+		self._serial_number = serial_number
+
+
+
+		# Create attributes for target values
+
+		self._initialize_attributes()
+
+
+
+		# Process source data into target values
+
+		self.transform()
+
+
+
+	def __str__(self):
+
+		return json.dumps(
+			asdict(
+				object = self
+				,attributes = self.__class__.ATTRIBUTES
+			)
+			,indent = mg.JSON_INDENT
+		)
+
+
+
+	def transform(self):
+
+		# Run a transformation function to populate each output
+		# attribute
+
+		for f in (
+			self.transform_serialnumber
+			,self.transform_type
+		):
+
+			logging.debug(f'Executing: {f.__name__}')
+			f()
+
+
+
+	def transform_serialnumber(self):
+
+		if isempty(self._serial_number):
+		
+			raise ValueError(f'Data Logger: Missing serial number')
+			
+		
+		self.SerialNumber = self._serial_number.strip()
+
+
+
+	def transform_type(self):
+
+		if isempty(self._serial_number):
+		
+			raise ValueError(f'Data Logger: Missing type')
+			
+		
+		self.Type = self._type.strip()
+
+
+
+	#
+	# Private
+	#
+
+	def _initialize_attributes(self):
+
+		for a in self.__class__.ATTRIBUTES:
+
+			setattr(
+				self
+				,a
+				,None
+			)
+
+
+
+class Location:
+	'''
+	Hydro monitoring location
+
+	Accepts content from multiple sources, correlates, and
+	transforms/validates for use with hydro monitoring geodatabase
+	'''
+
+
+	########################################################################
+	# Class attributes
+	########################################################################
+
+
+	#
+	# Public
+	#
+
+
+	# Properties in the target hydro geodatabase data model, to use as
+	# instance attributes
+
 	ATTRIBUTES = (
 		'shape'
 		,'NWFID'
@@ -110,9 +241,9 @@ class Location:
 		,'HasWaterQuality'
 		,'Comments'
 	)
-	
-	
-	
+
+
+
 	########################################################################
 	# Instance methods
 	########################################################################
@@ -130,38 +261,48 @@ class Location:
 
 		logging.debug(f'Initializing {__class__.__name__}')
 
-		
-		
+
+
 		# Store source data values
-		
+
 		self.data_aq_stations = data_aq_stations
 		self.data_district_monitoring = data_district_monitoring
-		
-		
-		
+
+
+
 		# Create attributes for target values
-		
+
 		self._initialize_attributes()
 
 
 
-		# Check some basic integrity before running transformers
-		
-		if self.data_district_monitoring.Monitoring_Type is None:
-		
-			raise ValueError(f'Location has empty monitoring type in District Monitoring spreadsheet')
-			
+		# Initialize related objects
 
-		
+		self.data_logger = None
+		self.sensors = []
+
+
+
+		# Check basic integrity before running transformers
+
+		if self.data_district_monitoring.Monitoring_Type is None:
+
+			raise ValueError(f'District Monitoring: Missing monitoring type')
+
+
+
 		# Process source data into target values
-		
+
 		self.transform()
-		
-		
-			
+
+
+
 	def __str__(self):
-	
-		return json.dumps(
+
+
+		# Location
+
+		message = json.dumps(
 			asdict(
 				object = self
 				,attributes = self.__class__.ATTRIBUTES
@@ -171,12 +312,49 @@ class Location:
 
 
 
+		# Data Logger
+
+		if self.data_logger is None:
+
+			message += '\nData Logger: None'
+
+		else:
+
+			message += '\nData Logger:'
+			message += f'\n{self.data_logger}'
+
+
+
+		# Sensors
+		
+		if len(self.sensors) == 0:
+		
+			message += '\nSensors: None'
+			
+			
+		else:
+		
+			message += '\nSensors:'
+			
+			for sensor in self.sensors:
+			
+				message += f'\n{sensor}'
+
+
+
+		# Return
+		
+		return message
+
+
+
 	def transform(self):
-	
+
 		# Run a transformation function to populate each output
 		# attribute
-		
+
 		for f in (
+			# Location properties
 			self.transform_hasadvm
 			,self.transform_hasadvmbattery
 			,self.transform_hasconductivity
@@ -191,155 +369,327 @@ class Location:
 			,self.transform_nwfid
 			,self.transform_project
 			,self.transform_shape
+			# Related data
+			,self.transform__datalogger
+			,self.transform__sensors
 		):
-		
+
 			logging.debug(f'Executing: {f.__name__}')
 			f()
 
 
 
-	def transform_hasadvm(self):
-	
-		if 'vel.ind' in self.data_district_monitoring.Monitoring_Type.lower():
-		
-			self.HasADVM = 'Yes'
+	def transform__datalogger(self):
+		'''
+		Locations may have zero or one Data Loggers. Loggers must have
+		both a type and serial number.
+		'''
+
+		type_ = self.data_district_monitoring.Type_of_Recorder
+		serial_number = self.data_district_monitoring.Recorder_Serial__
+
+
+
+		if (
+			not isempty(type_)
+			and not isempty(serial_number)
+		):
+
+			logging.debug('Found Data Logger')
 			
+			self.data_logger = DataLogger(
+				type_ = type_.strip()
+				,serial_number = serial_number.strip()
+			)
+
+
+		elif(
+			isempty(type_)
+			^ isempty(serial_number)
+		):
+
+			raise ValueError(
+				'District Monitoring: Data Logger must have both type and serial number'
+				f'\nType: {mg.none2blank(type_)}'
+				f'\nSerial number: {mg.none2blank(serial_number)}'
+			)
+
+
 		else:
-		
+
+			logging.debug('No Data Logger record')
+
+
+
+	def transform_hasadvm(self):
+
+		if 'vel.ind' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+
+			self.HasADVM = 'Yes'
+
+		else:
+
 			self.HasADVM = 'No'
-	
-	
-	
+
+
+
 	def transform_hasadvmbattery(self):
-	
+
 		# This source data is not available yet; set all values to NULL
 		# for now
-		
+
 		self.HasADVMBattery = None
-	
-	
-	
+
+
+
 	def transform_hasconductivity(self):
-	
-		if 'cond' in self.data_district_monitoring.Monitoring_Type.lower():
-		
+
+		if 'cond' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+
 			self.HasConductivity = 'Yes'
-			
+
 		else:
-		
+
 			self.HasConductivity = 'No'
-	
-	
-	
+
+
+
 	def transform_hasdatalogger(self):
-	
-		if self.data_district_monitoring.Type_of_Recorder is None:
-		
+
+		if isempty(self.data_district_monitoring.Type_of_Recorder):
+
 			self.HasDataLogger = 'No'
-			
+
 		else:
-		
+
 			self.HasDataLogger = 'Yes'
-	
-	
-	
+
+
+
 	def transform_hasdischarge(self):
-	
-		if 'discharge' in self.data_district_monitoring.Monitoring_Type.lower():
-		
+
+		if 'discharge' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+
 			self.HasDischarge = 'Yes'
-			
+
 		else:
-		
+
 			self.HasDischarge = 'No'
-	
-	
-	
+
+
+
 	def transform_hasgroundwater(self):
-	
-		if 'gw level' in self.data_district_monitoring.Monitoring_Type.lower():
-		
+
+		if 'gw level' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+
 			self.HasGroundwater = 'Yes'
-			
+
 		else:
-		
+
 			self.HasGroundwater = 'No'
-	
-	
-	
+
+
+
 	def transform_hasrainfall(self):
-	
-		if 'rainfall' in self.data_district_monitoring.Monitoring_Type.lower():
-		
+
+		if 'rainfall' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+
 			self.HasRainfall = 'Yes'
-			
+
 		else:
-		
+
 			self.HasRainfall = 'No'
-		
-		
-		
+
+
+
 	def transform_hasstage(self):
-	
-		monitoring_type = self.data_district_monitoring.Monitoring_Type.lower()
-		
-	
+
+		monitoring_type = mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower()
+
+
 		if 'd-stage' in monitoring_type: # Discontinued stage type
-		
+
 			self.HasStage = 'No'
-			
+
 		elif 'stage' in monitoring_type: # All instances except 'd-stage'
-		
+
 			self.HasStage = 'Yes'
-			
+
 		else:
-		
+
 			self.HasStage = 'No'
-	
-	
-	
+
+
+
 	def transform_hastemperature(self):
-	
-		if 'temp' in self.data_district_monitoring.Monitoring_Type.lower():
-		
+
+		if 'temp' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+
 			self.HasTemperature = 'Yes'
-			
+
 		else:
-		
+
 			self.HasTemperature = 'No'
-	
-	
-	
+
+
+
 	def transform_haswaterquality(self):
-	
-		if 'wq' in self.data_district_monitoring.Monitoring_Type.lower():
-		
+
+		if 'wq' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+
 			self.HasWaterQuality = 'Yes'
+
+		else:
+
+			self.HasWaterQuality = 'No'
+
+
+
+	def transform_name(self):
+
+		if not isempty(self.data_district_monitoring.Station_Name):
+		
+			self.Name = self.data_district_monitoring.Station_Name.strip()
+
+
+
+	def transform_nwfid(self):
+
+		if isempty(self.data_aq_stations.LocationIdentifier):
+		
+			raise ValueError('Aquarius: Missing location identifier')
 			
+			
+		self.NWFID = f'{self.data_aq_stations.LocationIdentifier:>06}'
+
+
+
+	def transform_project(self):
+
+		if not isempty(self.data_district_monitoring.Project_Number):
+		
+			try:
+			
+				self.Project = int(self.data_district_monitoring.Project_Number)
+				
+			except Exception as e:
+			
+				logging.warning(f'Location {self.data_aq_stations.LocationIdentifier}: Failed to process project number: {self.data_district_monitoring.Project_Number}')
+
+
+
+	def transform__sensors(self):
+		'''
+		Locations may have zero or more sensors. Sensors are stored in
+		two places in the District Monitoring spreadsheet:
+		
+			o Tipping bucket
+				o Zero or one
+				
+			o Other sensors
+				o Zero or many
+				o Multiple sensors are pipe delimited
+				
+		All sensors must have a type and a serial number
+		'''
+		
+		
+		# Tipping bucket
+
+		tb_type = self.data_district_monitoring.Type_of_Tipping_Bucket
+		tb_serial_number = self.data_district_monitoring.T_B__Serial__
+
+
+		if (
+			not isempty(tb_type)
+			and not isempty(tb_serial_number)
+		):
+
+			logging.debug('Found tipping bucket')
+			
+			self.sensors.append(
+				Sensor(
+					type_ = tb_type.strip()
+					,serial_number = tb_serial_number.strip()
+				)
+			)
+
+
+		elif(
+			isempty(tb_type)
+			^ isempty(tb_serial_number)
+		):
+
+			raise ValueError(
+				'District Monitoring: Tipping bucket must have both type and serial number'
+				f'\nType: {mg.none2blank(tb_type)}'
+				f'\nSerial number: {mg.none2blank(tb_serial_number)}'
+			)
+
+
+		else:
+
+			logging.debug('No tipping bucket record')
+			
+			
+			
+		# Other sensors
+		
+		sensor_types = self.data_district_monitoring.Type_of_Sensor
+		sensor_serial_numbers = self.data_district_monitoring.Sensor_Serial__
+
+
+		if (
+			not isempty(sensor_types)
+			and not isempty(sensor_serial_numbers)
+		):
+		
+			logging.debug('Found sensor records')
+			
+		
+			sensor_type_list = sensor_types.split('|')
+			sensor_serial_number_list = sensor_serial_numbers.split('|')
+		
+			
+			if len(sensor_type_list) != len(sensor_serial_number_list):
+			
+				raise ValueError(
+					'District Monitoring: Sensor list must have type and serial number for each sensor'
+					f'\nTypes: {mg.none2blank(sensor_types)}'
+					f'\nSerial numbers: {mg.none2blank(sensor_serial_numbers)}'
+				)
+			
+			
+			for i in range(len(sensor_type_list)):
+			
+				logging.debug(f'Adding Sensor {i}')
+			
+				self.sensors.append(
+					Sensor(
+						type_ = sensor_type_list[i].strip()
+						,serial_number = sensor_serial_number_list[i].strip()
+					)
+				)
+
+
+		elif(
+			isempty(sensor_types)
+			^ isempty(sensor_serial_numbers)
+		):
+
+			raise ValueError(
+				'District Monitoring: Sensor list must have type and serial number for each sensor'
+				f'\nTypes: {mg.none2blank(sensor_types)}'
+				f'\nSerial numbers: {mg.none2blank(sensor_serial_numbers)}'
+			)
+
+
 		else:
 		
-			self.HasWaterQuality = 'No'
-	
-	
-	
-	def transform_name(self):
-	
-		self.Name = self.data_district_monitoring.Station_Name
-	
-	
-	
-	def transform_nwfid(self):
-	
-		self.NWFID = f'{self.data_aq_stations.LocationIdentifier:>06}'
-		
-		
-	
-	def transform_project(self):
-	
-		self.Project = int(self.data_district_monitoring.Project_Number)
-	
-	
-	
+			logging.debug('No sensor records')
+
+
+
 	def transform_shape(self):
 		'''
 		Experimenting with different shape formats. Keeping all code for
@@ -352,23 +702,269 @@ class Location:
 			# self.data_aq_stations
 			# ,'SHAPE@'
 		# )
-		
 
-		
+
+
 		# Sequence
 
 		self.shape = self.data_aq_stations.Shape
-		
-		
+
+
 
 	#
 	# Private
 	#
-	
+
 	def _initialize_attributes(self):
-	
+
 		for a in self.__class__.ATTRIBUTES:
+
+			setattr(
+				self
+				,a
+				,None
+			)
+
+
+
+class Metrics:
+	'''
+	Store and report statistics for data processing progress
+	'''
+
+
+	########################################################################
+	# Properties
+	########################################################################
+
+
+	####################
+	# Counts
+	####################
+
+
+	#
+	# Locations
+	#
+
+
+	# Succeeded
+
+	@property
+	def location_succeeded(self):
+
+		return self._location_succeeded
+
+
+	@location_succeeded.setter
+	def location_succeeded(
+		self
+		,count
+	):
+
+		self._location_succeeded = count
+
+
+
+	# Failed
+
+	@property
+	def location_failed(self):
+
+		return self._location_failed
+
+
+	@location_failed.setter
+	def location_failed(
+		self
+		,count
+	):
+
+		self._location_failed = count
+
+
+
+	# Total
+
+	@property
+	def location_total(self):
+
+		return self.location_succeeded + self.location_failed
+
+
+
+	########################################################################
+	# Instance methods
+	########################################################################
+
+
+	#
+	# Public
+	#
+
+	def __init__(self):
+
+		logging.debug(f'Initializing {__class__.__name__}')
+
+
+		# Initialize counters
+
+		self.location_succeeded = 0
+		self.location_failed = 0
+
+
+
+	def __str__(self):
+
+		template_count_header = '\n\t{type:<20s}{total:>12s}{succeeded:>12s}{failed:>12s}'
+		template_count        = '\n\t{type:<20s}{total:>12,d}{succeeded:>12,d}{failed:>12,d}'
+
+
+		message = 'Data Processing Metrics'
+
+		message += template_count_header.format(
+			type = ''
+			,total = 'Total'
+			,succeeded = 'Succeeded'
+			,failed = 'Failed'
+			,excluded = 'Excluded'
+		)
+
+		message += template_count.format(
+			type = 'Location'
+			,total = self.location_total
+			,succeeded = self.location_succeeded
+			,failed = self.location_failed
+		)
+
+
+
+		return message
+
+
+
+class Sensor:
+	'''
+	Sensor
+	'''
+
+
+	########################################################################
+	# Class attributes
+	########################################################################
+
+
+	#
+	# Public
+	#
+
+
+	# Properties in the target hydro geodatabase data model, to use as
+	# instance attributes
+
+	ATTRIBUTES = (
+		'Type'
+		,'SerialNumber'
+		,'Comments'
+	)
+
+
+
+	########################################################################
+	# Instance methods
+	########################################################################
+
+
+	#
+	# Public
+	#
+
+	def __init__(
+		self
+		,type_
+		,serial_number
+	):
+
+		logging.debug(f'Initializing {__class__.__name__}')
+
+
+
+		# Store values passed by caller
+
+		self._type = type_
+		self._serial_number = serial_number
+
+
+
+		# Create attributes for target values
+
+		self._initialize_attributes()
+
+
+
+		# Process source data into target values
+
+		self.transform()
+
+
+
+	def __str__(self):
+
+		return json.dumps(
+			asdict(
+				object = self
+				,attributes = self.__class__.ATTRIBUTES
+			)
+			,indent = mg.JSON_INDENT
+		)
+
+
+
+	def transform(self):
+
+		# Run a transformation function to populate each output
+		# attribute
+
+		for f in (
+			self.transform_serialnumber
+			,self.transform_type
+		):
+
+			logging.debug(f'Executing: {f.__name__}')
+			f()
+
+
+
+	def transform_serialnumber(self):
+
+		if isempty(self._serial_number):
 		
+			raise ValueError(f'Sensor: Missing serial number')
+			
+		
+		self.SerialNumber = self._serial_number.strip()
+
+
+
+	def transform_type(self):
+
+		if isempty(self._type):
+		
+			raise ValueError(f'Sensor: Missing type')
+			
+		
+		self.Type = self._type.strip()
+
+
+
+	#
+	# Private
+	#
+
+	def _initialize_attributes(self):
+
+		for a in self.__class__.ATTRIBUTES:
+
 			setattr(
 				self
 				,a
@@ -380,7 +976,7 @@ class Location:
 class SourceData:
 	'''
 	Collection of source values, accessible by name
-	
+
 	Constructor accepts an arcpy.da.SearchCursor (for column names) and
 	a row fetched from that cursor, and sets attributes named from the
 	former with values from latter. Attribute names are lower-case.
@@ -389,13 +985,13 @@ class SourceData:
 	order to fetch values unambiguously by column name. A duplicate column
 	name raises ValueError.
 	'''
-	
+
 	def __init__(
 		self
 		,cursor
 		,row
 	):
-	
+
 		logging.debug(f'Initializing {__class__.__name__}')
 
 
@@ -404,30 +1000,30 @@ class SourceData:
 
 
 		for i in range(len(cursor.fields)):
-		
+
 			name = cursor.fields[i]
 			value = row[i]
-			
-			
+
+
 			if name in self._attributes:
-			
+
 				raise ValueError(f'Column name {name} already exists')
-				
+
 
 
 			self._attributes.append(name)
-			
-			
+
+
 			setattr(
 				self
 				,name
 				,value
 			)
-			
-			
-			
+
+
+
 	def __str__(self):
-	
+
 		return json.dumps(
 			asdict(
 				object = self
@@ -435,8 +1031,8 @@ class SourceData:
 			)
 			,indent = mg.JSON_INDENT
 		)
-	
-	
+
+
 
 ################################################################################
 # Functions
@@ -455,68 +1051,97 @@ def asdict(
 	'''
 	Convert complex objects to dictionaries with simple types that can be
 	encoded as JSON by json module
-	
+
 	This helper function factors out common code from several classes
 	defined in this module. It accepts an object and a sequence of attribute
 	names, and returns a dict of the attribute names and their values.
-	
+
 	The conversion logic is simple:
-	
+
 		If an attribute value has its own attribute named 'asdict', we
 		assume that the value is a complex object that needs additional
 		simplification and call value.asdict() to get a dict with simple
 		types that are compatible with the json module.
-		
+
 		Otherwise, if the value does not have an attribute named
 		'asdict', we assume that it can be encoded directly by the
 		json module and add it to the dict without furhter processing.
 	'''
-	
+
 	d = {}
-	
+
 
 	for a in attributes:
-	
+
 		value = getattr(
 			object
 			,a
 		)
-		
-		
-		
+
+
+
 		if hasattr( # Complex type
 			value
 			,'asdict'
 		):
-		
+
 			d[a] = value.asdict()
-			
-			
+
+
 		else: # Simple type
-		
+
 			if isinstance( # Convert datetime to string, for subsequent JSON conversions
 				value
 				,datetime.datetime
 			):
-			
+
 				value = value.strftime(mg.JSON_FORMAT_DATE)
-				
-		
+
+
 			if isinstance( # Display human-friendly representation of geometry
 				value
 				,arcpy.Geometry
 			):
-			
+
 				value = json.loads(value.JSON)
 
 
 			d[a] = value
-			
-			
-			
+
+
+
 	# Return
-	
+
 	return d
+
+
+
+def isempty(
+	value
+):
+
+	if value is None:
+	
+		return True
+		
+		
+	elif isinstance(
+		value
+		,str
+	):
+	
+		if len(value.strip()) == 0:
+		
+			return True
+			
+		else:
+		
+			return False
+			
+			
+	else:
+	
+		return False
 
 
 
@@ -532,133 +1157,151 @@ def load_data(
 
 
 	#
+	# Initialize metrics
+	#
+
+	metrics = Metrics()
+
+
+
+	#
 	# Read District Monitoring source data to memory
 	#
 	# Performance is prohibitively poor when accessing directly from Excel
 	# (at least for this workbook). Cache the relevant worksheet to a table
 	# in an in-memory workspace.
 	#
-	
+
 	source_district_monitoring_table = os.path.join(
 		source_district_monitoring
 		,'T_Comprehensive_Monitoring$_' # 'T_' prefix and '_' suffix added for use with geoprocessing tools
 	)
 	logging.debug(f'District Monitoring source table: {source_district_monitoring_table}')
-	
-	
+
+
 	table_district_monitoring_memory_name = f't{uuid.uuid4().hex}' # Random table name
 	table_district_monitoring_memory = f'memory/{table_district_monitoring_memory_name}'
 	logging.debug(f'District Monitoring in-memory table: {table_district_monitoring_memory}')
-	
-	
+
+
 	logging.info('Loading District Monitoring source data to memory')
-	
+
 	arcpy.conversion.TableToTable(
 		in_rows = source_district_monitoring_table
 		,out_path = 'memory'
 		,out_name = table_district_monitoring_memory_name
 	)
-	
-	
+
+
 
 	#
 	# Process data
 	#
-	
+
 	logging.info('Starting Location processing')
 
-	location_count = 0
-	
 	with arcpy.da.SearchCursor( # Main Locations loop
 		in_table = source_aq_stations
 		,field_names = '*'
+		# ,where_clause = 'LocationIdentifier in (8495, 8505, 8544)' # DEBUG
 		,spatial_reference = C.SR_UTM16N_NAD83
 	) as cursor_aq_stations:
-	
-		
+
+
 		# Fetch Location
-		
+
 		for row_aq_stations in cursor_aq_stations:
-		
-			location_count += 1
-			
-		
+
 			data_aq_stations = SourceData(
 				cursor_aq_stations
 				,row_aq_stations
 			)
-			logging.datadebug(f'Source data - Aquarius Locations:\n{data_aq_stations}')
+			logging.debug(f'Fetched Aquarius Location {data_aq_stations.LocationIdentifier}')
+			logging.datadebug(f'Source data: Aquarius Locations:\n{data_aq_stations}')
 
 
 
 			# Fetch related District monitoring data
-			
-			logging.debug(f'Fetching related District Monitoring record for Location ID: {data_aq_stations.LocationIdentifier}')
-			
+
+			logging.debug(f'Fetching related District Monitoring record for Location ID {data_aq_stations.LocationIdentifier}')
+
 			district_monitoring_count = 0
-			
-			
+
+
 			with arcpy.da.SearchCursor( # District Monitoring record for this Location
 				in_table = table_district_monitoring_memory
 				,field_names = '*'
 				,where_clause = f'Station_ID = {data_aq_stations.LocationIdentifier}'
 			) as cursor_district_monitoring:
-			
+
 				logging.debug(f'Created cursor for District Monitoring memory table')
-				
+
 				data_district_monitoring = None
-				
-			
+
+
 				for row_district_monitoring in cursor_district_monitoring:
-			
+
 					district_monitoring_count += 1
-					
-					logging.debug(f'Found matching District Monitoring record for Location ID: {data_aq_stations.LocationIdentifier}')
-					
+
+					logging.debug(f'Found matching District Monitoring record for Location ID {data_aq_stations.LocationIdentifier}')
+
 					if district_monitoring_count > 1:
-					
-						raise ValueError(f'Multiple District Monitoring spreadsheet records found for Location ID: {data_aq_stations.LocationIdentifier}')
-						
-						
+
+						raise ValueError(f'District Monitoring: Multiple records found for Location ID {data_aq_stations.LocationIdentifier}')
+
+
 					data_district_monitoring = SourceData(
 						cursor_district_monitoring
 						,row_district_monitoring
 					)
-					logging.datadebug(f'Source data - District Monitoring:\n{data_district_monitoring}')
-			
-			
-			
+					logging.datadebug(f'Source data: District Monitoring:\n{data_district_monitoring}')
+
+
+
 			if data_district_monitoring is None:
-			
-				logging.warning(f'Skipping Location {data_aq_stations.LocationIdentifier}: No District Monitoring data')
-				
-			
+
+				logging.warning(f'Skipping Location ID {data_aq_stations.LocationIdentifier}: District Monitoring: No data found')
+
+				metrics.location_failed += 1
+
+
 			else:
-			
+
 				try:
-				
+
 					location = Location(
 						data_aq_stations = data_aq_stations
 						,data_district_monitoring = data_district_monitoring
 					)
-					logging.datadebug(f'Location:\n{location}')
-					
-					
-				except ValueError as e:
-				
-					logging.warning(f'Skipping Location {data_aq_stations.LocationIdentifier}: {e}')
+					logging.data(f'Location:\n{location}')
 
-			
-			
-			if location_count % feedback == 0:
-			
-				logging.info(f'Processed {location_count} Locations')
-			
-			
-			if location_count >= 12: break
-			
-			
-			
+
+					metrics.location_succeeded += 1
+
+
+				except ValueError as e:
+
+					logging.warning(f'Skipping Location ID {data_aq_stations.LocationIdentifier}: {e}')
+
+					metrics.location_failed += 1
+
+
+
+			if metrics.location_total % feedback == 0:
+
+				logging.info(metrics)
+
+
+
+	#
+	# Final feedback messages
+	#
+
+	logging.info('Finished processing Locations')
+
+	logging.info(metrics)
+
+
 #
 # Private
 #
@@ -671,14 +1314,14 @@ def _check_credentials():
 
 	domain = os.environ.get('USERDOMAIN')
 	user = os.environ.get('USERNAME')
-	
+
 	username = f'{domain}\\{user}' # Leave default string case, for display
-	
-	
-	
+
+
+
 	logging.debug('Checking OS username')
 	if not username.upper() in C.OS_USERNAMES_HYDRO:
-	
+
 		raise RuntimeError(
 			'Invalid Windows credentials'
 			f'\nThis script must run in a Python session as the HQ\hydro user, but is running as {username}'
@@ -759,14 +1402,14 @@ def _configure_arguments():
 		,'--help'
 		,action = 'help'
 	)
-	
-	
+
+
 	# Positional arguments
 	#
 	# Positional arguments are always required, so `required` is not
 	# permitted. Argument name is the destination, so `dest` is not
 	# permitted. 
-	
+
 	g.add_argument(
 		'source_aq_stations'
 		# ,dest = 'source_aq_stations'
@@ -833,7 +1476,7 @@ def _connect_gdb(
 ):
 	'''
 	Create temporary geodatabase connection using OS authentication
-	
+
 	Returns tempfile.TemporaryDirectory object, along with geodatabase
 	connection file. You must retain a reference to the returned
 	TemporaryDirectory, else it will go out-of-scope and automatically
@@ -841,28 +1484,28 @@ def _connect_gdb(
 	a reference to the file, itself, is not sufficient to prevent automatic
 	cleanup.
 	'''
-	
-	
-	# Check Windows credentials
-	
-	try:
-	
-		_check_credentials()
-		
-	
-	except RuntimeError as e:
-	
-		raise
-		
 
-	
+
+	# Check Windows credentials
+
+	try:
+
+		_check_credentials()
+
+
+	except RuntimeError as e:
+
+		raise
+
+
+
 	# Create connection
-	
+
 	temp_dir = tempfile.TemporaryDirectory()
 	logging.debug(f'Created temporary directory {temp_dir.name}')
-	
-	
-	
+
+
+
 	arcpy.management.CreateDatabaseConnection(
 		out_folder_path = temp_dir.name
 		,out_name = C.CONNECTION_FILE_NAME
@@ -871,16 +1514,16 @@ def _connect_gdb(
 		,account_authentication = 'OPERATING_SYSTEM_AUTH'
 		,database = 'hydro'
 	)
-	
-	
+
+
 	gdb = os.path.join(
 		temp_dir.name
 		,C.CONNECTION_FILE_NAME
 	)
 	logging.debug(f'Created database connection file: {gdb}')
-	
-	
-	
+
+
+
 	# Validate geodatabase connection
 	#
 	# Creating connection file does not appear to test connection, just
@@ -917,15 +1560,15 @@ def _connect_gdb(
 		raise RuntimeError('Invalid enterprise geodatabase') from e
 
 
-	
+
 	# Return connection file AND TemporaryDirectory; see function header
 	# comments for details
-	
+
 	return(
 		gdb
 		,temp_dir
 	)
-	
+
 
 
 def _initialize_logging(
@@ -948,39 +1591,39 @@ def _initialize_logging(
 	script will choose a more reasonable level after processing arguments.
 	Define custom formatting now, to avoid early messages looking
 	differently than later ones.
-	
+
 	The custom implementations includes attributes and methods that mimic
 	those of the built-in levels, including:
-	
+
 		Logging level macros
-		
+
 			logging.DATA
 			logging.DATADEBUG
-			
+
 		Wrapper functions, at module level
-		
+
 			logging.data('message')
 			logging.datadebug('message')
-			
+
 		Wrapper functions, at root logger level
-		
+
 			l = logging.getLogger()
 			l.data('message')
 			l.datadebug('message')
 
 	Returns formatter, for use with other handlers.
 	'''
-	
-	
+
+
 	# Configure custom DATA level
 
 	logging.DATA = mg.LOG_LEVEL_DATA
-	
+
 	logging.addLevelName(
 		logging.DATA
 		,'DATA'
 	)
-	
+
 	logging.data = _logging_data
 	logging.getLogger().data = _logging_data
 
@@ -989,12 +1632,12 @@ def _initialize_logging(
 	# Configure custom DATADEBUG level
 
 	logging.DATADEBUG = mg.LOG_LEVEL_DATADEBUG
-	
+
 	logging.addLevelName(
 		logging.DATADEBUG
 		,'DATADEBUG'
 	)
-	
+
 	logging.datadebug = _logging_datadebug
 	logging.getLogger().datadebug = _logging_datadebug
 
@@ -1029,9 +1672,9 @@ def _initialize_logging(
 	# Return
 
 	return f
-			
-			
-			
+
+
+
 def _logging_data(
 	msg
 	,*args
@@ -1039,12 +1682,12 @@ def _logging_data(
 ):
 	'''
 	Create function for custom logging.DATA level
-	
+
 	This function will be bound to the logging module and the root logger
 	the root logger to match the convenience functions for the built-in
 	log levels. For example: logging.data('message')
 	'''
-	
+
 	logging.log(
 		logging.DATA
 		,msg
@@ -1061,12 +1704,12 @@ def _logging_datadebug(
 ):
 	'''
 	Create function for custom logging.DATADEBUG level
-	
+
 	This function will be bound to the logging module and the root logger
 	the root logger to match the convenience functions for the built-in
 	log levels. For example: logging.datadebug('message')
 	'''
-	
+
 	logging.log(
 		logging.DATADEBUG
 		,msg
@@ -1087,8 +1730,8 @@ def _print_banner(
 		f'{mg.BANNER_DELIMITER_1}\n'
 		f'Hydrologic Data Model Data Loader\n'
 		f'{mg.BANNER_DELIMITER_2}\n'
-		f'Source data - Aquarius stations:   {args.source_aq_stations}\n'
-		f'Source data - District monitoring: {args.source_district_monitoring}\n'
+		f'Source data: Aquarius stations:    {args.source_aq_stations}\n'
+		f'Source data: District monitoring:  {args.source_district_monitoring}\n'
 		f'Target database server:            {args.server}\n'
 		f'Log level:                         {args.log_level}\n'
 		f'Log file:                          {args.log_file_name}\n'
@@ -1162,7 +1805,7 @@ def _process_arguments(
 	#
 	# Relative paths break some arcpy functionality (e.g. accessing Excel
 	# tables) so force all paths to absolute
-	
+
 	source_aq_stations = os.path.abspath(args.source_aq_stations)
 	source_district_monitoring = os.path.abspath(args.source_district_monitoring)
 
@@ -1223,21 +1866,21 @@ if __name__ == '__main__':
 
 
 	# Connect to geodatabase
-	
+
 	logging.info('Connecting to geodatabase')
 
 	try:
-	
+
 		(
 			gdb
 			,temp_dir
 		) = _connect_gdb(args.server)
-		
-		
+
+
 	except RuntimeError as e:
-	
+
 		logging.error(e)
-		
+
 		sys.exit(mg.EXIT_FAILURE)
 
 
@@ -1245,7 +1888,7 @@ if __name__ == '__main__':
 	#
 	# Load data
 	#
-	
+
 	load_data(
 		target_gdb = gdb
 		,source_aq_stations = source_aq_stations
