@@ -522,7 +522,7 @@ def create_table_datalogger(
 
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
-		('DataLoggerType'		,'TEXT'		,None		,None	,32		,'Data Logger Type'		,True		,False		,'Data Logger Type'			,None)
+		('DataLoggerType'		,'TEXT'		,None		,None	,64		,'Data Logger Type'		,True		,False		,'Data Logger Type'			,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
