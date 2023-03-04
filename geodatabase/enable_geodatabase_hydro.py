@@ -6,9 +6,9 @@
 #	Enable geodatabae functionality in the [hydro] database
 #
 # Environment:
-#	ArcGIS Pro 3.0.4
-#	Python 3.9.11, with:
-#		arcpy 3.0 (build py39_arcgispro_36045)
+#	ArcGIS Pro 3.1.0
+#	Python 3.9.16, with:
+#		arcpy 3.1 (build py39_arcgispro_41759)
 #
 # Notes:
 #	This script connects to the target `hydro` database using Windows

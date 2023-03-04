@@ -6,7 +6,8 @@
 #	Shared Python objects for Mannion Geosystems modules
 #
 # Environment:
-#	Python 3.9.11
+#	Python 3.9.16
+#	ArcGIS Pro 3.1.0
 #
 # Notes:
 #	MESSAGES
@@ -959,6 +960,21 @@ def create_table(
 			,indent_level = indent_level + 2
 		)
 
+
+
+def none2blank(
+	string
+):
+
+	if string is None:
+	
+		return ''
+		
+		
+	else:
+	
+		return string
+		
 
 
 def set_subtype_domains(

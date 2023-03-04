@@ -6,9 +6,9 @@
 #	Load asset and configuration data to hydro geodatabase
 #
 # Environment:
-#	ArcGIS Pro 3.0.4
-#	Python 3.9.11, with:
-#		arcpy 3.0 (build py39_arcgispro_36056)
+#	ArcGIS Pro 3.1.0
+#	Python 3.9.16, with:
+#		arcpy 3.1 (build py39_arcgispro_41759)
 #
 # Notes:
 #	Run this script as the Windows user HQ\hydro. The script will create

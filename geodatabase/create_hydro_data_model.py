@@ -7,9 +7,9 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.0.4
-#	Python 3.9.11, with:
-#		arcpy 3.0 (build py39_arcgispro_36045)
+#	ArcGIS Pro 3.1.0
+#	Python 3.9.16, with:
+#		arcpy 3.1 (build py39_arcgispro_41759)
 #
 # Notes:
 #
@@ -154,8 +154,26 @@ def create_domains(
 		)
 		,(
 			'Data Logger Type', 'TEXT', (
-				('Type 1', 'Type 1')
-				,('Type 2', 'Type 2')
+				('CDMALink', 'CDMALink')
+				,('High Sierra 3208', 'High Sierra 3208')
+				,('In-Situ Level Troll', 'In-Situ Level Troll')
+				,('In-Situ Level Troll 500', 'In-Situ Level Troll 500')
+				,('In-Situ Level Troll 700', 'In-Situ Level Troll 700')
+				,('Keller CTD (68m), Keller CTD (77m)', 'Keller CTD (68m), Keller CTD (77m)')
+				,('OTT Orpheus Mini', 'OTT Orpheus Mini')
+				,('OTT Orpheus Mini-11 M, 0-4', 'OTT Orpheus Mini-11 M, 0-4')
+				,('Rugged Troll 100', 'Rugged Troll 100')
+				,('See 12697 - North Bay Tide', 'See 12697 - North Bay Tide')
+				,('Storm3', 'Storm3')
+				,('Sutron 7310', 'Sutron 7310')
+				,('Sutron 9210', 'Sutron 9210')
+				,('Sutron 9210 Xlite', 'Sutron 9210 Xlite')
+				,('Sutron Satlink 3', 'Sutron Satlink 3')
+				,('WaterLog H500XL', 'WaterLog H500XL')
+				,('WaterLog H500XL', 'WaterLog H500XL')
+				,('WaterLog H522+', 'WaterLog H522+')
+				,('XLink 100', 'XLink 100')
+				,('XLink 500', 'XLink 500')
 			)
 		)
 		,(
@@ -213,8 +231,31 @@ def create_domains(
 		)
 		,(
 			'Sensor Type', 'TEXT', (
-				('Type 1', 'Type 1')
-				,('Type 2', 'Type 2')
+				('15 foot cord', '15 foot cord')
+				,('30\'cable', '30\'cable')
+				,('Aqua Troll 500', 'Aqua Troll 500')
+				,('Cable', 'Cable')
+				,('Channel Master', 'Channel Master')
+				,('Druck', 'Druck')
+				,('Druck PTX1835', 'Druck PTX1835')
+				,('In Situ Level TROLL', 'In Situ Level TROLL')
+				,('In Situ Level TROLL 500', 'In Situ Level TROLL 500')
+				,('KPSI 500', 'KPSI 500')
+				,('Keller', 'Keller')
+				,('Keller AccuLevel', 'Keller AccuLevel')
+				,('Keller Acculevel', 'Keller Acculevel')
+				,('Keller Acculevel 30\'', 'Keller Acculevel 30\'')
+				,('Keller PT', 'Keller PT')
+				,('Level Troll 500', 'Level Troll 500')
+				,('OTT Mini', 'OTT Mini')
+				,('OTT PLS', 'OTT PLS')
+				,('OTT PLS-15 M', 'OTT PLS-15 M')
+				,('OTT PLS-C', 'OTT PLS-C')
+				,('Sontek Argonaut', 'Sontek Argonaut')
+				,('Sontek SL 1500', 'Sontek SL 1500')
+				,('Sutron RLR', 'Sutron RLR')
+				,('WaterLog Pulse Radar', 'WaterLog Pulse Radar')
+				,('Waterlog Encoder H-3311', 'Waterlog Encoder H-3311')
 			)
 		)
 		,(
