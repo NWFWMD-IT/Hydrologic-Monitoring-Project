@@ -257,6 +257,7 @@ class Location:
 		self
 		,data_aq_stations # SourceData instance
 		,data_district_monitoring # SourceData instance
+		,data_measuring_points # List of SourceData instances
 	):
 
 		logging.debug(f'Initializing {__class__.__name__}')
@@ -267,6 +268,7 @@ class Location:
 
 		self.data_aq_stations = data_aq_stations
 		self.data_district_monitoring = data_district_monitoring
+		self.data_measuring_points = data_measuring_points
 
 
 
@@ -279,21 +281,33 @@ class Location:
 		# Initialize related objects
 
 		self.data_logger = None
+		self.measuring_points = []
 		self.sensors = []
-
-
-
-		# Check basic integrity before running transformers
-
-		if self.data_district_monitoring.Monitoring_Type is None:
-
-			raise ValueError(f'District Monitoring: Missing monitoring type')
 
 
 
 		# Process source data into target values
 
 		self.transform()
+		
+		
+		
+		# Check multi-property integrity
+		
+		if not (
+			self.HasDataLogger
+			or self.HasRainfall
+			or self.HasStage
+			or self.HasGroundwater
+			or self.HasConductivity
+			or self.HasADVM
+			or self.HasADVMBattery
+			or self.HasDischarge
+			or self.HasTemperature
+			or self.HasWaterQuality
+		):
+		
+			raise ValueError(f'District Monitoring: No monitoring type')
 
 
 
@@ -339,6 +353,16 @@ class Location:
 			for sensor in self.sensors:
 			
 				message += f'\n{sensor}'
+				
+				
+				
+		# Measuring Points
+		
+		message += '\nMeasuring Points:'
+		
+		for measuring_point in self.measuring_points:
+		
+			message += f'\n{measuring_point}'
 
 
 
@@ -371,53 +395,12 @@ class Location:
 			,self.transform_shape
 			# Related data
 			,self.transform__datalogger
+			,self.transform__measuringpoints
 			,self.transform__sensors
 		):
 
 			logging.debug(f'Executing: {f.__name__}')
 			f()
-
-
-
-	def transform__datalogger(self):
-		'''
-		Locations may have zero or one Data Loggers. Loggers must have
-		both a type and serial number.
-		'''
-
-		type_ = self.data_district_monitoring.Type_of_Recorder
-		serial_number = self.data_district_monitoring.Recorder_Serial__
-
-
-
-		if (
-			not isempty(type_)
-			and not isempty(serial_number)
-		):
-
-			logging.debug('Found Data Logger')
-			
-			self.data_logger = DataLogger(
-				type_ = type_.strip()
-				,serial_number = serial_number.strip()
-			)
-
-
-		elif(
-			isempty(type_)
-			^ isempty(serial_number)
-		):
-
-			raise ValueError(
-				'District Monitoring: Data Logger must have both type and serial number'
-				f'\nType: {mg.none2blank(type_)}'
-				f'\nSerial number: {mg.none2blank(serial_number)}'
-			)
-
-
-		else:
-
-			logging.debug('No Data Logger record')
 
 
 
@@ -578,6 +561,105 @@ class Location:
 
 
 
+	def transform_shape(self):
+		'''
+		Experimenting with different shape formats. Keeping all code for
+		reference and commenting out parts that don't currently apply.
+		'''
+
+		# PointGeometry
+		#
+		# self.shape = getattr( # Need to use getattr() because '@' is required by ArcGIS but syntactically disallowed by Python
+			# self.data_aq_stations
+			# ,'SHAPE@'
+		# )
+
+
+
+		# Sequence
+
+		self.shape = self.data_aq_stations.Shape
+
+
+
+	def transform__datalogger(self):
+		'''
+		Locations may have zero or one Data Loggers. Loggers must have
+		both a type and serial number.
+		'''
+
+		type_ = self.data_district_monitoring.Type_of_Recorder
+		serial_number = self.data_district_monitoring.Recorder_Serial__
+
+
+
+		if (
+			not isempty(type_)
+			and not isempty(serial_number)
+		):
+
+			logging.debug('Found Data Logger')
+			
+			self.data_logger = DataLogger(
+				type_ = type_.strip()
+				,serial_number = serial_number.strip()
+			)
+
+
+		elif(
+			isempty(type_)
+			^ isempty(serial_number)
+		):
+
+			raise ValueError(
+				'District Monitoring: Data Logger must have both type and serial number'
+				f'\nType: {mg.none2blank(type_)}'
+				f'\nSerial number: {mg.none2blank(serial_number)}'
+			)
+
+
+		else:
+
+			logging.debug('No Data Logger record')
+
+
+
+	def transform__measuringpoints(self):
+		'''
+		Locations must have one or more Measuring Points
+		'''
+		
+		for source_data in self.data_measuring_points:
+		
+			if source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum.lower() != 'false':
+			
+				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is not FALSE')
+				
+				
+			elif source_data.Name == 'NAVD88 0ft':
+			
+				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: Name is NAVD88 0ft')
+		
+				
+			elif source_data.Name == 'NGVD29 0ft':
+			
+				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: Name is NGVD29 0ft')
+		
+				
+			else:
+			
+				self.measuring_points.append(
+					MeasuringPoint(source_data)
+				)
+				
+				
+				
+		if len(self.measuring_points) == 0:
+		
+			raise ValueError('Measuring Points: No valid measuring points found')
+	
+	
+	
 	def transform__sensors(self):
 		'''
 		Locations may have zero or more sensors. Sensors are stored in
@@ -690,27 +772,6 @@ class Location:
 
 
 
-	def transform_shape(self):
-		'''
-		Experimenting with different shape formats. Keeping all code for
-		reference and commenting out parts that don't currently apply.
-		'''
-
-		# PointGeometry
-		#
-		# self.shape = getattr( # Need to use getattr() because '@' is required by ArcGIS but syntactically disallowed by Python
-			# self.data_aq_stations
-			# ,'SHAPE@'
-		# )
-
-
-
-		# Sequence
-
-		self.shape = self.data_aq_stations.Shape
-
-
-
 	#
 	# Private
 	#
@@ -743,6 +804,26 @@ class Metrics:
 	####################
 
 
+	#
+	# Data Loggers (total only)
+	#
+	
+	@property
+	def data_logger_total(self):
+	
+		return self._data_logger_total
+		
+		
+	@data_logger_total.setter
+	def data_logger_total(
+		self
+		,count
+	):
+	
+		self._data_logger_total = count
+		
+		
+	
 	#
 	# Locations
 	#
@@ -790,6 +871,76 @@ class Metrics:
 	def location_total(self):
 
 		return self.location_succeeded + self.location_failed
+		
+		
+	
+	#
+	# Measuring Points
+	#
+	
+	
+	# Succeeded
+	
+	@property
+	def measuring_point_succeeded(self):
+	
+		return self._measuring_point_succeeded
+		
+		
+	@measuring_point_succeeded.setter
+	def measuring_point_succeeded(
+		self
+		,count
+	):
+	
+		self._measuring_point_succeeded = count
+
+
+	
+	# Failed
+	
+	@property
+	def measuring_point_failed(self):
+	
+		return self._measuring_point_failed
+		
+		
+	@measuring_point_failed.setter
+	def measuring_point_failed(
+		self
+		,count
+	):
+	
+		self._measuring_point_failed = count
+
+
+
+	# Total
+
+	@property
+	def measuring_point_total(self):
+
+		return self.measuring_point_succeeded + self.measuring_point_failed
+
+
+
+	#
+	# Sensors (total only)
+	#
+	
+	@property
+	def sensor_total(self):
+	
+		return self._sensor_total
+		
+		
+	@sensor_total.setter
+	def sensor_total(
+		self
+		,count
+	):
+	
+		self._sensor_total = count
 
 
 
@@ -809,15 +960,20 @@ class Metrics:
 
 		# Initialize counters
 
-		self.location_succeeded = 0
+		self.data_logger_total = 0
 		self.location_failed = 0
+		self.location_succeeded = 0
+		self.measuring_point_failed = 0
+		self.measuring_point_succeeded = 0
+		self.sensor_total = 0
 
 
 
 	def __str__(self):
 
-		template_count_header = '\n\t{type:<20s}{total:>12s}{succeeded:>12s}{failed:>12s}'
-		template_count        = '\n\t{type:<20s}{total:>12,d}{succeeded:>12,d}{failed:>12,d}'
+		template_count_header    = '\n\t{type:<20s}{total:>12s}{succeeded:>12s}{failed:>12s}'
+		template_count           = '\n\t{type:<20s}{total:>12d}{succeeded:>12d}{failed:>12d}'
+		template_count_totalonly = '\n\t{type:<20s}{total:>12d}' + f'{"-":>12}' * 2
 
 
 		message = 'Data Processing Metrics'
@@ -826,8 +982,7 @@ class Metrics:
 			type = ''
 			,total = 'Total'
 			,succeeded = 'Succeeded'
-			,failed = 'Failed'
-			,excluded = 'Excluded'
+			,failed = 'Rejected'
 		)
 
 		message += template_count.format(
@@ -837,9 +992,173 @@ class Metrics:
 			,failed = self.location_failed
 		)
 
+		message += template_count_totalonly.format(
+			type = 'Data Logger'
+			,total = self.data_logger_total
+		)
+
+		message += template_count_totalonly.format(
+			type = 'Sensor'
+			,total = self.sensor_total
+		)
+
+		message += template_count.format(
+			type = 'Measuring Point'
+			,total = self.measuring_point_total
+			,succeeded = self.measuring_point_succeeded
+			,failed = self.measuring_point_failed
+		)
+
 
 
 		return message
+
+
+
+class MeasuringPoint:
+	'''
+	Measuring Point
+	'''
+
+
+	########################################################################
+	# Class attributes
+	########################################################################
+
+
+	#
+	# Public
+	#
+
+
+	# Properties in the target hydro geodatabase data model, to use as
+	# instance attributes
+
+	ATTRIBUTES = (
+		'Name'
+		,'AquariusID'
+		,'Description'
+		,'Elevation'
+		,'Comments'
+	)
+
+
+
+	########################################################################
+	# Instance methods
+	########################################################################
+
+
+	#
+	# Public
+	#
+
+	def __init__(
+		self
+		,source_data
+	):
+	
+		logging.debug(f'Initializing {__class__.__name__}')
+		
+		
+		
+		# Store source data values
+		
+		self.source_data = source_data
+
+
+
+		# Create attributes for target values
+
+		self._initialize_attributes()
+
+
+
+		# Process source data into target values
+
+		self.transform()
+
+
+
+	def __str__(self):
+
+		return json.dumps(
+			asdict(
+				object = self
+				,attributes = self.__class__.ATTRIBUTES
+			)
+			,indent = mg.JSON_INDENT
+		)
+
+
+
+	def transform(self):
+
+		# Run a transformation function to populate each output
+		# attribute
+
+		for f in (
+			self.transform_aquariusid
+			,self.transform_description
+			,self.transform_elevation
+			,self.transform_name
+		):
+
+			logging.debug(f'Executing: {f.__name__}')
+			f()
+
+
+	def transform_aquariusid(self):
+	
+		if isempty(self.source_data.UniqueId):
+		
+			raise ValueError(f'Measuring Point: Missing Aquarius ID')
+			
+			
+		self.AquariusID = uuid.UUID(self.source_data.UniqueId)
+
+
+
+	def transform_description(self):
+	
+		if not isempty(self.source_data.Description):
+		
+			self.Description = self.source_data.Description.strip()
+
+
+
+	def transform_elevation(self):
+	
+		if isempty(self.source_data.ReferencePointPeriods_0_Elevation):
+		
+			raise ValueError(f'Measuring Point: Missing elevation')
+			
+			
+		self.Elevation = self.source_data.ReferencePointPeriods_0_Elevation
+
+
+
+	def transform_name(self):
+	
+		if not isempty(self.source_data.Name):
+		
+			self.Name = self.source_data.Name.strip()
+
+
+
+	#
+	# Private
+	#
+
+	def _initialize_attributes(self):
+
+		for a in self.__class__.ATTRIBUTES:
+
+			setattr(
+				self
+				,a
+				,None
+			)
 
 
 
@@ -1104,6 +1423,14 @@ def asdict(
 			):
 
 				value = json.loads(value.JSON)
+				
+				
+			if isinstance( # Convert UUID to string, for subsequent JSON conversions
+				value
+				,uuid.UUID
+			):
+			
+				value = str(value)
 
 
 			d[a] = value
@@ -1114,6 +1441,147 @@ def asdict(
 
 	return d
 
+
+
+def cache_district_monitoring_source(
+	source_district_monitoring
+):
+	'''
+	Performance is prohibitively poor when accessing directly from Excel
+	(at least for this workbook). Cache the relevant worksheet to a table
+	in an in-memory workspace.
+	'''
+	
+	
+	# Build source table name
+	
+	source_district_monitoring_table = os.path.join(
+		source_district_monitoring
+		,'T_Comprehensive_Monitoring$_' # 'T_' prefix and '_' suffix added for use with geoprocessing tools
+	)
+	logging.debug(f'District Monitoring source table: {source_district_monitoring_table}')
+
+
+	
+	# Build cache table name
+	
+	cache_district_monitoring_name = f't{uuid.uuid4().hex}' # Random table name
+	cache_district_monitoring = f'memory/{cache_district_monitoring_name}'
+	logging.debug(f'District Monitoring cache table: {cache_district_monitoring}')
+
+
+
+	# Load source data to cache
+	
+	logging.info('Caching District Monitoring source data')
+
+	arcpy.conversion.TableToTable(
+		in_rows = source_district_monitoring_table
+		,out_path = 'memory'
+		,out_name = cache_district_monitoring_name
+	)
+	
+	
+	
+	# Return cache table name
+	
+	return cache_district_monitoring
+
+
+
+def fetch_district_monitoring(
+	source_district_monitoring
+	,location_id
+):
+	'''
+	Fetch District Monitoring data for given Location ID
+	
+	Return:
+		o No match: None
+		o Single match: SourceData
+		o Multiple matches: ValueError
+	'''
+	
+	district_monitoring_count = 0
+
+
+	with arcpy.da.SearchCursor(
+		in_table = source_district_monitoring
+		,field_names = '*'
+		,where_clause = f'Station_ID = {location_id}'
+	) as cursor:
+
+		logging.debug(f'Created cursor for District Monitoring data, Location ID {location_id}')
+
+
+		data = None
+
+
+		for row in cursor:
+
+			district_monitoring_count += 1
+
+			logging.debug(f'Found matching District Monitoring record for Location ID {location_id}')
+
+			if district_monitoring_count > 1:
+
+				raise ValueError(f'District Monitoring: Multiple records found for Location ID {location_id}')
+
+
+			data = SourceData(
+				cursor
+				,row
+			)
+			logging.datadebug(f'Source data: District Monitoring:\n{data}')
+			
+			
+			
+	return data
+
+
+
+def fetch_measuring_points(
+	source_measuring_points
+	,location_id
+):
+	'''
+	Fetch Measuring Point data for given Location ID
+	
+	Return all Measuring Point records found. Location / MeasuringPoint
+	transformers will evaluate records and reject if appropriate.
+	
+	Returns list of SourceData, or empty list if no records found
+	'''
+
+	data = []
+	
+
+	with arcpy.da.SearchCursor(
+		in_table = source_measuring_points
+		,field_names = '*'
+		,where_clause = (f'Identifier = {location_id}')
+	) as cursor:
+	
+		logging.debug(f'Created cursor for Measuring Point data, Location ID {location_id}')
+		
+		
+		for row in cursor:
+		
+			logging.debug('Found Measuring Point record')
+			
+			
+			measuring_point = SourceData(
+				cursor
+				,row
+			)
+			logging.datadebug(f'Source data: Measuring Point:\n{measuring_point}')
+			
+			
+			data.append(measuring_point)
+
+
+
+	return data
 
 
 def isempty(
@@ -1149,6 +1617,7 @@ def load_data(
 	target_gdb
 	,source_aq_stations
 	,source_district_monitoring
+	,source_measuring_points
 	,feedback
 ):
 	'''
@@ -1165,32 +1634,10 @@ def load_data(
 
 
 	#
-	# Read District Monitoring source data to memory
-	#
-	# Performance is prohibitively poor when accessing directly from Excel
-	# (at least for this workbook). Cache the relevant worksheet to a table
-	# in an in-memory workspace.
+	# Cache District Monitoring source data
 	#
 
-	source_district_monitoring_table = os.path.join(
-		source_district_monitoring
-		,'T_Comprehensive_Monitoring$_' # 'T_' prefix and '_' suffix added for use with geoprocessing tools
-	)
-	logging.debug(f'District Monitoring source table: {source_district_monitoring_table}')
-
-
-	table_district_monitoring_memory_name = f't{uuid.uuid4().hex}' # Random table name
-	table_district_monitoring_memory = f'memory/{table_district_monitoring_memory_name}'
-	logging.debug(f'District Monitoring in-memory table: {table_district_monitoring_memory}')
-
-
-	logging.info('Loading District Monitoring source data to memory')
-
-	arcpy.conversion.TableToTable(
-		in_rows = source_district_monitoring_table
-		,out_path = 'memory'
-		,out_name = table_district_monitoring_memory_name
-	)
+	cache_district_monitoring = cache_district_monitoring_source(source_district_monitoring)
 
 
 
@@ -1203,93 +1650,108 @@ def load_data(
 	with arcpy.da.SearchCursor( # Main Locations loop
 		in_table = source_aq_stations
 		,field_names = '*'
-		# ,where_clause = 'LocationIdentifier in (8495, 8505, 8544)' # DEBUG
+		# ,where_clause = 'LocationIdentifier in (8495,  8505,  8544)' # DEBUG
 		,spatial_reference = C.SR_UTM16N_NAD83
 	) as cursor_aq_stations:
 
 
-		# Fetch Location
-
 		for row_aq_stations in cursor_aq_stations:
 
+			# Report feedback
+			#
+			# Check this at top because it will be skipped at end if
+			# processing bails early due to failed Location
+			
+			if (
+				metrics.location_total != 0 # Skip first pass
+				and metrics.location_total % feedback == 0
+			):
+
+				logging.info(metrics)
+			
+			
+			
+			# Fetch Location
+			
+			logging.debug('Fetched Aquarius Location')
+			
+			
 			data_aq_stations = SourceData(
 				cursor_aq_stations
 				,row_aq_stations
 			)
-			logging.debug(f'Fetched Aquarius Location {data_aq_stations.LocationIdentifier}')
-			logging.datadebug(f'Source data: Aquarius Locations:\n{data_aq_stations}')
+			logging.datadebug(f'Source data: Aquarius Location:\n{data_aq_stations}')
+
+
+			location_id = data_aq_stations.LocationIdentifier # Save for easy reference; used frequently below
+			logging.debug(f'Processing Aquarius Location ID {location_id}')
 
 
 
-			# Fetch related District monitoring data
-
-			logging.debug(f'Fetching related District Monitoring record for Location ID {data_aq_stations.LocationIdentifier}')
-
-			district_monitoring_count = 0
-
-
-			with arcpy.da.SearchCursor( # District Monitoring record for this Location
-				in_table = table_district_monitoring_memory
-				,field_names = '*'
-				,where_clause = f'Station_ID = {data_aq_stations.LocationIdentifier}'
-			) as cursor_district_monitoring:
-
-				logging.debug(f'Created cursor for District Monitoring memory table')
-
-				data_district_monitoring = None
-
-
-				for row_district_monitoring in cursor_district_monitoring:
-
-					district_monitoring_count += 1
-
-					logging.debug(f'Found matching District Monitoring record for Location ID {data_aq_stations.LocationIdentifier}')
-
-					if district_monitoring_count > 1:
-
-						raise ValueError(f'District Monitoring: Multiple records found for Location ID {data_aq_stations.LocationIdentifier}')
-
-
-					data_district_monitoring = SourceData(
-						cursor_district_monitoring
-						,row_district_monitoring
-					)
-					logging.datadebug(f'Source data: District Monitoring:\n{data_district_monitoring}')
-
+			# Fetch related District Monitoring data
+			
+			logging.debug(f'Fetching related District Monitoring record for Location ID {location_id}')
+			data_district_monitoring = fetch_district_monitoring(
+				source_district_monitoring = cache_district_monitoring
+				,location_id = location_id
+			)
 
 
 			if data_district_monitoring is None:
 
-				logging.warning(f'Skipping Location ID {data_aq_stations.LocationIdentifier}: District Monitoring: No data found')
+				logging.warning(f'Skipping Location ID {location_id}: District Monitoring: No data found')
 
 				metrics.location_failed += 1
-
-
-			else:
-
-				try:
-
-					location = Location(
-						data_aq_stations = data_aq_stations
-						,data_district_monitoring = data_district_monitoring
-					)
-					logging.data(f'Location:\n{location}')
-
-
-					metrics.location_succeeded += 1
-
-
-				except ValueError as e:
-
-					logging.warning(f'Skipping Location ID {data_aq_stations.LocationIdentifier}: {e}')
-
-					metrics.location_failed += 1
+				
+				continue
 
 
 
-			if metrics.location_total % feedback == 0:
+			# Fetch related Measuring Point data
 
-				logging.info(metrics)
+			logging.debug(f'Fetching related Measuring Point records for Location ID {location_id}')
+			data_measuring_points = fetch_measuring_points(
+				source_measuring_points = source_measuring_points
+				,location_id = location_id
+			)
+			
+			
+			if len(data_measuring_points) == 0:
+			
+				logging.warning(f'Skipping Location ID {location_id}: Measuring Points: No data found')
+
+				metrics.location_failed += 1
+				
+				continue
+			
+			
+			
+			# Create Location instance
+
+			try:
+
+				location = Location(
+					data_aq_stations = data_aq_stations
+					,data_district_monitoring = data_district_monitoring
+					,data_measuring_points = data_measuring_points
+				)
+				logging.data(f'Location:\n{location}')
+
+
+				# Update metrics
+				
+				metrics.location_succeeded += 1
+				metrics.data_logger_total += 0 if location.data_logger is None else 1
+				metrics.measuring_point_succeeded += len(location.measuring_points)
+				metrics.measuring_point_failed += len(data_measuring_points) - len(location.measuring_points)
+				metrics.sensor_total += len(location.sensors)
+
+
+			except ValueError as e:
+
+				logging.warning(f'Skipping Location ID {location_id}: {e}')
+
+				metrics.location_failed += 1
 
 
 
@@ -1412,18 +1874,20 @@ def _configure_arguments():
 
 	g.add_argument(
 		'source_aq_stations'
-		# ,dest = 'source_aq_stations'
 		,help = 'AQ_STATIONS feature class'
 		,metavar = '<source_aq_stations>'
-		# ,required = True
 	)
 
 	g.add_argument(
 		'source_district_monitoring'
-		# ,dest = 'source_district_monitoring'
 		,help = 'District monitoring spreadsheet'
 		,metavar = '<source_district_monitoring>'
-		# ,required = True
+	)
+
+	g.add_argument(
+		'source_measuring_points'
+		,help = 'Measuring Points CSV'
+		,metavar = '<source_measuring_points>	'
 	)
 
 
@@ -1732,6 +2196,7 @@ def _print_banner(
 		f'{mg.BANNER_DELIMITER_2}\n'
 		f'Source data: Aquarius stations:    {args.source_aq_stations}\n'
 		f'Source data: District monitoring:  {args.source_district_monitoring}\n'
+		f'Source data: Measuring points:     {args.source_measuring_points}\n'
 		f'Target database server:            {args.server}\n'
 		f'Log level:                         {args.log_level}\n'
 		f'Log file:                          {args.log_file_name}\n'
@@ -1808,6 +2273,7 @@ def _process_arguments(
 
 	source_aq_stations = os.path.abspath(args.source_aq_stations)
 	source_district_monitoring = os.path.abspath(args.source_district_monitoring)
+	source_measuring_points = os.path.abspath(args.source_measuring_points)
 
 
 
@@ -1819,6 +2285,7 @@ def _process_arguments(
 		args
 		,source_aq_stations
 		,source_district_monitoring
+		,source_measuring_points
 	)
 
 
@@ -1849,6 +2316,7 @@ if __name__ == '__main__':
 			args
 			,source_aq_stations
 			,source_district_monitoring
+			,source_measuring_points
 		) = _process_arguments(log_formatter)
 
 
@@ -1893,6 +2361,7 @@ if __name__ == '__main__':
 		target_gdb = gdb
 		,source_aq_stations = source_aq_stations
 		,source_district_monitoring = source_district_monitoring
+		,source_measuring_points = source_measuring_points
 		,feedback = args.feedback
 	)
 
