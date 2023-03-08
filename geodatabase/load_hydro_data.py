@@ -43,6 +43,7 @@
 # Copyright 2003-2022. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
+
 #
 # Modules
 #
@@ -64,6 +65,14 @@ import uuid
 
 import constants as C
 import mg
+
+
+
+#
+# Constants
+#
+
+NEWLINE = '\n' # For f-string expressions, which disallow backslashes
 
 
 
@@ -245,6 +254,21 @@ class Location:
 
 
 	########################################################################
+	# Properties
+	########################################################################
+	
+	@property
+	def rejected_measuring_point_count(self):
+		'''
+		This counter is incremented only by instance internals. The
+		property provides read-only access to consumers.
+		'''
+	
+		return self._rejected_measuring_point_count
+	
+	
+	
+	########################################################################
 	# Instance methods
 	########################################################################
 
@@ -278,6 +302,12 @@ class Location:
 
 
 
+		# Initialize internal counters
+		
+		self._rejected_measuring_point_count = 0
+		
+		
+		
 		# Initialize related objects
 
 		self.data_logger = None
@@ -308,6 +338,14 @@ class Location:
 		):
 		
 			raise ValueError(f'District Monitoring: No monitoring type')
+			
+			
+		if (
+			self.data_logger is None
+			and len(self.sensors) > 0
+		):
+		
+			raise ValueError('District Monitoring: Location has Sensors without Data Logger')
 
 
 
@@ -635,15 +673,21 @@ class Location:
 			
 				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is not FALSE')
 				
+				self._rejected_measuring_point_count += 1
+				
 				
 			elif source_data.Name == 'NAVD88 0ft':
 			
 				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: Name is NAVD88 0ft')
+				
+				self._rejected_measuring_point_count += 1
 		
 				
 			elif source_data.Name == 'NGVD29 0ft':
 			
 				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: Name is NGVD29 0ft')
+				
+				self._rejected_measuring_point_count += 1
 		
 				
 			else:
@@ -791,6 +835,13 @@ class Location:
 class Metrics:
 	'''
 	Store and report statistics for data processing progress
+	
+	Callers can set succeeded and failed counters; the total counter is
+	derived from these, and cannot be set directly.
+	
+	In some cases, a counter may not apply. To disable a counter, set its
+	value to None. If both the succeeded and failed counters for one metric
+	type are None, the total will be reported as None, as well.
 	'''
 
 
@@ -805,25 +856,58 @@ class Metrics:
 
 
 	#
-	# Data Loggers (total only)
+	# Data Loggers
 	#
 	
-	@property
-	def data_logger_total(self):
 	
-		return self._data_logger_total
+	# Succeeded
+	
+	@property
+	def data_logger_succeeded(self):
+	
+		return self._data_logger_succeeded
 		
 		
-	@data_logger_total.setter
-	def data_logger_total(
+	@data_logger_succeeded.setter
+	def data_logger_succeeded(
 		self
 		,count
 	):
 	
-		self._data_logger_total = count
+		self._data_logger_succeeded = self._check_count(count)
 		
 		
 	
+	# Failed
+	
+	@property
+	def data_logger_failed(self):
+	
+		return self._data_logger_failed
+		
+		
+	@data_logger_failed.setter
+	def data_logger_failed(
+		self
+		,count
+	):
+	
+		self._data_logger_failed = self._check_count(count)
+		
+		
+	
+	# Total
+	
+	@property
+	def data_logger_total(self):
+	
+		return self._get_total(
+			succeeded = self.data_logger_succeeded
+			,failed = self.data_logger_failed
+		)
+		
+		
+
 	#
 	# Locations
 	#
@@ -843,7 +927,7 @@ class Metrics:
 		,count
 	):
 
-		self._location_succeeded = count
+		self._location_succeeded = self._check_count(count)
 
 
 
@@ -861,7 +945,7 @@ class Metrics:
 		,count
 	):
 
-		self._location_failed = count
+		self._location_failed = self._check_count(count)
 
 
 
@@ -870,7 +954,10 @@ class Metrics:
 	@property
 	def location_total(self):
 
-		return self.location_succeeded + self.location_failed
+		return self._get_total(
+			succeeded = self.location_succeeded
+			,failed = self.location_failed
+		)
 		
 		
 	
@@ -893,7 +980,7 @@ class Metrics:
 		,count
 	):
 	
-		self._measuring_point_succeeded = count
+		self._measuring_point_succeeded = self._check_count(count)
 
 
 	
@@ -911,7 +998,7 @@ class Metrics:
 		,count
 	):
 	
-		self._measuring_point_failed = count
+		self._measuring_point_failed = self._check_count(count)
 
 
 
@@ -920,29 +1007,65 @@ class Metrics:
 	@property
 	def measuring_point_total(self):
 
-		return self.measuring_point_succeeded + self.measuring_point_failed
+		return self._get_total(
+			succeeded = self.measuring_point_succeeded
+			,failed = self.measuring_point_failed
+		)
 
 
 
 	#
-	# Sensors (total only)
+	# Sensors
 	#
+	
+	
+	# Succeeded
 	
 	@property
-	def sensor_total(self):
+	def sensor_succeeded(self):
 	
-		return self._sensor_total
+		return self._sensor_succeeded
 		
 		
-	@sensor_total.setter
-	def sensor_total(
+	@sensor_succeeded.setter
+	def sensor_succeeded(
 		self
 		,count
 	):
 	
-		self._sensor_total = count
-
-
+		self._sensor_succeeded = self._check_count(count)
+		
+		
+	
+	# Failed
+	
+	@property
+	def sensor_failed(self):
+	
+		return self._sensor_failed
+		
+		
+	@sensor_failed.setter
+	def sensor_failed(
+		self
+		,count
+	):
+	
+		self._sensor_failed = self._check_count(count)
+		
+		
+	
+	# Total
+	
+	@property
+	def sensor_total(self):
+	
+		return self._get_total(
+			succeeded = self.sensor_succeeded
+			,failed = self.sensor_failed
+		)
+		
+		
 
 	########################################################################
 	# Instance methods
@@ -953,65 +1076,151 @@ class Metrics:
 	# Public
 	#
 
-	def __init__(self):
+	def __init__(
+		self
+		,header = 'Data Processing Metrics' # Header message
+	):
 
 		logging.debug(f'Initializing {__class__.__name__}')
 
 
+
+		# Store header
+		
+		self.header = header
+		
+		
+		
 		# Initialize counters
 
-		self.data_logger_total = 0
+		self.data_logger_failed = 0
+		self.data_logger_succeeded = 0
 		self.location_failed = 0
 		self.location_succeeded = 0
 		self.measuring_point_failed = 0
 		self.measuring_point_succeeded = 0
-		self.sensor_total = 0
+		self.sensor_failed = 0
+		self.sensor_succeeded = 0
 
 
 
 	def __str__(self):
 
-		template_count_header    = '\n\t{type:<20s}{total:>12s}{succeeded:>12s}{failed:>12s}'
-		template_count           = '\n\t{type:<20s}{total:>12d}{succeeded:>12d}{failed:>12d}'
-		template_count_totalonly = '\n\t{type:<20s}{total:>12d}' + f'{"-":>12}' * 2
+
+		# Negative count values indicate that the count does not apply,
+		# and are formatted as '-'. By contrast, a zero indicates that
+		# the counter is active and has not accumulated any instances
+		# yet.
+	
+		def format_count(value):
+		
+			if value is None:
+			
+				return '-'
+				
+			else:
+			
+				return str(f'{value:n}')
+		
+		
+		
+		template    = '\n\t{type:<20s}{total:>12s}{succeeded:>12s}{failed:>12s}'
 
 
-		message = 'Data Processing Metrics'
 
-		message += template_count_header.format(
+		message = self.header
+		
+		message += template.format(
 			type = ''
 			,total = 'Total'
 			,succeeded = 'Succeeded'
-			,failed = 'Rejected'
+			,failed = 'Failed'
 		)
 
-		message += template_count.format(
+		message += template.format(
 			type = 'Location'
-			,total = self.location_total
-			,succeeded = self.location_succeeded
-			,failed = self.location_failed
+			,total = format_count(self.location_total)
+			,succeeded = format_count(self.location_succeeded)
+			,failed = format_count(self.location_failed)
 		)
 
-		message += template_count_totalonly.format(
+		message += template.format(
 			type = 'Data Logger'
-			,total = self.data_logger_total
+			,total = format_count(self.data_logger_total)
+			,succeeded = format_count(self.data_logger_succeeded)
+			,failed = format_count(self.data_logger_failed)
 		)
 
-		message += template_count_totalonly.format(
+		message += template.format(
 			type = 'Sensor'
-			,total = self.sensor_total
+			,total = format_count(self.sensor_total)
+			,succeeded = format_count(self.sensor_succeeded)
+			,failed = format_count(self.sensor_failed)
 		)
 
-		message += template_count.format(
+		message += template.format(
 			type = 'Measuring Point'
-			,total = self.measuring_point_total
-			,succeeded = self.measuring_point_succeeded
-			,failed = self.measuring_point_failed
+			,total = format_count(self.measuring_point_total)
+			,succeeded = format_count(self.measuring_point_succeeded)
+			,failed = format_count(self.measuring_point_failed)
 		)
 
 
 
 		return message
+		
+		
+	
+	#
+	# Private
+	#
+	
+	def _check_count(
+		self
+		,count
+	):
+	
+		if count is None:
+		
+			return None
+			
+			
+		elif isinstance(
+			count
+			,int
+		):
+		
+			if count < 0:
+			
+				raise ValueError(f'Invalid Metrics count: Value cannot be negative')
+			
+			else:
+			
+				return count
+			
+			
+		else:
+		
+			raise ValueError(f'Invalid Metrics count: Expected an int, received a {type(count)}')
+			
+			
+			
+	def _get_total(
+		self
+		,succeeded
+		,failed
+	):
+	
+		if (
+			succeeded is None
+			and failed is None
+		):
+		
+			return None
+			
+		else:
+		
+			return (succeeded or 0) + (failed or 0)
 
 
 
@@ -1584,6 +1793,76 @@ def fetch_measuring_points(
 	return data
 
 
+
+def get_location(
+	data_aq_stations # SourceData
+	,source_district_monitoring
+	,source_measuring_points
+):
+	'''
+	Extract and transform Location and related data (Data Logger, Sensors,
+	Measuring Points).
+	
+	Return valid Location instance (presumably for loading to target
+	database)
+	'''
+	
+	location_id = data_aq_stations.LocationIdentifier # Save for easy reference
+
+
+
+	# Fetch related District Monitoring data
+	
+	logging.debug(f'Fetching related District Monitoring record for Location ID {location_id}')
+	data_district_monitoring = fetch_district_monitoring(
+		source_district_monitoring = source_district_monitoring
+		,location_id = location_id
+	)
+
+
+	if data_district_monitoring is None:
+
+		raise ValueError('District Monitoring: No data found')
+
+
+
+	# Fetch related Measuring Point data
+
+	logging.debug(f'Fetching related Measuring Point records for Location ID {location_id}')
+	data_measuring_points = fetch_measuring_points(
+		source_measuring_points = source_measuring_points
+		,location_id = location_id
+	)
+	
+	
+	if len(data_measuring_points) == 0:
+	
+		raise ValueError('Measuring Points: No data found')
+
+	
+	
+	# Create Location instance
+	#
+	# Allow exceptions to propagate to caller
+	
+	location = Location(
+		data_aq_stations = data_aq_stations
+		,data_district_monitoring = data_district_monitoring
+		,data_measuring_points = data_measuring_points
+	)
+	logging.data(f'Location:\n{location}')
+	
+	
+	
+	
+	
+	
+	# Return
+	
+	return location
+
+
+
 def isempty(
 	value
 ):
@@ -1629,7 +1908,19 @@ def load_data(
 	# Initialize metrics
 	#
 
-	metrics = Metrics()
+
+	# Input
+	
+	metrics_input = Metrics('Input Processing Metrics')
+	
+	metrics_input.data_logger_failed = None # Disable counter
+	metrics_input.sensor_failed = None # Disable counter
+	
+	
+	
+	# Output
+	
+	metrics_output = Metrics('Output Processing Metrics')
 
 
 
@@ -1638,16 +1929,27 @@ def load_data(
 	#
 
 	cache_district_monitoring = cache_district_monitoring_source(source_district_monitoring)
-
-
-
+	
+	
+	
 	#
 	# Process data
 	#
-
+	
 	logging.info('Starting Location processing')
+	
 
-	with arcpy.da.SearchCursor( # Main Locations loop
+	
+	# Create geodatabase editor for transaction control
+	
+	editor = arcpy.da.Editor(target_gdb)
+	logging.debug('Created geodatabase editor')
+
+
+
+	# Main Locations loop
+	
+	with arcpy.da.SearchCursor(
 		in_table = source_aq_stations
 		,field_names = '*'
 		# ,where_clause = 'LocationIdentifier in (8495,  8505,  8544)' # DEBUG
@@ -1657,101 +1959,231 @@ def load_data(
 
 		for row_aq_stations in cursor_aq_stations:
 
+			#
 			# Report feedback
 			#
 			# Check this at top because it will be skipped at end if
 			# processing bails early due to failed Location
+			#
 			
 			if (
-				metrics.location_total != 0 # Skip first pass
-				and metrics.location_total % feedback == 0
+				metrics_input.location_total != 0 # Skip first pass
+				and metrics_input.location_total % feedback == 0
 			):
 
-				logging.info(metrics)
+				logging.info(f'{metrics_input}\n{metrics_output}')
 			
 			
 			
-			# Fetch Location
+			####################
+			# Read and process Location and related data
+			####################
 			
 			logging.debug('Fetched Aquarius Location')
-			
+
 			
 			data_aq_stations = SourceData(
 				cursor_aq_stations
 				,row_aq_stations
 			)
 			logging.datadebug(f'Source data: Aquarius Location:\n{data_aq_stations}')
-
-
-			location_id = data_aq_stations.LocationIdentifier # Save for easy reference; used frequently below
+			
+			location_id = data_aq_stations.LocationIdentifier # Save for easy reference
 			logging.debug(f'Processing Aquarius Location ID {location_id}')
 
 
 
-			# Fetch related District Monitoring data
-			
-			logging.debug(f'Fetching related District Monitoring record for Location ID {location_id}')
-			data_district_monitoring = fetch_district_monitoring(
-				source_district_monitoring = cache_district_monitoring
-				,location_id = location_id
-			)
-
-
-			if data_district_monitoring is None:
-
-				logging.warning(f'Skipping Location ID {location_id}: District Monitoring: No data found')
-
-				metrics.location_failed += 1
-				
-				continue
-
-
-
-			# Fetch related Measuring Point data
-
-			logging.debug(f'Fetching related Measuring Point records for Location ID {location_id}')
-			data_measuring_points = fetch_measuring_points(
-				source_measuring_points = source_measuring_points
-				,location_id = location_id
-			)
-			
-			
-			if len(data_measuring_points) == 0:
-			
-				logging.warning(f'Skipping Location ID {location_id}: Measuring Points: No data found')
-
-				metrics.location_failed += 1
-				
-				continue
-			
-			
-			
-			# Create Location instance
-
 			try:
 
-				location = Location(
+				location = get_location(
 					data_aq_stations = data_aq_stations
-					,data_district_monitoring = data_district_monitoring
-					,data_measuring_points = data_measuring_points
+					,source_district_monitoring = cache_district_monitoring
+					,source_measuring_points = source_measuring_points
 				)
 				logging.data(f'Location:\n{location}')
-
-
-				# Update metrics
-				
-				metrics.location_succeeded += 1
-				metrics.data_logger_total += 0 if location.data_logger is None else 1
-				metrics.measuring_point_succeeded += len(location.measuring_points)
-				metrics.measuring_point_failed += len(data_measuring_points) - len(location.measuring_points)
-				metrics.sensor_total += len(location.sensors)
 
 
 			except ValueError as e:
 
 				logging.warning(f'Skipping Location ID {location_id}: {e}')
 
-				metrics.location_failed += 1
+				metrics_input.location_failed += 1
+				
+				continue
+
+
+
+			# Update input metrics
+			
+			metrics_input.location_succeeded += 1
+			metrics_input.data_logger_succeeded += 0 if location.data_logger is None else 1
+			metrics_input.measuring_point_succeeded += len(location.measuring_points)
+			metrics_input.measuring_point_failed += location.rejected_measuring_point_count
+			metrics_input.sensor_succeeded += len(location.sensors)
+			
+			
+			
+			####################
+			# Write Location and related data
+			####################
+			
+			
+			# Start transaction
+			
+			editor.startEditing(
+				with_undo = False
+				,multiuser_mode = False
+			)
+			logging.debug('Started transaction')
+			
+			
+			
+			# Write Location
+
+			logging.debug('Writing Location')
+			try:
+			
+				location_globalid = write_location(
+					gdb = gdb
+					,location = location
+				)
+				logging.debug(f'Loaded Location ID {location_id} to GlobalID {location_globalid}')
+				
+				
+			except Exception as e:
+			
+				logging.warning(f'Failed to load Location ID {location_id}: {e}')
+				
+				logging.debug('Rolling back transaction')
+				editor.stopEditing(False)
+				
+				metrics_output.location_failed += 1
+				
+				continue
+				
+				
+				
+			# Write Data Logger
+			
+			data_logger_globalid = None
+			
+			
+			if location.data_logger is not None:
+			
+				logging.debug('Writing Data Logger')
+				try:
+				
+					data_logger_globalid = write_data_logger(
+						gdb = gdb
+						,location = location
+						,location_globalid = location_globalid
+					)
+					logging.debug(f'Loaded Location ID {location_id} Data Logger to GlobalID {data_logger_globalid}')
+
+
+				except Exception as e:
+				
+					logging.warning(f'Failed to load Location ID {location_id}: Data Logger: {e}')
+					
+					logging.debug('Rolling back transaction')
+					editor.stopEditing(False)
+					
+					metrics_output.location_failed += 1
+					metrics_output.data_logger_failed += 1
+					metrics_output.sensor_failed += len(location.sensors)
+					metrics_output.measuring_point_failed += len(location.measuring_points)
+					
+					continue
+			
+
+
+			# Write Sensors
+			
+			sensor_objectids = []
+			
+			
+			if len(location.sensors) > 0:
+			
+				logging.debug('Writing Sensors')
+				try:
+				
+					sensor_objectids = write_sensors(
+						gdb = gdb
+						,location = location
+						,data_logger_globalid = data_logger_globalid
+					)
+					logging.debug(
+						f'Loaded Location ID {location_id} Sensors to ObjectIDs:'
+						f'\n{NEWLINE.join(map(str, sensor_objectids))}'
+					)
+
+
+				except Exception as e:
+				
+					logging.warning(f'Failed to load Location ID {location_id}: Sensors: {e}')
+					
+					logging.debug('Rolling back transaction')
+					editor.stopEditing(False)
+					
+					metrics_output.location_failed += 1
+					metrics_output.data_logger_failed += 1
+					metrics_output.sensor_failed += len(location.sensors)
+					metrics_output.measuring_point_failed += len(location.measuring_points)
+					
+					continue
+			
+
+
+			# Write Measuring Points
+			
+			measuring_point_objectids = []
+			
+			
+			if len(location.measuring_points) > 0:
+			
+				logging.debug('Writing Measuring Points')
+				try:
+				
+					measuring_point_objectids = write_measuring_points(
+						gdb = gdb
+						,location = location
+						,location_globalid = location_globalid
+					)
+					logging.debug(
+						f'Loaded Location ID {location_id} Measuring Points to ObjectIDs:'
+						f'\n{NEWLINE.join(map(str, measuring_point_objectids))}'
+					)
+
+
+				except Exception as e:
+				
+					logging.warning(f'Failed to load Location ID {location_id}: Measuring Points: {e}')
+					
+					logging.debug('Rolling back transaction')
+					editor.stopEditing(False)
+					
+					metrics_output.location_failed += 1
+					metrics_output.data_logger_failed += 1
+					metrics_output.sensor_failed += len(location.sensors)
+					metrics_output.measuring_point_failed += len(location.measuring_points)
+					
+					continue
+			
+
+
+			# Commit transaction
+			
+			editor.stopEditing(True)
+			
+			
+			
+			# Update output metrics
+			
+			metrics_output.location_succeeded += 1
+			metrics_output.data_logger_succeeded += 0 if data_logger_globalid is None else 1
+			metrics_output.sensor_succeeded += len(sensor_objectids)
+			metrics_output.measuring_point_succeeded += len(measuring_point_objectids)
+				
 
 
 
@@ -1761,9 +2193,314 @@ def load_data(
 
 	logging.info('Finished processing Locations')
 
-	logging.info(metrics)
+	logging.info(f'{metrics_input}\n{metrics_output}')
 
 
+
+def write_data_logger(
+	gdb
+	,location
+	,location_globalid
+):
+	'''
+	Write Data Logger record to target geodatabase and relate to Location
+	'''
+	
+	
+	# Create attribute for related Location
+	
+	location.data_logger.LocationGlobalID = location_globalid
+	
+	
+	
+	# Insert Data Logger
+	
+	table = os.path.join(
+		gdb
+		,'hydro.DataLogger'
+	)
+	
+	
+	logging.debug('Creating insert cursor')
+	cursor_insert = arcpy.da.InsertCursor(
+		in_table = table
+		,field_names = (
+			'Type'
+			,'SerialNumber'
+			,'Comments'
+			,'LocationGlobalID'
+		)
+	)
+	
+	
+	
+	logging.debug('Building row')
+	
+	row = []
+	
+	for field_name in cursor_insert.fields:
+	
+		row.append(
+			getattr(
+				location.data_logger
+				,field_name
+			)
+		)
+		
+		
+	
+	logging.debug('Inserting row')
+	logging.datadebug(f'Row:\n{NEWLINE.join(map(str, row))}')
+	objectid = cursor_insert.insertRow(row)
+	
+	
+	
+	# Fetch and return GlobalID
+	
+	logging.debug('Fetching GlobalID')
+	
+	cursor_globalid = arcpy.da.SearchCursor(
+		in_table = table
+		,field_names = 'GlobalID'
+		,where_clause = f'ObjectID = {objectid}'
+	)
+	
+	globalid = cursor_globalid.next()[0]
+	
+	logging.datadebug(
+		'Loaded Data Logger:'
+		f'\nLocation NWFID {location.NWFID}'
+		f'\nObjectID {objectid}'
+		f'\nGlobalID {globalid}'
+	)
+	
+	
+	return globalid
+	
+	
+	
+def write_location(
+	gdb
+	,location
+):
+	'''
+	Write Location record to target geodatabase
+	'''
+	
+	
+	# Insert Location
+	
+	fc = os.path.join(
+		gdb
+		,'hydro.Location'
+	)
+	
+	
+	logging.debug('Creating insert cursor')
+	cursor_insert = arcpy.da.InsertCursor(
+		in_table = fc
+		,field_names = (
+			'shape'
+			,'NWFID'
+			,'Name'
+			,'Project'
+			,'HasDataLogger'
+			,'HasRainfall'
+			,'HasStage'
+			,'HasGroundwater'
+			,'HasConductivity'
+			,'HasADVM'
+			,'HasADVMBattery'
+			,'HasDischarge'
+			,'HasTemperature'
+			,'HasWaterQuality'
+			,'Comments'
+		)
+	)
+	
+	
+	
+	logging.debug('Building row')
+	
+	row = []
+	
+	for field_name in cursor_insert.fields:
+	
+		row.append(
+			getattr(
+				location
+				,field_name
+			)
+		)
+		
+		
+	
+	logging.debug('Inserting row')
+	logging.datadebug(f'Row:\n{NEWLINE.join(map(str, row))}')
+	objectid = cursor_insert.insertRow(row)
+	
+	
+	
+	# Fetch and return GlobalID
+	
+	logging.debug('Fetching GlobalID')
+	
+	cursor_globalid = arcpy.da.SearchCursor(
+		in_table = fc
+		,field_names = 'GlobalID'
+		,where_clause = f'ObjectID = {objectid}'
+	)
+	
+	globalid = cursor_globalid.next()[0]
+	
+	logging.datadebug(
+		'Loaded Location:'
+		f'\nNWFID {location.NWFID}'
+		f'\nObjectID {objectid}'
+		f'\nGlobalID {globalid}'
+	)
+	
+	
+	return globalid
+
+
+
+def write_measuring_points(
+	gdb
+	,location
+	,location_globalid
+):
+	'''
+	Write Measuring Point records to target geodatabase and relate to Location
+	'''
+
+	
+	# Insert Measuring Points
+	
+	table = os.path.join(
+		gdb
+		,'hydro.MeasuringPoint'
+	)
+	
+	
+	logging.debug('Creating insert cursor')
+	cursor = arcpy.da.InsertCursor(
+		in_table = table
+		,field_names = (
+			'Name'
+			,'AquariusID'
+			,'Description'
+			,'Elevation'
+			,'Comments'
+			,'LocationGlobalID'
+		)
+	)
+	
+	
+	
+	objectids = []
+	
+	for measuring_point in location.measuring_points:
+	
+		measuring_point.LocationGlobalID = location_globalid # Create attribute for related Location
+
+
+		logging.debug('Building row')
+		
+		row = []
+		
+		for field_name in cursor.fields:
+		
+			row.append(
+				getattr(
+					measuring_point
+					,field_name
+				)
+			)
+			
+			
+		
+		logging.debug('Inserting row')
+		logging.datadebug(f'Row:\n{NEWLINE.join(map(str, row))}')
+		objectids.append(
+			cursor.insertRow(row)
+		)
+	
+	
+	
+	# Return
+	
+	return objectids
+	
+	
+	
+def write_sensors(
+	gdb
+	,location
+	,data_logger_globalid
+):
+	'''
+	Write Sensor records to target geodatabase and relate to Data Logger
+	'''
+
+	
+	# Insert Sensors
+	
+	table = os.path.join(
+		gdb
+		,'hydro.Sensor'
+	)
+	
+	
+	logging.debug('Creating insert cursor')
+	cursor = arcpy.da.InsertCursor(
+		in_table = table
+		,field_names = (
+			'Type'
+			,'SerialNumber'
+			,'Comments'
+			,'DataLoggerGlobalID'
+		)
+	)
+	
+	
+	
+	objectids = []
+	
+	for sensor in location.sensors:
+	
+		sensor.DataLoggerGlobalID = data_logger_globalid # Create attribute for related Data Logger
+
+
+		logging.debug('Building row')
+		
+		row = []
+		
+		for field_name in cursor.fields:
+		
+			row.append(
+				getattr(
+					sensor
+					,field_name
+				)
+			)
+			
+			
+		
+		logging.debug('Inserting row')
+		logging.datadebug(f'Row:\n{NEWLINE.join(map(str, row))}')
+		objectids.append(
+			cursor.insertRow(row)
+		)
+	
+	
+	
+	# Return
+	
+	return objectids
+	
+	
+	
 #
 # Private
 #
