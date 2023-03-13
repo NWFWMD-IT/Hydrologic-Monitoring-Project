@@ -1850,10 +1850,7 @@ def get_location(
 		,data_district_monitoring = data_district_monitoring
 		,data_measuring_points = data_measuring_points
 	)
-	logging.data(f'Location:\n{location}')
-	
-	
-	
+	logging.debug('Created Location instance')
 	
 	
 	
@@ -2252,6 +2249,17 @@ def write_data_logger(
 	logging.debug('Inserting row')
 	logging.datadebug(f'Row:\n{NEWLINE.join(map(str, row))}')
 	objectid = cursor_insert.insertRow(row)
+	logging.data(f'Created ObjectID: {objectid}')
+	
+	
+	
+	# Close cursor
+	#
+	# Cannot reliably read newly created row, even within same transaction,
+	# without explicitly closing the insert cursor
+	
+	logging.debug('Closing insert cursor')
+	del cursor_insert
 	
 	
 	
@@ -2264,9 +2272,11 @@ def write_data_logger(
 		,field_names = 'GlobalID'
 		,where_clause = f'ObjectID = {objectid}'
 	)
+	logging.debug('Created cursor')
 	
 	globalid = cursor_globalid.next()[0]
-	
+	logging.datadebug(f'Fetched GlobalID: {globalid}')
+		
 	logging.datadebug(
 		'Loaded Data Logger:'
 		f'\nLocation NWFID {location.NWFID}'
@@ -2338,6 +2348,17 @@ def write_location(
 	logging.debug('Inserting row')
 	logging.datadebug(f'Row:\n{NEWLINE.join(map(str, row))}')
 	objectid = cursor_insert.insertRow(row)
+	logging.data(f'Created ObjectID: {objectid}')
+	
+	
+	
+	# Close cursor
+	#
+	# Cannot reliably read newly created row, even within same transaction,
+	# without explicitly closing the insert cursor
+	
+	logging.debug('Closing insert cursor')
+	del cursor_insert
 	
 	
 	
@@ -2350,8 +2371,10 @@ def write_location(
 		,field_names = 'GlobalID'
 		,where_clause = f'ObjectID = {objectid}'
 	)
+	logging.debug('Created cursor')
 	
 	globalid = cursor_globalid.next()[0]
+	logging.datadebug(f'Fetched GlobalID: {globalid}')
 	
 	logging.datadebug(
 		'Loaded Location:'
@@ -2422,9 +2445,9 @@ def write_measuring_points(
 		
 		logging.debug('Inserting row')
 		logging.datadebug(f'Row:\n{NEWLINE.join(map(str, row))}')
-		objectids.append(
-			cursor.insertRow(row)
-		)
+		objectid = cursor.insertRow(row)
+		logging.data(f'Created ObjectID: {objectid}')
+		objectids.append(objectid)
 	
 	
 	
@@ -2489,9 +2512,9 @@ def write_sensors(
 		
 		logging.debug('Inserting row')
 		logging.datadebug(f'Row:\n{NEWLINE.join(map(str, row))}')
-		objectids.append(
-			cursor.insertRow(row)
-		)
+		objectid = cursor.insertRow(row)
+		logging.data(f'Created ObjectID: {objectid}')
+		objectids.append(objectid)
 	
 	
 	
