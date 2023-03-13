@@ -1,6 +1,7 @@
-
-*.~vsdx
 *.pyc
 *.log
+*.~vsdx
+*.sr.lock
+*.rd.log
 geodatabase/hydro_service/*
 documents/esri_support/*
