@@ -512,8 +512,7 @@ def create_table_datalogger(
 	global_id = True
 	editor_tracking = True
 	archiving = True
-	attachments = True
-	attachments_upgrade = True
+	attachments = False
 
 	table = os.path.join(
 		gdb
@@ -550,7 +549,6 @@ def create_table_datalogger(
 		,editor_tracking = editor_tracking
 		,archiving = archiving
 		,attachments = attachments
-		,attachments_upgrade = attachments_upgrade
 		,privileges = privileges
 		,indent_level = indent_level
 	)

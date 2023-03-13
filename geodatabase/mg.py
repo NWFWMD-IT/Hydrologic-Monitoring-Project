@@ -42,6 +42,7 @@
 #	2022-07-18 MCM Created
 #	2022-11-21 MCM Added attachment upgrade support (Hydro 55)
 #	2023-02-23 MCM Added custom logging levels DATA and DATADEBUG
+#	2023-03-13 MCM Changed `attachments_upgrade` default to True
 #
 # To do:
 #	none
@@ -441,7 +442,7 @@ def create_fc(
 	,editor_tracking = True
 	,archiving = True
 	,attachments = True
-	,attachments_upgrade = False
+	,attachments_upgrade = True
 	,privileges = None
 	,indent_level = 0
 ):
@@ -764,7 +765,7 @@ def create_table(
 	,editor_tracking = True
 	,archiving = True
 	,attachments = True
-	,attachments_upgrade = False
+	,attachments_upgrade = True
 	,privileges = None
 	,indent_level = 0
 ):
