@@ -2542,9 +2542,9 @@ def _check_credentials():
 
 
 	logging.debug('Checking OS username')
-	if not username.upper() in C.OS_USERNAMES_HYDRO:
+	if user.upper() != 'HYDRO': # Only check user, not domain, so developers can run in arbitrary environment
 
-		raise RuntimeError(
+		raise RuntimeError( # Error message is hardwired to HQ domain; developers can ignore domain name
 			'Invalid Windows credentials'
 			f'\nThis script must run in a Python session as the HQ\hydro user, but is running as {username}'
 		)

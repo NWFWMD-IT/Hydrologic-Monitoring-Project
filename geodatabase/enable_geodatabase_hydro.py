@@ -20,6 +20,7 @@
 #	2022-09-18 MCM Switched to OS authentication (Hydro 17/18)
 #	2022-12-14 MCM Moved literals to constant OS_USERNAMES
 #	2023-02-22 MCM Moved constants to constants.py
+#	2023-03-13 MCM Replaced OS_USERNAMES_SDE with dynamic domain name
 #
 # To do:
 #	none
@@ -80,9 +81,9 @@ def _check_credentials():
 	
 	
 	logging.debug('Checking OS username')
-	if not username.upper() in C.OS_USERNAMES_SDE:
+	if user.upper() != 'SDE': # Only check user, not domain, so developers can run in arbitrary environment
 	
-		raise RuntimeError(
+		raise RuntimeError( # Error message is hardwired to HQ domain; developers can ignore domain name
 			'Invalid Windows credentials'
 			f'\nThis script must run in a Python session as the HQ\sde user, but is running as {username}'
 		)

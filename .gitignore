@@ -2,6 +2,6 @@
 *.log
 *.~vsdx
 *.sr.lock
-*.rd.log
+*.rd.lock
 geodatabase/hydro_service/*
 documents/esri_support/*

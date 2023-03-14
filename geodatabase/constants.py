@@ -19,6 +19,7 @@
 #
 # History:
 #	2023-02-22 MCM Created
+#	2023-03-13 MCM Replaced OS_USERNAMES_* constants
 #
 # To do:
 #	none
@@ -43,24 +44,6 @@ import arcpy
 #
 
 CONNECTION_FILE_NAME = 'connection.sde'
-
-
-
-#
-# Operating system users
-#
-
-OS_USERNAMES_HYDRO = (
-	'HQ\HYDRO' # NWFWMD production
-	,'CITRA\HYDRO' # MannionGeo development
-	,'PORTER\HYDRO' # MannionGeo development
-)
-
-OS_USERNAMES_SDE = (
-	'HQ\SDE' # NWFWMD production
-	,'CITRA\SDE' # MannionGeo development
-	,'PORTER\SDE' # MannionGeo development
-)
 
 
 

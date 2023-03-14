@@ -34,6 +34,10 @@
 #	               Removed column TemperatureMeasurement.ManualLevelUnits
 #	                 and domain Temperature Units (Hydro 68)
 #	2023-02-22 MCM Moved constants to constants.py
+#	2023-03-13 MCM Replaced OS_USERNAMES_SDE with dynamic domain name
+#	               Removed attachments from DataLogger table (#70)
+#	               Added Location Issue Type domain value (#71)
+#	               Replaced static OS domain names with dynamic
 #
 # To do:
 #	none
@@ -204,6 +208,7 @@ def create_domains(
 				('Conduit', 'Conduit')
 				,('Incorrect inventory', 'Incorrect inventory')
 				,('Invalid punch', 'Invalid punch')
+				,('Missing measuring point', 'Missing measuring point')
 				,('Solar panel', 'Solar panel')
 				,('Vandalism', 'Vandalism')
 				,('Other', 'Other')
@@ -381,8 +386,8 @@ def create_fc_location(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -473,8 +478,8 @@ def create_table_conductivitymeasurement(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -530,8 +535,8 @@ def create_table_datalogger(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -594,8 +599,8 @@ def create_table_groundwatermeasurement(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -651,8 +656,8 @@ def create_table_locationissue(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -754,8 +759,8 @@ def create_table_locationvisit(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -815,8 +820,8 @@ def create_table_measuringpoint(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -873,8 +878,8 @@ def create_table_rainfalltips(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -930,8 +935,8 @@ def create_table_sensor(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -993,8 +998,8 @@ def create_table_stagemeasurement(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -1054,8 +1059,8 @@ def create_table_temperaturemeasurement(
 	subtypes = None
 
 	privileges = (
-		#user		read		write
-		('HQ\\arcgis'	,'GRANT'	,'GRANT')
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
 		,
 	)
 
@@ -1148,9 +1153,9 @@ def _check_credentials():
 	
 	
 	logging.debug('Checking OS username')
-	if not username.upper() in C.OS_USERNAMES_HYDRO:
+	if user.upper() != 'HYDRO': # Only check user, not domain, so developers can run in arbitrary environment
 	
-		raise RuntimeError(
+		raise RuntimeError( # Error message is hardwired to HQ domain; developers can ignore domain name
 			'Invalid Windows credentials'
 			f'\nThis script must run in a Python session as the HQ\hydro user, but is running as {username}'
 		)
@@ -1371,6 +1376,27 @@ def _connect_gdb(
 	
 
 
+def _get_domain():
+
+	domain = os.environ['USERDOMAIN']
+	
+	
+	if domain in ( # Development Windows Workgroup
+		'APOLLO'
+		,'CITRA'
+		,'PORTER'
+		,'STOUT'
+	):
+	
+		return 'CITRA'
+		
+		
+	else:
+	
+		return domain
+		
+	
+	
 def _initialize_logging(
 	level = logging.NOTSET
 ):
