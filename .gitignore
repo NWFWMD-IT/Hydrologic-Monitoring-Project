@@ -1,6 +1,7 @@
 *.pyc
 *.log
 *.~vsdx
+~$*.xlsx
 *.sr.lock
 *.rd.lock
 geodatabase/hydro_service/*

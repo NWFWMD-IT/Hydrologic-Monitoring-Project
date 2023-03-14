@@ -823,6 +823,7 @@ def create_table_measuringpoint(
 		,('AquariusID'			,'GUID'		,None		,None	,None		,'Aquarius ID'			,True		,False		,None					,None)
 		,('Description'			,'TEXT'		,None		,None	,1024		,'Serial Number'		,True		,False		,None					,None)
 		,('Elevation'			,'DOUBLE'	,38		,2	,None		,'Elevation'			,True		,False		,None					,None)
+		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
 	)

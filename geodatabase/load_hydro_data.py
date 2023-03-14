@@ -36,6 +36,7 @@
 #
 # History:
 #	2022-12-12 MCM Created
+#	2023-03-14 MCM Added MeasuringPoint.IsActive property (#72)
 #
 # To do:
 #	none
@@ -1248,6 +1249,7 @@ class MeasuringPoint:
 		,'AquariusID'
 		,'Description'
 		,'Elevation'
+		,'IsActive'
 		,'Comments'
 	)
 
@@ -1310,6 +1312,7 @@ class MeasuringPoint:
 			self.transform_aquariusid
 			,self.transform_description
 			,self.transform_elevation
+			,self.transform_isactive
 			,self.transform_name
 		):
 
@@ -1347,6 +1350,14 @@ class MeasuringPoint:
 
 
 
+	def transform_isactive(self):
+	
+		# All Measuring Points that pass other validation tests are
+		# implicitly active
+		
+		self.IsActive = 'Yes'
+		
+		
 	def transform_name(self):
 	
 		if not isempty(self.source_data.Name):
@@ -2414,6 +2425,7 @@ def write_measuring_points(
 			,'AquariusID'
 			,'Description'
 			,'Elevation'
+			,'IsActive'
 			,'Comments'
 			,'LocationGlobalID'
 		)
