@@ -108,7 +108,7 @@ DOMAIN_NAMES = (
 	,'Conductivity Serial Number'
 	,'Conductivity Standard'
 	,'Data Logger Type'
-	,'Dessicant Maintenance'
+	,'Desiccant Maintenance'
 	,'Groundwater Adjustment Exception'
 	,'Hydro Staff'
 	,'Location Issue Type'
@@ -122,6 +122,7 @@ DOMAIN_NAMES = (
 	,'Yes/No'
 	# Obsolete
 	,'Battery Replacement Time Adjustment'
+	,'Dessicant Maintenance' # Misspelled
 	,'Temperature Units'
 )
 

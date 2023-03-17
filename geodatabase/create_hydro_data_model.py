@@ -38,6 +38,11 @@
 #	               Removed attachments from DataLogger table (#70)
 #	               Added Location Issue Type domain value (#71)
 #	               Replaced static OS domain names with dynamic
+#	2023-03-13 MCM Added comments columns for domains with "Other" values (#75)
+#	               Added `MeasuringPoint.IsActive` column (#72)
+#	2023-03-17 MCM Added `LocationVisit.ADVMMaintenanceComments` (#75)
+#	               Added `LocationVisit.ADVMDischargeRecordStart/End` columns (#79)
+#	               Corrected spelling of "desiccant" (#80)
 #
 # To do:
 #	none
@@ -181,7 +186,7 @@ def create_domains(
 			)
 		)
 		,(
-			'Dessicant Maintenance', 'TEXT', (
+			'Desiccant Maintenance', 'TEXT', (
 				('Verified', 'Verified')
 				,('Replaced', 'Replaced')
 				,('Needs replacement - No materials', 'Needs replacement - No materials')
@@ -231,7 +236,6 @@ def create_domains(
 				,('Reset after', 'Reset after')
 				,('Cleaning before', 'Cleaning before')
 				,('Cleaning after', 'Cleaning after')
-				,('Other', 'Other')
 			)
 		)
 		,(
@@ -718,10 +722,10 @@ def create_table_locationvisit(
 		,('BatteryReplacementDate'		,'DATE'		,None		,None	,None		,'Battery Replacement Date'		,True		,False		,None					,None)
 		,('BatteryReplacementException'		,'TEXT'		,None		,None	,32		,'Battery Replacement Exception'	,True		,False		,'Battery Replacement Exception'	,None)
 		,('BatteryReplacementComments'		,'TEXT'		,None		,None	,1024		,'Battery Replacement Comments'		,True		,False		,None					,None)
-		,('DessicantEnclosure'			,'TEXT'		,None		,None	,32		,'Enclosure Dessicant'			,True		,False		,'Dessicant Maintenance'		,None)
-		,('DessicantStage'			,'TEXT'		,None		,None	,32		,'Stage Sensor Dessicant'		,True		,False		,'Dessicant Maintenance'		,None)
-		,('DessicantGroundwater'		,'TEXT'		,None		,None	,32		,'Groundwater Sensor Dessicant'		,True		,False		,'Dessicant Maintenance'		,None)
-		,('DessicantComments'			,'TEXT'		,None		,None	,1024		,'Dessicant Comments'			,True		,False		,None					,None)
+		,('DesiccantEnclosure'			,'TEXT'		,None		,None	,32		,'Enclosure Desiccant'			,True		,False		,'Desiccant Maintenance'		,None)
+		,('DesiccantStage'			,'TEXT'		,None		,None	,32		,'Stage Sensor Desiccant'		,True		,False		,'Desiccant Maintenance'		,None)
+		,('DesiccantGroundwater'		,'TEXT'		,None		,None	,32		,'Groundwater Sensor Desiccant'		,True		,False		,'Desiccant Maintenance'		,None)
+		,('DesiccantComments'			,'TEXT'		,None		,None	,1024		,'Desiccant Comments'			,True		,False		,None					,None)
 		,('DataLoggerRecordStart'		,'DATE'		,None		,None	,None		,'Data Logger Record Start'		,True		,False		,None					,None)
 		,('DataLoggerRecordEnd'			,'DATE'		,None		,None	,None		,'Data Logger Record End'		,True		,False		,None					,None)
 		,('DataLoggerTimeAdjustmentType'	,'TEXT'		,None		,None	,32		,'Data Logger Time Adjustment Type'	,True		,False		,'Time Adjustment Type'			,None)
@@ -742,6 +746,8 @@ def create_table_locationvisit(
 		,('ADVMBatteryReplacementComments'	,'TEXT'		,None		,None	,1024		,'ADVM Battery Replacement Comments'	,True		,False		,None					,None)
 		,('ADVMRecordStart'			,'DATE'		,None		,None	,None		,'ADVM Record Start'			,True		,False		,None					,None)
 		,('ADVMRecordEnd'			,'DATE'		,None		,None	,None		,'ADVM Record End'			,True		,False		,None					,None)
+		,('ADVMDischarge RecordStart'		,'DATE'		,None		,None	,None		,'ADVM Discharge Record Start'		,True		,False		,None					,None)
+		,('ADVMDischarge RecordEnd'		,'DATE'		,None		,None	,None		,'ADVM Discharge Record End'		,True		,False		,None					,None)
 		,('ADVMBeamCheckedInitial'		,'TEXT'		,None		,None	,3		,'ADVM Initial Beam Checked'		,True		,False		,'Yes/No'				,None)
 		,('ADVMBeamCheckInitialException'	,'TEXT'		,None		,None	,32		,'ADVM Initial Beam Check Exception'	,True		,False		,'ADVM Beam Check Initial Exception'	,None)
 		,('ADVMBeamCheckInitialComments'	,'TEXT'		,None		,None	,1024		,'ADVM Initial Beam Check Comments'	,True		,False		,None					,None)
@@ -752,6 +758,7 @@ def create_table_locationvisit(
 		,('ADVMCleanedException'		,'TEXT'		,None		,None	,32		,'ADVM Cleaned Exception'		,True		,False		,'ADVM Cleaned Exception'		,None)
 		,('ADVMCleanedComments'			,'TEXT'		,None		,None	,1024		,'ADVM Cleaned Comments'		,True		,False		,None					,None)
 		,('ADVMMaintenance'			,'TEXT'		,None		,None	,32		,'ADVM Additional Maintenace'		,True		,False		,'ADVM Maintenance'			,None)
+		,('ADVMMaintenanceComments'		,'TEXT'		,None		,None	,1024		,'ADVM Maintenance Comments'		,True		,False		,None					,None)
 		,('DischargeRecordStart'		,'DATE'		,None		,None	,None		,'Discharge Record Start'		,True		,False		,None					,None)
 		,('DischargeRecordEnd'			,'DATE'		,None		,None	,None		,'Discharge Record End'			,True		,False		,None					,None)
 		,('DischargeStageStart'			,'DATE'		,None		,None	,None		,'Discharge Stage Start'		,True		,False		,None					,None)
