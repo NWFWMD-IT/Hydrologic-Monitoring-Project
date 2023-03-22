@@ -43,11 +43,13 @@
 #	2023-03-17 MCM Added `LocationVisit.ADVMMaintenanceComments` (#75)
 #	               Added `LocationVisit.ADVMDischargeRecordStart/End` columns (#79)
 #	               Corrected spelling of "desiccant" (#80)
+#	2023-03-22 MCM Changed 'Incorrect inventory' to 'Update inventory' (#83)
+#	               Added `Location.FLUWID` property (#84)
 #
 # To do:
 #	none
 #
-# Copyright 2003-2022. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -211,10 +213,10 @@ def create_domains(
 		,(
 			'Location Issue Type', 'TEXT', (
 				('Conduit', 'Conduit')
-				,('Incorrect inventory', 'Incorrect inventory')
 				,('Invalid punch', 'Invalid punch')
 				,('Missing measuring point', 'Missing measuring point')
 				,('Solar panel', 'Solar panel')
+				,('Update inventory', 'Update inventory')
 				,('Vandalism', 'Vandalism')
 				,('Other', 'Other')
 			)
@@ -291,9 +293,9 @@ def create_domains(
 			)
 		)
 		,(
-			'Time Adjustment Type', 'TEXT', (
-				('Drift', 'Drift')
-				,('Clock default', 'Clock default')
+			'Time Adjustment Exception', 'TEXT', (
+				('Value 1', 'Value 1')
+				,('Other', 'Other')
 			)
 		)
 		,(
@@ -374,6 +376,7 @@ def create_fc_location(
 		('NWFID'			,'TEXT'		,None		,None	,6		,'NWFID'			,True		,False		,None					,None)
 		,('Name'			,'TEXT'		,None		,None	,128		,'Name'				,True		,False		,None					,None)
 		,('Project'			,'LONG'		,None		,None	,None		,'Project Number'		,True		,False		,None					,None)
+		,('FLUWID'			,'TEXT'		,None		,None	,16		,'FLUWID'			,True		,False		,None					,None)
 		,('HasDataLogger'		,'TEXT'		,None		,None	,3		,'Has Data Logger'		,True		,False		,'Yes/No'				,None)
 		,('HasRainfall'			,'TEXT'		,None		,None	,3		,'Has Rainfall'			,True		,False		,'Yes/No'				,None)
 		,('HasStage'			,'TEXT'		,None		,None	,3		,'Has Stage'			,True		,False		,'Yes/No'				,None)
@@ -728,9 +731,13 @@ def create_table_locationvisit(
 		,('DesiccantComments'			,'TEXT'		,None		,None	,1024		,'Desiccant Comments'			,True		,False		,None					,None)
 		,('DataLoggerRecordStart'		,'DATE'		,None		,None	,None		,'Data Logger Record Start'		,True		,False		,None					,None)
 		,('DataLoggerRecordEnd'			,'DATE'		,None		,None	,None		,'Data Logger Record End'		,True		,False		,None					,None)
-		,('DataLoggerTimeAdjustmentType'	,'TEXT'		,None		,None	,32		,'Data Logger Time Adjustment Type'	,True		,False		,'Time Adjustment Type'			,None)
+		,('DataLoggerTime'			,'DATE'		,None		,None	,None		,'Data Logger Clock Time'		,True		,False		,None					,None)
+		,('DataLoggerTimeActual'		,'DATE'		,None		,None	,None		,'Correct Current Time'			,True		,False		,None					,None)
 		,('DataLoggerTimeAdjustmentAmount'	,'LONG'		,None		,None	,None		,'Data Logger Time Adjustment (minutes)'	,True	,False		,None					,None)
+		,('DataLoggerTimeAdjusted'		,'TEXT'		,None		,None	,3		,'Data Logger Time Adjusted'		,True		,False		,'Yes/No'				,None)
 		,('DataLoggerTimeAdjustmentDate'	,'DATE'		,None		,None	,None		,'Data Logger Time Adjustment Date'	,True		,False		,None					,None)
+		,('DataLoggerTimeAdjustmentException'	,'TEXT'		,None		,None	,32		,'Data Logger Time Adjustment Exception'	,True	,False		,'Time Adjustment Exception'		,None)
+		,('DataLoggerTimeAdjustmentComments'	,'TEXT'		,None		,None	,1024		,'Data Logger Time Adjustment Comments'	,True		,False		,None					,None)
 		,('RainfallBucketCleaned'		,'TEXT'		,None		,None	,3		,'Rainfall Bucket Cleaned'		,True		,False		,'Yes/No'				,None)
 		,('RainfallBucketException'		,'TEXT'		,None		,None	,32		,'Rainfall Bucket Exception'		,True		,False		,'Rainfall Exception'			,None)
 		,('RainfallBucketComments'		,'TEXT'		,None		,None	,1024		,'Rainfall Bucket Comments'		,True		,False		,None					,None)

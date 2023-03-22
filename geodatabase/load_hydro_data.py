@@ -36,12 +36,13 @@
 #
 # History:
 #	2022-12-12 MCM Created
-#	2023-03-14 MCM Added MeasuringPoint.IsActive property (#72)
+#	2023-03-14 MCM Added `MeasuringPoint.IsActive` property (#72)
+#	2023-03-22 MCM Added `Location.FLUWID` property (#84)
 #
 # To do:
 #	none
 #
-# Copyright 2003-2022. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -239,6 +240,7 @@ class Location:
 		,'NWFID'
 		,'Name'
 		,'Project'
+		,'FLUWID'
 		,'HasDataLogger'
 		,'HasRainfall'
 		,'HasStage'
@@ -418,7 +420,8 @@ class Location:
 
 		for f in (
 			# Location properties
-			self.transform_hasadvm
+			self.transform_fluwid
+			,self.transform_hasadvm
 			,self.transform_hasadvmbattery
 			,self.transform_hasconductivity
 			,self.transform_hasdatalogger
@@ -443,6 +446,18 @@ class Location:
 
 
 
+	def transform_fluwid(self):
+	
+		if self.data_aq_stations.FLUWID is None:
+		
+			self.FLUWID = None
+			
+		else:
+		
+			self.FLUWID = self.data_aq_stations.FLUWID.strip()
+	
+	
+	
 	def transform_hasadvm(self):
 
 		if 'vel.ind' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():

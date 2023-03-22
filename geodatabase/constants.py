@@ -23,6 +23,8 @@
 #
 # To do:
 #	none
+#
+# Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
