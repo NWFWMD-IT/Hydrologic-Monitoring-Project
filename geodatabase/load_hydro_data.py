@@ -2340,6 +2340,7 @@ def write_location(
 			,'NWFID'
 			,'Name'
 			,'Project'
+			,'FLUWID'
 			,'HasDataLogger'
 			,'HasRainfall'
 			,'HasStage'
