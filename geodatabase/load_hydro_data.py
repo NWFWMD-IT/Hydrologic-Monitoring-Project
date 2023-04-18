@@ -38,6 +38,8 @@
 #	2022-12-12 MCM Created
 #	2023-03-14 MCM Added `MeasuringPoint.IsActive` property (#72)
 #	2023-03-22 MCM Added `Location.FLUWID` property (#84)
+#	2023-04-17 MCM Added `DataLogger.LowVoltage` property (#89)
+#	               Added `MeasuringPoint.DisplayOrder` property (#86)
 #
 # To do:
 #	none
@@ -105,6 +107,7 @@ class DataLogger:
 	ATTRIBUTES = (
 		'Type'
 		,'SerialNumber'
+		,'LowVoltage'
 		,'Comments'
 	)
 
@@ -168,6 +171,8 @@ class DataLogger:
 		for f in (
 			self.transform_serialnumber
 			,self.transform_type
+			# Follows transform_type
+			,self.transform_lowvoltage
 		):
 
 			logging.debug(f'Executing: {f.__name__}')
@@ -175,6 +180,28 @@ class DataLogger:
 
 
 
+	def transform_lowvoltage(self): # See #89 for documentation
+	
+		if self.Type == 'OTT Orpheus Mini':
+		
+			self.LowVoltage = 4.2
+			
+			
+		elif self.Type in (
+			'In-Situ Level Troll 500'
+			,'In-Situ Level Troll 700'
+		):
+		
+			self.LowVoltage = 40
+		
+		
+		else:
+		
+			self.LowVoltage = 12.45
+			
+		
+	
+	
 	def transform_serialnumber(self):
 
 		if isempty(self._serial_number):
@@ -1265,6 +1292,7 @@ class MeasuringPoint:
 		,'Description'
 		,'Elevation'
 		,'IsActive'
+		,'DisplayOrder'
 		,'Comments'
 	)
 
@@ -1326,6 +1354,7 @@ class MeasuringPoint:
 		for f in (
 			self.transform_aquariusid
 			,self.transform_description
+			,self.transform_displayorder
 			,self.transform_elevation
 			,self.transform_isactive
 			,self.transform_name
@@ -1354,6 +1383,11 @@ class MeasuringPoint:
 
 
 
+	def transform_displayorder(self):
+	
+		self.DisplayOrder = 0 # Test value; awaiting source data per #86
+	
+	
 	def transform_elevation(self):
 	
 		if isempty(self.source_data.ReferencePointPeriods_0_Elevation):
@@ -2167,7 +2201,7 @@ def load_data(
 				logging.debug('Writing Measuring Points')
 				try:
 				
-					measuring_point_objectids = write_measuring_points(
+					measuring_point_objectids = write_measuring_point(
 						gdb = gdb
 						,location = location
 						,location_globalid = location_globalid
@@ -2250,6 +2284,7 @@ def write_data_logger(
 		,field_names = (
 			'Type'
 			,'SerialNumber'
+			,'LowVoltage'
 			,'Comments'
 			,'LocationGlobalID'
 		)
@@ -2415,7 +2450,7 @@ def write_location(
 
 
 
-def write_measuring_points(
+def write_measuring_point(
 	gdb
 	,location
 	,location_globalid
@@ -2442,6 +2477,7 @@ def write_measuring_points(
 			,'Description'
 			,'Elevation'
 			,'IsActive'
+			,'DisplayOrder'
 			,'Comments'
 			,'LocationGlobalID'
 		)
