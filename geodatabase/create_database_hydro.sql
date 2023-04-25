@@ -61,6 +61,7 @@
 --	2022-09-13 MCM Change users from database to Windows authentication (Hydro #17)
 --	               Updated file paths for NWFWMD production environment
 --	2022-12-14 MCM Switch to [master] at end, to facilitae development testing
+--	2023-04-25 MCM Moved data/log files to `hydro` directory
 --
 -- To do:
 --	Localize for NWFWMD environment:
@@ -78,14 +79,14 @@ CREATE DATABASE [hydro]
 CONTAINMENT = PARTIAL
 ON PRIMARY (
 	NAME = 'hydro_01.mdf'
-	,FILENAME = 'D:\sqldata\MSSQLSERVER\hydro_01.mdf'
+	,FILENAME = 'D:\sqldata\MSSQLSERVER\hydro\hydro_01.mdf'
 	,SIZE = 16 GB
 	,MAXSIZE = UNLIMITED
 	,FILEGROWTH = 4 GB
 )
 LOG ON (
 	NAME = 'hydro_01.ldf'
-	,FILENAME = 'D:\sqldata\MSSQLSERVER\hydro_01.ldf'
+	,FILENAME = 'D:\sqldata\MSSQLSERVER\hydro\hydro_01.ldf'
 	,SIZE = 1 GB
 	,MAXSIZE = 16 GB
 	,FILEGROWTH = 1 GB
