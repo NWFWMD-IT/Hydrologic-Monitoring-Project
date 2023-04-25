@@ -49,6 +49,39 @@
 --	with informed consideration by the administrator.
 --
 --
+--	USER NAMES
+--
+--	Adding a Windows authenticated, contained database user can be done with
+--	a statement as simple as:
+--
+--		CREATE USER [HQ\sde]
+--
+--	The resulting username, however, includes the domain name. This is
+--	generally acceptable for end users, but not for some administrative
+--	users, including:
+--
+--		o Geodatabase administrator - The ArcGIS software requires this
+--		  user to be called 'sde', without a domain prefix.
+--
+--		o Data owner - The data owner's name is visible to end users
+--		  in many areas of the ArcGIS UI, such as when browsing the
+--		  content of a geodatabase in ArcGIS Pro. Object names are
+--		  simpler without the domain prefix, and District users are
+--		  accustom to seeing the unadorned names from various legacy
+--		  enterprise geodatabases.
+--
+--	Therefore, we use an alternate syntax when creating these users that
+--	allows defining a database user name that differs from the underlying
+--	Windows account name:
+--
+--		CREATE USER [sde]
+--		FOR LOGIN [HQ\sde]
+--
+--	Note that the `FOR LOGIN` syntax does not create a user based on a
+--	SQL Server login. Despite its name, this clause creates a Windows
+--	authenticated, contained database user, as desired.
+--
+--
 --	DEVELOPMENT
 --
 --	To run in the development environment, find and replace:
