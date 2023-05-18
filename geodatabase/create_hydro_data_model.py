@@ -48,6 +48,7 @@
 #	2023-04-17 MCM Added secondary battery / time columns (#94)
 #	               Added `DataLogger.LowVoltage` (#89)
 #	               Added `MeasuringPoint.DisplayOrder` (#86)
+#	2023-05-18 MCM Removed "Conductivity" value from `Temperature Source` domain
 #
 # To do:
 #	none
@@ -291,7 +292,6 @@ def create_domains(
 		,(
 			'Temperature Source', 'TEXT', (
 				('ADVM', 'ADVM')
-				,('Conductivity', 'Conductivity')
 				,('Transducer', 'Transducer')
 			)
 		)
