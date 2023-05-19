@@ -48,7 +48,9 @@
 #	2023-04-17 MCM Added secondary battery / time columns (#94)
 #	               Added `DataLogger.LowVoltage` (#89)
 #	               Added `MeasuringPoint.DisplayOrder` (#86)
-#	2023-05-18 MCM Removed "Conductivity" value from `Temperature Source` domain
+#	2023-05-18 MCM Removed "Conductivity" value from `Temperature Source` domain (#68)
+#	               Added `StageMeasurement.IsDischarge` (#99)
+#	               Removed `LocationVisit.DischargeStageStart/End` (#99)
 #
 # To do:
 #	none
@@ -781,8 +783,6 @@ def create_table_locationvisit(
 		,('ADVMMaintenanceComments'		,'TEXT'		,None		,None	,1024		,'ADVM Maintenance Comments'		,True		,False		,None					,None)
 		,('DischargeRecordStart'		,'DATE'		,None		,None	,None		,'Discharge Record Start'		,True		,False		,None					,None)
 		,('DischargeRecordEnd'			,'DATE'		,None		,None	,None		,'Discharge Record End'			,True		,False		,None					,None)
-		,('DischargeStageStart'			,'DATE'		,None		,None	,None		,'Discharge Stage Start'		,True		,False		,None					,None)
-		,('DischargeStageEnd'			,'DATE'		,None		,None	,None		,'Discharge Stage End'			,True		,False		,None					,None)
 		,('DischargeVolume'			,'DOUBLE'	,38		,2	,None		,'Discharge Volume'			,True		,False		,None					,None)
 		,('DischargeUncertainty'		,'DOUBLE'	,38		,2	,None		,'Discharge Uncertainty'		,True		,False		,None					,None)
 		,('WaterQualitySensorPulled'		,'TEXT'		,None		,None	,3		,'Water Quality Sensor Pulled'		,True		,False		,'Yes/No'				,None)
@@ -1023,6 +1023,7 @@ def create_table_stagemeasurement(
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
+		,('IsDischarge'			,'TEXT'		,None		,None	,3		,'Discharge Related'		,True		,False		,'Yes/No'				,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
 		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Computed Manual Water Level'	,True		,False		,None					,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
