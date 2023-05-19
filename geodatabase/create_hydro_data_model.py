@@ -49,7 +49,10 @@
 #	               Added `DataLogger.LowVoltage` (#89)
 #	               Added `MeasuringPoint.DisplayOrder` (#86)
 #	2023-05-18 MCM Removed "Conductivity" value from `Temperature Source` domain (#68)
-#	               Added `StageMeasurement.IsDischarge` (#99)
+#	               Added `StageMeasurement` columns:
+#	                 `IsDischarge` (#99)
+#	                 `ManualMethod` / `ManualMethodComments` (#76)
+#	               Added domain `Stage Method` (#76)
 #	               Removed `LocationVisit.DischargeStageStart/End` (#99)
 #
 # To do:
@@ -273,6 +276,14 @@ def create_domains(
 				,('Sutron RLR', 'Sutron RLR')
 				,('WaterLog Pulse Radar', 'WaterLog Pulse Radar')
 				,('Waterlog Encoder H-3311', 'Waterlog Encoder H-3311')
+			)
+		)
+		,(
+			'Stage Method', 'TEXT', (
+				('Staff', 'Staff')
+				,('Tape up/down', 'Tape up/down')
+				,('Wire weight', 'Wire weight')
+				,('Other', 'Other')
 			)
 		)
 		,(
@@ -1024,6 +1035,8 @@ def create_table_stagemeasurement(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('IsDischarge'			,'TEXT'		,None		,None	,3		,'Discharge Related'		,True		,False		,'Yes/No'				,None)
+		,('ManualMethod'		,'TEXT'		,None		,None	,32		,'Manual Measurement Method'	,True		,False		,'Stage Method'				,None)
+		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Manual Measurement Method Comments'	,True	,False		,None					,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
 		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Computed Manual Water Level'	,True		,False		,None					,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
