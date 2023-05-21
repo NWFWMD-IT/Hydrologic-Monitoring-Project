@@ -40,6 +40,7 @@
 #	2023-03-22 MCM Added `Location.FLUWID` property (#84)
 #	2023-04-17 MCM Added `DataLogger.LowVoltage` property (#89)
 #	               Added `MeasuringPoint.DisplayOrder` property (#86)
+#	2023-05-18 MCM Removed `Location.HasADVMBattery` property (#95)
 #
 # To do:
 #	none
@@ -274,7 +275,6 @@ class Location:
 		,'HasGroundwater'
 		,'HasConductivity'
 		,'HasADVM'
-		,'HasADVMBattery'
 		,'HasDischarge'
 		,'HasTemperature'
 		,'HasWaterQuality'
@@ -361,7 +361,6 @@ class Location:
 			or self.HasGroundwater
 			or self.HasConductivity
 			or self.HasADVM
-			or self.HasADVMBattery
 			or self.HasDischarge
 			or self.HasTemperature
 			or self.HasWaterQuality
@@ -449,7 +448,6 @@ class Location:
 			# Location properties
 			self.transform_fluwid
 			,self.transform_hasadvm
-			,self.transform_hasadvmbattery
 			,self.transform_hasconductivity
 			,self.transform_hasdatalogger
 			,self.transform_hasdischarge
@@ -494,15 +492,6 @@ class Location:
 		else:
 
 			self.HasADVM = 'No'
-
-
-
-	def transform_hasadvmbattery(self):
-
-		# This source data is not available yet; set all values to NULL
-		# for now
-
-		self.HasADVMBattery = None
 
 
 
@@ -2382,7 +2371,6 @@ def write_location(
 			,'HasGroundwater'
 			,'HasConductivity'
 			,'HasADVM'
-			,'HasADVMBattery'
 			,'HasDischarge'
 			,'HasTemperature'
 			,'HasWaterQuality'

@@ -54,6 +54,8 @@
 #	                 `ManualMethod` / `ManualMethodComments` (#76)
 #	               Added domain `Stage Method` (#76)
 #	               Removed `LocationVisit.DischargeStageStart/End` (#99)
+#	               Removed `Location.HasADVMBattery` column (#95)
+#	               Removed `LocationVisit.ADVMBattery*` columns (#95)
 #
 # To do:
 #	none
@@ -399,7 +401,6 @@ def create_fc_location(
 		,('HasGroundwater'		,'TEXT'		,None		,None	,3		,'Has Groundwater'		,True		,False		,'Yes/No'				,None)
 		,('HasConductivity'		,'TEXT'		,None		,None	,3		,'Has Conductivity'		,True		,False		,'Yes/No'				,None)
 		,('HasADVM'			,'TEXT'		,None		,None	,3		,'Has ADVM'			,True		,False		,'Yes/No'				,None)
-		,('HasADVMBattery'		,'TEXT'		,None		,None	,3		,'Has ADVM Battery'		,True		,False		,'Yes/No'				,None)
 		,('HasDischarge'		,'TEXT'		,None		,None	,3		,'Has Discharge'		,True		,False		,'Yes/No'				,None)
 		,('HasTemperature'		,'TEXT'		,None		,None	,3		,'Has Temperature'		,True		,False		,'Yes/No'				,None)
 		,('HasWaterQuality'		,'TEXT'		,None		,None	,3		,'Has Water Quality'		,True		,False		,'Yes/No'				,None)
@@ -770,13 +771,6 @@ def create_table_locationvisit(
 		,('RainfallMechanismChecked'		,'TEXT'		,None		,None	,3		,'Tipping Mechanism Checked'		,True		,False		,'Yes/No'				,None)
 		,('RainfallMechanismException'		,'TEXT'		,None		,None	,32		,'Tipping Mechanism Exception'		,True		,False		,'Rainfall Exception'			,None)
 		,('RainfallMechanismComments'		,'TEXT'		,None		,None	,1024		,'Rainfall Mechanism Comments'		,True		,False		,None					,None)
-		,('ADVMBatteryDOA'			,'TEXT'		,None		,None	,3		,'ADVM Battery DOA'			,True		,False		,'Yes/No'				,None)
-		,('ADVMBatteryCondition'		,'TEXT'		,None		,None	,32		,'ADVM Battery Condition'		,True		,False		,'Battery Condition'			,None)
-		,('ADVMBatteryVoltage'			,'DOUBLE'	,38		,2	,None		,'ADVM Battery Voltage'			,True		,False		,None					,None)
-		,('ADVMBatteryReplaced'			,'TEXT'		,None		,None	,3		,'ADVM Battery Replaced'		,True		,False		,'Yes/No'				,None)
-		,('ADVMBatteryReplacementDate'		,'DATE'		,None		,None	,None		,'ADVM Battery Replacement Date'	,True		,False		,None					,None)
-		,('ADVMBatteryReplacementException'	,'TEXT'		,None		,None	,32		,'ADVM Battery Replacement Exception'	,True		,False		,'Battery Replacement Exception'	,None)
-		,('ADVMBatteryReplacementComments'	,'TEXT'		,None		,None	,1024		,'ADVM Battery Replacement Comments'	,True		,False		,None					,None)
 		,('ADVMRecordStart'			,'DATE'		,None		,None	,None		,'ADVM Record Start'			,True		,False		,None					,None)
 		,('ADVMRecordEnd'			,'DATE'		,None		,None	,None		,'ADVM Record End'			,True		,False		,None					,None)
 		,('ADVMDischarge RecordStart'		,'DATE'		,None		,None	,None		,'ADVM Discharge Record Start'		,True		,False		,None					,None)
