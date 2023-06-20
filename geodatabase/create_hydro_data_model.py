@@ -7,7 +7,7 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.1.0
+#	ArcGIS Pro 3.1.2
 #	Python 3.9.16, with:
 #		arcpy 3.1 (build py39_arcgispro_41759)
 #
@@ -39,23 +39,34 @@
 #	               Added Location Issue Type domain value (#71)
 #	               Replaced static OS domain names with dynamic
 #	2023-03-13 MCM Added comments columns for domains with "Other" values (#75)
-#	               Added `MeasuringPoint.IsActive` column (#72)
-#	2023-03-17 MCM Added `LocationVisit.ADVMMaintenanceComments` (#75)
-#	               Added `LocationVisit.ADVMDischargeRecordStart/End` columns (#79)
+#	               Added MeasuringPoint.IsActive column (#72)
+#	2023-03-17 MCM Added LocationVisit.ADVMMaintenanceComments (#75)
+#	               Added LocationVisit.ADVMDischargeRecordStart/End columns (#79)
 #	               Corrected spelling of "desiccant" (#80)
 #	2023-03-22 MCM Changed 'Incorrect inventory' to 'Update inventory' (#83)
-#	               Added `Location.FLUWID` property (#84)
+#	               Added Location.FLUWID property (#84)
 #	2023-04-17 MCM Added secondary battery / time columns (#94)
-#	               Added `DataLogger.LowVoltage` (#89)
-#	               Added `MeasuringPoint.DisplayOrder` (#86)
-#	2023-05-18 MCM Removed "Conductivity" value from `Temperature Source` domain (#68)
-#	               Added `StageMeasurement` columns:
-#	                 `IsDischarge` (#99)
-#	                 `ManualMethod` / `ManualMethodComments` (#76)
-#	               Added domain `Stage Method` (#76)
-#	               Removed `LocationVisit.DischargeStageStart/End` (#99)
-#	               Removed `Location.HasADVMBattery` column (#95)
-#	               Removed `LocationVisit.ADVMBattery*` columns (#95)
+#	               Added DataLogger.LowVoltage (#89)
+#	               Added MeasuringPoint.DisplayOrder (#86)
+#	2023-05-18 MCM Removed "Conductivity" value from Temperature Source domain (#68)
+#	               Added StageMeasurement columns:
+#	                 IsDischarge (#99)
+#	                 ManualMethod / ManualMethodComments (#76)
+#	               Added domain Stage Method (#76)
+#	               Removed LocationVisit.DischargeStageStart/End (#99)
+#	               Removed Location.HasADVMBattery column (#95)
+#	               Removed LocationVisit.ADVMBattery* columns (#95)
+#	2023-06-15 MCM Enhanced groundwater measurements (#77)
+#	                 Added domain Groundwater Method
+#	                 Added columns to GroundwaterMeasurement table:
+#	                   ManualMethod
+#	                   ManualMethodComments
+#	                   ManualLevelHeld
+#	                   ManualLevelWet
+#	2023-06-20 MCM Changed Desiccant Maintenance domain value from
+#	                 "Verified" to "OK" (#106)
+#	               Combined stage/groundwater desiccants into single
+#	                 LocationVisit.DesiccantSensor column (#107)
 #
 # To do:
 #	none
@@ -200,7 +211,7 @@ def create_domains(
 		)
 		,(
 			'Desiccant Maintenance', 'TEXT', (
-				('Verified', 'Verified')
+				('OK', 'OK')
 				,('Replaced', 'Replaced')
 				,('Needs replacement - No materials', 'Needs replacement - No materials')
 				,('Other', 'Other')
@@ -212,6 +223,14 @@ def create_domains(
 				,('Low conductivity', 'Low conductivity')
 				,('Time', 'Time')
 				,('Weather', 'Weather')
+				,('Other', 'Other')
+			)
+		)
+		,(
+			'Groundwater Method', 'TEXT', (
+				('Electric tape', 'Electric tape')
+				,('Steel tape', 'Steel tape')
+				,('Piezo tube', 'Piezo tube')
 				,('Other', 'Other')
 			)
 		)
@@ -611,7 +630,11 @@ def create_table_groundwatermeasurement(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
+		,('ManualMethod'		,'TEXT'		,None		,None	,32		,'Manual Measurement Method'	,True		,False		,'Groundwater Method'			,None)
+		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Manual Measurement Method Comments'	,True	,False		,None					,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
+		,('ManualLevelHeld'		,'DOUBLE'	,38		,2	,None		,'Steel Tape Held At (feet)'	,True		,False		,None					,None)
+		,('ManualLevelWet'		,'DOUBLE'	,38		,2	,None		,'Steel Tape Wet At (feet)'	,True		,False		,None					,None)
 		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Computed Manual Water Level'	,True		,False		,None					,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
 		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Sensor Adjustment Amount'	,True		,False		,None					,None)
@@ -746,8 +769,7 @@ def create_table_locationvisit(
 		,('BatteryReplacementException'		,'TEXT'		,None		,None	,32		,'Battery Replacement Exception'	,True		,False		,'Battery Replacement Exception'	,None)
 		,('BatteryReplacementComments'		,'TEXT'		,None		,None	,1024		,'Battery Replacement Comments'		,True		,False		,None					,None)
 		,('DesiccantEnclosure'			,'TEXT'		,None		,None	,32		,'Enclosure Desiccant'			,True		,False		,'Desiccant Maintenance'		,None)
-		,('DesiccantStage'			,'TEXT'		,None		,None	,32		,'Stage Sensor Desiccant'		,True		,False		,'Desiccant Maintenance'		,None)
-		,('DesiccantGroundwater'		,'TEXT'		,None		,None	,32		,'Groundwater Sensor Desiccant'		,True		,False		,'Desiccant Maintenance'		,None)
+		,('DesiccantSensor'			,'TEXT'		,None		,None	,32		,'Sensor Desiccant'			,True		,False		,'Desiccant Maintenance'		,None)
 		,('DesiccantComments'			,'TEXT'		,None		,None	,1024		,'Desiccant Comments'			,True		,False		,None					,None)
 		,('DataLoggerRecordStart'		,'DATE'		,None		,None	,None		,'Data Logger Record Start'		,True		,False		,None					,None)
 		,('DataLoggerRecordEnd'			,'DATE'		,None		,None	,None		,'Data Logger Record End'		,True		,False		,None					,None)

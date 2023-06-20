@@ -6,7 +6,7 @@
 #	Store constants used by hydro database deployment modules
 #
 # Environment:
-#	Python 3.9.11
+#	Python 3.9.16
 #
 # Notes:
 #	This module stores constants for hydro database deployment python

@@ -7,7 +7,7 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.1.0
+#	ArcGIS Pro 3.1.2
 #	Python 3.9.16, with:
 #		arcpy 3.1 (build py39_arcgispro_41759)
 #
@@ -110,6 +110,7 @@ DOMAIN_NAMES = (
 	,'Data Logger Type'
 	,'Desiccant Maintenance'
 	,'Groundwater Adjustment Exception'
+	,'Groundwater Method'
 	,'Hydro Staff'
 	,'Location Issue Type'
 	,'Rainfall Exception'

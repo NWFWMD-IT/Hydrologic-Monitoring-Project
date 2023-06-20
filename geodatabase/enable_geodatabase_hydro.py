@@ -6,7 +6,7 @@
 #	Enable geodatabae functionality in the [hydro] database
 #
 # Environment:
-#	ArcGIS Pro 3.1.0
+#	ArcGIS Pro 3.1.2
 #	Python 3.9.16, with:
 #		arcpy 3.1 (build py39_arcgispro_41759)
 #
