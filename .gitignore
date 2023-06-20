@@ -6,3 +6,16 @@
 *.rd.lock
 geodatabase/hydro_service/*
 documents/esri_support/*
+data/District Monitoring - Copy.xlsx
+documents/data_model/battery_ta_worksheet.xlsx
+documents/data_model/pdf/battery_time_scenarios.pdf
+documents/data_model/pdf/time_adjustment_DRAFT.pdf
+documents/data_model/pdf/time_adjustment_TARGETS_DRAFT.pdf
+geodatabase/hydro.npp
+geodatabase/MapImageSharingDraftExample_PRO_FAILED.sddraft
+geodatabase/MapImageSharingDraftExample_PYTHON_SUCCESS.sd
+geodatabase/MapImageSharingDraftExample_PYTHON_SUCCESS.sddraft
+geodatabase/MapImageSharingDraftExample_RECONCILE.sd
+geodatabase/MapImageSharingDraftExample_RECONCILE.sddraft
+geodatabase/publish_service_SCREENSHARE.py
+geodatabase/publish_service_SCREENSHARE_HOSTED.py
