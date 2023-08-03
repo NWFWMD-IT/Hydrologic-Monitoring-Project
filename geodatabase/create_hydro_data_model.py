@@ -706,7 +706,7 @@ def create_table_locationissue(
 
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
-		('Type'				,'TEXT'		,None		,None	,32		,'Issue Type'			,True		,False		,'Location Issue Type'			,None)
+		('Type'				,'TEXT'		,None		,None	,64		,'Issue Type'			,True		,False		,'Location Issue Type'			,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
 	)
