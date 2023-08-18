@@ -41,6 +41,9 @@
 #	2023-04-17 MCM Added `DataLogger.LowVoltage` property (#89)
 #	               Added `MeasuringPoint.DisplayOrder` property (#86)
 #	2023-05-18 MCM Removed `Location.HasADVMBattery` property (#95)
+#	2023-08-16 MCM Updated Measuring Point import logic (#112):
+#	                 Added importing display order
+#	                 Added filters for invalid records
 #
 # To do:
 #	none
@@ -654,8 +657,12 @@ class Location:
 
 	def transform__datalogger(self):
 		'''
-		Locations may have zero or one Data Loggers. Loggers must have
-		both a type and serial number.
+		Locations with rainfall or ADVM must have one Data Logger
+
+		Other Locations may have zero or one Data Logger
+		
+		A Data Logger must have	both a type and serial number in order
+		to be valid
 		'''
 
 		type_ = self.data_district_monitoring.Type_of_Recorder
@@ -690,56 +697,115 @@ class Location:
 
 		else:
 
-			logging.debug('No Data Logger record')
+			if (
+				self.HasADVM == True
+				or self.HasRainfall == True
+			):
+			
+				raise ValueError('District Monitoring: Data Logger required for Location with ADVM or rainfall')
+				
+			
+			else:
+			
+				logging.debug('No Data Logger record')
 
 
 
 	def transform__measuringpoints(self):
 		'''
-		Locations must have one or more Measuring Points
+		Locations with groundwater or stage must have one or more
+		valid Measuring Points
+		
+		Other Locations may have zero or more valid Measuring Points
 		'''
 		
 		for source_data in self.data_measuring_points:
 		
-			if source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum.lower() != 'false':
+			if source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum.lower() == 'true':
 			
-				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is not FALSE')
+				if source_data.Name.lower().startswith('ref point is'):
 				
-				self._rejected_measuring_point_count += 1
+					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is TRUE and Name starts with \'Ref point is\'')
+
+					self._rejected_measuring_point_count += 1
+
+				else:
 				
+					self.measuring_points.append(
+						MeasuringPoint(source_data)
+					)
+
+
+			elif source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum.lower() == 'false':
+
+				if source_data.Name.lower().strip() == ('land surface datum'):
 				
-			elif source_data.Name == 'NAVD88 0ft':
-			
-				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: Name is NAVD88 0ft')
+					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'Land Surface Datum\'')
+
+					self._rejected_measuring_point_count += 1
+
+
+				elif source_data.Name.lower().strip() == ('navd88 0ft'):
 				
-				self._rejected_measuring_point_count += 1
-		
+					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'NAVD88 0ft\'')
+
+					self._rejected_measuring_point_count += 1
+
+
+				elif source_data.Name.lower().strip() == ('ngvd29 0ft'):
 				
-			elif source_data.Name == 'NGVD29 0ft':
-			
-				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: Name is NGVD29 0ft')
+					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'NGVD29 0ft\'')
+
+					self._rejected_measuring_point_count += 1
+
+
+				elif source_data.Name.lower().strip() == ('slab'):
 				
-				self._rejected_measuring_point_count += 1
-		
+					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'Slab\'')
+
+					self._rejected_measuring_point_count += 1
 				
+
+				else:
+				
+					self.measuring_points.append(
+						MeasuringPoint(source_data)
+					)
+					
+					
 			else:
-			
-				self.measuring_points.append(
-					MeasuringPoint(source_data)
-				)
 				
+				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is \'{source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum}\'; expected TRUE or FALSE')
+
+				self._rejected_measuring_point_count += 1
 				
+
+
 				
 		if len(self.measuring_points) == 0:
-		
-			raise ValueError('Measuring Points: No valid measuring points found')
-	
-	
-	
+
+			if (
+				self.HasGroundwater == True
+				or self.HasStage == True
+			):
+			
+				raise ValueError('Measuring Point: Measuring Point required for Location with groundwater or stage')
+				
+			
+			else:
+			
+				logging.debug('No valid Measuring Points found')
+
+
+
 	def transform__sensors(self):
 		'''
-		Locations may have zero or more sensors. Sensors are stored in
-		two places in the District Monitoring spreadsheet:
+		Locations with rainfall must have one or more Sensors
+		
+		Other Locations may have zero or more sensors
+		
+		Sensors are stored in two places in the District Monitoring
+		spreadsheet:
 		
 			o Tipping bucket
 				o Zero or one
@@ -1373,8 +1439,13 @@ class MeasuringPoint:
 
 
 	def transform_displayorder(self):
+
+		if self.source_data.DisplayOrder is None:
+		
+			logging.debug('Measuring Point: Missing display order')
+			
 	
-		self.DisplayOrder = 0 # Test value; awaiting source data per #86
+		self.DisplayOrder = self.source_data.DisplayOrder
 	
 	
 	def transform_elevation(self):
@@ -1876,6 +1947,10 @@ def get_location(
 
 
 	# Fetch related Measuring Point data
+	#
+	# Defer checking whether we fetched any Measuring Points until inside
+	# Location constructor; some types of Location do not require a
+	# Measuring Point.
 
 	logging.debug(f'Fetching related Measuring Point records for Location ID {location_id}')
 	data_measuring_points = fetch_measuring_points(
@@ -1883,11 +1958,6 @@ def get_location(
 		,location_id = location_id
 	)
 	
-	
-	if len(data_measuring_points) == 0:
-	
-		raise ValueError('Measuring Points: No data found')
-
 	
 	
 	# Create Location instance
