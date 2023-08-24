@@ -41,7 +41,7 @@
 #	2023-04-17 MCM Added `DataLogger.LowVoltage` property (#89)
 #	               Added `MeasuringPoint.DisplayOrder` property (#86)
 #	2023-05-18 MCM Removed `Location.HasADVMBattery` property (#95)
-#	2023-08-16 MCM Updated Measuring Point import logic (#112):
+#	2023-08-16 MCM Updated Measuring Point import logic (#122):
 #	                 Added importing display order
 #	                 Added filters for invalid records
 #
@@ -698,8 +698,8 @@ class Location:
 		else:
 
 			if (
-				self.HasADVM == True
-				or self.HasRainfall == True
+				self.HasADVM == 'Yes'
+				or self.HasRainfall == 'Yes'
 			):
 			
 				raise ValueError('District Monitoring: Data Logger required for Location with ADVM or rainfall')
@@ -785,8 +785,8 @@ class Location:
 		if len(self.measuring_points) == 0:
 
 			if (
-				self.HasGroundwater == True
-				or self.HasStage == True
+				self.HasGroundwater == 'Yes'
+				or self.HasStage == 'Yes'
 			):
 			
 				raise ValueError('Measuring Point: Measuring Point required for Location with groundwater or stage')
@@ -800,10 +800,6 @@ class Location:
 
 	def transform__sensors(self):
 		'''
-		Locations with rainfall must have one or more Sensors
-		
-		Other Locations may have zero or more sensors
-		
 		Sensors are stored in two places in the District Monitoring
 		spreadsheet:
 		
@@ -814,6 +810,10 @@ class Location:
 				o Zero or many
 				o Multiple sensors are pipe delimited
 				
+		Locations with rainfall must have exactly one tipping bucket
+		
+		Other Locations may have zero or more sensors
+		
 		All sensors must have a type and a serial number
 		'''
 		
@@ -852,8 +852,15 @@ class Location:
 
 
 		else:
+		
+			if self.HasRainfall == 'Yes':
+			
+				raise ValueError('District Monitoring: Tipping bucket required for Location with rainfall')
+				
+				
+			else:
 
-			logging.debug('No tipping bucket record')
+				logging.debug('No tipping bucket record')
 			
 			
 			
@@ -2083,7 +2090,8 @@ def load_data(
 			#
 			
 			if (
-				metrics_input.location_total != 0 # Skip first pass
+				feedback > 0 # Check first to avoid ZeroDivisionError in modulo
+				and metrics_input.location_total != 0 # Skip first pass
 				and metrics_input.location_total % feedback == 0
 			):
 
@@ -2735,7 +2743,7 @@ def _configure_arguments():
 		,'--feedback'
 		,default = 0
 		,dest = 'feedback'
-		,help = 'Feedback interval for progress metrics (number of Locations processed)'
+		,help = 'Feedback interval for progress metrics (number of Locations processed); 0 to disable'
 		,metavar = '<feedback>'
 		,required = False
 		,type = int
@@ -3146,6 +3154,16 @@ def _process_arguments(
 			,log_formatter
 		)
 
+
+
+	#
+	# Verify feedback
+	#
+
+	if not args.feedback >= 0:
+	
+		raise ValueError('Feedback interval must be greater or equal to zero')
+	
 
 
 	# Standardize paths

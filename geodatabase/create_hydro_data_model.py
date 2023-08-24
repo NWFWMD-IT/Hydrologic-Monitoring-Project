@@ -883,7 +883,7 @@ def create_table_measuringpoint(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Name'				,'TEXT'		,None		,None	,64		,'Name'				,True		,False		,None					,None)
 		,('AquariusID'			,'GUID'		,None		,None	,None		,'Aquarius ID'			,True		,False		,None					,None)
-		,('Description'			,'TEXT'		,None		,None	,1024		,'Serial Number'		,True		,False		,None					,None)
+		,('Description'			,'TEXT'		,None		,None	,1024		,'Description'			,True		,False		,None					,None)
 		,('Elevation'			,'DOUBLE'	,38		,2	,None		,'Elevation'			,True		,False		,None					,None)
 		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
 		,('DisplayOrder'		,'LONG'		,None		,None	,None		,'Display Order'		,True		,False		,None					,None)
