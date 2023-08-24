@@ -254,6 +254,20 @@ GO
 -- End users
 --
 
+CREATE USER [HQ\rmd_db]
+WITH
+	DEFAULT_SCHEMA = [dbo]
+;
+
+GO
+
+
+ALTER ROLE [db_datareader]
+ADD MEMBER [HQ\rmd_db]
+;
+
+GO
+
 
 
 --------------------------------------------------------------------------------
