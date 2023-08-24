@@ -95,6 +95,7 @@
 --	               Updated file paths for NWFWMD production environment
 --	2022-12-14 MCM Switch to [master] at end, to facilitae development testing
 --	2023-04-25 MCM Moved data/log files to `hydro` directory
+--	2023-08-23 MCM Add rmd_db group as end user
 --
 -- To do:
 --	Localize for NWFWMD environment:
@@ -248,6 +249,7 @@ WITH
 ;
 
 GO
+
 
 
 --
