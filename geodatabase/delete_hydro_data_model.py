@@ -111,7 +111,6 @@ DOMAIN_NAMES = (
 	,'Desiccant Maintenance'
 	,'Groundwater Adjustment Exception'
 	,'Groundwater Method'
-	,'Hydro Staff'
 	,'Location Issue Type'
 	,'Rainfall Exception'
 	,'Reading Type'
@@ -124,6 +123,7 @@ DOMAIN_NAMES = (
 	# Obsolete
 	,'Battery Replacement Time Adjustment'
 	,'Dessicant Maintenance' # Misspelled
+	,'Hydro Staff'
 	,'Temperature Units'
 	,'Time Adjustment Type'
 )

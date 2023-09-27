@@ -48,7 +48,7 @@
 #	2023-04-17 MCM Added secondary battery / time columns (#94)
 #	               Added DataLogger.LowVoltage (#89)
 #	               Added MeasuringPoint.DisplayOrder (#86)
-#	2023-05-18 MCM Removed "Conductivity" value from Temperature Source domain (#68)
+#	2023-05-18 MCM Removed 'Conductivity' value from Temperature Source domain (#68)
 #	               Added StageMeasurement columns:
 #	                 IsDischarge (#99)
 #	                 ManualMethod / ManualMethodComments (#76)
@@ -64,10 +64,12 @@
 #	                   ManualLevelHeld
 #	                   ManualLevelWet
 #	2023-06-20 MCM Changed Desiccant Maintenance domain value from
-#	                 "Verified" to "OK" (#106)
+#	                 'Verified' to 'OK' (#106)
 #	               Combined stage/groundwater desiccants into single
 #	                 LocationVisit.DesiccantSensor column (#107)
 #	2023-07-31 MCM Update domain values (#24)
+#	2023-09-27 MCM Removed Hydro Staff domain (#124)
+#	               Added LocationVisit.StaffComments column (#124)
 #
 # To do:
 #	none
@@ -234,20 +236,6 @@ def create_domains(
 				('Electric tape', 'Electric tape')
 				,('Steel tape', 'Steel tape')
 				,('Piezo tube', 'Piezo tube')
-				,('Other', 'Other')
-			)
-		)
-		,(
-			'Hydro Staff', 'TEXT', (
-				('Candice Keeney', 'Candice Keeney')
-				,('David Stanford', 'David Stanford')
-				,('Fred Callaway', 'Fred Callaway')
-				,('Garrett Ifland', 'Garrett Ifland')
-				,('Ian Waters', 'Ian Waters')
-				,('Jacob Kucala', 'Jacob Kucala')
-				,('Katie Price', 'Katie Price')
-				,('Pete Folland', 'Pete Folland')
-				,('Steve Costa', 'Steve Costa')
 				,('Other', 'Other')
 			)
 		)
@@ -765,7 +753,8 @@ def create_table_locationvisit(
 	attributes = (
 		#name					,type		,precision	,scale	,length		,alias					,nullable	,required	,domain					,default
 		('VisitDate'				,'DATE'		,None		,None	,None		,'Visit Date'				,True		,False		,None					,None)
-		,('Staff'				,'TEXT'		,None		,None	,1024		,'Visit Staff'				,True		,False		,'Hydro Staff'				,None)
+		,('Staff'				,'TEXT'		,None		,None	,1024		,'Visit Staff'				,True		,False		,None					,None)
+		,('StaffComments'			,'TEXT'		,None		,None	,1024		,'Staff Comments'			,True		,False		,None					,None)
 		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,None)
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
 		,('BatteryCondition'			,'TEXT'		,None		,None	,32		,'Battery Condition'			,True		,False		,'Battery Condition'			,None)
