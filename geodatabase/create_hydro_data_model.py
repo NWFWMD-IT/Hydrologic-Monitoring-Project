@@ -70,6 +70,7 @@
 #	2023-07-31 MCM Update domain values (#24)
 #	2023-09-27 MCM Removed Hydro Staff domain (#124)
 #	               Added LocationVisit.StaffComments column (#124)
+#	2023-09-29 MCM Added `Location.HasSensor/MeasuringPoint` columns (#126)
 #
 # To do:
 #	none
@@ -411,6 +412,8 @@ def create_fc_location(
 		,('Project'			,'LONG'		,None		,None	,None		,'Project Number'		,True		,False		,None					,None)
 		,('FLUWID'			,'TEXT'		,None		,None	,16		,'FLUWID'			,True		,False		,None					,None)
 		,('HasDataLogger'		,'TEXT'		,None		,None	,3		,'Has Data Logger'		,True		,False		,'Yes/No'				,None)
+		,('HasSensor'			,'TEXT'		,None		,None	,3		,'Has Sensor'			,True		,False		,'Yes/No'				,None)
+		,('HasMeasuringPoint'		,'TEXT'		,None		,None	,3		,'Has Measuring Point'		,True		,False		,'Yes/No'				,None)
 		,('HasRainfall'			,'TEXT'		,None		,None	,3		,'Has Rainfall'			,True		,False		,'Yes/No'				,None)
 		,('HasStage'			,'TEXT'		,None		,None	,3		,'Has Stage'			,True		,False		,'Yes/No'				,None)
 		,('HasGroundwater'		,'TEXT'		,None		,None	,3		,'Has Groundwater'		,True		,False		,'Yes/No'				,None)

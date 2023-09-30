@@ -44,6 +44,7 @@
 #	2023-08-16 MCM Updated Measuring Point import logic (#122):
 #	                 Added importing display order
 #	                 Added filters for invalid records
+#	2023-09-29 MCM Add `Location.HasSensor/HasMeasuringPoint` properties (#126)
 #
 # To do:
 #	none
@@ -273,6 +274,8 @@ class Location:
 		,'Project'
 		,'FLUWID'
 		,'HasDataLogger'
+		,'HasSensor'
+		,'HasMeasuringPoint'
 		,'HasRainfall'
 		,'HasStage'
 		,'HasGroundwater'
@@ -358,8 +361,7 @@ class Location:
 		# Check multi-property integrity
 		
 		if not (
-			self.HasDataLogger
-			or self.HasRainfall
+			self.HasRainfall
 			or self.HasStage
 			or self.HasGroundwater
 			or self.HasConductivity
@@ -452,7 +454,6 @@ class Location:
 			self.transform_fluwid
 			,self.transform_hasadvm
 			,self.transform_hasconductivity
-			,self.transform_hasdatalogger
 			,self.transform_hasdischarge
 			,self.transform_hasgroundwater
 			,self.transform_hasrainfall
@@ -467,6 +468,10 @@ class Location:
 			,self.transform__datalogger
 			,self.transform__measuringpoints
 			,self.transform__sensors
+			# Location properties based on related data
+			,self.transform_hasdatalogger
+			,self.transform_hasmeasuringpoint
+			,self.transform_hassensor
 		):
 
 			logging.debug(f'Executing: {f.__name__}')
@@ -512,7 +517,7 @@ class Location:
 
 	def transform_hasdatalogger(self):
 
-		if isempty(self.data_district_monitoring.Type_of_Recorder):
+		if self.data_logger is None:
 
 			self.HasDataLogger = 'No'
 
@@ -546,6 +551,18 @@ class Location:
 
 
 
+	def transform_hasmeasuringpoint(self):
+
+		if len(self.measuring_points) > 0:
+
+			self.HasMeasuringPoint = 'Yes'
+
+		else:
+
+			self.HasMeasuringPoint = 'No'
+
+
+
 	def transform_hasrainfall(self):
 
 		if 'rainfall' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
@@ -555,6 +572,18 @@ class Location:
 		else:
 
 			self.HasRainfall = 'No'
+
+
+
+	def transform_hassensor(self):
+
+		if len(self.sensors) > 0:
+
+			self.HasSensor = 'Yes'
+
+		else:
+
+			self.HasSensor = 'No'
 
 
 
@@ -2444,6 +2473,8 @@ def write_location(
 			,'Project'
 			,'FLUWID'
 			,'HasDataLogger'
+			,'HasSensor'
+			,'HasMeasuringPoint'
 			,'HasRainfall'
 			,'HasStage'
 			,'HasGroundwater'
