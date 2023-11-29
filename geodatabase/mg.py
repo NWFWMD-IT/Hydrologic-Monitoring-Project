@@ -43,6 +43,7 @@
 #	2022-11-21 MCM Added attachment upgrade support (Hydro 55)
 #	2023-02-23 MCM Added custom logging levels DATA and DATADEBUG
 #	2023-03-13 MCM Changed `attachments_upgrade` default to True
+#	2023-11-27 MCM Added asdict()
 #
 # To do:
 #	none
@@ -57,9 +58,12 @@
 
 import arcpy
 import copy
+import datetime
 import inspect
+import json
 import logging
 import os
+import uuid
 
 
 
@@ -344,6 +348,100 @@ def add_subtypes(
 			,subtype_code = code
 			,subtype_description = description
 		)
+
+
+
+def asdict(
+	object
+	,attributes
+):
+	'''
+	Convert complex objects to dictionaries with simple types that can be
+	encoded as JSON by json module
+
+	This function accepts an object and a sequence of attribute names, and
+	returns a dict of the attribute names and their values.
+
+	The conversion logic is simple:
+
+		If an attribute value has its own attribute named 'asdict', we
+		assume that the value is a complex object that needs additional
+		simplification and call value.asdict() to get a dict with simple
+		types that are compatible with the json module.
+
+		Otherwise, if the value does not have an attribute named
+		'asdict', we assume that it can be encoded directly by the
+		json module and add it to the dict without furhter processing.
+	'''
+
+	d = {}
+
+
+	for a in attributes:
+
+		value = getattr(
+			object
+			,a
+		)
+
+
+
+		if hasattr( # Complex type
+			value
+			,'asdict'
+		):
+
+			d[a] = value.asdict()
+
+
+		else: # Simple type
+
+			if ( # Display human-friendly representation of binary
+				isinstance(
+					value
+					,bytearray
+				)
+				or isinstance(
+					value
+					,bytes
+				)
+			):
+			
+				value = f'<binary: {len(value):,} bytes>'
+				
+			
+			elif isinstance( # Convert datetime to string, for subsequent JSON conversions
+				value
+				,datetime.datetime
+			):
+
+				value = value.strftime(JSON_FORMAT_DATE)
+
+
+			elif isinstance( # Display human-friendly representation of geometry
+				value
+				,arcpy.Geometry
+			):
+
+				value = json.loads(value.JSON)
+				
+				
+			elif isinstance( # Convert UUID to string, for subsequent JSON conversions
+				value
+				,uuid.UUID
+			):
+			
+				value = str(value)
+
+
+
+			d[a] = value
+
+
+
+	# Return
+
+	return d
 
 
 

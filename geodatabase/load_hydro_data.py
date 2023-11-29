@@ -47,7 +47,7 @@
 #	2023-09-29 MCM Add `Location.HasSensor/HasMeasuringPoint` properties (#126)
 #
 # To do:
-#	none
+#	Switch from local asdict to mg.asdict
 #
 # Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
