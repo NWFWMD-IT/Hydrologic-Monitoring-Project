@@ -7,9 +7,9 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.1.2
-#	Python 3.9.16, with:
-#		arcpy 3.1 (build py39_arcgispro_41759)
+#	ArcGIS Pro 3.2
+#	Python 3.9.18, with:
+#		arcpy 3.2 (build py39_arcgispro_49690)
 #
 # Notes:
 #	This script is designed to facilitate model deployment development by
