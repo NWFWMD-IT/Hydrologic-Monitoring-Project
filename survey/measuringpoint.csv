@@ -1,232 +1,265 @@
 name,label,locationname,elevation,locationglobalid,active,display,locationmpname
-Staff,Staff,*** ECONFINA CREEK ABOVE GAINER***,10,{F09652FD-E84A-442B-9E3B-983DBFA14FB8},Yes,1,*** ECONFINA CREEK ABOVE GAINER*** - Staff
-Top of Staff,Top of Staff,*** ECONFINA CREEK ABOVE GAINER***,19.7,{E1C6C2B9-7E5D-44FC-A749-10C2C047EC0E},Yes,2,*** ECONFINA CREEK ABOVE GAINER*** - Top of Staff
-High Water Nail in Tree,High Water Nail in Tree,*** ECONFINA CREEK ABOVE GAINER***,27.16,{4F184D86-83B0-4B7E-A754-0BBEF6059278},Yes,3,*** ECONFINA CREEK ABOVE GAINER*** - High Water Nail in Tree
-TO 4 inch PVC casing,TO 4 inch PVC casing,*** PITTMAN VISA WELL***,128.76,{E341C257-6B3F-47DD-8320-46DBCA3B5410},Yes,1,*** PITTMAN VISA WELL*** - TO 4 inch PVC casing
-Top of lock rim,Top of lock rim,***2 EGG AMBIENT #3***,123.19,{673DCEC4-0F54-4D4B-9FC6-10BD054AE779},Yes,1,***2 EGG AMBIENT #3*** - Top of lock rim
-Ch Square- left of station box,Ch Square- left of station box,***ECONFINA CREEK @ SR20***,17.51,{D139AAB1-D726-416F-A063-77D6E331E35A},Yes,1,***ECONFINA CREEK @ SR20*** - Ch Square- left of station box
-Staff,Staff,***ECONFINA CREEK @ SR20***,0,{F0FBD08F-1315-4DA8-970C-BDBE5AF2BED0},Yes,1,***ECONFINA CREEK @ SR20*** - Staff
-Staff,Staff,***ECONFINA CREEK AT WALSINGHAM BRIDGE***,0,{992F3BB5-EB49-4499-922B-C7FD592A98C6},Yes,1,***ECONFINA CREEK AT WALSINGHAM BRIDGE*** - Staff
-Staff,Staff,***ECONFINA CREEK BELOW GAINER***,10,{DD9F863F-EB7A-4633-84AF-96E5B8B11F57},Yes,1,***ECONFINA CREEK BELOW GAINER*** - Staff
-1st 2 inch galvanized pipe,1st 2 inch galvanized pipe,***ECONFINA CREEK BELOW GAINER***,14.95,{35B6B5FC-C221-4E94-8ACE-A2DB165FE115},Yes,2,***ECONFINA CREEK BELOW GAINER*** - 1st 2 inch galvanized pipe
-2nd 2 inch galvanized pipe,2nd 2 inch galvanized pipe,***ECONFINA CREEK BELOW GAINER***,12.95,{A3C43575-EF1B-4365-8D66-89756027DA76},Yes,2,***ECONFINA CREEK BELOW GAINER*** - 2nd 2 inch galvanized pipe
-High Water Nail in Tree,High Water Nail in Tree,***ECONFINA CREEK BELOW GAINER***,26.94,{C54B42F6-12A2-4C31-B44E-82816818E0B3},Yes,4,***ECONFINA CREEK BELOW GAINER*** - High Water Nail in Tree
-Top of Staff,Top of Staff,***ECONFINA CREEK BELOW GAINER***,19.51,{9B58A8BA-76C8-4EDD-AB76-580DFDDD42B9},Yes,5,***ECONFINA CREEK BELOW GAINER*** - Top of Staff
-Ch Square on bridge,Ch Square on bridge,***INDIAN SPRING RUN @ SR61***,13.33,{AD54A78C-31E4-4725-9A52-AF508F8D3D47},Yes,1,***INDIAN SPRING RUN @ SR61*** - Ch Square on bridge
-TO 12 inch steel casing,TO 12 inch steel casing,***ST MARKS NAT WILDLIFE REFUGE - FLORIDAN MONITOR-77m***,25.98,{742E5AE1-2240-4326-8BFE-9D6008CADCF9},Yes,1,***ST MARKS NAT WILDLIFE REFUGE - FLORIDAN MONITOR-77m*** - TO 12 inch steel casing
-TO 8 inch protective casing,TO 8 inch protective casing,***WAKULLA CONDUIT WELL@WEST OF HWY 61***,24.68,{F68AB210-36A2-4DE8-B3F2-85D042E3A1D0},Yes,1,***WAKULLA CONDUIT WELL@WEST OF HWY 61*** - TO 8 inch protective casing
-TO 6 inch PVC casing,TO 6 inch PVC casing,A-2 (Lower Floridan Monitor),55.59,{C097334E-EFC6-496F-90EA-42B0B3392E1F},Yes,1,A-2 (Lower Floridan Monitor) - TO 6 inch PVC casing
-TO 12 inch steel protective casing,TO 12 inch steel protective casing,A-2 (Lower Floridan Monitor),55.77,{89D8AD01-F100-4826-B4F7-6B9E13C5268A},Yes,2,A-2 (Lower Floridan Monitor) - TO 12 inch steel protective casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,A-2B (Surficial Monitor),55.45,{399F7D10-9466-4F8B-9566-706B01455B70},Yes,1,A-2B (Surficial Monitor) - TO 4 inch PVC casing
-TO 10 inch aluminum protective casing,TO 10 inch aluminum protective casing,A-2B (Surficial Monitor),55.55,{7F233B9D-4829-4CAD-AF94-5AB5DB329877},Yes,2,A-2B (Surficial Monitor) - TO 10 inch aluminum protective casing
-TO 6 inch PVC casing,TO 6 inch PVC casing,A-3 (Lower Floridan Monitor),54.07,{8C686A04-BC89-439C-9050-C7248ED20C5C},Yes,1,A-3 (Lower Floridan Monitor) - TO 6 inch PVC casing
-TO 12 inch steel protective casing,TO 12 inch steel protective casing,A-3 (Lower Floridan Monitor),54.4,{778742CC-E755-47B1-9A4E-A0297788C5A6},Yes,2,A-3 (Lower Floridan Monitor) - TO 12 inch steel protective casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,A-3B (Surficial Monitor),54.36,{4D1B9E06-EA47-4ED0-8301-0D4FFCABFF28},Yes,1,A-3B (Surficial Monitor) - TO 4 inch PVC casing
-TO 10 inch square aluminum protective casing,TO 10 inch square aluminum protective casing,A-3B (Surficial Monitor),54.65,{C806A82B-FCE0-4385-A35C-57B04F6CB78B},Yes,2,A-3B (Surficial Monitor) - TO 10 inch square aluminum protective casing
-TO 6 inch PVC casing,TO 6 inch PVC casing,A-4 (Lower Floridan Monitor),21.97,{584FA50C-528B-48D1-81D4-D4A77AA1AA8F},Yes,1,A-4 (Lower Floridan Monitor) - TO 6 inch PVC casing
-TO 12 inch steel protective casing,TO 12 inch steel protective casing,A-4 (Lower Floridan Monitor),22.56,{5785FD3C-1222-4696-BB42-6327B902CACD},Yes,2,A-4 (Lower Floridan Monitor) - TO 12 inch steel protective casing
-TO 6 inch PVC casing,TO 6 inch PVC casing,A-4A (Upper Floridan Monitor),21.39,{88762EDE-A593-4B49-A803-8091D9BAEC44},Yes,1,A-4A (Upper Floridan Monitor) - TO 6 inch PVC casing
-TO 12 inch steel protective casing,TO 12 inch steel protective casing,A-4A (Upper Floridan Monitor),21.65,{E77A6DC8-CC22-48C3-BD09-2B3B4A195AF2},Yes,2,A-4A (Upper Floridan Monitor) - TO 12 inch steel protective casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,A-4B (Surficial Monitor),22.24,{17679324-F477-43D9-B4DC-EC58BF1166E6},Yes,1,A-4B (Surficial Monitor) - TO 4 inch PVC casing
-TO 6 inch square aluminum protective casing,TO 6 inch square aluminum protective casing,A-4B (Surficial Monitor),22.43,{0512885C-B111-4A55-BEF6-06D8F1B2797D},Yes,2,A-4B (Surficial Monitor) - TO 6 inch square aluminum protective casing
-Aluminum angle on station,Aluminum angle on station,Alford Arm Trib @ Micc. Rd,63.54,{B48481D0-DC3A-4C8D-AB96-39F67E180D69},Yes,1,Alford Arm Trib @ Micc. Rd - Aluminum angle on station
-Pipe next to transducer,Pipe next to transducer,Ames Sink,8.83,{384CAF81-6BDB-412B-86E8-E2355889C81F},Yes,1,Ames Sink - Pipe next to transducer
-TO 6 inch PVC casing,TO 6 inch PVC casing,B-2 (Upper Floridan Monitor),34.29,{B0570A63-07AD-4486-809F-4A3E84578D69},Yes,1,B-2 (Upper Floridan Monitor) - TO 6 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Baxter Sand Pit Visa,130.44,{BEA0205C-78FC-4E7B-8501-0C958B609307},Yes,1,Baxter Sand Pit Visa - TO 4 inch PVC casing
-TO sanitary seal,TO sanitary seal,Bay Co - Harders Park,51.1,{3B262A9E-E588-4BBC-B2DC-65F2BCA96250},Yes,1,Bay Co - Harders Park - TO sanitary seal
-Staff,Staff,Bear Creek @ US231,0,{EB9C77F6-0550-4139-8930-D2C79C3519BE},Yes,1,Bear Creek @ US231 - Staff
-TO 4 inch PVC casing,TO 4 inch PVC casing,Bike Trail / Nitrate Pot. Map,37.86,{D502805B-9BEE-470C-A46F-FE56CBE65917},Yes,1,Bike Trail / Nitrate Pot. Map - TO 4 inch PVC casing
-Ch Square on bridge,Ch Square on bridge,Black Creek @ SR 267,38.47,{CCFF64A9-E730-4DE4-88EF-1BB6CF47F5F9},Yes,1,Black Creek @ SR 267 - Ch Square on bridge
-TO 4 inch PVC casing,TO 4 inch PVC casing,Blountstown Floridan,84.75,{B8D3F0F3-702C-4B8B-96D8-B331290EEBAA},Yes,1,Blountstown Floridan - TO 4 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Blountstown Intermediate,84.66,{D5F51342-B807-402E-98EC-2BC15BB05878},Yes,1,Blountstown Intermediate - TO 2 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Blountstown Surficial,84.4,{157AB0B0-7FFA-4AF3-BA8A-F6DA7ED7CB08},Yes,1,Blountstown Surficial - TO 2 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Bradford Brook Deep,47.11,{9FED01A2-C1F9-485D-9BBF-E1ABA95D9FE7},Yes,1,Bradford Brook Deep - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Bradford Brook Shallow,47.43,{4CC8C354-929A-4B0F-A86E-9E6F2FD5C34D},Yes,1,Bradford Brook Shallow - TO 4 inch PVC casing
-TO sanitary seal,TO sanitary seal,Brida - Casper Dr,108.4,{E0F0DB57-5375-4596-9226-A925A36BED13},Yes,1,Brida - Casper Dr - TO sanitary seal
-Metal pipe below conduit pipe- under water,Metal pipe below conduit pipe- under water,Burnt Grocery Creek,10,{62B5A641-2669-4E84-AEFC-DE930EDA98E1},Yes,1,Burnt Grocery Creek - Metal pipe below conduit pipe- under water
-TO 4 inch PVC casing,TO 4 inch PVC casing,C. DONAHUE DEEP / NITRATE POT. MAP,27.12,{653E30A9-F55D-442A-B989-DB331B4809EA},Yes,1,C. DONAHUE DEEP / NITRATE POT. MAP - TO 4 inch PVC casing
-TO 10 inch casing,TO 10 inch casing,Camp G. Johnston,33.63,{613050E9-95CD-46D8-930F-781ED4955F2A},Yes,1,Camp G. Johnston - TO 10 inch casing
-Ch Square,Ch Square,Central DD @ Lake Bradford Rd,58.05,{975CAD38-5EC7-42B7-9ABF-93CDC8643530},Yes,1,Central DD @ Lake Bradford Rd - Ch Square
-Angled bracket 6ft Right of station,Angled bracket 6ft Right of station,Central DD @ Orange Ave,44.02,{D5199DBC-0B61-46D3-9D0A-9D40BA8112AC},Yes,1,Central DD @ Orange Ave - Angled bracket 6ft Right of station
-TO Sanitary Seal,TO Sanitary Seal,Charles Donahue,26.33,{8196C085-44D6-40B9-9E03-99F2C94C7926},Yes,1,Charles Donahue - TO Sanitary Seal
-TO 4 inch PVC casing,TO 4 inch PVC casing,Chipola WMA #1,117.54,{232164FE-1AAF-43C8-91F2-B9E2A379B595},Yes,1,Chipola WMA #1 - TO 4 inch PVC casing
-TO sanitary seal,TO sanitary seal,Christy - Rolling Pines Rd,91.13,{CCF13DB2-50DE-49A6-BAD7-75581E36ADA6},Yes,1,Christy - Rolling Pines Rd - TO sanitary seal
-TO casing,TO casing,Compass Lake Tower,303.5,{1DECB6CA-EF60-4C8D-AB9D-752A5D882AE3},Yes,1,Compass Lake Tower - TO casing
-Short staff,Short staff,Cox Pond,52.86,{56B483E7-305D-4BE3-AFB9-2CF04A6CDB9B},Yes,1,Cox Pond - Short staff
-Tall staff,Tall staff,Cox Pond,54.04,{0E19E8D2-722C-4950-942D-23A03881090A},Yes,2,Cox Pond - Tall staff
-1 1/4 inch galv pipe,1 1/4 inch galv pipe,Cox Pond,53,{AA0BF297-A69E-4F5C-A564-64ABC2373023},Yes,3,Cox Pond - 1 1/4 inch galv pipe
-Ch Square,Ch Square,Crooked River @ CR67,9.5,{76AA610C-FEBB-41BC-933C-7E062A86534E},Yes,1,Crooked River @ CR67 - Ch Square
-TO 4 inch PVC casing,TO 4 inch PVC casing,Cypress Park #1-Floridan,137.84,{779DBD6B-051C-450D-B7F7-AB0F24B2F363},Yes,1,Cypress Park #1-Floridan - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Cypress Park #2-Surficial,137.93,{7696332E-3BD1-4806-8FA9-C4E46DC95704},Yes,1,Cypress Park #2-Surficial - TO 4 inch PVC casing
-TO 4 inch steel casing,TO 4 inch steel casing,Ditty JC-3 (JK-30),155.76,{1F9A3DAA-A696-4347-A75D-6214EFB3F68C},Yes,1,Ditty JC-3 (JK-30) - TO 4 inch steel casing
-Temp Ref point is 0.40ft above LSD,Temp Ref point is 0.40ft above LSD,DWU #5 (503' - 747'),0.4,{EDA5444B-2A83-4D58-8D74-6DCD2DA260B5},Yes,1,DWU #5 (503' - 747') - Temp Ref point is 0.40ft above LSD
-Staff inside culvert,Staff inside culvert,E DD @ Adams,42.84,{A64A6BD6-0F52-48E2-BEB8-69C1838806A2},Yes,1,E DD @ Adams - Staff inside culvert
-Chiseled Square on lower headwall,Chiseled Square on lower headwall,E DD @ Adams,52.03,{F95DE4A8-C816-4878-A2A6-16190D7E559F},Yes,2,E DD @ Adams - Chiseled Square on lower headwall
-Top of galvanized threaded pipe vent coupler,Top of galvanized threaded pipe vent coupler,EAFB 6204 Floridan 96 CEG,136.57,{1E4B1B24-BF29-4C00-9E37-6746538753A7},Yes,1,EAFB 6204 Floridan 96 CEG - Top of galvanized threaded pipe vent coupler
-Top of 6 inch threaded adaptor,Top of 6 inch threaded adaptor,EAFB Field #4 (Int.Sys),89.2,{F7545062-8250-4F15-8A05-6A6CBD6AC719},Yes,1,EAFB Field #4 (Int.Sys) - Top of 6 inch threaded adaptor
-Top of 4 inch steel protective casing,Top of 4 inch steel protective casing,EAFB Field #4 (S&G),91.44,{F0876CEE-E3C2-44A9-9461-2F0010F5B236},Yes,1,EAFB Field #4 (S&G) - Top of 4 inch steel protective casing
-Top of 5 inch flange,Top of 5 inch flange,EAFB Field #4 Well #2,91.72,{ACA8FD70-73A4-4996-BD4D-81AF96F08E26},Yes,1,EAFB Field #4 Well #2 - Top of 5 inch flange
-TO PVC coupler,TO PVC coupler,EAFB Floridan#4 (Lowermost Flrd),91.4,{8DC3491E-367C-40EB-9B83-6CBA8371E88E},Yes,1,EAFB Floridan#4 (Lowermost Flrd) - TO PVC coupler
-Top of sanitary seal,Top of sanitary seal,EAFB Metts Tower,191.74,{8B5BB9B8-233E-4F7A-B863-E8FDF40DE088},Yes,1,EAFB Metts Tower - Top of sanitary seal
-Top of sanitary seal,Top of sanitary seal,EAFB NCO #71,11.2,{4C740006-9A8E-445B-894B-DE463E038F84},Yes,1,EAFB NCO #71 - Top of sanitary seal
-Top of sanitary seal,Top of sanitary seal,EAFB R52N Road #200,177.4,{39960056-95CE-4186-9AD9-97C0A372D05D},Yes,1,EAFB R52N Road #200 - Top of sanitary seal
-Top of PVC vent pipe,Top of PVC vent pipe,EAFB Range 63 #31,136.53,{AC9230C7-3D56-4DA1-A6E1-8BFD78C1D9B3},Yes,1,EAFB Range 63 #31 - Top of PVC vent pipe
-TO hole on edge on PVC cap,TO hole on edge on PVC cap,EAFB San Blas #107,8.85,{506AF568-D181-4B98-9AA2-AA9F4C367019},Yes,1,EAFB San Blas #107 - TO hole on edge on PVC cap
-Top of sanitary seal,Top of sanitary seal,EAFB Site C-62,216.18,{52FC9F1D-2B51-485E-81A7-E46E01F5D73F},Yes,1,EAFB Site C-62 - Top of sanitary seal
-TO 4 inch steel casing,TO 4 inch steel casing,Eastpoint #3 Deep MW-50D,18.58,{150F657D-5641-453D-9AD1-DFAC86B21335},Yes,1,Eastpoint #3 Deep MW-50D - TO 4 inch steel casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Eastpoint #3 Shallow Mw,18.3,{4C8BF879-9E27-41B8-86ED-B3BCB3C4C901},Yes,1,Eastpoint #3 Shallow Mw - TO 2 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Eastpoint #4 Shallow Mw,18.09,{34B4F30F-EEDC-474E-8D5A-C68B785BDAB7},Yes,1,Eastpoint #4 Shallow Mw - TO 2 inch PVC casing
-TO threaded pipe,TO threaded pipe,Eastpoint WSD #4,20.48,{5E162252-4403-4792-AAF5-BFF9FC073DB1},Yes,1,Eastpoint WSD #4 - TO threaded pipe
-TO locking cap,TO locking cap,Eastpoint WWTF MW#6,27.95,{AD196E40-7ECE-4698-AEA2-7ABB52F06AF0},Yes,1,Eastpoint WWTF MW#6 - TO locking cap
-Staff,Staff,Econfina Creek @ Scott Rd,0,{D85A4BB8-5467-4231-B9A6-EB09386B184A},Yes,1,Econfina Creek @ Scott Rd - Staff
-TO sanitary seal,TO sanitary seal,Estiffanulga Work Center,58.25,{9A008A19-9B17-4A98-917C-6430AF622BE1},Yes,1,Estiffanulga Work Center - TO sanitary seal
-Top of Extension,Top of Extension,FAF #65/AKA USGS 40,132.32,{CC30F75C-A55E-4CB2-B40A-9E603AE2AD3A},Yes,1,FAF #65/AKA USGS 40 - Top of Extension
-Top of Extension,Top of Extension,FAF #79,117.41,{B8000740-4682-4815-9C51-A9BC6D0B3A37},Yes,1,FAF #79 - Top of Extension
-Top of Extension,Top of Extension,FAF #93,169.37,{0098A74F-0553-46A8-9F21-C7C496F1B22F},Yes,1,FAF #93 - Top of Extension
-TO hole in middle of plywood cover,TO hole in middle of plywood cover,Fannin Airport,5.53,{D9EDD34C-8E20-4F31-9921-35A6D033461E},Yes,1,Fannin Airport - TO hole in middle of plywood cover
-TO 2 inch PVC casing,TO 2 inch PVC casing,FGS - Sullivan Sink #1,26.58,{41D5339A-4621-4907-A7AB-78505ACDD05C},Yes,1,FGS - Sullivan Sink #1 - TO 2 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,FGS- Hq Intermediate,202.25,{A1EFBD52-1559-4EF7-B113-2E9542B981A6},Yes,1,FGS- Hq Intermediate - TO 2 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,FGS-Pine Log Forest,77.7,{83A0BCDC-5269-4C5E-9397-ABDD6E05A008},Yes,1,FGS-Pine Log Forest - TO 4 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,FGS-TRAPP POND INTERMEDIATE,164.2,{C223E901-56DB-4E0E-B98F-36D01A9BF6A5},Yes,1,FGS-TRAPP POND INTERMEDIATE - TO 2 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,FGS-TRAPP POND SURFICIAL,167.5,{AB3E830C-F69C-40B8-876C-1C951D458332},Yes,1,FGS-TRAPP POND SURFICIAL - TO 2 inch PVC casing
-Ch Square on bridge,Ch Square on bridge,Fisher Creek Near Spring Hill SR 373,55.28,{EA653BE3-BA69-4BE7-B8BD-6BDCC6A3FA0E},Yes,1,Fisher Creek Near Spring Hill SR 373 - Ch Square on bridge
-TO 2 inch PVC casing,TO 2 inch PVC casing,FRUS Piezometer #3AR,147.53,{A69102EA-E55B-4766-990B-E042B9BE7556},Yes,1,FRUS Piezometer #3AR - TO 2 inch PVC casing
-Metal pipe below conduit- under water,Metal pipe below conduit- under water,Garnier creek @ Blue Barnes Rd.,10,{964C9712-F86C-4046-8CBE-13583DB214EB},Yes,1,Garnier creek @ Blue Barnes Rd. - Metal pipe below conduit- under water
-TO 4 inch PVC casing,TO 4 inch PVC casing,George'S 40,107.49,{0D5B5D6A-712E-49D6-9879-58FC32DDFEDE},Yes,1,George'S 40 - TO 4 inch PVC casing
-TO 2 inch threaded PVC casing,TO 2 inch threaded PVC casing,Green Point Intermediate,19.24,{BF25052E-620D-4969-BBA5-7E59EAFB07F6},Yes,1,Green Point Intermediate - TO 2 inch threaded PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Green Point Shallow,20,{884D3556-2D62-4FB9-A6C2-1889519A5A28},Yes,1,Green Point Shallow - TO 2 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-12F (Riversprings Ms),22.46,{BCE51B02-5EA4-4CFB-A354-8CB6AEB02D7F},Yes,1,GW-12F (Riversprings Ms) - TO 4 inch PVC casing
-TO 1 inch PVC casing,TO 1 inch PVC casing,GW-2FLZ (Ft Braden),169.87,{7EA3A54E-5967-432C-9C1D-84DFEF9F5023},Yes,1,GW-2FLZ (Ft Braden) - TO 1 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-2F-UZ (Ft Braden),169.8,{B4A82E83-84F3-4457-BEBB-414810A257B1},Yes,1,GW-2F-UZ (Ft Braden) - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-2S (Ft Braden),169.61,{E025E407-FC6D-407D-9F01-E0856EEE9ABF},Yes,1,GW-2S (Ft Braden) - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-3F Deep (ANF FR-305),106.44,{8BAE4757-5EB9-48FD-9420-EAD850837B08},Yes,1,GW-3F Deep (ANF FR-305) - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-3F-UZ (ANF FR-305),106.65,{2A6C8AF7-3C9E-4009-85AD-AF725403858B},Yes,1,GW-3F-UZ (ANF FR-305) - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-3S (ANF FR-305),106.94,{D687ACCC-2DC3-481D-95D3-26C4E406A000},Yes,1,GW-3S (ANF FR-305) - TO 4 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,GW-4F Deep (Hwy27 Dot),60.82,{43BC6A6B-B0E8-431E-BDC3-D3F17E3F247A},Yes,1,GW-4F Deep (Hwy27 Dot) - TO 2 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,GW-4F Shallow (Hwy27 DOT),60.78,{187E62BF-F951-42C6-941F-5B72C6B5A4B3},Yes,1,GW-4F Shallow (Hwy27 DOT) - TO 2 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-5F (Leon County VFD),160.35,{31AEE6F6-CF84-4EBF-9A27-07641A690846},Yes,1,GW-5F (Leon County VFD) - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-5S (Leon County VFD),160.56,{57D53085-7A40-458D-8605-40B90938D82D},Yes,1,GW-5S (Leon County VFD) - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-6F (Micc Greenway),166.91,{F90DEA22-1FAB-4F58-AEBD-0272369FDD15},Yes,1,GW-6F (Micc Greenway) - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-6S (Micc Greenway),166.71,{7FC87827-8331-4664-8BDE-33409215FF2C},Yes,1,GW-6S (Micc Greenway) - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,GW-7F (Leon CR-59),115.65,{2B4968B4-1CFD-4064-AC03-A42E8E0F5EA0},Yes,1,GW-7F (Leon CR-59) - TO 4 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,GW-7S (Leon CR-59),113.4,{99DCEDFF-8880-46A0-AD56-1A97B2519074},Yes,1,GW-7S (Leon CR-59) - TO 2 inch PVC casing
-TO casing,TO casing,HQ Floridan,203.25,{506103C2-9F2E-45BA-B882-9EB01343C835},Yes,1,HQ Floridan - TO casing
-TO 3 inch PVC casing,TO 3 inch PVC casing,HQ Surficial,201.87,{B6DC99C8-F132-4111-9F2D-36F7ECAEC053},Yes,1,HQ Surficial - TO 3 inch PVC casing
-Top of lock rim,Top of lock rim,Hwy 71 N of Malone,145.98,{ACC1B296-3D3B-4BD7-B6F7-7196DCC846A2},Yes,1,Hwy 71 N of Malone - Top of lock rim
-TO 4 inch steel casing,TO 4 inch steel casing,International Paper @ Cypress,167.31,{E042BE63-5460-400F-9EA3-F50449BD676F},Yes,1,International Paper @ Cypress - TO 4 inch steel casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Jackson Blue #1-Claiborne,124.09,{F3F24EE3-4583-4678-8ACF-3D3E4552E27D},Yes,1,Jackson Blue #1-Claiborne - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Jackson Blue #2-Floridan,123.74,{81A61305-2BE0-4C05-9479-5031B2063C43},Yes,1,Jackson Blue #2-Floridan - TO 4 inch PVC casing
-Ch Square on North wing wall,Ch Square on North wing wall,Lake Iamonia Outfall,103.31,{C54B454F-9307-40A1-B335-C2A7B2DEEC24},Yes,1,Lake Iamonia Outfall - Ch Square on North wing wall
-Staff on platform,Staff on platform,Lake Jackson @ Miller Landing,76,{0B00D9F6-1074-4EA4-9B35-BF7C10B2A055},Yes,1,Lake Jackson @ Miller Landing - Staff on platform
-Ch square,Ch square,Lake Jackson Retention Pond,101,{45CE12E4-3EF7-4C6C-AB94-873408058B9E},Yes,1,Lake Jackson Retention Pond - Ch square
-2nd 1.75 inch pipe from station,2nd 1.75 inch pipe from station,Lake Kanturk at Clifden Dr,72.15,{4A99976B-519B-4528-9949-3005CBBE2FFC},Yes,1,Lake Kanturk at Clifden Dr - 2nd 1.75 inch pipe from station
-1st 1.75 inch pipe from station,1st 1.75 inch pipe from station,Lake Kanturk at Clifden Dr,74.14,{2467A78A-9804-4496-A4F0-A606C9C53EDE},Yes,2,Lake Kanturk at Clifden Dr - 1st 1.75 inch pipe from station
-Ch Square on downstream headwall,Ch Square on downstream headwall,Lake Kanturk Outfall (11301 / S618),81.82,{347FB5E0-D9BA-48D1-A62E-0173B1A62CC5},Yes,1,Lake Kanturk Outfall (11301 / S618) - Ch Square on downstream headwall
-2nd pipe from enclosure,2nd pipe from enclosure,Lake Killarny at McLaughlin Dr,74.21,{07AE3529-6E9C-4B1D-8829-6CE80BD0768C},Yes,1,Lake Killarny at McLaughlin Dr - 2nd pipe from enclosure
-1.25 inch pipe- Right of transducer,1.25 inch pipe- Right of transducer,Lake Killarny at McLaughlin Dr,72.68,{DDA679BD-7FB3-4ABB-A080-AC3C1011DC55},Yes,2,Lake Killarny at McLaughlin Dr - 1.25 inch pipe- Right of transducer
-1st pipe from enclosure,1st pipe from enclosure,Lake Killarny at McLaughlin Dr,76.25,{8434824D-3ECD-4AC8-A4FB-E969235D11C1},Yes,3,Lake Killarny at McLaughlin Dr - 1st pipe from enclosure
-Ch Square on weir,Ch Square on weir,Lake Kinsale Outfall,74.71,{4D2AFBE4-D4E9-4CDB-9D9F-DB0FB0546C11},Yes,1,Lake Kinsale Outfall - Ch Square on weir
-Ch Square in top of culvert headwall,Ch Square in top of culvert headwall,Lake Kinsale Outfall,80.55,{7A7E7F27-4C6D-49D2-9605-C71473642438},Yes,2,Lake Kinsale Outfall - Ch Square in top of culvert headwall
-Ch Square on bridge,Ch Square on bridge,Lake Lafayette Outfall,47.55,{1ED5C8BC-D82C-4610-A378-699484AFC27E},Yes,1,Lake Lafayette Outfall - Ch Square on bridge
-Ch Square on rail left of station,Ch Square on rail left of station,Lake Miccosukee Outfall,88.74,{2D069520-0996-4C48-B36B-578A494839E1},Yes,1,Lake Miccosukee Outfall - Ch Square on rail left of station
-Staff,Staff,Lake Miccosukee Outfall,79.26,{9FA8A712-CC6F-432B-BE08-C64D5B6B0009},Yes,2,Lake Miccosukee Outfall - Staff
-Ch Square right of transducer,Ch Square right of transducer,Leon HS Stormwater Inlet,108.09,{EE7E8438-AA52-444E-B668-C75462FAF63F},Yes,1,Leon HS Stormwater Inlet - Ch Square right of transducer
-Ch Square SW corner of South headwall,Ch Square SW corner of South headwall,Leon HS Stormwater Inlet,109.98,{1FB8EB06-E890-4AAB-AFA4-3C69E5207A98},Yes,2,Leon HS Stormwater Inlet - Ch Square SW corner of South headwall
-Staff,Staff,Little Bear Creek @ 388,0,{7A7ADDB5-4DD4-4538-BD98-7A7B077F2137},Yes,1,Little Bear Creek @ 388 - Staff
-Hole in top of 4 inch steel casing,Hole in top of 4 inch steel casing,Liza Jackson,7.82,{6D6BF276-D19E-4DA7-8930-0E542EE31AE3},Yes,1,Liza Jackson - Hole in top of 4 inch steel casing
-TO protective casing,TO protective casing,McCulloch,8.92,{397CC069-CD00-4732-9B60-3419EDC8A86A},Yes,1,McCulloch - TO protective casing
-TO 4 inch threaded PVC casing,TO 4 inch threaded PVC casing,McCulloch,18.95,{17D80ACF-25FA-48BE-8AAF-07A6CD84DA4A},Yes,1,McCulloch - TO 4 inch threaded PVC casing
-Ch Square- top of center culvert,Ch Square- top of center culvert,NE DD @ Centerville & Blairstone,75.44,{D46ACDD2-69FA-4EBD-BC22-CADA02FDBE6D},Yes,1,NE DD @ Centerville & Blairstone - Ch Square- top of center culvert
-Chiseled V on West culvert,Chiseled V on West culvert,NE DD @ Centerville & Blairstone,69.54,{5163FE46-47F4-4361-BE1E-505A09664910},Yes,2,NE DD @ Centerville & Blairstone - Chiseled V on West culvert
-Ch Square- East 5ft of station,Ch Square- East 5ft of station,NE DD @ Mahan,56.02,{6BB02742-4FE6-4E95-8626-B84B7A7E5EB2},Yes,1,NE DD @ Mahan - Ch Square- East 5ft of station
-Ch Square on bridge railing,Ch Square on bridge railing,New River @ Burnt Bridge Rd (Fr3),14.56,{163E0FEB-9A36-446D-9F26-CB4FCAA13FF4},Yes,1,New River @ Burnt Bridge Rd (Fr3) - Ch Square on bridge railing
-Staff,Staff,New River @ Burnt Bridge Rd (Fr3),0,{376BCF99-6B09-4E31-A2E9-79CEE5E4D9D5},Yes,2,New River @ Burnt Bridge Rd (Fr3) - Staff
-Wooden Ch Square,Wooden Ch Square,New River @ Burnt Bridge Rd (Fr3),11.78,{72814B1E-0D35-44E6-AED7-8B5D74159455},Yes,3,New River @ Burnt Bridge Rd (Fr3) - Wooden Ch Square
-TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #1,18.85,{9B4130CE-590C-420B-8B34-DCF49C0C10DB},Yes,1,Nitrate #1 - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #2,18.58,{6DFB8D0D-0F5B-485D-95D6-B4CD79C542E0},Yes,1,Nitrate #2 - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #3,14.43,{17AD0581-2A7D-4FBE-BFAC-336B387CB79F},Yes,1,Nitrate #3 - TO 4 inch PVC casing
-TO well,TO well,Nitrate #4,14.8,{4B3B0BF5-F3A4-47ED-873F-C33096E58122},Yes,1,Nitrate #4 - TO well
-TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #5,30.85,{6299CE01-1D24-496A-B40A-C72AB2D140AB},Yes,1,Nitrate #5 - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #6,29.66,{484F1065-854F-40A2-AE9E-B61AD69D8F0B},Yes,1,Nitrate #6 - TO 4 inch PVC casing
-TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #1 IAS Monitor,93.06,{7C37AB61-855F-4F64-B9F9-37B2636276B4},Yes,1,NW Bay #1 IAS Monitor - TO hole in recorder mounting plate
-TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #1 SAS Monitor,93.39,{0EED18C7-1FD6-4650-B0F0-568A5D2EA90A},Yes,1,NW Bay #1 SAS Monitor - TO hole in recorder mounting plate
-TO 6 inch PVC casing,TO 6 inch PVC casing,NW Bay #1 UFA Monitor,85.07,{3DBB4C12-F8C6-404D-8F40-010AA5D3A153},Yes,1,NW Bay #1 UFA Monitor - TO 6 inch PVC casing
-TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #3 IAS Monitor,93.36,{13EC3F0A-FFA2-4202-9384-A5EEF25BD1E6},Yes,1,NW Bay #3 IAS Monitor - TO hole in recorder mounting plate
-TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #3 SAS Monitor,93.81,{874512EE-EF86-49AA-9165-6079312FA6C8},Yes,1,NW Bay #3 SAS Monitor - TO hole in recorder mounting plate
-TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #3 UFA Monitor,93.65,{6B0E8384-2E69-4963-97ED-07F5753F3767},Yes,1,NW Bay #3 UFA Monitor - TO hole in recorder mounting plate
-TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW BAY CTY - SITE #2 IAS MONITOR,83.92,{8D720B8A-F089-4AB1-81DB-F1572580734B},Yes,1,NW BAY CTY - SITE #2 IAS MONITOR - TO hole in recorder mounting plate
-TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW BAY CTY - SITE #2 SAS MONITOR,84.04,{6C9641B4-B2C9-4A00-AA71-AD8704D8D3C7},Yes,1,NW BAY CTY - SITE #2 SAS MONITOR - TO hole in recorder mounting plate
-TO 6 inch PVC casing,TO 6 inch PVC casing,NW BAY CTY - SITE #2 UFA MONITOR/S718,85,{A3FBED99-6312-42CA-BA07-C03B9441EA87},Yes,1,NW BAY CTY - SITE #2 UFA MONITOR/S718 - TO 6 inch PVC casing
-TO casing below concrete slab,TO casing below concrete slab,NWFWMD 9 Mile Rd Deep,117.22,{11A14080-B3E5-46C0-A0C8-515A91F2F30F},Yes,1,NWFWMD 9 Mile Rd Deep - TO casing below concrete slab
-TO casing below concrete slab,TO casing below concrete slab,NWFWMD 9 Mile Rd Int,117.39,{97A7C52A-0418-4B52-8E70-2D5CF41FC546},Yes,1,NWFWMD 9 Mile Rd Int - TO casing below concrete slab
-TO casing below concrete slab,TO casing below concrete slab,NWFWMD 9 Mile Rd SZ,117.14,{5C374FC8-7589-459A-9F89-3DF4570A37F6},Yes,1,NWFWMD 9 Mile Rd SZ - TO casing below concrete slab
-TO 4 inch PVC casing,TO 4 inch PVC casing,NWFWMD Section 20,138.38,{15002547-8868-440C-8D2D-819BC5E0FC29},Yes,1,NWFWMD Section 20 - TO 4 inch PVC casing
-TO PVC casing,TO PVC casing,NWFWMD SR-1D,249.13,{755D48ED-F87A-4A2D-BC0F-B4D124FACA91},Yes,1,NWFWMD SR-1D - TO PVC casing
-TO PVC casing,TO PVC casing,NWFWMD SR-1S,248.98,{592252F6-8FAB-46FB-8506-FFE1AF6BC994},Yes,1,NWFWMD SR-1S - TO PVC casing
-TO PVC casing,TO PVC casing,NWFWMD SR-2D,272.04,{B49EB738-395E-469D-8AA5-4D7AB22C9443},Yes,1,NWFWMD SR-2D - TO PVC casing
-TO PVC casing,TO PVC casing,NWFWMD SR-3D,292.74,{3C320074-8A02-4A6F-94FF-3941155B4978},Yes,1,NWFWMD SR-3D - TO PVC casing
-TO PVC casing,TO PVC casing,NWFWMD SR-3S,292.76,{620C88AD-BC28-4917-804B-3211E5470EAB},Yes,1,NWFWMD SR-3S - TO PVC casing
-TO PVC casing,TO PVC casing,NWFWMD SR-4D,255.69,{37CF2091-29EE-4D25-A137-840351A73C29},Yes,1,NWFWMD SR-4D - TO PVC casing
-TO PVC casing,TO PVC casing,NWFWMD SR-5D,173.96,{C6D12C07-124A-44E1-9C76-B06F338D8FCB},Yes,1,NWFWMD SR-5D - TO PVC casing
-TO 4 inch steel casing,TO 4 inch steel casing,NWFWMD-Power Line,104.28,{4E320ADD-A374-40F0-BE77-87263581B429},Yes,1,NWFWMD-Power Line - TO 4 inch steel casing
-Alum support arm for TB,Alum support arm for TB,Ochlockonee R. @ US319,14.4,{D7C0DDB2-45CC-4CD8-A1DB-D2D18D05077C},Yes,1,Ochlockonee R. @ US319 - Alum support arm for TB
-Top of enclosure floor,Top of enclosure floor,Okaloosa School Board,18.27,{0EE9A080-6086-42EF-8ACE-9A9825989BE5},Yes,1,Okaloosa School Board - Top of enclosure floor
-TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Floridan-LZ,110.03,{EE50082F-E263-4990-A8D0-5A51B6AEEDBB},Yes,1,Otter Camp Floridan-LZ - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Floridan-SZ,109.73,{88FD6F5E-BE8A-4337-95BD-79B3697892A0},Yes,1,Otter Camp Floridan-SZ - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Int. Limestone,109.39,{4EB797EE-33E4-47C7-AD41-9BBCA372D12D},Yes,1,Otter Camp Int. Limestone - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Int. Sand,108.51,{12A08613-0691-4EB8-964A-A981ACD4EA93},Yes,1,Otter Camp Int. Sand - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Surficial,108.74,{5EA2509C-0FAD-4DD5-B49A-94BB5AFC84CF},Yes,1,Otter Camp Surficial - TO 4 inch PVC casing
-Staff,Staff,Piney Lake Staff,54.21,{4BA7FD54-08EA-4288-9FE0-2A3BBCD15901},Yes,1,Piney Lake Staff - Staff
-1 3/4 inch galv pipe,1 3/4 inch galv pipe,Piney Lake Staff,55.39,{951117FF-E47C-4EC0-A9BD-A7DFB6051D07},Yes,2,Piney Lake Staff - 1 3/4 inch galv pipe
-Top of Staff Gage,Top of Staff Gage,Piney Lake Staff,60.87,{D814377B-3BE0-4223-A829-7057478C3FE0},Yes,3,Piney Lake Staff - Top of Staff Gage
-Top of Fence Post,Top of Fence Post,Piney Lake Staff,57.82,{E510AC1F-BD5F-4D66-BE01-F092722D2709},Yes,4,Piney Lake Staff - Top of Fence Post
-TO PVC above steel piping and sanitary seal,TO PVC above steel piping and sanitary seal,Pleasant Valley Church,2,{8FEDD0C6-DC3F-41BA-892D-9E783A89A0C4},Yes,1,Pleasant Valley Church - TO PVC above steel piping and sanitary seal
-Top of Spigot,Top of Spigot,Point Washington,3.8,{EEFF8967-F664-4EBE-BC5F-BD46E938703E},Yes,1,Point Washington - Top of Spigot
-TO 2 inch PVC casing,TO 2 inch PVC casing,Port St Joe Deep Int,19.1,{E8C5FA9A-80C4-49E0-85EE-4F73962B859D},Yes,1,Port St Joe Deep Int - TO 2 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Port St Joe Med Shallow,19.6,{7CF67182-41C6-4F6C-8ED6-BC5C7D7E29FA},Yes,1,Port St Joe Med Shallow - TO 2 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Port St Joe Shallow Int,19.05,{92475DCF-7774-4905-89C1-93D51FEA435B},Yes,1,Port St Joe Shallow Int - TO 4 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Port St Joe Shallow Int #2,19.25,{1A00F56B-AFD5-4495-AD81-E561651B7CCD},Yes,1,Port St Joe Shallow Int #2 - TO 2 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Port St Joe Surficial,19.89,{7983627F-437F-4AA7-99EF-431DE039D913},Yes,1,Port St Joe Surficial - TO 2 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Port St. Joe Floridan,18.75,{E795A3DA-99ED-4F75-84B2-2468673DF582},Yes,1,Port St. Joe Floridan - TO 4 inch PVC casing
-TO 4 inch PVC casing,TO 4 inch PVC casing,Porter Pond East,138.84,{B13D7BDF-E541-4185-AA26-F16DFB9629B1},Yes,1,Porter Pond East - TO 4 inch PVC casing
-Staff,Staff,Powell Lake - Camp Helen,0,{CEC83F6F-7C83-4A49-87B0-E7BF3616FBF5},Yes,1,Powell Lake - Camp Helen - Staff
-Top of 6 inch PVC casing,Top of 6 inch PVC casing,Pt. Wash. Floridan APT,43.73,{3AD5BAB3-F5D2-47AE-B46A-6A00E2A8A75B},Yes,1,Pt. Wash. Floridan APT - Top of 6 inch PVC casing
-Staff on southern culvert wall,Staff on southern culvert wall,Quincy Creek @ Sr 267,10,{01E4B1F5-DD70-433B-AA45-DA8EACB88CDE},Yes,1,Quincy Creek @ Sr 267 - Staff on southern culvert wall
-Ch Square,Ch Square,Regional Stormwater Facility,54.15,{7829D3A4-6C71-423A-A2AD-E5D81DD3F423},Yes,1,Regional Stormwater Facility - Ch Square
-Staff,Staff,River Lake - Washington County,60.17,{12811BFC-A18E-45FC-B832-BC0A60F78A6D},Yes,1,River Lake - Washington County - Staff
-1 1/4 inch galv pipe,1 1/4 inch galv pipe,River Lake - Washington County,59.9,{6D67DD89-F506-4AE2-A8FE-7A710D03ED3A},Yes,2,River Lake - Washington County - 1 1/4 inch galv pipe
-TO PVC casing,TO PVC casing,RU Cedar Street,188.87,{63E615FE-F36E-47E3-9CCA-33B4605FD762},Yes,1,RU Cedar Street - TO PVC casing
-Ch Square on bridge handrail,Ch Square on bridge handrail,SALLY WARD SPRING RUN,13.05,{C3D7B3E5-52EE-46A6-8F72-E254E56C1D50},Yes,1,SALLY WARD SPRING RUN - Ch Square on bridge handrail
-TO 2 inch PVC casing,TO 2 inch PVC casing,Sand & Gravel MW-5S,219.1,{BB67A2F7-3DD0-4522-8922-A78F40F80C70},Yes,1,Sand & Gravel MW-5S - TO 2 inch PVC casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Sand & Gravel NW-5D,218.94,{84F8C5BC-DC97-4565-9361-E78BB738F2A6},Yes,1,Sand & Gravel NW-5D - TO 2 inch PVC casing
-TO 10 inch protective steel casing,TO 10 inch protective steel casing,Seagrove Deep,37.8,{2AF68890-2380-4C77-B136-B053A2072728},Yes,1,Seagrove Deep - TO 10 inch protective steel casing
-TO 8 inch protective steel casing,TO 8 inch protective steel casing,Seagrove Shallow Floridan,36.81,{09B204AB-4E88-4AE6-ADF5-7EAAA68A3719},Yes,1,Seagrove Shallow Floridan - TO 8 inch protective steel casing
-1.75 inch pipe- Right of transducer pipe,1.75 inch pipe- Right of transducer pipe,Southwood SW Pond SB111B,33.51,{6BA9D964-4D01-4BC0-A40F-A9190371BBF3},Yes,1,Southwood SW Pond SB111B - 1.75 inch pipe- Right of transducer pipe
-Staff,Staff,Southwood SW Pond WD005,32.04,{659AFBDF-68B5-465E-9987-D4E36CEE2281},Yes,1,Southwood SW Pond WD005 - Staff
-Wooden stake flush with bed,Wooden stake flush with bed,Southwood SW Pond WD005,32,{A0D98565-7959-4A1C-8045-9317BF9F81C0},Yes,2,Southwood SW Pond WD005 - Wooden stake flush with bed
-TO 12 inch steel casing,TO 12 inch steel casing,ST MARKS NAT WILDLIFE REFGURE - FLORIDAN MONITOR-68m,25.98,{04F1E909-7C51-4CC4-B249-C7E065C4050C},Yes,1,ST MARKS NAT WILDLIFE REFGURE - FLORIDAN MONITOR-68m - TO 12 inch steel casing
-Staff below bridge,Staff below bridge,Still Creek,50.98,{4AEFD5E8-D2F3-4F72-B13A-4796520279E7},Yes,1,Still Creek - Staff below bridge
-TO sanitary seal,TO sanitary seal,SWU - FAF #47,151.04,{06093E7C-9E12-446F-B188-1ABDBD85131C},Yes,1,SWU - FAF #47 - TO sanitary seal
-Top of 1 inch galvanized pipe nipple,Top of 1 inch galvanized pipe nipple,Tall Timbers Research,200,{483DB4E4-67DC-4B20-B3E7-C21D5B7A3F12},Yes,1,Tall Timbers Research - Top of 1 inch galvanized pipe nipple
-TO 12 inch protective casing,TO 12 inch protective casing,Tates Hell SF TH-2 Tractor Rd,25.04,{9EAA3479-4CEC-4742-8AD6-95DA5345EF06},Yes,1,Tates Hell SF TH-2 Tractor Rd - TO 12 inch protective casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Tates Hell SF THS-2 Tractor Rd Shallow,24.47,{CFE76DC8-55B7-44B0-A5FB-66EA91B9EB49},Yes,1,Tates Hell SF THS-2 Tractor Rd Shallow - TO 2 inch PVC casing
-TO 4 inch steel casing,TO 4 inch steel casing,Tom Brown Test,135.65,{93059E9C-57DB-4602-9A36-C03CD5B244DF},Yes,1,Tom Brown Test - TO 4 inch steel casing
-TO 4 inch steel casing,TO 4 inch steel casing,Trapp Pond,168.7,{DE905034-C051-4471-8C06-490252FE1499},Yes,1,Trapp Pond - TO 4 inch steel casing
-Staff,Staff,UPPER ST. MARKS SWALLET,10,{C764ABB9-4E76-45DE-A8B5-B9442309F7DA},Yes,1,UPPER ST. MARKS SWALLET - Staff
-Top of nail in tree upstream of station,Top of nail in tree upstream of station,UPPER ST. MARKS SWALLET,14.87,{B89994CB-CCAB-4D1B-91BD-725C0E88667B},Yes,2,UPPER ST. MARKS SWALLET - Top of nail in tree upstream of station
-TO 4 inch coupling on 4 inch casing,TO 4 inch coupling on 4 inch casing,USFS Porter Lake,23.07,{27E28D64-0794-4E70-B04A-B7BC0B89C7CA},Yes,1,USFS Porter Lake - TO 4 inch coupling on 4 inch casing
-TO 6 inch steel casing- highest southside point,TO 6 inch steel casing- highest southside point,USGS Lake Jackson Floridan,124.12,{2AB1C2A7-304F-4C8D-B671-28DE45C1AD32},Yes,1,USGS Lake Jackson Floridan - TO 6 inch steel casing- highest southside point
-TO 6 inch steel casing,TO 6 inch steel casing,USGS Lake Jackson Intermediate,124.14,{14E2E21D-45D7-438F-B092-394580755DB0},Yes,1,USGS Lake Jackson Intermediate - TO 6 inch steel casing
-TO 4 inch steel casing,TO 4 inch steel casing,USGS-422A Near Greenhead - Floridan,70.01,{1752C0C3-426E-4FB3-A9C4-BEB392AA468D},Yes,1,USGS-422A Near Greenhead - Floridan - TO 4 inch steel casing
-TO casing,TO casing,USGS-422B Near Greenhead,70.28,{00E51ED9-7094-45EF-A37E-6D33D141FEA0},Yes,1,USGS-422B Near Greenhead - TO casing
-TO steel casing,TO steel casing,USGS-Lester Lewis,9.71,{4A28C710-243F-45CD-82C3-C4BE9019FA03},Yes,1,USGS-Lester Lewis - TO steel casing
-TO base of recorder box,TO base of recorder box,USGS-Olson Road,194.73,{24DFA0CC-8328-4DEE-9208-397E7DA4D54B},Yes,1,USGS-Olson Road - TO base of recorder box
-Staff inside of East culvert,Staff inside of East culvert,W Drainage Ditch @ W Tenn,1.91,{B91DDC9B-5530-4D3F-8668-E9A45E1EDEE1},Yes,1,W Drainage Ditch @ W Tenn - Staff inside of East culvert
-TO 4 inch steel casing,TO 4 inch steel casing,Wakulla Correctional Institute #1,21.3,{00E9951E-3481-46CE-A203-687CDA120DA4},Yes,1,Wakulla Correctional Institute #1 - TO 4 inch steel casing
-TO sanitary seal,TO sanitary seal,Washington Co - Pine Ridge Dr #1,62.78,{8AD3C8C8-9FF6-4D17-8728-969D1253C448},Yes,1,Washington Co - Pine Ridge Dr #1 - TO sanitary seal
-TO sanitary seal,TO sanitary seal,Washington Co - Pine Ridge Dr #2,57.65,{2AB4FF71-2915-4CB4-A062-6E3D9B31362F},Yes,1,Washington Co - Pine Ridge Dr #2 - TO sanitary seal
-TO 2 inch PVC casing,TO 2 inch PVC casing,Weller Ave Deep MPZ,25.91,{1E035689-4ECB-48C6-90C3-F44F4986B920},Yes,1,Weller Ave Deep MPZ - TO 2 inch PVC casing
-TO 3 inch steel protective casing,TO 3 inch steel protective casing,Weller Ave MPZ,26.05,{E808E8C7-81BD-41AA-AA7E-BD8E37093A21},Yes,1,Weller Ave MPZ - TO 3 inch steel protective casing
-TO 2 inch PVC casing,TO 2 inch PVC casing,Weller Ave Shallow,26.23,{9C912B55-48D7-4608-B7E1-F0C58618D5AA},Yes,1,Weller Ave Shallow - TO 2 inch PVC casing
-Top of female adaptor,Top of female adaptor,West Hewett,20.56,{3992BAC3-A832-4265-B67A-BFF567185086},Yes,1,West Hewett - Top of female adaptor
-TO sanitary seal,TO sanitary seal,Zediker - Pine Ridge Dr,64.36,{3D4003BD-ABDC-485E-9E6C-C669DD5470A0},Yes,1,Zediker - Pine Ridge Dr - TO sanitary seal
+Staff,Staff,*** ECONFINA CREEK ABOVE GAINER***,10,{AE0A3D2B-5AF7-4C38-966D-3170ADC687A0},Yes,1,*** ECONFINA CREEK ABOVE GAINER*** - Staff
+High Water Nail in Tree,High Water Nail in Tree,*** ECONFINA CREEK ABOVE GAINER***,27.16,{165273F3-E48B-4937-BCF8-92C8E9206911},Yes,2,*** ECONFINA CREEK ABOVE GAINER*** - High Water Nail in Tree
+Top of Staff,Top of Staff,*** ECONFINA CREEK ABOVE GAINER***,19.7,{C8EDC800-E7B0-427C-B60F-8500DA810158},Yes,3,*** ECONFINA CREEK ABOVE GAINER*** - Top of Staff
+TO 4 inch PVC casing,TO 4 inch PVC casing,*** PITTMAN VISA WELL***,128.76,{A7DFFC35-C41B-456E-8C57-4E74E96A31A8},Yes,1,*** PITTMAN VISA WELL*** - TO 4 inch PVC casing
+Top of lock rim,Top of lock rim,***2 EGG AMBIENT #3***,123.19,{C0B31848-A536-443E-80A7-32A2AF630778},Yes,1,***2 EGG AMBIENT #3*** - Top of lock rim
+Staff,Staff,***ECONFINA CREEK @ SR20***,0,{4A89AE60-8550-4A4D-BA9F-DABC7CEF2623},Yes,1,***ECONFINA CREEK @ SR20*** - Staff
+Ch Square- left of station box,Ch Square- left of station box,***ECONFINA CREEK @ SR20***,17.51,{2CEB26F0-B592-4B6E-A910-7D6CDA7F905C},Yes,2,***ECONFINA CREEK @ SR20*** - Ch Square- left of station box
+Staff,Staff,***ECONFINA CREEK AT WALSINGHAM BRIDGE***,0,{326C2A4E-E274-4A1C-9056-3C8DCF195027},Yes,1,***ECONFINA CREEK AT WALSINGHAM BRIDGE*** - Staff
+Staff,Staff,***ECONFINA CREEK BELOW GAINER***,10,{85E5F521-6F78-44CD-B286-084EBDF6F0C3},Yes,1,***ECONFINA CREEK BELOW GAINER*** - Staff
+1st 2 inch galvanized pipe,1st 2 inch galvanized pipe,***ECONFINA CREEK BELOW GAINER***,14.95,{B8D8542A-3E3C-4772-A22E-9CA19239F76C},Yes,2,***ECONFINA CREEK BELOW GAINER*** - 1st 2 inch galvanized pipe
+2nd 2 inch galvanized pipe,2nd 2 inch galvanized pipe,***ECONFINA CREEK BELOW GAINER***,12.95,{89E9B229-F9D8-419B-BA63-D44A313B6142},Yes,3,***ECONFINA CREEK BELOW GAINER*** - 2nd 2 inch galvanized pipe
+High Water Nail in Tree,High Water Nail in Tree,***ECONFINA CREEK BELOW GAINER***,26.94,{5F59C334-7D77-49BE-9666-62326B268AA3},Yes,4,***ECONFINA CREEK BELOW GAINER*** - High Water Nail in Tree
+Top of Staff,Top of Staff,***ECONFINA CREEK BELOW GAINER***,19.51,{E49D62B3-0FB5-4D01-A79A-D6DD29707E6E},Yes,5,***ECONFINA CREEK BELOW GAINER*** - Top of Staff
+Ch square on bridge,Ch square on bridge,***INDIAN SPRING RUN @ SR61***,13.33,{2869F4F4-F0EC-4D5D-B6D9-FDF4A6A51EDD},Yes,1,***INDIAN SPRING RUN @ SR61*** - Ch square on bridge
+TO 12 inch steel casing,TO 12 inch steel casing,***ST MARKS NAT WILDLIFE REFUGE - FLORIDAN MONITOR-77m***,25.98,{A300B9DF-3C01-4F2A-B52A-186AA04955AE},Yes,1,***ST MARKS NAT WILDLIFE REFUGE - FLORIDAN MONITOR-77m*** - TO 12 inch steel casing
+TO 8 inch protective casing,TO 8 inch protective casing,***WAKULLA CONDUIT WELL@WEST OF HWY 61***,24.68,{72207114-00B1-46C2-8FA3-8C25D9A580CB},Yes,1,***WAKULLA CONDUIT WELL@WEST OF HWY 61*** - TO 8 inch protective casing
+TO 6 inch PVC casing,TO 6 inch PVC casing,A-2 (Lower Floridan Monitor),55.59,{C85773BE-F7F2-4B80-9B83-FB9C12CAF4B4},Yes,1,A-2 (Lower Floridan Monitor) - TO 6 inch PVC casing
+TO 12 inch steel protective casing,TO 12 inch steel protective casing,A-2 (Lower Floridan Monitor),55.77,{59ED8E96-CB25-480B-A28F-F4FF21648C73},Yes,2,A-2 (Lower Floridan Monitor) - TO 12 inch steel protective casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,A-2B (Surficial Monitor),55.45,{CF900928-54D7-4FDE-A50E-73926948250C},Yes,1,A-2B (Surficial Monitor) - TO 4 inch PVC casing
+TO 10 inch aluminum protective casing,TO 10 inch aluminum protective casing,A-2B (Surficial Monitor),55.55,{0F9946A2-5E12-4E9E-B00C-11DF6DE52393},Yes,2,A-2B (Surficial Monitor) - TO 10 inch aluminum protective casing
+TO 6 inch PVC casing,TO 6 inch PVC casing,A-3 (Lower Floridan Monitor),54.07,{3068C660-79BC-4598-8286-8DE82737AB79},Yes,1,A-3 (Lower Floridan Monitor) - TO 6 inch PVC casing
+TO 12 inch steel protective casing,TO 12 inch steel protective casing,A-3 (Lower Floridan Monitor),54.4,{E68D4067-D5C6-4ED2-8991-760628B0E3BB},Yes,2,A-3 (Lower Floridan Monitor) - TO 12 inch steel protective casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,A-3B (Surficial Monitor),54.36,{9F6B2EDD-3846-4C87-8066-D7A53EF87078},Yes,1,A-3B (Surficial Monitor) - TO 4 inch PVC casing
+TO 10 inch square aluminum protective casing,TO 10 inch square aluminum protective casing,A-3B (Surficial Monitor),54.65,{3CDF5A01-52D1-441F-AB06-1850D7C6C04A},Yes,2,A-3B (Surficial Monitor) - TO 10 inch square aluminum protective casing
+TO 6 inch PVC casing,TO 6 inch PVC casing,A-4 (Lower Floridan Monitor),21.97,{94A4788A-6402-4D31-95C7-FE426D398A1C},Yes,1,A-4 (Lower Floridan Monitor) - TO 6 inch PVC casing
+TO 12 inch steel protective casing,TO 12 inch steel protective casing,A-4 (Lower Floridan Monitor),22.56,{42A55533-9022-4E9A-9EAC-62ACC5523CDA},Yes,2,A-4 (Lower Floridan Monitor) - TO 12 inch steel protective casing
+TO 6 inch PVC casing,TO 6 inch PVC casing,A-4A (Upper Floridan Monitor),21.39,{C8C5F677-363E-4A0C-9BFB-8BB29ED86FC1},Yes,1,A-4A (Upper Floridan Monitor) - TO 6 inch PVC casing
+TO 12 inch steel protective casing,TO 12 inch steel protective casing,A-4A (Upper Floridan Monitor),21.65,{D401CC45-3B34-44F5-8D20-D1D8D8ACC2CD},Yes,2,A-4A (Upper Floridan Monitor) - TO 12 inch steel protective casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,A-4B (Surficial Monitor),22.24,{12AA86CB-688D-4721-AC26-54CA503CDDE5},Yes,1,A-4B (Surficial Monitor) - TO 4 inch PVC casing
+TO 6 inch square aluminum protective casing,TO 6 inch square aluminum protective casing,A-4B (Surficial Monitor),22.43,{4960131F-40AF-46AE-B1C0-2846CDF06591},Yes,2,A-4B (Surficial Monitor) - TO 6 inch square aluminum protective casing
+Alum angle,Alum angle,Alford Arm Trib @ Buck Lake,53.17,{0E816A44-3454-478E-A49E-8B081868CD20},Yes,1,Alford Arm Trib @ Buck Lake - Alum angle
+Aluminum angle on station,Aluminum angle on station,Alford Arm Trib @ Micc. Rd,63.54,{86EE740B-65F4-415F-88EE-B5EC08EDDB4D},Yes,1,Alford Arm Trib @ Micc. Rd - Aluminum angle on station
+Hose clamp on transducer pipe 8ft from junction LB,Hose clamp on transducer pipe 8ft from junction LB,Ames Sink,14.26,{42726307-00FA-42A4-986A-9AA0B03BD548},Yes,0,Ames Sink - Hose clamp on transducer pipe 8ft from junction LB
+1 inch steel pipe,1 inch steel pipe,Ames Sink,8.83,{EC4146EA-8D36-46B7-A279-2A30E27C76B4},Yes,1,Ames Sink - 1 inch steel pipe
+1st transducer anchor pipe from junction LB,1st transducer anchor pipe from junction LB,Ames Sink,12.62,{12C5FAE7-6884-4295-B304-9CDBB53A30A4},Yes,1,Ames Sink - 1st transducer anchor pipe from junction LB
+Metal disk 005 next to junction box,Metal disk 005 next to junction box,Ames Sink,16.56,{1E658CFD-3615-4631-A162-89412554B153},Yes,2,Ames Sink - Metal disk 005 next to junction box
+RR Spike in Antenna pole,RR Spike in Antenna pole,Ames Sink,24.78,{19619A50-E9E6-4F79-A70E-5D7F1DBF7A2A},Yes,3,Ames Sink - RR Spike in Antenna pole
+TO 6 inch PVC casing,TO 6 inch PVC casing,B-2 (Upper Floridan Monitor),34.29,{6E340834-8EB7-4DC4-9B2B-A1CA4A1C67CF},Yes,1,B-2 (Upper Floridan Monitor) - TO 6 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Baxter Sand Pit Visa,130.44,{4710BB15-C542-4EE7-A414-1D7B6B3CACEC},Yes,1,Baxter Sand Pit Visa - TO 4 inch PVC casing
+TO sanitary seal,TO sanitary seal,Bay Co - Harders Park,51.1,{462D852F-7E30-44F0-8C14-C6CDF7FC5018},Yes,1,Bay Co - Harders Park - TO sanitary seal
+Staff,Staff,Bear Creek @ US231,0,{369BC5D7-442B-4D88-B2DB-E54FC0D2B3D0},Yes,1,Bear Creek @ US231 - Staff
+TO 4 inch PVC casing,TO 4 inch PVC casing,Bike Trail / Nitrate Pot. Map,37.86,{A7E1622F-C77A-4C1A-BFDA-0D9FCFB70E9E},Yes,1,Bike Trail / Nitrate Pot. Map - TO 4 inch PVC casing
+Ch square on bridge,Ch square on bridge,Black Creek @ SR 267,38.47,{232EEB07-BAD6-403A-A2F0-617B66EBAB54},Yes,1,Black Creek @ SR 267 - Ch square on bridge
+TO 4 inch PVC casing,TO 4 inch PVC casing,Blountstown Floridan,84.75,{D5AFF6C1-1ADC-4DC8-A126-3F7E17EA0D4F},Yes,1,Blountstown Floridan - TO 4 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Blountstown Intermediate,84.66,{9D60B3F1-5828-4FFE-9BC1-43570E2C14A7},Yes,1,Blountstown Intermediate - TO 2 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Blountstown Surficial,84.4,{42D6C3E0-F835-46AB-95B5-A2113B5FDD0C},Yes,1,Blountstown Surficial - TO 2 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Bradford Brook Deep,47.11,{0ED555B3-80E9-46A2-B302-D5ACF17CCDA1},Yes,1,Bradford Brook Deep - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Bradford Brook Shallow,47.43,{1D49BF14-13B9-41DE-8F19-4B26063B3809},Yes,1,Bradford Brook Shallow - TO 4 inch PVC casing
+TO sanitary seal,TO sanitary seal,Brida - Casper Dr,108.4,{C13CDEB9-1111-4B9B-913D-C655BB1CE64F},Yes,1,Brida - Casper Dr - TO sanitary seal
+Metal pipe below conduit pipe- under water,Metal pipe below conduit pipe- under water,Burnt Grocery Creek,10,{85A0B3FD-9191-40BF-9773-EAB4EE30740D},Yes,1,Burnt Grocery Creek - Metal pipe below conduit pipe- under water
+TO 4 inch PVC casing,TO 4 inch PVC casing,C. DONAHUE DEEP / NITRATE POT. MAP,27.12,{15D07CC1-DED2-45CB-A5C6-BCC6595B252F},Yes,1,C. DONAHUE DEEP / NITRATE POT. MAP - TO 4 inch PVC casing
+TO 10 inch casing,TO 10 inch casing,Camp G. Johnston,33.63,{8425C6EB-B64B-471B-991C-75AC4392041D},Yes,1,Camp G. Johnston - TO 10 inch casing
+Ch Square,Ch Square,Central DD @ Lake Bradford Rd,58.05,{335CCC96-AF38-4E9C-AF2B-3D5369A73747},Yes,1,Central DD @ Lake Bradford Rd - Ch Square
+Angled bracket 6ft Right of station,Angled bracket 6ft Right of station,Central DD @ Orange Ave,44.02,{08E4D782-BAA5-4A55-8AAB-3498FA6FCCCD},Yes,1,Central DD @ Orange Ave - Angled bracket 6ft Right of station
+TO Sanitary Seal,TO Sanitary Seal,Charles Donahue,26.33,{9A209896-2978-497F-B7C8-E4662884ADC7},Yes,1,Charles Donahue - TO Sanitary Seal
+Alum plate,Alum plate,Chipola River @ SR71,51.39,{E097B79C-7A7D-428E-8C28-103E040A050D},Yes,1,Chipola River @ SR71 - Alum plate
+Ch square,Ch square,Chipola River @ SR71,51.47,{BCDFE8F9-90F7-4170-B289-7EDE2AAA8349},Yes,2,Chipola River @ SR71 - Ch square
+TO 4 inch PVC casing,TO 4 inch PVC casing,Chipola WMA #1,117.54,{F641A6E6-2BBB-476C-9DD8-B8D9229E701C},Yes,1,Chipola WMA #1 - TO 4 inch PVC casing
+TO sanitary seal,TO sanitary seal,Christy - Rolling Pines Rd,91.13,{05886980-F374-41F2-B80E-81D8206C5973},Yes,1,Christy - Rolling Pines Rd - TO sanitary seal
+TO casing,TO casing,Compass Lake Tower,303.5,{645012BB-B490-4FF1-8DC7-2DA7A7DEECF8},Yes,1,Compass Lake Tower - TO casing
+0.5 inch galv pipe,0.5 inch galv pipe,Cox Pond,49.23,{2ED353B0-7E01-4C22-8E4C-182EF9455471},Yes,1,Cox Pond - 0.5 inch galv pipe
+1.25 inch galv pipe,1.25 inch galv pipe,Cox Pond,53,{3856568F-1D8F-43FD-8CEF-39BA655D7EAE},Yes,2,Cox Pond - 1.25 inch galv pipe
+Short staff,Short staff,Cox Pond,52.86,{2E2EB11E-7945-455E-A989-DC0295DEB5B8},Yes,3,Cox Pond - Short staff
+Tall staff,Tall staff,Cox Pond,54.04,{C18B9DC1-722E-4BE1-A9F3-181C5C828BAA},Yes,4,Cox Pond - Tall staff
+Ch Square,Ch Square,Crooked River @ CR67,9.5,{77F4D6A0-8B29-469B-A69D-77C38C26C687},Yes,1,Crooked River @ CR67 - Ch Square
+TO 4 inch PVC casing,TO 4 inch PVC casing,Cypress Park #1-Floridan,137.84,{B28F264A-53E7-4524-B413-C9AED4193D2B},Yes,1,Cypress Park #1-Floridan - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Cypress Park #2-Surficial,137.93,{7CE6B3B2-DFB9-43FC-8E07-90EF2C0BA405},Yes,1,Cypress Park #2-Surficial - TO 4 inch PVC casing
+TO 4 inch steel casing,TO 4 inch steel casing,Ditty JC-3 (JK-30),155.76,{D982C370-8053-468B-ADB3-516ADB655768},Yes,1,Ditty JC-3 (JK-30) - TO 4 inch steel casing
+Temp Ref point is 0.40ft above LSD,Temp Ref point is 0.40ft above LSD,DWU #5 (503' - 747'),0.4,{AAB2FCF6-F58B-4597-BA3A-EA036F2D5901},Yes,1,DWU #5 (503' - 747') - Temp Ref point is 0.40ft above LSD
+Staff inside culvert,Staff inside culvert,E DD @ Adams,42.87,{16ED91F1-5124-4191-A99D-CFE7D8626401},Yes,1,E DD @ Adams - Staff inside culvert
+Chiseled Square on lower headwall,Chiseled Square on lower headwall,E DD @ Adams,52.03,{E9BBC445-8208-4D67-B74B-67D134900369},Yes,2,E DD @ Adams - Chiseled Square on lower headwall
+Top of galvanized threaded pipe vent coupler,Top of galvanized threaded pipe vent coupler,EAFB 6204 Floridan 96 CEG,136.57,{496A641E-3DB8-44A0-9136-E02BB5578D20},Yes,1,EAFB 6204 Floridan 96 CEG - Top of galvanized threaded pipe vent coupler
+Top of 6 inch threaded adaptor,Top of 6 inch threaded adaptor,EAFB Field #4 (Int.Sys),89.2,{76E1132D-F2BF-45E1-81DD-7A15F6A84197},Yes,1,EAFB Field #4 (Int.Sys) - Top of 6 inch threaded adaptor
+Top of 4 inch steel protective casing,Top of 4 inch steel protective casing,EAFB Field #4 (S&G),91.44,{7BEF77CD-C0F0-4589-91E6-E3EC2E0DF140},Yes,1,EAFB Field #4 (S&G) - Top of 4 inch steel protective casing
+Top of 5 inch flange,Top of 5 inch flange,EAFB Field #4 Well #2,91.72,{4E867C46-BF30-48B5-A11D-DE08E06380C7},Yes,1,EAFB Field #4 Well #2 - Top of 5 inch flange
+TO PVC coupler,TO PVC coupler,EAFB Floridan#4 (Lowermost Flrd),91.4,{D40BBD95-97DB-483A-A318-4C8B83B6EB3E},Yes,1,EAFB Floridan#4 (Lowermost Flrd) - TO PVC coupler
+Top of sanitary seal,Top of sanitary seal,EAFB Metts Tower,191.74,{F0D71F27-64E2-45BB-BCC0-B913D224AD73},Yes,1,EAFB Metts Tower - Top of sanitary seal
+Top of sanitary seal,Top of sanitary seal,EAFB NCO #71,11.2,{A3F032C9-7A66-4498-B381-9F4345581652},Yes,1,EAFB NCO #71 - Top of sanitary seal
+Top of sanitary seal,Top of sanitary seal,EAFB R52N Road #200,177.4,{E3C75C68-378F-4972-A3A8-E8C0BC061564},Yes,1,EAFB R52N Road #200 - Top of sanitary seal
+Top of PVC vent pipe,Top of PVC vent pipe,EAFB Range 63 #31,136.53,{DE6DABEB-5D68-40FC-BFFE-C34A9BC4203A},Yes,1,EAFB Range 63 #31 - Top of PVC vent pipe
+TO hole on edge on PVC cap,TO hole on edge on PVC cap,EAFB San Blas #107,8.85,{0B2C8217-D966-4D7A-B961-F343EB60A7F2},Yes,1,EAFB San Blas #107 - TO hole on edge on PVC cap
+Top of sanitary seal,Top of sanitary seal,EAFB Site C-62,216.18,{6393AA28-0810-4B2C-919B-3802A7AB7E5D},Yes,1,EAFB Site C-62 - Top of sanitary seal
+TO 4 inch steel casing,TO 4 inch steel casing,Eastpoint #3 Deep MW-50D,18.58,{2430053B-3CDC-4FB2-8221-27B608129AD1},Yes,1,Eastpoint #3 Deep MW-50D - TO 4 inch steel casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Eastpoint #3 Shallow Mw,18.3,{656CE329-3EC5-47A8-90C9-DDB2ABF740B9},Yes,1,Eastpoint #3 Shallow Mw - TO 2 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Eastpoint #4 Shallow Mw,18.09,{D04143BB-892A-4414-B387-D7365928112E},Yes,1,Eastpoint #4 Shallow Mw - TO 2 inch PVC casing
+TO threaded pipe,TO threaded pipe,Eastpoint WSD #4,20.48,{0E456B46-B182-4942-BAB1-B8A151CF33C3},Yes,1,Eastpoint WSD #4 - TO threaded pipe
+TO locking cap,TO locking cap,Eastpoint WWTF MW#6,27.95,{B9765072-FF64-4CE3-91EE-229736220E21},Yes,1,Eastpoint WWTF MW#6 - TO locking cap
+Staff,Staff,Econfina Creek @ Scott Rd,0,{8E6600DF-0D54-4D60-BAF8-C1670B6904C3},Yes,1,Econfina Creek @ Scott Rd - Staff
+TO sanitary seal,TO sanitary seal,Estiffanulga Work Center,58.25,{AED59CB0-804A-460E-AC25-6068A04A883A},Yes,1,Estiffanulga Work Center - TO sanitary seal
+Top of Extension,Top of Extension,FAF #65/AKA USGS 40,132.32,{8E33B1FA-8CBB-44FD-ADB1-19C1E1884539},Yes,1,FAF #65/AKA USGS 40 - Top of Extension
+Top of Extension,Top of Extension,FAF #79,117.41,{594506A9-C001-4C5D-9C06-315D390C1465},Yes,1,FAF #79 - Top of Extension
+Top of Extension,Top of Extension,FAF #93,169.37,{0683EFDD-2A7A-416B-9B8C-E79E4DE4F28E},Yes,1,FAF #93 - Top of Extension
+TO hole in middle of plywood cover,TO hole in middle of plywood cover,Fannin Airport,5.53,{06DFFA60-6B8A-4537-88B3-4F89B32B41C7},Yes,1,Fannin Airport - TO hole in middle of plywood cover
+TO 2 inch PVC casing,TO 2 inch PVC casing,FGS - Sullivan Sink #1,26.58,{F6952E95-9013-47ED-99B9-ED6A64CE5B9F},Yes,1,FGS - Sullivan Sink #1 - TO 2 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,FGS- Hq Intermediate,202.25,{99C542BD-1E57-4E3F-B50F-C265E85841C1},Yes,1,FGS- Hq Intermediate - TO 2 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,FGS-Pine Log Forest,77.7,{C1D9205E-78FD-43F4-B5D2-D3722E78BA04},Yes,1,FGS-Pine Log Forest - TO 4 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,FGS-TRAPP POND INTERMEDIATE,164.2,{1A392C3B-BAA2-4B8D-811C-E9D7B6FB672F},Yes,1,FGS-TRAPP POND INTERMEDIATE - TO 2 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,FGS-TRAPP POND SURFICIAL,167.5,{69365602-9042-4CE9-9467-B3017322E8AC},Yes,1,FGS-TRAPP POND SURFICIAL - TO 2 inch PVC casing
+Ch square on bridge,Ch square on bridge,Fisher Creek Near Spring Hill SR 373,55.28,{C15F1654-D336-458C-AEA2-AE2E9306F5C8},Yes,1,Fisher Creek Near Spring Hill SR 373 - Ch square on bridge
+TO 2 inch PVC casing,TO 2 inch PVC casing,FRUS Piezometer #3AR,147.53,{F69788DA-8D8C-4178-BF41-3BD99E4CC81A},Yes,1,FRUS Piezometer #3AR - TO 2 inch PVC casing
+Metal pipe below conduit- under water,Metal pipe below conduit- under water,Garnier creek @ Blue Barnes Rd.,10,{2A4C4489-5D6F-4547-8DCD-63C055B631F3},Yes,1,Garnier creek @ Blue Barnes Rd. - Metal pipe below conduit- under water
+TO 4 inch PVC casing,TO 4 inch PVC casing,George'S 40,107.49,{41E107B6-CC01-400A-A1C5-0BDC90250594},Yes,1,George'S 40 - TO 4 inch PVC casing
+TO 4 inch threaded PVC casing,TO 4 inch threaded PVC casing,Green Point Floridan,18.95,{927E09D4-265F-4003-BD97-A2EE3EB88A45},Yes,1,Green Point Floridan - TO 4 inch threaded PVC casing
+TO 2 inch threaded PVC casing,TO 2 inch threaded PVC casing,Green Point Intermediate,19.24,{CD452330-1E44-44AD-8422-EE393E031D43},Yes,1,Green Point Intermediate - TO 2 inch threaded PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Green Point Shallow,20,{0DE0C7C9-8C5C-474A-B823-46971E504811},Yes,1,Green Point Shallow - TO 2 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-12F (Riversprings Ms),22.46,{41AD96C4-637A-4022-9E05-8E90F9493D15},Yes,1,GW-12F (Riversprings Ms) - TO 4 inch PVC casing
+TO 1 inch PVC casing,TO 1 inch PVC casing,GW-2FLZ (Ft Braden),169.87,{D49E8924-38FB-406D-B03A-6D2DCE573480},Yes,1,GW-2FLZ (Ft Braden) - TO 1 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-2F-UZ (Ft Braden),169.8,{55D7EA40-AEE1-41FC-A95E-CDDB00627A3A},Yes,1,GW-2F-UZ (Ft Braden) - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-2S (Ft Braden),169.61,{4A5D22DE-F6F2-4A45-B4D9-0A8543F9EB70},Yes,1,GW-2S (Ft Braden) - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-3F Deep (ANF FR-305),106.44,{03CB993A-AA01-49F9-B54F-102A2C7FEF63},Yes,1,GW-3F Deep (ANF FR-305) - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-3F-UZ (ANF FR-305),106.65,{F76DAFAB-AB93-472A-9773-91A1D83CBB1E},Yes,1,GW-3F-UZ (ANF FR-305) - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-3S (ANF FR-305),106.94,{1A367364-BF78-49A0-8E53-2D13FD23970E},Yes,1,GW-3S (ANF FR-305) - TO 4 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,GW-4F Deep (Hwy27 Dot),60.82,{59D416F5-8F35-4B1E-BAC6-CB1E5243DC5E},Yes,1,GW-4F Deep (Hwy27 Dot) - TO 2 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,GW-4F Shallow (Hwy27 DOT),60.78,{579209A3-4659-43EF-88CA-E2A1310DEB71},Yes,1,GW-4F Shallow (Hwy27 DOT) - TO 2 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-5F (Leon County VFD),160.35,{DC589B29-3527-4585-B641-9196062D0989},Yes,1,GW-5F (Leon County VFD) - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-5S (Leon County VFD),160.56,{DA236A0A-5F70-481D-9465-230CBC842CD1},Yes,1,GW-5S (Leon County VFD) - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-6F (Micc Greenway),166.91,{D673B6D5-FCCA-40AA-8314-4B47C61D82DA},Yes,1,GW-6F (Micc Greenway) - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-6S (Micc Greenway),166.71,{9F21159D-8202-4FAE-BF76-6DBED3198E72},Yes,1,GW-6S (Micc Greenway) - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,GW-7F (Leon CR-59),115.65,{D4D9D520-D196-4C5E-B9CF-E8B9278A9402},Yes,1,GW-7F (Leon CR-59) - TO 4 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,GW-7S (Leon CR-59),113.4,{989B2FB6-FDC0-4A8F-88F8-428C0485C87D},Yes,1,GW-7S (Leon CR-59) - TO 2 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,HQ Floridan,203.25,{9ACD9488-5DE6-437E-8568-A811D8666714},Yes,1,HQ Floridan - TO 4 inch PVC casing
+TO 3 inch PVC casing,TO 3 inch PVC casing,HQ Surficial,201.87,{523F43F1-702B-4C52-B7DA-7EFA567C7E95},Yes,1,HQ Surficial - TO 3 inch PVC casing
+Top of lock rim,Top of lock rim,Hwy 71 N of Malone,145.98,{DBF60601-9307-4565-903C-56F79B9F5099},Yes,1,Hwy 71 N of Malone - Top of lock rim
+TO 4 inch steel casing,TO 4 inch steel casing,International Paper @ Cypress,167.31,{1D56F47E-B465-4EA9-8858-AF9723295C63},Yes,1,International Paper @ Cypress - TO 4 inch steel casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Jackson Blue #1-Claiborne,124.09,{6A28F26E-DDE1-4C7B-B633-B6707010B1EB},Yes,1,Jackson Blue #1-Claiborne - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Jackson Blue #2-Floridan,123.74,{5F3A0F27-5079-4D4E-9719-97EDD4BA7C90},Yes,1,Jackson Blue #2-Floridan - TO 4 inch PVC casing
+Ch Square on North wing wall,Ch Square on North wing wall,Lake Iamonia Outfall,103.31,{F94CD532-AB19-4793-84A2-10B33624F16E},Yes,1,Lake Iamonia Outfall - Ch Square on North wing wall
+Staff on platform,Staff on platform,Lake Jackson @ Miller Landing,76,{C583BC3A-0927-4D15-B222-134194C1BDEE},Yes,1,Lake Jackson @ Miller Landing - Staff on platform
+Ch square,Ch square,Lake Jackson Retention Pond,101,{9DE3CDCD-54E5-4E36-B81D-00EF430401A3},Yes,1,Lake Jackson Retention Pond - Ch square
+2nd 1.75 inch pipe from station,2nd 1.75 inch pipe from station,Lake Kanturk at Clifden Dr,72.15,{1BC57FFC-FD04-409B-988C-1BB3B4E6F37B},Yes,1,Lake Kanturk at Clifden Dr - 2nd 1.75 inch pipe from station
+1st 1.75 inch pipe from station,1st 1.75 inch pipe from station,Lake Kanturk at Clifden Dr,74.14,{A31EE321-4120-4633-8F2B-977BAB4381D1},Yes,2,Lake Kanturk at Clifden Dr - 1st 1.75 inch pipe from station
+Ch Square on downstream headwall,Ch Square on downstream headwall,Lake Kanturk Outfall (11301 / S618),81.82,{E7BEA2C6-F5D0-4486-9928-9BD22114342F},Yes,1,Lake Kanturk Outfall (11301 / S618) - Ch Square on downstream headwall
+1.25 inch pipe- Right of transducer,1.25 inch pipe- Right of transducer,Lake Killarny at McLaughlin Dr,72.68,{E304FF4B-B24E-4F2B-86E5-9E448A8464B4},Yes,1,Lake Killarny at McLaughlin Dr - 1.25 inch pipe- Right of transducer
+2nd pipe from enclosure,2nd pipe from enclosure,Lake Killarny at McLaughlin Dr,74.21,{1132DFE4-7B43-4009-ACAF-2972E79E83CA},Yes,2,Lake Killarny at McLaughlin Dr - 2nd pipe from enclosure
+1st pipe from enclosure,1st pipe from enclosure,Lake Killarny at McLaughlin Dr,76.25,{5956B47B-936B-4B72-8620-8EDEA6B7EFE9},Yes,3,Lake Killarny at McLaughlin Dr - 1st pipe from enclosure
+Ch Square on weir,Ch Square on weir,Lake Kinsale Outfall,74.71,{128EE672-3F2C-4CCB-8CDE-A21163F716C4},Yes,1,Lake Kinsale Outfall - Ch Square on weir
+Ch Square in top of culvert headwall,Ch Square in top of culvert headwall,Lake Kinsale Outfall,80.55,{63061EC0-D614-45CF-ACD5-4D6EBD180738},Yes,2,Lake Kinsale Outfall - Ch Square in top of culvert headwall
+Ch Square on bridge,Ch Square on bridge,Lake Lafayette Outfall,47.55,{FC59BD31-3B2F-4FF3-8547-5AA3AFBF61F3},Yes,1,Lake Lafayette Outfall - Ch Square on bridge
+Ch Square on rail left of station,Ch Square on rail left of station,Lake Miccosukee Outfall,88.74,{69285D1B-AA07-43AF-8133-DBBD29307AA3},Yes,1,Lake Miccosukee Outfall - Ch Square on rail left of station
+Staff,Staff,Lake Miccosukee Outfall,79.26,{5CF21E74-1FFF-4F24-B048-53EFBE76FF1A},Yes,2,Lake Miccosukee Outfall - Staff
+Ch square on alum I-beam,Ch square on alum I-beam,Lake Munson Outfall,31.26,{3EC7AA26-0FBC-4227-9381-A35D004099BA},Yes,1,Lake Munson Outfall - Ch square on alum I-beam
+Staff,Staff,Lauder Pond,159.48,{8EFCEDA1-8897-4A26-9B1F-44C0D7E573C9},Yes,1,Lauder Pond - Staff
+1.75 inch pipe,1.75 inch pipe,Lauder Pond,159.48,{6F2F440A-7AC4-4360-BDFC-EB07C9784C92},Yes,2,Lauder Pond - 1.75 inch pipe
+Ch Sq NE corner south box,Ch Sq NE corner south box,Lauder Pond,164.99,{CCF1363E-6C78-4CB0-866E-284599BAC220},Yes,3,Lauder Pond - Ch Sq NE corner south box
+Ch Square right of transducer,Ch Square right of transducer,Leon HS Stormwater Inlet,108.09,{FB97B5C7-100B-42E2-8AC4-41CA9B253343},Yes,1,Leon HS Stormwater Inlet - Ch Square right of transducer
+Ch Square SW corner of South headwall,Ch Square SW corner of South headwall,Leon HS Stormwater Inlet,109.98,{EE24243B-6078-4AEB-B1C7-02A5DA48527E},Yes,2,Leon HS Stormwater Inlet - Ch Square SW corner of South headwall
+Staff,Staff,Little Bear Creek @ 388,0,{0F429180-E40D-49BA-9490-450C3E7AD4CE},Yes,1,Little Bear Creek @ 388 - Staff
+Hole in top of 4 inch steel casing,Hole in top of 4 inch steel casing,Liza Jackson,7.82,{277D58A4-CD26-41B8-BC76-A0114E5769A4},Yes,1,Liza Jackson - Hole in top of 4 inch steel casing
+TO protective casing,TO protective casing,McCulloch,8.92,{A5085A8E-637E-479A-A543-35B6B10362D2},Yes,1,McCulloch - TO protective casing
+1 inch steel pipe attached to transducer conduit,1 inch steel pipe attached to transducer conduit,Munson Slough @ Cap Cir,25.94,{C1C3F233-4939-41EE-802F-24D62909DD43},Yes,1,Munson Slough @ Cap Cir - 1 inch steel pipe attached to transducer conduit
+Staff,Staff,Munson Slough @ Cap Cir,24.85,{E74F6EC5-D756-4F51-BF70-63F9D11576F7},Yes,2,Munson Slough @ Cap Cir - Staff
+1.25 inch galv pipe,1.25 inch galv pipe,Munson Slough @ Cap Cir,27.88,{0FD75690-B4A9-48D8-B9F9-7F68BC1632D3},Yes,3,Munson Slough @ Cap Cir - 1.25 inch galv pipe
+Ch square,Ch square,Munson Slough @ Oak Ridge Road,22.96,{28E86042-9C87-4C5C-8CEF-CA278F883855},Yes,1,Munson Slough @ Oak Ridge Road - Ch square
+FDOT bass survey disk,FDOT bass survey disk,Munson Slough @ Oak Ridge Road,23,{267AAC35-006F-498C-A127-26571F3FE62B},Yes,1,Munson Slough @ Oak Ridge Road - FDOT bass survey disk
+Ch Square- top of center culvert,Ch Square- top of center culvert,NE DD @ Centerville & Blairstone,75.44,{0B68DA38-C67F-48B5-B235-4440ED846CFB},Yes,1,NE DD @ Centerville & Blairstone - Ch Square- top of center culvert
+Chiseled V on West culvert,Chiseled V on West culvert,NE DD @ Centerville & Blairstone,69.54,{72DBF1D2-CDC0-439B-ACB5-44920E2B42F8},Yes,2,NE DD @ Centerville & Blairstone - Chiseled V on West culvert
+Ch Square- East 5ft of station,Ch Square- East 5ft of station,NE DD @ Mahan,56.02,{3EAE261F-F90D-4BA0-B631-2B04DFD460CE},Yes,1,NE DD @ Mahan - Ch Square- East 5ft of station
+Ch Square on bridge railing,Ch Square on bridge railing,New River @ Burnt Bridge Rd (Fr3),14.56,{2E10BB5B-0FD2-486A-B70F-A4A20C0E472E},Yes,1,New River @ Burnt Bridge Rd (Fr3) - Ch Square on bridge railing
+Wooden Ch Square,Wooden Ch Square,New River @ Burnt Bridge Rd (Fr3),11.78,{063C2728-A446-4A87-8BD0-9B597440958E},Yes,2,New River @ Burnt Bridge Rd (Fr3) - Wooden Ch Square
+Staff,Staff,New River @ Burnt Bridge Rd (Fr3),0,{5D666BE3-6B9E-4825-8B41-45219D405E72},Yes,3,New River @ Burnt Bridge Rd (Fr3) - Staff
+TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #1,18.85,{C0149C29-E6C6-4CC8-BAD0-AAB452186AC3},Yes,1,Nitrate #1 - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #2,18.58,{FACF41DF-8385-43A2-B469-14DC76B5C01E},Yes,1,Nitrate #2 - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #3,14.43,{23E7044F-468E-4E65-9365-95A0D26F4019},Yes,1,Nitrate #3 - TO 4 inch PVC casing
+TO well,TO well,Nitrate #4,14.8,{F023DE6B-65FC-4D3B-BCA9-E3DFBCFC4D4E},Yes,1,Nitrate #4 - TO well
+TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #5,30.85,{4F71107D-0357-4902-B8A3-78DBCC7D1844},Yes,1,Nitrate #5 - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Nitrate #6,29.66,{8A3E3B0D-C529-4F59-B058-85E93B7F4F51},Yes,1,Nitrate #6 - TO 4 inch PVC casing
+TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #1 IAS Monitor,93.06,{C0498C1C-F992-4B98-8BBF-98AA14143FF6},Yes,1,NW Bay #1 IAS Monitor - TO hole in recorder mounting plate
+TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #1 SAS Monitor,93.39,{8C6DFBD8-29D0-4697-B389-D4933014EB08},Yes,1,NW Bay #1 SAS Monitor - TO hole in recorder mounting plate
+TO 6 inch PVC casing,TO 6 inch PVC casing,NW Bay #1 UFA Monitor,85.07,{3071D975-900F-4364-A90A-C7038A829BE1},Yes,1,NW Bay #1 UFA Monitor - TO 6 inch PVC casing
+TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #3 IAS Monitor,93.36,{C3CB7628-F026-4B2F-8DDE-2E541E4E0C61},Yes,1,NW Bay #3 IAS Monitor - TO hole in recorder mounting plate
+TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #3 SAS Monitor,93.81,{CCA0EA05-8725-418B-B41A-DB85924F9944},Yes,1,NW Bay #3 SAS Monitor - TO hole in recorder mounting plate
+TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW Bay #3 UFA Monitor,93.65,{D1BAF4BE-FF97-43F1-BB57-38AFEA9582D8},Yes,1,NW Bay #3 UFA Monitor - TO hole in recorder mounting plate
+TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW BAY CTY - SITE #2 IAS MONITOR,83.92,{CB05A82E-7B70-444C-B177-3A34F2745FE6},Yes,1,NW BAY CTY - SITE #2 IAS MONITOR - TO hole in recorder mounting plate
+TO hole in recorder mounting plate,TO hole in recorder mounting plate,NW BAY CTY - SITE #2 SAS MONITOR,84.04,{CFA2F697-6D02-4269-8F3E-5374B0710B93},Yes,1,NW BAY CTY - SITE #2 SAS MONITOR - TO hole in recorder mounting plate
+TO 6 inch PVC casing,TO 6 inch PVC casing,NW BAY CTY - SITE #2 UFA MONITOR/S718,85,{F540620A-7FE7-4867-A57E-4F4E220BEBD6},Yes,1,NW BAY CTY - SITE #2 UFA MONITOR/S718 - TO 6 inch PVC casing
+TO casing below concrete slab,TO casing below concrete slab,NWFWMD 9 Mile Rd Deep,117.22,{BE90E38C-D244-42DF-8248-C4097D317504},Yes,1,NWFWMD 9 Mile Rd Deep - TO casing below concrete slab
+TO casing below concrete slab,TO casing below concrete slab,NWFWMD 9 Mile Rd Int,117.39,{806BF7B0-95B0-46BB-8813-59D22BBCF19D},Yes,1,NWFWMD 9 Mile Rd Int - TO casing below concrete slab
+TO casing below concrete slab,TO casing below concrete slab,NWFWMD 9 Mile Rd SZ,117.14,{6B7BD908-CE53-4D45-B620-45BF5192A2EA},Yes,1,NWFWMD 9 Mile Rd SZ - TO casing below concrete slab
+TO 4 inch PVC casing,TO 4 inch PVC casing,NWFWMD Section 20,138.38,{589192F4-F443-46FD-9CD1-45D38DFEAFD6},Yes,1,NWFWMD Section 20 - TO 4 inch PVC casing
+TO PVC casing,TO PVC casing,NWFWMD SR-1D,249.13,{6AC08B23-9CBD-45F4-A8B1-387EFAC5014E},Yes,1,NWFWMD SR-1D - TO PVC casing
+TO PVC casing,TO PVC casing,NWFWMD SR-1S,248.98,{411D5D1C-9836-4369-BCA6-A4998E5A85A5},Yes,1,NWFWMD SR-1S - TO PVC casing
+TO PVC casing,TO PVC casing,NWFWMD SR-2D,272.04,{BD291BC1-3446-4BB6-823A-53601979A376},Yes,1,NWFWMD SR-2D - TO PVC casing
+TO PVC casing,TO PVC casing,NWFWMD SR-3D,292.74,{CD35742D-6EDA-499F-B84C-E7E5F5E98B06},Yes,1,NWFWMD SR-3D - TO PVC casing
+TO PVC casing,TO PVC casing,NWFWMD SR-3S,292.76,{270E1A30-420A-4D33-9ABB-F1A65570E38A},Yes,1,NWFWMD SR-3S - TO PVC casing
+TO PVC casing,TO PVC casing,NWFWMD SR-4D,255.69,{8999C174-2B56-46D3-93E4-5FFB79A1D87D},Yes,1,NWFWMD SR-4D - TO PVC casing
+TO PVC casing,TO PVC casing,NWFWMD SR-5D,173.96,{9988A299-524D-4268-B5E4-6E18D3FD8B00},Yes,1,NWFWMD SR-5D - TO PVC casing
+TO 4 inch steel casing,TO 4 inch steel casing,NWFWMD-Power Line,104.28,{85769CC1-0461-493D-BC91-716D196DB0F8},Yes,1,NWFWMD-Power Line - TO 4 inch steel casing
+Ch square on bridge rail,Ch square on bridge rail,Ochlockonee R. @ US319,18.15,{ADD1FA86-B8E0-4F06-A9E6-A17EA531FC2F},Yes,1,Ochlockonee R. @ US319 - Ch square on bridge rail
+Alum support arm for TB,Alum support arm for TB,Ochlockonee R. @ US319,14.4,{39A9838B-6FA7-45C4-9532-F6F026FB592A},Yes,2,Ochlockonee R. @ US319 - Alum support arm for TB
+Top of enclosure floor,Top of enclosure floor,Okaloosa School Board,18.27,{7A9D2292-AF25-4758-BC93-3F9A7FB7414C},Yes,1,Okaloosa School Board - Top of enclosure floor
+TO of yellow cap,TO of yellow cap,Otter Camp Floridan-LZ,110.21,{73AB62DF-E450-4D14-905E-55ADC13B4F3E},Yes,1,Otter Camp Floridan-LZ - TO of yellow cap
+TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Floridan-LZ,110.03,{AE8D7DF3-B683-45F4-BC80-340858DB1F24},Yes,2,Otter Camp Floridan-LZ - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Floridan-SZ,109.73,{5BF3B7FA-959D-4BE8-807E-E3876B5198E0},Yes,1,Otter Camp Floridan-SZ - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Int. Limestone,109.39,{894E97B0-51B0-479C-BC49-4C953F24C75A},Yes,1,Otter Camp Int. Limestone - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Int. Sand,108.51,{01569FE7-AFAC-4142-A789-45DF1427D7D6},Yes,1,Otter Camp Int. Sand - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Otter Camp Surficial,108.74,{18142F75-1398-4BC5-A6C9-D73357E7E383},Yes,1,Otter Camp Surficial - TO 4 inch PVC casing
+Staff,Staff,Park Ave DD @ Violet,59.49,{F28B3B5B-E045-45E1-B810-7E9896121660},Yes,1,Park Ave DD @ Violet - Staff
+1.75 inch pipe,1.75 inch pipe,Park Ave DD @ Violet,61.67,{5CE03D47-4B53-449A-91C4-3440D759B38D},Yes,2,Park Ave DD @ Violet - 1.75 inch pipe
+Staff,Staff,Piney Lake Staff,54.21,{8CF811E8-C7D8-4778-A5F1-5A99069644D9},Yes,1,Piney Lake Staff - Staff
+1.75 inch galv pipe,1.75 inch galv pipe,Piney Lake Staff,55.39,{67C268E5-14A4-44D9-BF29-66FC7CF4279B},Yes,2,Piney Lake Staff - 1.75 inch galv pipe
+Top of Staff Gage,Top of Staff Gage,Piney Lake Staff,60.87,{C77B5653-24EB-4525-A11B-1CBCCC2FB4DB},Yes,3,Piney Lake Staff - Top of Staff Gage
+Top of Fence Post,Top of Fence Post,Piney Lake Staff,57.82,{00904ED9-8B1D-4AFC-A22D-FE0704594D19},Yes,4,Piney Lake Staff - Top of Fence Post
+TO PVC above steel piping and sanitary seal,TO PVC above steel piping and sanitary seal,Pleasant Valley Church,77.2,{F3CA6413-5A02-4C31-81A3-E2AD0403E5D5},Yes,1,Pleasant Valley Church - TO PVC above steel piping and sanitary seal
+Top of Spigot,Top of Spigot,Point Washington,3.8,{5E4B2983-7533-4F43-BF9E-1AF6CB667800},Yes,1,Point Washington - Top of Spigot
+TO 2 inch PVC casing,TO 2 inch PVC casing,Port St Joe Deep Int,19.1,{4C1F1CF9-73D0-44D3-827B-E8C17D9B2FB2},Yes,1,Port St Joe Deep Int - TO 2 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Port St Joe Med Shallow,19.6,{57070231-F9D3-4856-8973-65F95D24CF47},Yes,1,Port St Joe Med Shallow - TO 2 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Port St Joe Shallow Int,19.05,{07AE9683-66E4-4EA1-81B6-B6AF429DD3CE},Yes,1,Port St Joe Shallow Int - TO 4 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Port St Joe Shallow Int #2,19.25,{2E400C3B-F037-4E12-B4E1-82E4D54BB836},Yes,1,Port St Joe Shallow Int #2 - TO 2 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Port St Joe Surficial,19.89,{8260C45D-21A3-4C80-9449-382E23885B0D},Yes,1,Port St Joe Surficial - TO 2 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Port St. Joe Floridan,18.75,{8FB2CB66-9200-4BE5-BC50-43D68C63C373},Yes,1,Port St. Joe Floridan - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,Porter Pond East,138.84,{4E5A5533-CE73-4E89-B882-3611F652A299},Yes,1,Porter Pond East - TO 4 inch PVC casing
+Staff,Staff,Powell Lake - Camp Helen,0,{F36DDF53-85AA-4573-99D4-8AE979AF861B},Yes,1,Powell Lake - Camp Helen - Staff
+Top of 6 inch PVC casing,Top of 6 inch PVC casing,Pt. Wash. Floridan APT,43.73,{0D9EB86D-3031-4500-A5DE-9D87A6451540},Yes,1,Pt. Wash. Floridan APT - Top of 6 inch PVC casing
+Staff,Staff,Quincy Creek @ Sr 267,10,{C0BB98B9-E549-4882-957B-C388C71DE83D},Yes,1,Quincy Creek @ Sr 267 - Staff
+Alum angle,Alum angle,Quincy Creek @ Sr 267,14.4,{C89BA963-E63F-42A6-B012-DD31207B2717},Yes,2,Quincy Creek @ Sr 267 - Alum angle
+Ch square on top headwall,Ch square on top headwall,Quincy Creek @ Sr 267,27.14,{96CE496E-99AA-4DE2-891D-E0B84E891472},Yes,3,Quincy Creek @ Sr 267 - Ch square on top headwall
+Ch Square,Ch Square,Regional Stormwater Facility,54.15,{A0CC8E4A-B657-4987-A6BF-36BB263996F7},Yes,1,Regional Stormwater Facility - Ch Square
+0.5 inch galv pipe,0.5 inch galv pipe,River Lake - Washington County,57.26,{79E0A408-8080-4171-AD8A-08B4D6ED1435},Yes,1,River Lake - Washington County - 0.5 inch galv pipe
+1.25 inch galv pipe,1.25 inch galv pipe,River Lake - Washington County,59.9,{EA4E1B6E-D75E-42B8-BDD6-2C324CDA6DE0},Yes,2,River Lake - Washington County - 1.25 inch galv pipe
+Staff,Staff,River Lake - Washington County,60.17,{17B0576B-6C29-43A8-9031-AB3BC28C03C6},Yes,3,River Lake - Washington County - Staff
+TO PVC casing,TO PVC casing,RU Cedar Street,188.87,{F35962AB-2AC2-488A-A068-41D11EAD357C},Yes,1,RU Cedar Street - TO PVC casing
+Ch Square on bridge handrail,Ch Square on bridge handrail,SALLY WARD SPRING RUN,13.05,{B24F0D18-3F5F-4C47-A291-4333D94EF0FE},Yes,1,SALLY WARD SPRING RUN - Ch Square on bridge handrail
+TO 2 inch PVC casing,TO 2 inch PVC casing,Sand & Gravel MW-5S,219.1,{811920D4-3B2D-4CD6-9F5B-20F6AA8A6969},Yes,1,Sand & Gravel MW-5S - TO 2 inch PVC casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Sand & Gravel NW-5D,218.94,{6C6A6FFA-D31A-42E8-B717-4657514E3132},Yes,1,Sand & Gravel NW-5D - TO 2 inch PVC casing
+TO 10 inch protective steel casing,TO 10 inch protective steel casing,Seagrove Deep,37.8,{B905D704-E028-4991-ABAA-8D3BD10E278D},Yes,1,Seagrove Deep - TO 10 inch protective steel casing
+TO 8 inch protective steel casing,TO 8 inch protective steel casing,Seagrove Shallow Floridan,36.81,{BD01BC65-ECEF-423C-A605-A1A74F1FD40B},Yes,1,Seagrove Shallow Floridan - TO 8 inch protective steel casing
+1.75 inch pipe- Right of transducer pipe,1.75 inch pipe- Right of transducer pipe,Southwood SW Pond SB111B,33.51,{81E9798D-59C4-4E4A-B424-D4478EE39139},Yes,1,Southwood SW Pond SB111B - 1.75 inch pipe- Right of transducer pipe
+Staff,Staff,Southwood SW Pond WD005,32.04,{8FAAB702-153B-48AC-8825-9FB981F02692},Yes,1,Southwood SW Pond WD005 - Staff
+Wooden stake flush with bed,Wooden stake flush with bed,Southwood SW Pond WD005,32,{6FB940F2-2645-4B30-8BB5-223408156EB7},Yes,2,Southwood SW Pond WD005 - Wooden stake flush with bed
+TO 12 inch steel casing,TO 12 inch steel casing,ST MARKS NAT WILDLIFE REFGURE - FLORIDAN MONITOR-68m,25.98,{223C1D78-C693-43E3-AAA4-BF473E87CF11},Yes,1,ST MARKS NAT WILDLIFE REFGURE - FLORIDAN MONITOR-68m - TO 12 inch steel casing
+Staff below bridge,Staff below bridge,Still Creek,50.98,{D9276464-3819-472F-BCED-80CD12D3F101},Yes,1,Still Creek - Staff below bridge
+TO sanitary seal,TO sanitary seal,SWU - FAF #47,151.04,{7ECC1E64-AACE-4EF0-B910-A20B7CEE40F2},Yes,1,SWU - FAF #47 - TO sanitary seal
+Top of 1 inch galvanized pipe nipple,Top of 1 inch galvanized pipe nipple,Tall Timbers Research,200,{3117FB94-1B64-4ACE-B29C-0B9EEA254042},Yes,1,Tall Timbers Research - Top of 1 inch galvanized pipe nipple
+TO 12 inch protective casing,TO 12 inch protective casing,Tates Hell SF TH-2 Tractor Rd,25.04,{234E648C-173E-4A31-8508-0CAF1CAD151D},Yes,1,Tates Hell SF TH-2 Tractor Rd - TO 12 inch protective casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Tates Hell SF THS-2 Tractor Rd Shallow,24.47,{D65E2269-4ECA-42CF-9C34-86A61E85D4FD},Yes,1,Tates Hell SF THS-2 Tractor Rd Shallow - TO 2 inch PVC casing
+Ch square,Ch square,Telogia Creek @ CR 65D,29.78,{7780CA1E-C8C2-4FB7-ABF3-6B9AE96854E5},Yes,1,Telogia Creek @ CR 65D - Ch square
+TO 4 inch steel casing,TO 4 inch steel casing,Tom Brown Test,135.65,{A5766E41-466C-4550-A067-92730C4A2504},Yes,1,Tom Brown Test - TO 4 inch steel casing
+TO 4 inch steel casing,TO 4 inch steel casing,Trapp Pond,168.7,{4956748C-A83C-4669-AFCD-7497C3AD183B},Yes,1,Trapp Pond - TO 4 inch steel casing
+Staff,Staff,UPPER ST. MARKS SWALLET,10,{D16A5D13-22C4-4982-9675-EB8FC9B0B678},Yes,1,UPPER ST. MARKS SWALLET - Staff
+TO nail in tree upstream of station,TO nail in tree upstream of station,UPPER ST. MARKS SWALLET,14.87,{0A889AD7-C7C9-4963-A9A7-13FA76FB48DF},Yes,2,UPPER ST. MARKS SWALLET - TO nail in tree upstream of station
+TO 4 inch coupling on 4 inch casing,TO 4 inch coupling on 4 inch casing,USFS Porter Lake,23.07,{ABF84631-810E-44FA-990A-AFF66A69338B},Yes,1,USFS Porter Lake - TO 4 inch coupling on 4 inch casing
+Wood base of clam shell at high side of steel casing,Wood base of clam shell at high side of steel casing,USGS Lake Jackson Floridan,124.12,{EF88685E-2C47-4A47-AF4D-F2C2D26467B2},Yes,1,USGS Lake Jackson Floridan - Wood base of clam shell at high side of steel casing
+TO 6 inch steel casing,TO 6 inch steel casing,USGS Lake Jackson Intermediate,124.14,{6EB732D7-8142-4B78-8E71-25DD48A68D83},Yes,1,USGS Lake Jackson Intermediate - TO 6 inch steel casing
+TO 4 inch steel casing,TO 4 inch steel casing,USGS-422A Near Greenhead - Floridan,70.01,{EACF4FF1-CDF8-4A78-BD8C-C26B40371FDA},Yes,1,USGS-422A Near Greenhead - Floridan - TO 4 inch steel casing
+TO casing,TO casing,USGS-422B Near Greenhead,70.28,{94D80119-4283-4E8B-BD6B-66412BF7D0FE},Yes,1,USGS-422B Near Greenhead - TO casing
+TO steel casing,TO steel casing,USGS-Lester Lewis,9.71,{48DE2156-2843-49F9-8068-C06BADE9618E},Yes,1,USGS-Lester Lewis - TO steel casing
+TO base of recorder box,TO base of recorder box,USGS-Olson Road,194.73,{16DAE100-34C0-49EF-B4F8-0945167B3E6B},Yes,1,USGS-Olson Road - TO base of recorder box
+Alum Angle,Alum Angle,W DD @ Roberts Ave,52.74,{E7943901-DE2B-425E-B908-F7CA163D19B6},Yes,1,W DD @ Roberts Ave - Alum Angle
+Ch Square 8ft west of alum angle,Ch Square 8ft west of alum angle,W DD @ Roberts Ave,52.86,{D231389B-9A36-4865-8ED4-D3928A42317C},Yes,2,W DD @ Roberts Ave - Ch Square 8ft west of alum angle
+Low Water 1.25 inch Pipe,Low Water 1.25 inch Pipe,W DD @ Roberts Ave,38.98,{95C2A8E9-4B59-4E0A-A86D-01BC71B623EA},Yes,3,W DD @ Roberts Ave - Low Water 1.25 inch Pipe
+Staff inside of East culvert,Staff inside of East culvert,W Drainage Ditch @ W Tenn,1.91,{7BF4D456-A393-45D7-9E1B-C44ACA88C65F},Yes,1,W Drainage Ditch @ W Tenn - Staff inside of East culvert
+TO 4 inch steel casing,TO 4 inch steel casing,Wakulla Correctional Institute #1,21.3,{801411CC-3B28-4590-9F47-4AA0BB4BD91B},Yes,1,Wakulla Correctional Institute #1 - TO 4 inch steel casing
+TO sanitary seal,TO sanitary seal,Washington Co - Pine Ridge Dr #1,62.78,{B28AA084-A8D9-409B-AE82-EC92BAED698F},Yes,1,Washington Co - Pine Ridge Dr #1 - TO sanitary seal
+TO sanitary seal,TO sanitary seal,Washington Co - Pine Ridge Dr #2,57.65,{B6D0495E-DB68-4AC2-B305-E478E065768A},Yes,1,Washington Co - Pine Ridge Dr #2 - TO sanitary seal
+TO 2 inch PVC casing,TO 2 inch PVC casing,Weller Ave Deep MPZ,25.91,{EEC7EA27-E0EA-47D8-A6F3-C95E4056B5BF},Yes,1,Weller Ave Deep MPZ - TO 2 inch PVC casing
+TO 3 inch steel protective casing,TO 3 inch steel protective casing,Weller Ave MPZ,26.05,{55BE0AE8-184C-4142-A73F-D1DAAC2A75F8},Yes,1,Weller Ave MPZ - TO 3 inch steel protective casing
+TO 2 inch PVC casing,TO 2 inch PVC casing,Weller Ave Shallow,26.23,{5E7AB9E7-FFA3-44DA-808B-568C76E8C715},Yes,1,Weller Ave Shallow - TO 2 inch PVC casing
+Top of female adaptor,Top of female adaptor,West Hewett,20.56,{AF773478-83B0-49EF-9941-6CA0EC67B883},Yes,1,West Hewett - Top of female adaptor
+TO 6 inch steel casing,TO 6 inch steel casing,White City FAS-M1,13.62,{ABE234D0-F9C5-4248-A261-24159C1071D7},Yes,1,White City FAS-M1 - TO 6 inch steel casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,White City IAS-M1,14.13,{2B953125-B151-4697-AC10-E09B2098D62F},Yes,1,White City IAS-M1 - TO 4 inch PVC casing
+TO 4 inch PVC casing,TO 4 inch PVC casing,White City IAS-M2,12.63,{FE07F60F-5F58-421C-A434-13BBBF877CD8},Yes,1,White City IAS-M2 - TO 4 inch PVC casing
+TO 4 inch threaded nipple,TO 4 inch threaded nipple,White City IAS-TPW,13.12,{935E1DD2-7485-4075-B34D-F06D80FB50A0},Yes,1,White City IAS-TPW - TO 4 inch threaded nipple
+TO 4 inch PVC casing,TO 4 inch PVC casing,White City SAS-M1,13.99,{317A6973-0CB1-4609-BFD0-18D24E464B62},Yes,1,White City SAS-M1 - TO 4 inch PVC casing
+TO sanitary seal,TO sanitary seal,Zediker - Pine Ridge Dr,64.36,{F330FB90-D3C5-48DF-8594-CB53A5414C6B},Yes,1,Zediker - Pine Ridge Dr - TO sanitary seal
