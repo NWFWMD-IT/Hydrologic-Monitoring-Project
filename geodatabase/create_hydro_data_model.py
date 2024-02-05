@@ -71,11 +71,12 @@
 #	2023-09-27 MCM Removed Hydro Staff domain (#124)
 #	               Added LocationVisit.StaffComments column (#124)
 #	2023-09-29 MCM Added `Location.HasSensor/MeasuringPoint` columns (#126)
+#	2024-02-05 MCM Set `LocationVisit.InventoryVerified` default to 'No' (#141)
 #
 # To do:
 #	none
 #
-# Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -758,7 +759,7 @@ def create_table_locationvisit(
 		('VisitDate'				,'DATE'		,None		,None	,None		,'Visit Date'				,True		,False		,None					,None)
 		,('Staff'				,'TEXT'		,None		,None	,1024		,'Visit Staff'				,True		,False		,None					,None)
 		,('StaffComments'			,'TEXT'		,None		,None	,1024		,'Staff Comments'			,True		,False		,None					,None)
-		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,None)
+		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,'No')
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
 		,('BatteryCondition'			,'TEXT'		,None		,None	,32		,'Battery Condition'			,True		,False		,'Battery Condition'			,None)
 		,('BatteryVoltage'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage'			,True		,False		,None					,None)
