@@ -40,7 +40,7 @@
 # To do:
 #	none
 #
-# Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -116,6 +116,7 @@ DOMAIN_NAMES = (
 	,'Reading Type'
 	,'Sensor Type'
 	,'Stage Adjustment Exception'
+	,'Stage Method'
 	,'Temperature Serial Number'
 	,'Temperature Source'
 	,'Time Adjustment Exception'

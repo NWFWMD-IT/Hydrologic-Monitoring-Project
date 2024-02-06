@@ -45,11 +45,12 @@
 #	                 Added importing display order
 #	                 Added filters for invalid records
 #	2023-09-29 MCM Add `Location.HasSensor/HasMeasuringPoint` properties (#126)
+#	2024-02-05 MCM Reject Measuring Points with non-NULL `DecommissionDate` (#131)
 #
 # To do:
 #	Switch from local asdict to mg.asdict
 #
-# Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -81,7 +82,11 @@ import mg
 # Constants
 #
 
-NEWLINE = '\n' # For f-string expressions, which disallow backslashes
+
+# For f-string expressions, which disallow backslashes
+
+NEWLINE = '\n'
+TAB = '\t'
 
 
 
@@ -746,71 +751,120 @@ class Location:
 		valid Measuring Points
 		
 		Other Locations may have zero or more valid Measuring Points
+		
+		Generally, Measuring Points can be rejected because the source
+		data:
+		
+			o Is invalid (MeasuringPoint() constructor fails)
+			
+			o Describes a Measuring Point that, for business
+			  reasons, we do not wish to load
+			
+		For efficiency, we include logic here to reject prospective
+		Measuring Points in the second category, before attempting to
+		create a valid MeasuringPoint instance.
 		'''
 		
 		for source_data in self.data_measuring_points:
+		
+			reject_messages = []
+			
+			
+			
+			#
+			# Evaluate source data for rejection on business rules
+			#
+			# Test for and report all rejection conditions, to avoid
+			# the need to discover them incrementally with
+			# successive data loading attempts			
+			#
+			
+			
+			# Vertical datum
 		
 			if source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum.lower() == 'true':
 			
 				if source_data.Name.lower().startswith('ref point is'):
 				
-					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is TRUE and Name starts with \'Ref point is\'')
+					reject_messages.append('IsMeasuredAgainstLocalAssumedDatum is TRUE and Name starts with \'Ref point is\'')
 
-					self._rejected_measuring_point_count += 1
-
-				else:
-				
-					self.measuring_points.append(
-						MeasuringPoint(source_data)
-					)
 
 
 			elif source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum.lower() == 'false':
 
 				if source_data.Name.lower().strip() == ('land surface datum'):
 				
-					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'Land Surface Datum\'')
-
-					self._rejected_measuring_point_count += 1
+					reject_messages.append('IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'Land Surface Datum\'')
 
 
 				elif source_data.Name.lower().strip() == ('navd88 0ft'):
 				
-					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'NAVD88 0ft\'')
-
-					self._rejected_measuring_point_count += 1
+					reject_messages.append('IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'NAVD88 0ft\'')
 
 
 				elif source_data.Name.lower().strip() == ('ngvd29 0ft'):
 				
-					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'NGVD29 0ft\'')
-
-					self._rejected_measuring_point_count += 1
+					reject_messages.append('IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'NGVD29 0ft\'')
 
 
 				elif source_data.Name.lower().strip() == ('slab'):
 				
-					logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'Slab\'')
+					reject_messages.append('IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'Slab\'')
 
-					self._rejected_measuring_point_count += 1
-				
 
-				else:
-				
-					self.measuring_points.append(
-						MeasuringPoint(source_data)
-					)
-					
-					
+
 			else:
 				
-				logging.debug(f'Rejecting Measuring Point {source_data.UniqueId}: IsMeasuredAgainstLocalAssumedDatum is \'{source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum}\'; expected TRUE or FALSE')
+				reject_messages.append(f'IsMeasuredAgainstLocalAssumedDatum is \'{source_data.ReferencePointPeriods_0_IsMeasuredAgainstLocalAssumedDatum}\'; expected TRUE or FALSE')
 
+
+
+			# Decommissioned
+			
+			if source_data.DecommissionedDate is not None:
+			
+				reject_messages.append(f'DecommissionedDate is not NULL: {source_data.DecommissionedDate}')
+				
+
+
+			#
+			# Instantiate MeasuringPoint, or report rejection message(s)
+			#
+
+			if len(reject_messages) == 0:
+			
+				self.measuring_points.append(
+					MeasuringPoint(source_data)
+				)
+				
+				
+			else:
+			
+				header = f'Rejecting Measuring Point {source_data.UniqueId}:'
+			
+			
+				if len(reject_messages) == 1: # Single line message
+				
+					logging.debug(f'{header} {reject_messages[0]}')
+					
+					
+				else: # Multiline message
+				
+					logging.debug(
+						f'{header}'
+						f'\n\t{(NEWLINE + TAB).join(reject_messages)}'
+					)
+			
+			
+				
 				self._rejected_measuring_point_count += 1
 				
-
-
 				
+		
+		#
+		# Evaluate Measuring Point count
+		#
+					
 		if len(self.measuring_points) == 0:
 
 			if (
