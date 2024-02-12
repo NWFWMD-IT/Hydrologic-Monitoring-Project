@@ -19,3 +19,4 @@ geodatabase/MapImageSharingDraftExample_RECONCILE.sd
 geodatabase/MapImageSharingDraftExample_RECONCILE.sddraft
 geodatabase/publish_service_SCREENSHARE.py
 geodatabase/publish_service_SCREENSHARE_HOSTED.py
+*.nppsession
