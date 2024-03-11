@@ -241,7 +241,7 @@ def create_domains(
 				('Equipment - Data logger failure', 'Equipment - Data logger failure')
 				,('Equipment - Device changed', 'Equipment - Device changed')
 				,('Equipment - None installed', 'Equipment - None installed')
-				,('Equipment - Solar panel', 'Equipment - Solar panel')
+				,('Equipment - Solar panel issue', 'Equipment - Solar panel issue')
 				,('Equipment - Transducer failure', 'Equipment - Transducer failure')
 				,('Equipment - Unable to connect', 'Equipment - Unable to connect')
 				,('Follow up - Conduit adjustment/repair', 'Follow up - Conduit adjustment/repair')
