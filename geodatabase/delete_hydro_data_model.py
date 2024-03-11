@@ -102,7 +102,6 @@ DOMAIN_NAMES = (
 	,'ADVM Beam Check Secondary Exception'
 	,'ADVM Cleaned Exception'
 	,'ADVM Maintenance'
-	,'Battery Condition'
 	,'Battery Replacement Exception'
 	,'Conductivity Adjustment Exception'
 	,'Conductivity Serial Number'
@@ -122,6 +121,7 @@ DOMAIN_NAMES = (
 	,'Time Adjustment Exception'
 	,'Yes/No'
 	# Obsolete
+	,'Battery Condition'
 	,'Battery Replacement Time Adjustment'
 	,'Dessicant Maintenance' # Misspelled
 	,'Hydro Staff'
