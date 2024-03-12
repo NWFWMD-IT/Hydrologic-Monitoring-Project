@@ -72,6 +72,9 @@
 #	               Added LocationVisit.StaffComments column (#124)
 #	2023-09-29 MCM Added `Location.HasSensor/MeasuringPoint` columns (#126)
 #	2024-02-05 MCM Set `LocationVisit.InventoryVerified` default to 'No' (#141)
+#	2024-03-10 MCM Replaced battery condition columns / domain wtih needs
+#	                 replacement flag (#168)
+#	               Updated various domain values (#140, #153, #164, #167)
 #
 # To do:
 #	none
