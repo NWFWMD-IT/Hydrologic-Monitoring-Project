@@ -75,6 +75,7 @@
 #	2024-03-10 MCM Replaced battery condition columns / domain wtih needs
 #	                 replacement flag (#168)
 #	               Updated various domain values (#140, #153, #164, #167)
+#	2024-03-15 MCM Removed column StageMeasurement.IsDischarge (#159)
 #
 # To do:
 #	none
@@ -1051,7 +1052,6 @@ def create_table_stagemeasurement(
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
-		,('IsDischarge'			,'TEXT'		,None		,None	,3		,'Discharge Related'		,True		,False		,'Yes/No'				,None)
 		,('ManualMethod'		,'TEXT'		,None		,None	,32		,'Manual Measurement Method'	,True		,False		,'Stage Method'				,None)
 		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Manual Measurement Method Comments'	,True	,False		,None					,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
