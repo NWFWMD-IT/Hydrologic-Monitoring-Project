@@ -72,6 +72,9 @@
 #	               Added LocationVisit.StaffComments column (#124)
 #	2023-09-29 MCM Added `Location.HasSensor/MeasuringPoint` columns (#126)
 #	2024-02-05 MCM Set `LocationVisit.InventoryVerified` default to 'No' (#141)
+#	2024-03-10 MCM Replaced battery condition columns / domain wtih needs
+#	                 replacement flag (#168)
+#	               Updated various domain values (#140, #153, #164, #167)
 #
 # To do:
 #	none
@@ -158,12 +161,6 @@ def create_domains(
 			)
 		)
 		,(
-			'Battery Condition', 'TEXT', (
-				('Good', 'Good')
-				,('Poor', 'Poor')
-			)
-		)
-		,(
 			'Battery Replacement Exception', 'TEXT', (
 				('No materials', 'No materials')
 				,('Has solar panel', 'Has solar panel')
@@ -220,6 +217,7 @@ def create_domains(
 				('Verified', 'Verified')
 				,('Replaced', 'Replaced')
 				,('Needs replacement - No materials', 'Needs replacement - No materials')
+				,('NA', 'NA')
 				,('Other', 'Other')
 			)
 		)
@@ -243,17 +241,20 @@ def create_domains(
 		)
 		,(
 			'Location Issue Type', 'TEXT', (
-				('Transducer failure', 'Transducer failure')
-				,('Data logger failure', 'Data logger failure')
+				('Equipment - Data logger failure', 'Equipment - Data logger failure')
+				,('Equipment - Device changed', 'Equipment - Device changed')
+				,('Equipment - None installed', 'Equipment - None installed')
+				,('Equipment - Solar panel issue', 'Equipment - Solar panel issue')
+				,('Equipment - Transducer failure', 'Equipment - Transducer failure')
+				,('Equipment - Unable to connect', 'Equipment - Unable to connect')
 				,('Follow up - Conduit adjustment/repair', 'Follow up - Conduit adjustment/repair')
 				,('Invalid data - Battery change', 'Invalid data - Battery change')
 				,('Invalid data - In-Situ low battery', 'Invalid data - In-Situ low battery')
 				,('Invalid data - Station maintenance', 'Invalid data - Station maintenance')
-				,('Inventory updated', 'Inventory updated')
 				,('MP - Inaccessible due to high water', 'MP - Inaccessible due to high water')
 				,('MP - Missing (washed away, etc.)', 'MP - Missing (washed away, etc.)')
+				,('MP - New', 'MP - New')
 				,('MP - No water at MP', 'MP - No water at MP')
-				,('Solar panel damage', 'Solar panel damage')
 				,('Vandalism - Data logger', 'Vandalism - Data logger')
 				,('Vandalism - Enclosure', 'Vandalism - Enclosure')
 				,('Vandalism - Solar panel', 'Vandalism - Solar panel')
@@ -275,8 +276,6 @@ def create_domains(
 				,('Routine Before Sampling', 'Routine Before Sampling')
 				,('Routine After Sampling', 'Routine After Sampling')
 				,('After Calibration', 'After Calibration')
-				,('Extreme - Min', 'Extreme - Min')
-				,('Extreme - Max', 'Extreme - Max')
 			)
 		)
 		,(
@@ -316,9 +315,11 @@ def create_domains(
 			'Temperature Serial Number', 'TEXT', (
 				('252529', '252529')
 				,('252531', '252531')
-				,('210843076', '210843076')
-				,('210843093', '210843093')
-				,('210910858', '210910858')
+				,('230514759', '230514759')
+				,('230514768', '230514768')
+				,('230514786', '230514786')
+				,('Transducer - NIST unavailable', 'Transducer - NIST unavailable')
+				,('Other', 'Other')
 			)
 		)
 		,(
@@ -761,9 +762,8 @@ def create_table_locationvisit(
 		,('StaffComments'			,'TEXT'		,None		,None	,1024		,'Staff Comments'			,True		,False		,None					,None)
 		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,'No')
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
-		,('BatteryCondition'			,'TEXT'		,None		,None	,32		,'Battery Condition'			,True		,False		,'Battery Condition'			,None)
+		,('BatteryNeedsReplacement'		,'TEXT'		,None		,None	,3		,'Battery Needs Replacement'		,True		,False		,'Yes/No'				,None)
 		,('BatteryVoltage'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage'			,True		,False		,None					,None)
-		,('BatteryCondition2'			,'TEXT'		,None		,None	,32		,'Battery Condition'			,True		,False		,'Battery Condition'			,None)
 		,('BatteryVoltage2'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage (new battery)'	,True		,False		,None					,None)
 		,('BatteryReplaced'			,'TEXT'		,None		,None	,3		,'Battery Replaced (new battery)'	,True		,False		,'Yes/No'				,None)
 		,('BatteryReplacementDate'		,'DATE'		,None		,None	,None		,'Battery Replacement Date'		,True		,False		,None					,None)
@@ -1120,6 +1120,7 @@ def create_table_temperaturemeasurement(
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,'Temperature Serial Number'		,None)
+		,('SerialNumberComments'	,'TEXT'		,None		,None	,1024		,'Serial Number Comments'	,True		,False		,None					,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement'		,True		,False		,None					,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
 		,('SensorSource'		,'TEXT'		,None		,None	,32		,'Sensor Source'		,True		,False		,'Temperature Source'			,None)
