@@ -1,0 +1,88 @@
+{
+    "collectInfo": {
+        "enabled": true
+    },
+    "displayInfo": {
+        "map": {
+            "defaultType": {
+            },
+            "home": {
+                "latitude": 34.056223110283184,
+                "longitude": -117.19532583406398,
+                "zoomLevel": 15
+            },
+            "includeDefaultMaps": true,
+            "preview": {
+            }
+        },
+        "style": {
+            "toolbarBackgroundColor": "#045273"
+        }
+    },
+    "foldersInfo": {
+        "showMap": true
+    },
+    "imagesInfo": {
+        "captureResolution": 1280
+    },
+    "locationSharingInfo": {
+        "enabled": true,
+        "required": false
+    },
+    "overviewInfo": {
+        "enabled": false
+    },
+    "publishInfo": {
+        "connectVersion": "3.19.116",
+        "webFormTransform": true
+    },
+    "queryInfo": {
+        "applySpatialFilter": true,
+        "copyEnabled": false,
+        "editEnabled": true,
+        "mode": "manual",
+        "viewEnabled": false,
+        "where": ""
+    },
+    "sentInfo": {
+        "copyEnabled": true,
+        "editEnabled": false,
+        "enabled": false
+    },
+    "webformInfo": {
+        "settings": {
+            "captcha": {
+                "content": "",
+                "isEnabled": false
+            },
+            "draftInfo": {
+                "isEnabled": false
+            },
+            "isVersionLocked": true,
+            "multiSubmissionInfo": {
+                "autoReload": -1,
+                "maxAllowed": 0,
+                "redirectUrl": "",
+                "showSubmitAnotherTip": false
+            },
+            "notificationsInfo": {
+            },
+            "openStatusInfo": {
+                "closedStatusContent": "",
+                "schedule": {
+                    "end": null,
+                    "start": null
+                },
+                "status": "open"
+            },
+            "recordStartEndTime": {
+                "fieldInfos": [
+                ],
+                "isEnabled": false
+            },
+            "thankYouScreenContent": ""
+        },
+        "themes": [
+        ]
+    }
+}

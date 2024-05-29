@@ -1,0 +1,62 @@
+{
+    "access": "org",
+    "accessInformation": null,
+    "appCategories": [
+    ],
+    "avgRating": 0,
+    "banner": null,
+    "categories": [
+    ],
+    "commentsEnabled": false,
+    "created": 1668877680643,
+    "culture": "en-us",
+    "description": "\n<p style='-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;'><br /></p>",
+    "documentation": null,
+    "extent": [
+    ],
+    "groupDesignations": null,
+    "guid": null,
+    "id": "f032871677f74a8a940a693187de0ca9",
+    "industries": [
+    ],
+    "isOrgItem": true,
+    "itemControl": "admin",
+    "languages": [
+    ],
+    "largeThumbnail": null,
+    "licenseInfo": null,
+    "listed": false,
+    "modified": 1717010082644,
+    "name": "NW_Florida_Hydrologic_Field_Form.zip",
+    "numComments": 0,
+    "numRatings": 0,
+    "numViews": 338,
+    "orgId": "0123456789ABCDEF",
+    "owner": "PortalPublisher",
+    "ownerFolder": "00424ccd6b064428b4ba071946e412b9",
+    "properties": {
+        "connectVersion": "3.19.116",
+        "isVersionLocked": true
+    },
+    "protected": true,
+    "proxyFilter": null,
+    "scoreCompleteness": 48,
+    "screenshots": [
+    ],
+    "size": 172700,
+    "snippet": "Station Maintenance and Data Download",
+    "spatialReference": null,
+    "tags": [
+    ],
+    "thumbnail": "thumbnail/thumbnail1690493424187.png",
+    "title": "Hydrologic Monitoring Field Collection",
+    "type": "Form",
+    "typeKeywords": [
+        "Form",
+        "requireUpdate",
+        "Survey123",
+        "Survey123 Connect",
+        "xForm"
+    ],
+    "url": null
+}
