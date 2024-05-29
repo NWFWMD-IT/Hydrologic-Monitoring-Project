@@ -96,6 +96,7 @@
 --	2022-12-14 MCM Switch to [master] at end, to facilitae development testing
 --	2023-04-25 MCM Moved data/log files to `hydro` directory
 --	2023-08-23 MCM Add rmd_db group as end user
+--	2024-05-29 MCM Add [ESRI Service] group as end user
 --
 -- To do:
 --	Localize for NWFWMD environment:
@@ -266,6 +267,22 @@ GO
 
 ALTER ROLE [db_datareader]
 ADD MEMBER [HQ\rmd_db]
+;
+
+GO
+
+
+
+CREATE USER [HQ\Esri Service]
+WITH
+	DEFAULT_SCHEMA = [dbo]
+;
+
+GO
+
+
+ALTER ROLE [db_datareader]
+ADD MEMBER [HQ\Esri Service]
 ;
 
 GO

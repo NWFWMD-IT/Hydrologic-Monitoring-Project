@@ -76,6 +76,7 @@
 #	                 replacement flag (#168)
 #	               Updated various domain values (#140, #153, #164, #167)
 #	2024-03-15 MCM Removed column StageMeasurement.IsDischarge (#159)
+#	2024-05-29 MCM Add ConductivityMeasurement.PrecalibrationLevel (#177)
 #
 # To do:
 #	none
@@ -515,6 +516,7 @@ def create_table_conductivitymeasurement(
 		,('SensorAdjustmentException'	,'TEXT'		,None		,None	,32		,'Sensor Adjustment Exception'	,True		,False		,'Conductivity Adjustment Exception'	,None)
 		,('SensorAdjustmentComments'	,'TEXT'		,None		,None	,1024		,'Sensor Adjustment Comments'	,True		,False		,None					,None)
 		,('CalibrationStandard'		,'LONG'		,None		,None	,None		,'Calibration Standard'		,True		,False		,'Conductivity Standard'		,None)
+		,('PrecalibrationLevel'		,'LONG'		,None		,None	,None		,'Precalibration Value'		,True		,False		,None					,None)
 		,('VerificationStandard'	,'LONG'		,None		,None	,None		,'Verification Standard'	,True		,False		,'Conductivity Standard'		,None)
 		,('VerificationLevel'		,'LONG'		,None		,None	,None		,'Verification Sensor Level'	,True		,False		,None					,None)
 		,('VerificationDate'		,'DATE'		,None		,None	,None		,'Verification Date'		,True		,False		,None					,None)
