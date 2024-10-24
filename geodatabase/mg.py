@@ -44,11 +44,12 @@
 #	2023-02-23 MCM Added custom logging levels DATA and DATADEBUG
 #	2023-03-13 MCM Changed `attachments_upgrade` default to True
 #	2023-11-27 MCM Added asdict()
+#	2024-10-22 MCM Added create_view()
 #
 # To do:
 #	none
 #
-# Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -244,16 +245,18 @@ def add_fields(
 
 	for field_spec in fields_spec:
 
-		name = field_spec[0]
-		data_type = field_spec[1]
-		precision = field_spec[2]
-		scale = field_spec[3]
-		length = field_spec[4]
-		alias = field_spec[5]
-		is_nullable = field_spec[6]
-		is_required = field_spec[7]
-		domain = field_spec[8]
-		default = field_spec[9]
+		(
+			name
+			,data_type
+			,precision
+			,scale
+			,length
+			,alias
+			,is_nullable
+			,is_required
+			,domain
+			,default
+		) = field_spec
 
 
 
@@ -312,8 +315,10 @@ def add_subtypes(
 	,indent_level = 0
 ):
 
-	field_name = subtype_spec[0]
-	subtypes = subtype_spec[1]
+	(
+		field_name
+		,subtypes
+	) = subtype_spec
 
 
 
@@ -333,8 +338,10 @@ def add_subtypes(
 
 	for subtype in subtypes:
 
-		code = subtype[0]
-		description = subtype[1]
+		(
+			code
+			,description
+		) = subtype
 
 
 		logging.info(
@@ -453,9 +460,11 @@ def assign_privileges(
 
 	for privilege in privileges_spec:
 
-		username = privilege[0]
-		read_privilege = privilege[1]
-		write_privilege = privilege[2]
+		(
+			username
+			,read_privilege
+			,write_privilege
+		) = privilege
 
 
 		logging.info(
@@ -509,8 +518,10 @@ def create_domain_cv(
 
 	for cv in coded_values:
 
-		code = cv[0]
-		description = cv[1]
+		(
+			code
+			,description
+		) = cv
 
 
 		logging.info(
@@ -727,7 +738,7 @@ def create_fc(
 	if privileges:
 
 		logging.info(
-			'Granting privileges'
+			'Assigning privileges'
 			,extra = {'indent_level': indent_level + 1}
 		)
 
@@ -1048,7 +1059,7 @@ def create_table(
 	if privileges:
 
 		logging.info(
-			'Granting privileges'
+			'Assigning privileges'
 			,extra = {'indent_level': indent_level + 1}
 		)
 
@@ -1058,6 +1069,136 @@ def create_table(
 			,privileges_spec = privileges
 			,indent_level = indent_level + 2
 		)
+
+
+
+def create_view(
+	gdb
+	,view_name
+	,view_text
+	,view_alias = None
+	,object_id_field_name = None
+	,shape_field_name = None
+	,geometry_type = None
+	,sr = None
+	,extent = None
+	,field_aliases = None
+	,privileges = None
+	,indent_level = 0
+):
+
+
+	# Log start message
+	
+	logging.info(
+		f'Creating view {view_name}'
+		,extra = {'indent_level': indent_level}
+	)
+	
+	
+	
+	# Create view
+	
+	arcpy.management.CreateDatabaseView(
+		input_database = gdb
+		,view_name = view_name
+		,view_definition = view_text
+	)
+	
+	
+	view = os.path.join(
+		gdb
+		,view_name
+	)
+	
+	
+	
+	# Register with geodatabase
+	
+	logging.info(
+		'Registering with geodatabase'
+		,extra = {'indent_level': indent_level + 1}
+	)
+	
+	
+	arcpy.management.RegisterWithGeodatabase(
+		in_dataset = view
+		,in_object_id_field = object_id_field_name
+		,in_shape_field = shape_field_name
+		,in_geometry_type = geometry_type
+		,in_spatial_reference = sr
+		,in_extent = extent
+	)
+	
+	
+	
+	# Set view alias
+	
+	if view_alias:
+	
+		logging.info(
+			'Setting view alias'
+			,extra = {'indent_level': indent_level + 1}
+		)
+		
+		
+		arcpy.AlterAliasName(
+			table = view
+			,alias = view_alias
+		)
+	
+	
+	
+	# Set field aliases
+	
+	if field_aliases:
+	
+		logging.info(
+			'Setting field aliases'
+			,extra = {'indent_level': indent_level + 1}
+		)
+		
+		for alias in field_aliases:
+		
+			(
+				field_name
+				,field_alias
+			) = alias
+			
+			
+			logging.info(
+				f'{field_name} > {field_alias}'
+				,extra = {'indent_level': indent_level + 2}
+			)
+			
+			
+			arcpy.management.AlterField(
+				in_table = view
+				,field = field_name
+				,new_field_alias = field_alias
+			)
+		
+		
+		
+	# Assign privileges
+	
+	if privileges:
+	
+		logging.info(
+			'Assigning privileges'
+			,extra = {'indent_level': indent_level + 1}
+		)
+		
+		
+		assign_privileges(
+			table = view
+			,privileges_spec = privileges
+			,indent_level = indent_level + 2
+			
+		)
+	
+		
+
 
 
 
@@ -1084,8 +1225,10 @@ def set_subtype_domains(
 
 	for domain_spec in domains_spec:
 
-		field_name = domain_spec[0]
-		assignments = domain_spec[1]
+		(
+			field_name
+			,assignments
+		) = domain_spec
 
 
 		logging.info(
@@ -1096,8 +1239,10 @@ def set_subtype_domains(
 
 		for assignment in assignments:
 
-			subtype_code = assignment[0]
-			domain_name = assignment[1]
+			(
+				subtype_code
+				,domain_name
+			) = assignment
 
 
 			logging.info(

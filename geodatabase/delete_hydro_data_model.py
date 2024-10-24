@@ -36,6 +36,7 @@
 #	2022-12-14 MCM Moved literals to constant OS_USERNAMES
 #	2023-02-22 MCM Moved constants to constants.py
 #	2023-03-14 MCM Replaced OS_USERNAMES_SDE with dynamic domain name
+#	2024-10-22 MCM Added view capability (#191)
 #
 # To do:
 #	none
@@ -136,6 +137,11 @@ FC_NAMES = (
 
 HISTORY_TABLE_NAMES = (
 	'Location_H'
+	,
+)
+
+VIEW_NAMES = (
+	'LocationLastVisit'
 	,
 )
 
@@ -255,6 +261,52 @@ def delete_tables(
 			r = arcpy.management.Delete(
 				in_data = table
 				,data_type = 'Table'
+			)
+			
+			
+			if r.maxSeverity > 0:
+			
+				logging.error(
+					f'Failed to delete with message:\n{r.getMessages()}'
+					,extra = {'indent_level': indent_level + 1}
+				)
+				
+				
+		except Exception as e:
+			
+				logging.error(
+					f'Failed to delete with message:\n{e}'
+					,extra = {'indent_level': indent_level + 1}
+				)
+
+
+
+
+def delete_views(
+	gdb
+	,view_names # tuple
+	,indent_level = 0
+):
+
+	for view_name in view_names:
+	
+		view = os.path.join(
+			gdb
+			,view_name
+		)
+		
+		
+	
+		try:
+		
+			logging.info(
+				view_name
+				,extra = {'indent_level': indent_level}
+			)
+			
+			r = arcpy.management.Delete(
+				in_data = view
+				# ,data_type = 'Table' # Current doc does not have view-specific data type
 			)
 			
 			
@@ -730,6 +782,20 @@ if __name__ == '__main__':
 		sys.exit(mg.EXIT_FAILURE)
 
 	
+	
+	#
+	# Delete views
+	#
+	
+	logging.info('Deleting views')
+	
+	delete_views(
+		gdb = gdb
+		,view_names = VIEW_NAMES
+		,indent_level = 1
+	)
+
+
 	
 	#
 	# Delete feature classes

@@ -77,6 +77,7 @@
 #	               Updated various domain values (#140, #153, #164, #167)
 #	2024-03-15 MCM Removed column StageMeasurement.IsDischarge (#159)
 #	2024-05-29 MCM Add ConductivityMeasurement.PrecalibrationLevel (#177)
+#	2024-10-21 MCM Add view creation capability + LocationLastVisit view (#191)
 #
 # To do:
 #	none
@@ -104,6 +105,7 @@ import tempfile
 
 import constants as C
 import mg
+import sql_text
 
 
 
@@ -355,9 +357,11 @@ def create_domains(
 
 	for d in domains_cv:
 
-		domain_name = d[0]
-		data_type = d[1]
-		coded_values = d[2]
+		(
+			domain_name
+			,data_type
+			,coded_values
+		) = d
 
 
 		mg.create_domain_cv(
@@ -1208,6 +1212,73 @@ def create_rcs(
 
 
 
+####################
+# Views
+####################
+
+def create_views(
+	gdb
+	,indent_level = 0
+):
+
+	create_view_locationlastvisit(gdb, indent_level)
+
+
+
+def create_view_locationlastvisit(
+	gdb
+	,indent_level = 0
+):
+
+	
+	# Configuration
+	
+	view_name = 'LocationLastVisit'
+	view_text = sql_text.SQL_VIEW_LOCATIONLASTVISIT
+	view_alias = 'Location Last Visit'
+	
+	object_id_field_name = 'id'
+	shape_field_name = 'shape'
+	
+	geometry_type = 'POINT'
+	sr = C.SR_UTM16N_NAD83
+	extent = C.EXTENT_DISTRICT
+	
+	field_aliases = (
+		#name			,alias
+		('ID'			,'Geodatabase Unique ID')
+		,('NWFID'		,'NWFID')
+		,('Name'		,'Name')
+		,('LastVisit'		,'Last Visit')
+	)
+	
+	privileges = (
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
+		,
+	)
+	
+	
+	
+	# Create view
+	
+	mg.create_view(
+		gdb = gdb
+		,view_name = view_name
+		,view_text = view_text
+		,view_alias = view_alias
+		,object_id_field_name = object_id_field_name
+		,shape_field_name = shape_field_name
+		,geometry_type = geometry_type
+		,sr = sr
+		,extent = extent
+		,field_aliases = field_aliases
+		,privileges = privileges
+		,indent_level = 0
+	)
+	
+
+
 ################################################################################
 # Utility functions
 ################################################################################
@@ -1455,7 +1526,7 @@ def _get_domain():
 	domain = os.environ['USERDOMAIN']
 	
 	
-	if domain in ( # Development Windows Workgroup
+	if domain.upper() in ( # Development Windows Workgroup
 		'APOLLO'
 		,'CITRA'
 		,'PORTER'
@@ -1734,6 +1805,19 @@ if __name__ == '__main__':
 	logging.info('Creating relationship classes')
 
 	create_rcs(
+		gdb = gdb
+		,indent_level = 1
+	)
+
+
+
+	#
+	# Create views
+	#
+
+	logging.info('Creating views')
+
+	create_views(
 		gdb = gdb
 		,indent_level = 1
 	)
