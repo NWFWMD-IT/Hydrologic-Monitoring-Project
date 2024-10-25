@@ -42,17 +42,17 @@ WITH lv (
 	SELECT
 		LocationGlobalID
 		,MAX(VisitDate)
-	FROM LocationVisit
+	FROM hydro.LocationVisit_EVW
 	GROUP BY
 		LocationGlobalID
 )
 SELECT
 	l.Shape
-	,l.gdb_archive_oid ID
+	,l.ObjectID ID
 	,l.NWFID
 	,l.Name
 	,lv.LastVisit
-FROM Location l
+FROM hydro.Location_EVW l
 LEFT JOIN lv ON
 	l.GlobalID = lv.LocationGlobalID
 '''
