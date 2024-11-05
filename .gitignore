@@ -20,3 +20,5 @@ geodatabase/MapImageSharingDraftExample_RECONCILE.sddraft
 geodatabase/publish_service_SCREENSHARE.py
 geodatabase/publish_service_SCREENSHARE_HOSTED.py
 *.nppsession
+geodatabase/TEST_create_view_attachment_count.sql
+geodatabase/TEST_create_view_attachments.sql
