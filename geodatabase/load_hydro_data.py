@@ -46,6 +46,7 @@
 #	                 Added filters for invalid records
 #	2023-09-29 MCM Add `Location.HasSensor/HasMeasuringPoint` properties (#126)
 #	2024-02-05 MCM Reject Measuring Points with non-NULL `DecommissionDate` (#131)
+#	2024-11-05 MCM Add `IsActive` property to Sensor / DataLogger objects (#193)
 #
 # To do:
 #	Switch from local asdict to mg.asdict
@@ -118,6 +119,7 @@ class DataLogger:
 		'Type'
 		,'SerialNumber'
 		,'LowVoltage'
+		,'IsActive'
 		,'Comments'
 	)
 
@@ -179,7 +181,8 @@ class DataLogger:
 		# attribute
 
 		for f in (
-			self.transform_serialnumber
+			self.transform_isactive
+			,self.transform_serialnumber
 			,self.transform_type
 			# Follows transform_type
 			,self.transform_lowvoltage
@@ -187,6 +190,12 @@ class DataLogger:
 
 			logging.debug(f'Executing: {f.__name__}')
 			f()
+
+
+
+	def transform_isactive(self):
+	
+		self.IsActive = 'Yes' # Hardwired until new data source available
 
 
 
@@ -210,7 +219,6 @@ class DataLogger:
 			self.LowVoltage = 12.45
 			
 		
-	
 	
 	def transform_serialnumber(self):
 
@@ -1603,6 +1611,7 @@ class Sensor:
 	ATTRIBUTES = (
 		'Type'
 		,'SerialNumber'
+		,'IsActive'
 		,'Comments'
 	)
 
@@ -1664,12 +1673,19 @@ class Sensor:
 		# attribute
 
 		for f in (
-			self.transform_serialnumber
+			self.transform_isactive
+			,self.transform_serialnumber
 			,self.transform_type
 		):
 
 			logging.debug(f'Executing: {f.__name__}')
 			f()
+
+
+
+	def transform_isactive(self):
+	
+		self.IsActive = 'Yes' # Hardwired until new data source available
 
 
 
