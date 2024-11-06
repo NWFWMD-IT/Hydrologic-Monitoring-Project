@@ -208,6 +208,7 @@ class DataLogger:
 		if self.Type == 'OTT Orpheus Mini':
 		
 			self.LowBattery = 4
+			self.LowBatteryUnits = 'Volts'
 			
 			
 		elif self.Type in (
