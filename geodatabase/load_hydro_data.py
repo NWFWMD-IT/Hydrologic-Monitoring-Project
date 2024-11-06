@@ -47,6 +47,9 @@
 #	2023-09-29 MCM Add `Location.HasSensor/HasMeasuringPoint` properties (#126)
 #	2024-02-05 MCM Reject Measuring Points with non-NULL `DecommissionDate` (#131)
 #	2024-11-05 MCM Add `IsActive` property to Sensor / DataLogger objects (#193)
+#	               Enhance Data Logger battery properties (#195)
+#	                 Rename property `LowVoltage` to `LowBattery`
+#	                 Add property `LowBatteryUnits`
 #
 # To do:
 #	Switch from local asdict to mg.asdict
@@ -118,7 +121,8 @@ class DataLogger:
 	ATTRIBUTES = (
 		'Type'
 		,'SerialNumber'
-		,'LowVoltage'
+		,'LowBattery'
+		,'LowBatteryUnits'
 		,'IsActive'
 		,'Comments'
 	)
@@ -185,7 +189,7 @@ class DataLogger:
 			,self.transform_serialnumber
 			,self.transform_type
 			# Follows transform_type
-			,self.transform_lowvoltage
+			,self.transform_lowbattery # Set LowBattery and LowBatteryUnits
 		):
 
 			logging.debug(f'Executing: {f.__name__}')
@@ -199,26 +203,54 @@ class DataLogger:
 
 
 
-	def transform_lowvoltage(self): # See #89 for documentation
+	def transform_lowbattery(self): # Set LowBattery and LowBatteryUnits
 	
 		if self.Type == 'OTT Orpheus Mini':
 		
-			self.LowVoltage = 4.2
+			self.LowBattery = 4
 			
 			
 		elif self.Type in (
-			'In-Situ Level Troll 500'
-			,'In-Situ Level Troll 700'
+			'High Sierra 3208'
+			,'Sutron 9210'
+			,'Sutron CDMALink'
+			,'Sutron SatLink 3'
+			,'Sutron XLink 100'
+			,'Sutron XLink 500'
+			,'WaterLog H500XL'
+			,'WaterLog H522+'
+			,'WaterLog Storm'
 		):
 		
-			self.LowVoltage = 40
+			self.LowBattery = 12.5
+			self.LowBatteryUnits = 'Volts'
+
+		
+		elif self.Type in (
+			'In-Situ Level Troll 500'
+			,'In-Situ Level Troll 700'
+			,'In-Situ Rugged Baro Troll'
+			,'In-Situ Rugged Troll'
+			,'Keller CTD'
+		):
+		
+			self.LowBattery = 40
+			self.LowBatteryUnits = 'Percent'
 		
 		
+		elif self.Type in (
+			'OTT Ecolog 1000'
+			,
+		):
+		
+			self.LowBattery = 18000
+			self.LowBatteryUnits = 'mAh'
+
+
 		else:
 		
-			self.LowVoltage = 12.45
+			raise ValueError(f'Data Logger: Unknown low battery level / units for type {self.Type}')
 			
-		
 	
 	def transform_serialnumber(self):
 

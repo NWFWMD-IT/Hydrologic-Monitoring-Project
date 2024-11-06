@@ -79,6 +79,10 @@
 #	2024-05-29 MCM Add ConductivityMeasurement.PrecalibrationLevel (#177)
 #	2024-10-21 MCM Add view creation capability + LocationLastVisit view (#191)
 #	2024-11-05 MCM Add IsActive columns to Sensor / DataLogger tables (#193)
+#                Enhance data logger battery properties (#195)
+#	                 Rename column LowVoltage to LowBattery
+#	                 Add column LowBatteryUnits
+#	                 Add domain Battery Units
 #
 # To do:
 #	none
@@ -170,6 +174,13 @@ def create_domains(
 				('No materials', 'No materials')
 				,('Has solar panel', 'Has solar panel')
 				,('Other', 'Other')
+			)
+		)
+		,(
+			'Battery Units', 'TEXT' (
+				('Volts', 'Volts')
+				,('Percent', 'Percent')
+				,('mAh', 'mAh')
 			)
 		)
 		,(
@@ -581,9 +592,10 @@ def create_table_datalogger(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Type'				,'TEXT'		,None		,None	,64		,'Data Logger Type'		,True		,False		,'Data Logger Type'			,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
-		,('LowVoltage'			,'DOUBLE'	,38		,2	,None		,'Low Battery Limit (volts or percent)'	,True	,False		,None					,None)
-		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
+		,('LowBattery'			,'DOUBLE'	,38		,2	,None		,'Low Battery Limit'		,True		,False		,None					,None)
+		,('LowBatteryUnits'		,'TEXT'		,None		,None	,16		,'Low Battery Units'		,True		,False		,'Battery Units'
 		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
+		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
 	)
 
@@ -1004,8 +1016,8 @@ def create_table_sensor(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Type'				,'TEXT'		,None		,None	,32		,'Sensor Type'			,True		,False		,'Sensor Type'				,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
-		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
+		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('DataLoggerGlobalID'		,'GUID'		,None		,None	,None		,'Related Data Logger'		,True		,False		,None					,None)
 	)
 
