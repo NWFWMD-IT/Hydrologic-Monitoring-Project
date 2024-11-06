@@ -37,6 +37,7 @@
 #	2023-02-22 MCM Moved constants to constants.py
 #	2023-03-14 MCM Replaced OS_USERNAMES_SDE with dynamic domain name
 #	2024-10-22 MCM Added view capability (#191)
+#	2024-11-05 MCM Added domain Battery Units (#195)
 #
 # To do:
 #	none
@@ -104,6 +105,7 @@ DOMAIN_NAMES = (
 	,'ADVM Cleaned Exception'
 	,'ADVM Maintenance'
 	,'Battery Replacement Exception'
+	,'Battery Units'
 	,'Conductivity Adjustment Exception'
 	,'Conductivity Serial Number'
 	,'Conductivity Standard'
