@@ -78,6 +78,7 @@
 #	2024-03-15 MCM Removed column StageMeasurement.IsDischarge (#159)
 #	2024-05-29 MCM Add ConductivityMeasurement.PrecalibrationLevel (#177)
 #	2024-10-21 MCM Add view creation capability + LocationLastVisit view (#191)
+#	2024-11-05 MCM Add IsActive columns to Sensor / DataLogger tables (#193)
 #
 # To do:
 #	none
@@ -582,7 +583,8 @@ def create_table_datalogger(
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
 		,('LowVoltage'			,'DOUBLE'	,38		,2	,None		,'Low Battery Limit (volts or percent)'	,True	,False		,None					,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
-		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
+		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
+		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
 	)
 
 	subtypes = None
@@ -1003,6 +1005,7 @@ def create_table_sensor(
 		('Type'				,'TEXT'		,None		,None	,32		,'Sensor Type'			,True		,False		,'Sensor Type'				,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
+		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
 		,('DataLoggerGlobalID'		,'GUID'		,None		,None	,None		,'Related Data Logger'		,True		,False		,None					,None)
 	)
 
