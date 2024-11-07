@@ -177,7 +177,7 @@ def create_domains(
 			)
 		)
 		,(
-			'Battery Units', 'TEXT' (
+			'Battery Units', 'TEXT', (
 				('Volts', 'Volts')
 				,('Percent', 'Percent')
 				,('mAh', 'mAh')
@@ -593,10 +593,10 @@ def create_table_datalogger(
 		('Type'				,'TEXT'		,None		,None	,64		,'Data Logger Type'		,True		,False		,'Data Logger Type'			,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
 		,('LowBattery'			,'DOUBLE'	,38		,2	,None		,'Low Battery Limit'		,True		,False		,None					,None)
-		,('LowBatteryUnits'		,'TEXT'		,None		,None	,16		,'Low Battery Units'		,True		,False		,'Battery Units'
+		,('LowBatteryUnits'		,'TEXT'		,None		,None	,16		,'Low Battery Units'		,True		,False		,'Battery Units'			,None)
 		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
-		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
+		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
 	)
 
 	subtypes = None

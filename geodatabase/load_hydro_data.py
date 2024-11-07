@@ -205,42 +205,42 @@ class DataLogger:
 
 	def transform_lowbattery(self): # Set LowBattery and LowBatteryUnits
 	
-		if self.Type == 'OTT Orpheus Mini':
+		if self.Type.lower() == 'ott orpheus mini':
 		
 			self.LowBattery = 4
 			self.LowBatteryUnits = 'Volts'
 			
 			
-		elif self.Type in (
-			'High Sierra 3208'
-			,'Sutron 9210'
-			,'Sutron CDMALink'
-			,'Sutron SatLink 3'
-			,'Sutron XLink 100'
-			,'Sutron XLink 500'
-			,'WaterLog H500XL'
-			,'WaterLog H522+'
-			,'WaterLog Storm'
+		elif self.Type.lower() in (
+			'high sierra 3208'
+			,'sutron 9210'
+			,'sutron cdmalink'
+			,'sutron satlink 3'
+			,'sutron xlink 100'
+			,'sutron xlink 500'
+			,'waterlog h500xl'
+			,'waterlog h522+'
+			,'waterlog storm'
 		):
 		
 			self.LowBattery = 12.5
 			self.LowBatteryUnits = 'Volts'
 
 		
-		elif self.Type in (
-			'In-Situ Level Troll 500'
-			,'In-Situ Level Troll 700'
-			,'In-Situ Rugged Baro Troll'
-			,'In-Situ Rugged Troll'
-			,'Keller CTD'
+		elif self.Type.lower() in (
+			'in-situ level troll 500'
+			,'in-situ level troll 700'
+			,'in-situ rugged baro troll'
+			,'in-situ rugged troll'
+			,'keller ctd'
 		):
 		
 			self.LowBattery = 40
 			self.LowBatteryUnits = 'Percent'
 		
 		
-		elif self.Type in (
-			'OTT Ecolog 1000'
+		elif self.Type.lower() in (
+			'ott ecolog 1000'
 			,
 		):
 		
@@ -2483,7 +2483,9 @@ def write_data_logger(
 		,field_names = (
 			'Type'
 			,'SerialNumber'
-			,'LowVoltage'
+			,'LowBattery'
+			,'LowBatteryUnits'
+			,'IsActive'
 			,'Comments'
 			,'LocationGlobalID'
 		)
@@ -2745,6 +2747,7 @@ def write_sensors(
 		,field_names = (
 			'Type'
 			,'SerialNumber'
+			,'IsActive'
 			,'Comments'
 			,'DataLoggerGlobalID'
 		)
