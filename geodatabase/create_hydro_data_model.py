@@ -83,6 +83,10 @@
 #	                 Rename column LowVoltage to LowBattery
 #	                 Add column LowBatteryUnits
 #	                 Add domain Battery Units
+#	2024-12-13 MCM Add Location Issue domain value 'General Note' (#200)
+#	               Rename columns on table LocationVisit:
+#	                 BatteryVoltage > BatteryLevel
+#	                 BatteryVoltage2 > BatteryLevel2
 #
 # To do:
 #	none
@@ -276,6 +280,7 @@ def create_domains(
 				,('Vandalism - Solar panel', 'Vandalism - Solar panel')
 				,('Vandalism - Transducer', 'Vandalism - Transducer')
 				,('Other', 'Other')
+				,('General Note', 'General Note')
 			)
 		)
 		,(
@@ -784,8 +789,8 @@ def create_table_locationvisit(
 		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,'No')
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
 		,('BatteryNeedsReplacement'		,'TEXT'		,None		,None	,3		,'Battery Needs Replacement'		,True		,False		,'Yes/No'				,None)
-		,('BatteryVoltage'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage'			,True		,False		,None					,None)
-		,('BatteryVoltage2'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage (new battery)'	,True		,False		,None					,None)
+		,('BatteryLevel'			,'DOUBLE'	,38		,2	,None		,'Battery Level'			,True		,False		,None					,None)
+		,('BatteryLevel2'			,'DOUBLE'	,38		,2	,None		,'Battery Level (new battery)'	,True		,False		,None					,None)
 		,('BatteryReplaced'			,'TEXT'		,None		,None	,3		,'Battery Replaced (new battery)'	,True		,False		,'Yes/No'				,None)
 		,('BatteryReplacementDate'		,'DATE'		,None		,None	,None		,'Battery Replacement Date'		,True		,False		,None					,None)
 		,('BatteryReplacementException'		,'TEXT'		,None		,None	,32		,'Battery Replacement Exception'	,True		,False		,'Battery Replacement Exception'	,None)
