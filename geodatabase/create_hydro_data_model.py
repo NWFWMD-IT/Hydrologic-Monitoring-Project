@@ -84,7 +84,7 @@
 #	                 Add column LowBatteryUnits
 #	                 Add domain Battery Units
 #	2024-12-13 MCM Add Location Issue domain value 'General Note' (#200)
-#	               Rename columns on table LocationVisit:
+#	               Rename columns on table LocationVisit (#201):
 #	                 BatteryVoltage > BatteryLevel
 #	                 BatteryVoltage2 > BatteryLevel2
 #
