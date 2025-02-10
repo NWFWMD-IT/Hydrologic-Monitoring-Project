@@ -87,6 +87,11 @@
 #	               Rename columns on table LocationVisit (#201):
 #	                 BatteryVoltage > BatteryLevel
 #	                 BatteryVoltage2 > BatteryLevel2
+#	2025-02-01 MCM Update domains from Aquarius export (#203):
+#	                 Conductivity Serial Number
+#	                 Data Logger Type
+#	                 Sensor Type
+#	                 Temperature Serial Number
 #
 # To do:
 #	none
@@ -197,7 +202,10 @@ def create_domains(
 		)
 		,(
 			'Conductivity Serial Number', 'TEXT', (
-				('252529', '252529')
+				('00J1251', '00J1251')
+				,('21A105572', '21A105572')
+				,('22K100733', '22K100733')
+				,('252529', '252529')
 				,('252531', '252531')
 			)
 		)
@@ -217,19 +225,17 @@ def create_domains(
 				,('In-Situ Rugged Baro Troll', 'In-Situ Rugged Baro Troll')
 				,('In-Situ Rugged Troll 100', 'In-Situ Rugged Troll 100')
 				,('Keller CTD', 'Keller CTD')
-				,('Ott EcoLog1000', 'Ott EcoLog1000')
-				,('Ott Orpheus Mini', 'Ott Orpheus Mini')
-				,('Sontek Argonaut', 'Sontek Argonaut')
-				,('Sutron 7310', 'Sutron 7310')
+				,('OTT Ecolog 1000', 'OTT Ecolog 1000')
+				,('OTT Orpheus Mini', 'OTT Orpheus Mini')
 				,('Sutron 9210', 'Sutron 9210')
 				,('Sutron CDMALink', 'Sutron CDMALink')
-				,('Sutron SatLink Lite3', 'Sutron SatLink Lite3')
-				,('Sutron SatLink3', 'Sutron SatLink3')
+				,('Sutron Satlink 3', 'Sutron Satlink 3')
+				,('Sutron Satlink3', 'Sutron Satlink3')
 				,('Sutron XLink 100', 'Sutron XLink 100')
 				,('Sutron XLink 500', 'Sutron XLink 500')
 				,('WaterLog H500XL', 'WaterLog H500XL')
 				,('WaterLog H522+', 'WaterLog H522+')
-				,('WaterLog Storm3 ', 'WaterLog Storm3 ')
+				,('WaterLog Storm', 'WaterLog Storm')
 			)
 		)
 		,(
@@ -301,16 +307,19 @@ def create_domains(
 		)
 		,(
 			'Sensor Type', 'TEXT', (
-				('In-Situ Aqua Troll 500', 'In-Situ Aqua Troll 500')
+				('Hydrological Services TB3', 'Hydrological Services TB3')
+				,('Hydrological Services TB4', 'Hydrological Services TB4')
+				,('In-Situ Aqua Troll 500', 'In-Situ Aqua Troll 500')
 				,('In-Situ Level Troll 500', 'In-Situ Level Troll 500')
 				,('Keller Acculevel', 'Keller Acculevel')
 				,('KPSI 500', 'KPSI 500')
-				,('Ott PLS', 'Ott PLS')
-				,('Ott PLS-C', 'Ott PLS-C')
-				,('SonTek SL 1500', 'SonTek SL 1500')
+				,('OTT PLS', 'OTT PLS')
+				,('OTT PLS-C', 'OTT PLS-C')
+				,('RDI ChannelMaster', 'RDI ChannelMaster')
+				,('Sontek Argonaut ADV', 'Sontek Argonaut ADV')
+				,('Sontek SL 1500', 'Sontek SL 1500')
 				,('Sutron RLR', 'Sutron RLR')
-				,('Teledyne Channel Master', 'Teledyne Channel Master')
-				,('WaterLog Encoder H-3311', 'WaterLog Encoder H-3311')
+				,('WaterLog H-3311', 'WaterLog H-3311')
 				,('WaterLog Pulse Radar', 'WaterLog Pulse Radar')
 			)
 		)
@@ -334,11 +343,16 @@ def create_domains(
 		)
 		,(
 			'Temperature Serial Number', 'TEXT', (
-				('252529', '252529')
-				,('252531', '252531')
+				('00J1251', '00J1251')
+				,('210843076', '210843076')
+				,('210910858', '210910858')
+				,('21A105572', '21A105572')
+				,('22K100733', '22K100733')
 				,('230514759', '230514759')
 				,('230514768', '230514768')
 				,('230514786', '230514786')
+				,('252529', '252529')
+				,('252531', '252531')
 				,('Transducer - NIST unavailable', 'Transducer - NIST unavailable')
 				,('Other', 'Other')
 			)
