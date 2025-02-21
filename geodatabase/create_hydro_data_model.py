@@ -7,9 +7,9 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.2
-#	Python 3.9.18, with:
-#		arcpy 3.2 (build py39_arcgispro_49690)
+#	ArcGIS Pro 3.4.2
+#	Python 3.11.10, with:
+#		arcpy 3.4 (build py311_arcgispro_55347)
 #
 # Notes:
 #
@@ -78,11 +78,28 @@
 #	2024-03-15 MCM Removed column StageMeasurement.IsDischarge (#159)
 #	2024-05-29 MCM Add ConductivityMeasurement.PrecalibrationLevel (#177)
 #	2024-10-21 MCM Add view creation capability + LocationLastVisit view (#191)
+#	2024-11-05 MCM Add IsActive columns to Sensor / DataLogger tables (#193)
+#                Enhance data logger battery properties (#195)
+#	                 Rename column LowVoltage to LowBattery
+#	                 Add column LowBatteryUnits
+#	                 Add domain Battery Units
+#	2024-12-13 MCM Add Location Issue domain value 'General Note' (#200)
+#	               Rename columns on table LocationVisit (#201):
+#	                 BatteryVoltage > BatteryLevel
+#	                 BatteryVoltage2 > BatteryLevel2
+#	2025-02-01 MCM Update column aliases (#178)
+#	               Update domains from Aquarius export (#203):
+#	                 Conductivity Serial Number
+#	                 Data Logger Type
+#	                 Sensor Type
+#	                 Temperature Serial Number
+#	               Rename column LocationVisit.InventoryVerified to
+#	                 EqiupmentChange (#205)
 #
 # To do:
 #	none
 #
-# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2025. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -172,6 +189,13 @@ def create_domains(
 			)
 		)
 		,(
+			'Battery Units', 'TEXT', (
+				('Volts', 'Volts')
+				,('Percent', 'Percent')
+				,('mAh', 'mAh')
+			)
+		)
+		,(
 			'Conductivity Adjustment Exception', 'TEXT', (
 				('No standards', 'No standards')
 				,('Sensor failed after calibration', 'Sensor failed after calibration')
@@ -181,7 +205,10 @@ def create_domains(
 		)
 		,(
 			'Conductivity Serial Number', 'TEXT', (
-				('252529', '252529')
+				('00J1251', '00J1251')
+				,('21A105572', '21A105572')
+				,('22K100733', '22K100733')
+				,('252529', '252529')
 				,('252531', '252531')
 			)
 		)
@@ -201,24 +228,22 @@ def create_domains(
 				,('In-Situ Rugged Baro Troll', 'In-Situ Rugged Baro Troll')
 				,('In-Situ Rugged Troll 100', 'In-Situ Rugged Troll 100')
 				,('Keller CTD', 'Keller CTD')
-				,('Ott EcoLog1000', 'Ott EcoLog1000')
-				,('Ott Orpheus Mini', 'Ott Orpheus Mini')
-				,('Sontek Argonaut', 'Sontek Argonaut')
-				,('Sutron 7310', 'Sutron 7310')
+				,('OTT Ecolog 1000', 'OTT Ecolog 1000')
+				,('OTT Orpheus Mini', 'OTT Orpheus Mini')
 				,('Sutron 9210', 'Sutron 9210')
 				,('Sutron CDMALink', 'Sutron CDMALink')
-				,('Sutron SatLink Lite3', 'Sutron SatLink Lite3')
-				,('Sutron SatLink3', 'Sutron SatLink3')
+				,('Sutron Satlink 3', 'Sutron Satlink 3')
+				,('Sutron Satlink3', 'Sutron Satlink3')
 				,('Sutron XLink 100', 'Sutron XLink 100')
 				,('Sutron XLink 500', 'Sutron XLink 500')
 				,('WaterLog H500XL', 'WaterLog H500XL')
 				,('WaterLog H522+', 'WaterLog H522+')
-				,('WaterLog Storm3 ', 'WaterLog Storm3 ')
+				,('WaterLog Storm', 'WaterLog Storm')
 			)
 		)
 		,(
 			'Desiccant Maintenance', 'TEXT', (
-				('Verified', 'Verified')
+				('Verified', 'Verified')
 				,('Replaced', 'Replaced')
 				,('Needs replacement - No materials', 'Needs replacement - No materials')
 				,('NA', 'NA')
@@ -264,6 +289,7 @@ def create_domains(
 				,('Vandalism - Solar panel', 'Vandalism - Solar panel')
 				,('Vandalism - Transducer', 'Vandalism - Transducer')
 				,('Other', 'Other')
+				,('General Note', 'General Note')
 			)
 		)
 		,(
@@ -284,16 +310,19 @@ def create_domains(
 		)
 		,(
 			'Sensor Type', 'TEXT', (
-				('In-Situ Aqua Troll 500', 'In-Situ Aqua Troll 500')
+				('Hydrological Services TB3', 'Hydrological Services TB3')
+				,('Hydrological Services TB4', 'Hydrological Services TB4')
+				,('In-Situ Aqua Troll 500', 'In-Situ Aqua Troll 500')
 				,('In-Situ Level Troll 500', 'In-Situ Level Troll 500')
 				,('Keller Acculevel', 'Keller Acculevel')
 				,('KPSI 500', 'KPSI 500')
-				,('Ott PLS', 'Ott PLS')
-				,('Ott PLS-C', 'Ott PLS-C')
-				,('SonTek SL 1500', 'SonTek SL 1500')
+				,('OTT PLS', 'OTT PLS')
+				,('OTT PLS-C', 'OTT PLS-C')
+				,('RDI ChannelMaster', 'RDI ChannelMaster')
+				,('Sontek Argonaut ADV', 'Sontek Argonaut ADV')
+				,('Sontek SL 1500', 'Sontek SL 1500')
 				,('Sutron RLR', 'Sutron RLR')
-				,('Teledyne Channel Master', 'Teledyne Channel Master')
-				,('WaterLog Encoder H-3311', 'WaterLog Encoder H-3311')
+				,('WaterLog H-3311', 'WaterLog H-3311')
 				,('WaterLog Pulse Radar', 'WaterLog Pulse Radar')
 			)
 		)
@@ -317,11 +346,16 @@ def create_domains(
 		)
 		,(
 			'Temperature Serial Number', 'TEXT', (
-				('252529', '252529')
-				,('252531', '252531')
+				('00J1251', '00J1251')
+				,('210843076', '210843076')
+				,('210910858', '210910858')
+				,('21A105572', '21A105572')
+				,('22K100733', '22K100733')
 				,('230514759', '230514759')
 				,('230514768', '230514768')
 				,('230514786', '230514786')
+				,('252529', '252529')
+				,('252531', '252531')
 				,('Transducer - NIST unavailable', 'Transducer - NIST unavailable')
 				,('Other', 'Other')
 			)
@@ -511,12 +545,12 @@ def create_table_conductivitymeasurement(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
-		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,'Conductivity Serial Number'		,None)
+		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Verification Serial Number'	,True		,False		,'Conductivity Serial Number'		,None)
 		,('ManualLevel'			,'LONG'		,None		,None	,None		,'Manual Measurement'		,True		,False		,None					,None)
-		,('SensorLevel'			,'LONG'		,None		,None	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
-		,('SensorAdjustmentAmount'	,'LONG'		,None		,None	,None		,'Sensor Adjustment Amount'	,True		,False		,None					,None)
+		,('SensorLevel'			,'LONG'		,None		,None	,None		,'Logger Conductivity'		,True		,False		,None					,None)
+		,('SensorAdjustmentAmount'	,'LONG'		,None		,None	,None		,'Calculated Difference'	,True		,False		,None					,None)
 		,('SensorAdjusted'		,'TEXT'		,None		,None	,3		,'Sensor Adjusted'		,True		,False		,'Yes/No'				,None)
-		,('SensorAdjustmentDate'	,'DATE'		,None		,None	,None		,'Sensor Adjustment Date'	,True		,False		,None					,None)
+		,('SensorAdjustmentDate'	,'DATE'		,None		,None	,None		,'Calibrated Date'		,True		,False		,None					,None)
 		,('SensorAdjustmentException'	,'TEXT'		,None		,None	,32		,'Sensor Adjustment Exception'	,True		,False		,'Conductivity Adjustment Exception'	,None)
 		,('SensorAdjustmentComments'	,'TEXT'		,None		,None	,1024		,'Sensor Adjustment Comments'	,True		,False		,None					,None)
 		,('CalibrationStandard'		,'LONG'		,None		,None	,None		,'Calibration Standard'		,True		,False		,'Conductivity Standard'		,None)
@@ -580,7 +614,9 @@ def create_table_datalogger(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Type'				,'TEXT'		,None		,None	,64		,'Data Logger Type'		,True		,False		,'Data Logger Type'			,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
-		,('LowVoltage'			,'DOUBLE'	,38		,2	,None		,'Low Battery Limit (volts or percent)'	,True	,False		,None					,None)
+		,('LowBattery'			,'DOUBLE'	,38		,2	,None		,'Low Battery Limit'		,True		,False		,None					,None)
+		,('LowBatteryUnits'		,'TEXT'		,None		,None	,16		,'Low Battery Units'		,True		,False		,'Battery Units'			,None)
+		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationGlobalID'		,'GUID'		,None		,None	,None		,'Related Location'		,True		,False		,None					,None)
 	)
@@ -639,13 +675,13 @@ def create_table_groundwatermeasurement(
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
 		,('ManualMethod'		,'TEXT'		,None		,None	,32		,'Manual Measurement Method'	,True		,False		,'Groundwater Method'			,None)
-		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Manual Measurement Method Comments'	,True	,False		,None					,None)
+		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Other Method'			,True	,False		,None					,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
 		,('ManualLevelHeld'		,'DOUBLE'	,38		,2	,None		,'Steel Tape Held At (feet)'	,True		,False		,None					,None)
 		,('ManualLevelWet'		,'DOUBLE'	,38		,2	,None		,'Steel Tape Wet At (feet)'	,True		,False		,None					,None)
-		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Computed Manual Water Level'	,True		,False		,None					,None)
-		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
-		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Sensor Adjustment Amount'	,True		,False		,None					,None)
+		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Calculated Manual Water Level'	,True		,False		,None					,None)
+		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Logger GWL'			,True		,False		,None					,None)
+		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Calculated Difference'	,True		,False		,None					,None)
 		,('SensorAdjusted'		,'TEXT'		,None		,None	,3		,'Sensor Adjusted'		,True		,False		,'Yes/No'				,None)
 		,('SensorAdjustmentDate'	,'DATE'		,None		,None	,None		,'Sensor Adjustment Date'	,True		,False		,None					,None)
 		,('SensorAdjustmentException'	,'TEXT'		,None		,None	,32		,'Sensor Adjustment Exception'	,True		,False		,'Groundwater Adjustment Exception'	,None)
@@ -766,13 +802,13 @@ def create_table_locationvisit(
 		#name					,type		,precision	,scale	,length		,alias					,nullable	,required	,domain					,default
 		('VisitDate'				,'DATE'		,None		,None	,None		,'Visit Date'				,True		,False		,None					,None)
 		,('Staff'				,'TEXT'		,None		,None	,1024		,'Visit Staff'				,True		,False		,None					,None)
-		,('StaffComments'			,'TEXT'		,None		,None	,1024		,'Staff Comments'			,True		,False		,None					,None)
-		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,'No')
+		,('StaffComments'			,'TEXT'		,None		,None	,1024		,'Other Staff'				,True		,False		,None					,None)
+		,('EquipmentChange'			,'TEXT'		,None		,None	,3		,'Equipment Change Needed'		,True		,False		,'Yes/No'				,'No')
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
 		,('BatteryNeedsReplacement'		,'TEXT'		,None		,None	,3		,'Battery Needs Replacement'		,True		,False		,'Yes/No'				,None)
-		,('BatteryVoltage'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage'			,True		,False		,None					,None)
-		,('BatteryVoltage2'			,'DOUBLE'	,38		,2	,None		,'Battery Voltage (new battery)'	,True		,False		,None					,None)
-		,('BatteryReplaced'			,'TEXT'		,None		,None	,3		,'Battery Replaced (new battery)'	,True		,False		,'Yes/No'				,None)
+		,('BatteryLevel'			,'DOUBLE'	,38		,2	,None		,'Battery Level'			,True		,False		,None					,None)
+		,('BatteryLevel2'			,'DOUBLE'	,38		,2	,None		,'Battery Level (new battery)'		,True		,False		,None					,None)
+		,('BatteryReplaced'			,'TEXT'		,None		,None	,3		,'Battery Replaced'			,True		,False		,'Yes/No'				,None)
 		,('BatteryReplacementDate'		,'DATE'		,None		,None	,None		,'Battery Replacement Date'		,True		,False		,None					,None)
 		,('BatteryReplacementException'		,'TEXT'		,None		,None	,32		,'Battery Replacement Exception'	,True		,False		,'Battery Replacement Exception'	,None)
 		,('BatteryReplacementComments'		,'TEXT'		,None		,None	,1024		,'Battery Replacement Comments'		,True		,False		,None					,None)
@@ -782,14 +818,14 @@ def create_table_locationvisit(
 		,('DataLoggerRecordStart'		,'DATE'		,None		,None	,None		,'Data Logger Record Start'		,True		,False		,None					,None)
 		,('DataLoggerRecordEnd'			,'DATE'		,None		,None	,None		,'Data Logger Record End'		,True		,False		,None					,None)
 		,('DataLoggerTime'			,'DATE'		,None		,None	,None		,'Data Logger Clock Time'		,True		,False		,None					,None)
-		,('DataLoggerTimeActual'		,'DATE'		,None		,None	,None		,'Correct Current Time'			,True		,False		,None					,None)
+		,('DataLoggerTimeActual'		,'DATE'		,None		,None	,None		,'Laptop Time'				,True		,False		,None					,None)
 		,('DataLoggerTimeAdjAmount'		,'LONG'		,None		,None	,None		,'Data Logger Time Adjustment (minutes)'	,True	,False		,None					,None)
 		,('DataLoggerTimeAdjusted'		,'TEXT'		,None		,None	,3		,'Data Logger Time Adjusted'		,True		,False		,'Yes/No'				,None)
 		,('DataLoggerTimeAdjDate'		,'DATE'		,None		,None	,None		,'Data Logger Time Adjustment Date'	,True		,False		,None					,None)
 		,('DataLoggerTimeAdjException'		,'TEXT'		,None		,None	,32		,'Data Logger Time Adjustment Exception'	,True	,False		,'Time Adjustment Exception'		,None)
 		,('DataLoggerTimeAdjComments'		,'TEXT'		,None		,None	,1024		,'Data Logger Time Adjustment Comments'	,True		,False		,None					,None)
 		,('DataLoggerTime2'			,'DATE'		,None		,None	,None		,'Data Logger Clock Time (new battery)'	,True		,False		,None					,None)
-		,('DataLoggerTimeActual2'		,'DATE'		,None		,None	,None		,'Correct Current Time (new battery)'	,True		,False		,None					,None)
+		,('DataLoggerTimeActual2'		,'DATE'		,None		,None	,None		,'Laptop Time (new battery)'		,True		,False		,None					,None)
 		,('DataLoggerTimeAdjAmount2'		,'LONG'		,None		,None	,None		,'Data Logger Time Adjustment (minutes; new battery)'	,True	,False	,None					,None)
 		,('DataLoggerTimeAdjusted2'		,'TEXT'		,None		,None	,3		,'Data Logger Time Adjusted (new battery)'	,True	,False		,'Yes/No'				,None)
 		,('DataLoggerTimeAdjDate2'		,'DATE'		,None		,None	,None		,'Data Logger Time Adjustment Date (new battery)'	,True	,False	,None					,None)
@@ -1002,6 +1038,7 @@ def create_table_sensor(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Type'				,'TEXT'		,None		,None	,32		,'Sensor Type'			,True		,False		,'Sensor Type'				,None)
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
+		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('DataLoggerGlobalID'		,'GUID'		,None		,None	,None		,'Related Data Logger'		,True		,False		,None					,None)
 	)
@@ -1059,11 +1096,11 @@ def create_table_stagemeasurement(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('ManualMethod'		,'TEXT'		,None		,None	,32		,'Manual Measurement Method'	,True		,False		,'Stage Method'				,None)
-		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Manual Measurement Method Comments'	,True	,False		,None					,None)
+		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Other Method'			,True		,False		,None					,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
-		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Computed Manual Water Level'	,True		,False		,None					,None)
-		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
-		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Sensor Adjustment Amount'	,True		,False		,None					,None)
+		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Calculated Manual Water Level'	,True		,False		,None					,None)
+		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Logger Stage'			,True		,False		,None					,None)
+		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Calculated Difference'	,True		,False		,None					,None)
 		,('SensorAdjusted'		,'TEXT'		,None		,None	,3		,'Sensor Adjusted'		,True		,False		,'Yes/No'				,None)
 		,('SensorAdjustmentDate'	,'DATE'		,None		,None	,None		,'Sensor Adjustment Date'	,True		,False		,None					,None)
 		,('SensorAdjustmentException'	,'TEXT'		,None		,None	,32		,'Sensor Adjustment Exception'	,True		,False		,'Stage Adjustment Exception'		,None)
@@ -1128,8 +1165,8 @@ def create_table_temperaturemeasurement(
 		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,'Temperature Serial Number'		,None)
 		,('SerialNumberComments'	,'TEXT'		,None		,None	,1024		,'Serial Number Comments'	,True		,False		,None					,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement'		,True		,False		,None					,None)
-		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Realtime Sensor Level'	,True		,False		,None					,None)
-		,('SensorSource'		,'TEXT'		,None		,None	,32		,'Sensor Source'		,True		,False		,'Temperature Source'			,None)
+		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Logger Temperature'		,True		,False		,None					,None)
+		,('SensorSource'		,'TEXT'		,None		,None	,32		,'Sensor Validated'		,True		,False		,'Temperature Source'			,None)
 		,('SensorFailed'		,'TEXT'		,None		,None	,3		,'Sensor Failed'		,True		,False		,'Yes/No'				,None)
 		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
 	)

@@ -6,9 +6,9 @@
 #	Enable geodatabae functionality in the [hydro] database
 #
 # Environment:
-#	ArcGIS Pro 3.1.2
-#	Python 3.9.16, with:
-#		arcpy 3.1 (build py39_arcgispro_41759)
+#	ArcGIS Pro 3.4.2
+#	Python 3.11.10, with:
+#		arcpy 3.4 (build py311_arcgispro_55347)
 #
 # Notes:
 #	This script connects to the target `hydro` database using Windows
@@ -25,7 +25,7 @@
 # To do:
 #	none
 #
-# Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2025. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 

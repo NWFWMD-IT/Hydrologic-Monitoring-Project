@@ -6,9 +6,9 @@
 #	Load asset and configuration data to hydro geodatabase
 #
 # Environment:
-#	ArcGIS Pro 3.1.2
-#	Python 3.9.16, with:
-#		arcpy 3.1 (build py39_arcgispro_41759)
+#	ArcGIS Pro 3.4.2
+#	Python 3.11.10, with:
+#		arcpy 3.4 (build py311_arcgispro_55347)
 #
 # Notes:
 #	Run this script as the Windows user HQ\hydro. The script will create
@@ -46,11 +46,16 @@
 #	                 Added filters for invalid records
 #	2023-09-29 MCM Add `Location.HasSensor/HasMeasuringPoint` properties (#126)
 #	2024-02-05 MCM Reject Measuring Points with non-NULL `DecommissionDate` (#131)
+#	2024-11-05 MCM Add `IsActive` property to Sensor / DataLogger objects (#193)
+#	               Enhance Data Logger battery properties (#195)
+#	                 Rename property `LowVoltage` to `LowBattery`
+#	                 Add property `LowBatteryUnits`
+#	2025-02-01 MCM Migrate input data sources to all-geodatabase (#188)
 #
 # To do:
 #	Switch from local asdict to mg.asdict
 #
-# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2025. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -117,7 +122,9 @@ class DataLogger:
 	ATTRIBUTES = (
 		'Type'
 		,'SerialNumber'
-		,'LowVoltage'
+		,'LowBattery'
+		,'LowBatteryUnits'
+		,'IsActive'
 		,'Comments'
 	)
 
@@ -179,10 +186,11 @@ class DataLogger:
 		# attribute
 
 		for f in (
-			self.transform_serialnumber
+			self.transform_isactive
+			,self.transform_serialnumber
 			,self.transform_type
 			# Follows transform_type
-			,self.transform_lowvoltage
+			,self.transform_lowbattery # Set LowBattery and LowBatteryUnits
 		):
 
 			logging.debug(f'Executing: {f.__name__}')
@@ -190,27 +198,61 @@ class DataLogger:
 
 
 
-	def transform_lowvoltage(self): # See #89 for documentation
+	def transform_isactive(self):
 	
-		if self.Type == 'OTT Orpheus Mini':
+		self.IsActive = 'Yes' # Hardwired until new data source available
+
+
+
+	def transform_lowbattery(self): # Set LowBattery and LowBatteryUnits
+	
+		if self.Type.lower() == 'ott orpheus mini':
 		
-			self.LowVoltage = 4.2
+			self.LowBattery = 4
+			self.LowBatteryUnits = 'Volts'
 			
 			
-		elif self.Type in (
-			'In-Situ Level Troll 500'
-			,'In-Situ Level Troll 700'
+		elif self.Type.lower() in (
+			'high sierra 3208'
+			,'sutron 9210'
+			,'sutron cdmalink'
+			,'sutron satlink 3'
+			,'sutron xlink 100'
+			,'sutron xlink 500'
+			,'waterlog h500xl'
+			,'waterlog h522+'
+			,'waterlog storm'
 		):
 		
-			self.LowVoltage = 40
+			self.LowBattery = 12.5
+			self.LowBatteryUnits = 'Volts'
+
+		
+		elif self.Type.lower() in (
+			'in-situ level troll 500'
+			,'in-situ level troll 700'
+			,'in-situ rugged baro troll'
+			,'in-situ rugged troll'
+			,'keller ctd'
+		):
+		
+			self.LowBattery = 40
+			self.LowBatteryUnits = 'Percent'
 		
 		
+		elif self.Type.lower() in (
+			'ott ecolog 1000'
+			,
+		):
+		
+			self.LowBattery = 18000
+			self.LowBatteryUnits = 'mAh'
+
+
 		else:
 		
-			self.LowVoltage = 12.45
+			raise ValueError(f'Data Logger: Unknown low battery level / units for type {self.Type}')
 			
-		
-	
 	
 	def transform_serialnumber(self):
 
@@ -320,9 +362,9 @@ class Location:
 
 	def __init__(
 		self
-		,data_aq_stations # SourceData instance
-		,data_district_monitoring # SourceData instance
-		,data_measuring_points # List of SourceData instances
+		,data_location # SourceData instance
+		,data_monitoring # SourceData instance
+		,data_measuring_point # List of SourceData instances
 	):
 
 		logging.debug(f'Initializing {__class__.__name__}')
@@ -331,9 +373,9 @@ class Location:
 
 		# Store source data values
 
-		self.data_aq_stations = data_aq_stations
-		self.data_district_monitoring = data_district_monitoring
-		self.data_measuring_points = data_measuring_points
+		self.data_location = data_location
+		self.data_monitoring = data_monitoring
+		self.data_measuring_point = data_measuring_point
 
 
 
@@ -486,19 +528,19 @@ class Location:
 
 	def transform_fluwid(self):
 	
-		if self.data_aq_stations.FLUWID is None:
+		if self.data_location.FLUWID is None:
 		
 			self.FLUWID = None
 			
 		else:
 		
-			self.FLUWID = self.data_aq_stations.FLUWID.strip()
+			self.FLUWID = self.data_location.FLUWID.strip()
 	
 	
 	
 	def transform_hasadvm(self):
 
-		if 'vel.ind' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+		if 'vel.ind' in mg.none2blank(self.data_monitoring.Monitoring_Type).lower():
 
 			self.HasADVM = 'Yes'
 
@@ -510,7 +552,7 @@ class Location:
 
 	def transform_hasconductivity(self):
 
-		if 'cond' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+		if 'cond' in mg.none2blank(self.data_monitoring.Monitoring_Type).lower():
 
 			self.HasConductivity = 'Yes'
 
@@ -534,7 +576,7 @@ class Location:
 
 	def transform_hasdischarge(self):
 
-		if 'discharge' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+		if 'discharge' in mg.none2blank(self.data_monitoring.Monitoring_Type).lower():
 
 			self.HasDischarge = 'Yes'
 
@@ -546,7 +588,7 @@ class Location:
 
 	def transform_hasgroundwater(self):
 
-		if 'gw level' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+		if 'gw level' in mg.none2blank(self.data_monitoring.Monitoring_Type).lower():
 
 			self.HasGroundwater = 'Yes'
 
@@ -570,7 +612,7 @@ class Location:
 
 	def transform_hasrainfall(self):
 
-		if 'rainfall' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+		if 'rainfall' in mg.none2blank(self.data_monitoring.Monitoring_Type).lower():
 
 			self.HasRainfall = 'Yes'
 
@@ -594,7 +636,7 @@ class Location:
 
 	def transform_hasstage(self):
 
-		monitoring_type = mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower()
+		monitoring_type = mg.none2blank(self.data_monitoring.Monitoring_Type).lower()
 
 
 		if 'd-stage' in monitoring_type: # Discontinued stage type
@@ -613,7 +655,7 @@ class Location:
 
 	def transform_hastemperature(self):
 
-		if 'temp' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+		if 'temp' in mg.none2blank(self.data_monitoring.Monitoring_Type).lower():
 
 			self.HasTemperature = 'Yes'
 
@@ -625,7 +667,7 @@ class Location:
 
 	def transform_haswaterquality(self):
 
-		if 'wq' in mg.none2blank(self.data_district_monitoring.Monitoring_Type).lower():
+		if 'wq' in mg.none2blank(self.data_monitoring.Monitoring_Type).lower():
 
 			self.HasWaterQuality = 'Yes'
 
@@ -637,34 +679,34 @@ class Location:
 
 	def transform_name(self):
 
-		if not isempty(self.data_district_monitoring.Station_Name):
+		if not isempty(self.data_monitoring.Station_Name):
 		
-			self.Name = self.data_district_monitoring.Station_Name.strip()
+			self.Name = self.data_monitoring.Station_Name.strip()
 
 
 
 	def transform_nwfid(self):
 
-		if isempty(self.data_aq_stations.LocationIdentifier):
+		if isempty(self.data_location.LocationIdentifier):
 		
 			raise ValueError('Aquarius: Missing location identifier')
 			
 			
-		self.NWFID = f'{self.data_aq_stations.LocationIdentifier:>06}'
+		self.NWFID = f'{self.data_location.LocationIdentifier:>06}'
 
 
 
 	def transform_project(self):
 
-		if not isempty(self.data_district_monitoring.Project_Number):
+		if not isempty(self.data_monitoring.Project_Number):
 		
 			try:
 			
-				self.Project = int(self.data_district_monitoring.Project_Number)
+				self.Project = int(self.data_monitoring.Project_Number)
 				
 			except Exception as e:
 			
-				logging.warning(f'Location {self.data_aq_stations.LocationIdentifier}: Failed to process project number: {self.data_district_monitoring.Project_Number}')
+				logging.warning(f'Location {self.data_location.LocationIdentifier}: Failed to process project number: {self.data_monitoring.Project_Number}')
 
 
 
@@ -677,7 +719,7 @@ class Location:
 		# PointGeometry
 		#
 		# self.shape = getattr( # Need to use getattr() because '@' is required by ArcGIS but syntactically disallowed by Python
-			# self.data_aq_stations
+			# self.data_location
 			# ,'SHAPE@'
 		# )
 
@@ -685,7 +727,7 @@ class Location:
 
 		# Sequence
 
-		self.shape = self.data_aq_stations.Shape
+		self.shape = self.data_location.Shape
 
 
 
@@ -699,8 +741,8 @@ class Location:
 		to be valid
 		'''
 
-		type_ = self.data_district_monitoring.Type_of_Recorder
-		serial_number = self.data_district_monitoring.Recorder_Serial__
+		type_ = self.data_monitoring.Type_of_Recorder
+		serial_number = self.data_monitoring.Recorder_Serial__
 
 
 
@@ -765,7 +807,7 @@ class Location:
 		create a valid MeasuringPoint instance.
 		'''
 		
-		for source_data in self.data_measuring_points:
+		for source_data in self.data_measuring_point:
 		
 			reject_messages = []
 			
@@ -903,8 +945,8 @@ class Location:
 		
 		# Tipping bucket
 
-		tb_type = self.data_district_monitoring.Type_of_Tipping_Bucket
-		tb_serial_number = self.data_district_monitoring.T_B__Serial__
+		tb_type = self.data_monitoring.Type_of_Tipping_Bucket
+		tb_serial_number = self.data_monitoring.T_B__Serial__
 
 
 		if (
@@ -949,8 +991,8 @@ class Location:
 			
 		# Other sensors
 		
-		sensor_types = self.data_district_monitoring.Type_of_Sensor
-		sensor_serial_numbers = self.data_district_monitoring.Sensor_Serial__
+		sensor_types = self.data_monitoring.Type_of_Sensor
+		sensor_serial_numbers = self.data_monitoring.Sensor_Serial__
 
 
 		if (
@@ -1603,6 +1645,7 @@ class Sensor:
 	ATTRIBUTES = (
 		'Type'
 		,'SerialNumber'
+		,'IsActive'
 		,'Comments'
 	)
 
@@ -1664,12 +1707,19 @@ class Sensor:
 		# attribute
 
 		for f in (
-			self.transform_serialnumber
+			self.transform_isactive
+			,self.transform_serialnumber
 			,self.transform_type
 		):
 
 			logging.debug(f'Executing: {f.__name__}')
 			f()
+
+
+
+	def transform_isactive(self):
+	
+		self.IsActive = 'Yes' # Hardwired until new data source available
 
 
 
@@ -1862,54 +1912,8 @@ def asdict(
 
 
 
-def cache_district_monitoring_source(
-	source_district_monitoring
-):
-	'''
-	Performance is prohibitively poor when accessing directly from Excel
-	(at least for this workbook). Cache the relevant worksheet to a table
-	in an in-memory workspace.
-	'''
-	
-	
-	# Build source table name
-	
-	source_district_monitoring_table = os.path.join(
-		source_district_monitoring
-		,'T_Comprehensive_Monitoring$_' # 'T_' prefix and '_' suffix added for use with geoprocessing tools
-	)
-	logging.debug(f'District Monitoring source table: {source_district_monitoring_table}')
-
-
-	
-	# Build cache table name
-	
-	cache_district_monitoring_name = f't{uuid.uuid4().hex}' # Random table name
-	cache_district_monitoring = f'memory/{cache_district_monitoring_name}'
-	logging.debug(f'District Monitoring cache table: {cache_district_monitoring}')
-
-
-
-	# Load source data to cache
-	
-	logging.info('Caching District Monitoring source data')
-
-	arcpy.conversion.TableToTable(
-		in_rows = source_district_monitoring_table
-		,out_path = 'memory'
-		,out_name = cache_district_monitoring_name
-	)
-	
-	
-	
-	# Return cache table name
-	
-	return cache_district_monitoring
-
-
-
-def fetch_district_monitoring(
-	source_district_monitoring
+def fetch_monitoring(
+	source_table_monitoring
 	,location_id
 ):
 	'''
@@ -1921,11 +1925,11 @@ def fetch_district_monitoring(
 		o Multiple matches: ValueError
 	'''
 	
-	district_monitoring_count = 0
+	monitoring_count = 0
 
 
 	with arcpy.da.SearchCursor(
-		in_table = source_district_monitoring
+		in_table = source_table_monitoring
 		,field_names = '*'
 		,where_clause = f'Station_ID = {location_id}'
 	) as cursor:
@@ -1938,11 +1942,11 @@ def fetch_district_monitoring(
 
 		for row in cursor:
 
-			district_monitoring_count += 1
+			monitoring_count += 1
 
 			logging.debug(f'Found matching District Monitoring record for Location ID {location_id}')
 
-			if district_monitoring_count > 1:
+			if monitoring_count > 1:
 
 				raise ValueError(f'District Monitoring: Multiple records found for Location ID {location_id}')
 
@@ -1959,8 +1963,8 @@ def fetch_district_monitoring(
 
 
 
-def fetch_measuring_points(
-	source_measuring_points
+def fetch_measuring_point(
+	source_table_measuring_point
 	,location_id
 ):
 	'''
@@ -1976,7 +1980,7 @@ def fetch_measuring_points(
 	
 
 	with arcpy.da.SearchCursor(
-		in_table = source_measuring_points
+		in_table = source_table_measuring_point
 		,field_names = '*'
 		,where_clause = (f'Identifier = {location_id}')
 	) as cursor:
@@ -2005,9 +2009,9 @@ def fetch_measuring_points(
 
 
 def get_location(
-	data_aq_stations # SourceData
-	,source_district_monitoring
-	,source_measuring_points
+	data_location # SourceData
+	,source_table_monitoring
+	,source_table_measuring_point
 ):
 	'''
 	Extract and transform Location and related data (Data Logger, Sensors,
@@ -2017,20 +2021,20 @@ def get_location(
 	database)
 	'''
 	
-	location_id = data_aq_stations.LocationIdentifier # Save for easy reference
+	location_id = data_location.LocationIdentifier # Save for easy reference
 
 
 
 	# Fetch related District Monitoring data
 	
 	logging.debug(f'Fetching related District Monitoring record for Location ID {location_id}')
-	data_district_monitoring = fetch_district_monitoring(
-		source_district_monitoring = source_district_monitoring
+	data_monitoring = fetch_monitoring(
+		source_table_monitoring = source_table_monitoring
 		,location_id = location_id
 	)
 
 
-	if data_district_monitoring is None:
+	if data_monitoring is None:
 
 		raise ValueError('District Monitoring: No data found')
 
@@ -2043,8 +2047,8 @@ def get_location(
 	# Measuring Point.
 
 	logging.debug(f'Fetching related Measuring Point records for Location ID {location_id}')
-	data_measuring_points = fetch_measuring_points(
-		source_measuring_points = source_measuring_points
+	data_measuring_point = fetch_measuring_point(
+		source_table_measuring_point = source_table_measuring_point
 		,location_id = location_id
 	)
 	
@@ -2055,9 +2059,9 @@ def get_location(
 	# Allow exceptions to propagate to caller
 	
 	location = Location(
-		data_aq_stations = data_aq_stations
-		,data_district_monitoring = data_district_monitoring
-		,data_measuring_points = data_measuring_points
+		data_location = data_location
+		,data_monitoring = data_monitoring
+		,data_measuring_point = data_measuring_point
 	)
 	logging.debug('Created Location instance')
 	
@@ -2100,9 +2104,9 @@ def isempty(
 
 def load_data(
 	target_gdb
-	,source_aq_stations
-	,source_district_monitoring
-	,source_measuring_points
+	,source_table_location
+	,source_table_monitoring
+	,source_table_measuring_point
 	,feedback
 ):
 	'''
@@ -2131,14 +2135,6 @@ def load_data(
 
 
 	#
-	# Cache District Monitoring source data
-	#
-
-	cache_district_monitoring = cache_district_monitoring_source(source_district_monitoring)
-	
-	
-	
-	#
 	# Process data
 	#
 	
@@ -2156,14 +2152,14 @@ def load_data(
 	# Main Locations loop
 	
 	with arcpy.da.SearchCursor(
-		in_table = source_aq_stations
+		in_table = source_table_location
 		,field_names = '*'
 		# ,where_clause = 'LocationIdentifier in (8495,  8505,  8544)' # DEBUG
 		,spatial_reference = C.SR_UTM16N_NAD83
-	) as cursor_aq_stations:
+	) as cursor_location:
 
 
-		for row_aq_stations in cursor_aq_stations:
+		for row_location in cursor_location:
 
 			#
 			# Report feedback
@@ -2189,13 +2185,13 @@ def load_data(
 			logging.debug('Fetched Aquarius Location')
 
 			
-			data_aq_stations = SourceData(
-				cursor_aq_stations
-				,row_aq_stations
+			data_location = SourceData(
+				cursor_location
+				,row_location
 			)
-			logging.datadebug(f'Source data: Aquarius Location:\n{data_aq_stations}')
+			logging.datadebug(f'Source data: Aquarius Location:\n{data_location}')
 			
-			location_id = data_aq_stations.LocationIdentifier # Save for easy reference
+			location_id = data_location.LocationIdentifier # Save for easy reference
 			logging.debug(f'Processing Aquarius Location ID {location_id}')
 
 
@@ -2203,9 +2199,9 @@ def load_data(
 			try:
 
 				location = get_location(
-					data_aq_stations = data_aq_stations
-					,source_district_monitoring = cache_district_monitoring
-					,source_measuring_points = source_measuring_points
+					data_location = data_location
+					,source_table_monitoring = source_table_monitoring
+					,source_table_measuring_point = source_table_measuring_point
 				)
 				logging.data(f'Location:\n{location}')
 
@@ -2434,7 +2430,9 @@ def write_data_logger(
 		,field_names = (
 			'Type'
 			,'SerialNumber'
-			,'LowVoltage'
+			,'LowBattery'
+			,'LowBatteryUnits'
+			,'IsActive'
 			,'Comments'
 			,'LocationGlobalID'
 		)
@@ -2696,6 +2694,7 @@ def write_sensors(
 		,field_names = (
 			'Type'
 			,'SerialNumber'
+			,'IsActive'
 			,'Comments'
 			,'DataLoggerGlobalID'
 		)
@@ -2848,21 +2847,9 @@ def _configure_arguments():
 	# permitted. 
 
 	g.add_argument(
-		'source_aq_stations'
-		,help = 'AQ_STATIONS feature class'
-		,metavar = '<source_aq_stations>'
-	)
-
-	g.add_argument(
-		'source_district_monitoring'
-		,help = 'District monitoring spreadsheet'
-		,metavar = '<source_district_monitoring>'
-	)
-
-	g.add_argument(
-		'source_measuring_points'
-		,help = 'Measuring Points CSV'
-		,metavar = '<source_measuring_points>	'
+		'aquarius_export_gdb'
+		,help = 'Aquarius export geodatabase'
+		,metavar = '<aquarius_export_gdb>'
 	)
 
 
@@ -3169,13 +3156,11 @@ def _print_banner(
 		f'{mg.BANNER_DELIMITER_1}\n'
 		f'Hydrologic Data Model Data Loader\n'
 		f'{mg.BANNER_DELIMITER_2}\n'
-		f'Source data: Aquarius stations:    {args.source_aq_stations}\n'
-		f'Source data: District monitoring:  {args.source_district_monitoring}\n'
-		f'Source data: Measuring points:     {args.source_measuring_points}\n'
-		f'Target database server:            {args.server}\n'
-		f'Log level:                         {args.log_level}\n'
-		f'Log file:                          {args.log_file_name}\n'
-		f'Feedback:                          {args.feedback}\n'
+		f'Aquarius export geodatabase:  {args.aquarius_export_gdb}\n'
+		f'Target database server:       {args.server}\n'
+		f'Log level:                    {args.log_level}\n'
+		f'Log file:                     {args.log_file_name}\n'
+		f'Feedback:                     {args.feedback}\n'
 		f'{mg.BANNER_DELIMITER_1}'
 	)
 
@@ -3251,14 +3236,27 @@ def _process_arguments(
 	
 
 
-	# Standardize paths
+	# Build paths
 	#
-	# Relative paths break some arcpy functionality (e.g. accessing Excel
-	# tables) so force all paths to absolute
+	# Relative paths break some arcpy functionality so force all paths to
+	# absolute
 
-	source_aq_stations = os.path.abspath(args.source_aq_stations)
-	source_district_monitoring = os.path.abspath(args.source_district_monitoring)
-	source_measuring_points = os.path.abspath(args.source_measuring_points)
+	aquarius_export_gdb = os.path.abspath(args.aquarius_export_gdb)
+	
+	source_table_location = os.path.join(
+		aquarius_export_gdb
+		,C.TABLE_NAME_LOCATION
+	)
+	
+	source_table_monitoring = os.path.join(
+		aquarius_export_gdb
+		,C.TABLE_NAME_MONITORING
+	)
+	
+	source_table_measuring_point = os.path.join(
+		aquarius_export_gdb
+		,C.TABLE_NAME_MEASURING_POINT
+	)
 
 
 
@@ -3268,9 +3266,9 @@ def _process_arguments(
 
 	return (
 		args
-		,source_aq_stations
-		,source_district_monitoring
-		,source_measuring_points
+		,source_table_location
+		,source_table_monitoring
+		,source_table_measuring_point
 	)
 
 
@@ -3303,9 +3301,9 @@ if __name__ == '__main__':
 
 		(
 			args
-			,source_aq_stations
-			,source_district_monitoring
-			,source_measuring_points
+			,source_table_location
+			,source_table_monitoring
+			,source_table_measuring_point
 		) = _process_arguments(log_formatter)
 
 
@@ -3348,9 +3346,9 @@ if __name__ == '__main__':
 
 	load_data(
 		target_gdb = gdb
-		,source_aq_stations = source_aq_stations
-		,source_district_monitoring = source_district_monitoring
-		,source_measuring_points = source_measuring_points
+		,source_table_location = source_table_location
+		,source_table_monitoring = source_table_monitoring
+		,source_table_measuring_point = source_table_measuring_point
 		,feedback = args.feedback
 	)
 

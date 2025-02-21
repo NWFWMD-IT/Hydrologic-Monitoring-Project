@@ -7,9 +7,9 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.2
-#	Python 3.9.18, with:
-#		arcpy 3.2 (build py39_arcgispro_49690)
+#	ArcGIS Pro 3.4.2
+#	Python 3.11.10, with:
+#		arcpy 3.4 (build py311_arcgispro_55347)
 #
 # Notes:
 #	This script is designed to facilitate model deployment development by
@@ -37,11 +37,12 @@
 #	2023-02-22 MCM Moved constants to constants.py
 #	2023-03-14 MCM Replaced OS_USERNAMES_SDE with dynamic domain name
 #	2024-10-22 MCM Added view capability (#191)
+#	2024-11-05 MCM Added domain Battery Units (#195)
 #
 # To do:
 #	none
 #
-# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2025. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -104,6 +105,7 @@ DOMAIN_NAMES = (
 	,'ADVM Cleaned Exception'
 	,'ADVM Maintenance'
 	,'Battery Replacement Exception'
+	,'Battery Units'
 	,'Conductivity Adjustment Exception'
 	,'Conductivity Serial Number'
 	,'Conductivity Standard'
