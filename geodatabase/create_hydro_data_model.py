@@ -7,9 +7,9 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.2
-#	Python 3.9.18, with:
-#		arcpy 3.2 (build py39_arcgispro_49690)
+#	ArcGIS Pro 3.4.2
+#	Python 3.11.10, with:
+#		arcpy 3.4 (build py311_arcgispro_55347)
 #
 # Notes:
 #
@@ -93,11 +93,13 @@
 #	                 Data Logger Type
 #	                 Sensor Type
 #	                 Temperature Serial Number
+#	               Rename column LocationVisit.InventoryVerified to
+#	                 EqiupmentChange (#205)
 #
 # To do:
 #	none
 #
-# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2025. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
@@ -801,7 +803,7 @@ def create_table_locationvisit(
 		('VisitDate'				,'DATE'		,None		,None	,None		,'Visit Date'				,True		,False		,None					,None)
 		,('Staff'				,'TEXT'		,None		,None	,1024		,'Visit Staff'				,True		,False		,None					,None)
 		,('StaffComments'			,'TEXT'		,None		,None	,1024		,'Other Staff'				,True		,False		,None					,None)
-		,('InventoryVerified'			,'TEXT'		,None		,None	,3		,'Equipment Inventory Verified'		,True		,False		,'Yes/No'				,'No')
+		,('EquipmentChange'			,'TEXT'		,None		,None	,3		,'Equipment Change Needed'		,True		,False		,'Yes/No'				,'No')
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
 		,('BatteryNeedsReplacement'		,'TEXT'		,None		,None	,3		,'Battery Needs Replacement'		,True		,False		,'Yes/No'				,None)
 		,('BatteryLevel'			,'DOUBLE'	,38		,2	,None		,'Battery Level'			,True		,False		,None					,None)

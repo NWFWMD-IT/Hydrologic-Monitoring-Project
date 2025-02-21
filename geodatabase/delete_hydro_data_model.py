@@ -7,9 +7,9 @@
 #	model
 #
 # Environment:
-#	ArcGIS Pro 3.2
-#	Python 3.9.18, with:
-#		arcpy 3.2 (build py39_arcgispro_49690)
+#	ArcGIS Pro 3.4.2
+#	Python 3.11.10, with:
+#		arcpy 3.4 (build py311_arcgispro_55347)
 #
 # Notes:
 #	This script is designed to facilitate model deployment development by
@@ -42,7 +42,7 @@
 # To do:
 #	none
 #
-# Copyright 2003-2024. Mannion Geosystems, LLC. http://www.manniongeo.com
+# Copyright 2003-2025. Mannion Geosystems, LLC. http://www.manniongeo.com
 ################################################################################
 
 
