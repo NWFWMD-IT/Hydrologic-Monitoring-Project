@@ -100,6 +100,7 @@
 #
 # History:
 #	2023-10-30 MCM Created (#109)
+#	2025-03-16 MCM Allow loading one photo to multiple Measuring Points (#213)
 #
 # To do:
 #	none
@@ -174,7 +175,7 @@ class Attachment:
 		,'gdb'
 		,'globalid'
 		,'photo'
-		,'rel_globalid'
+		,'rel_globalids'
 	)
 
 
@@ -215,10 +216,10 @@ class Attachment:
 	
 	
 	@property
-	def where_clause(self):
+	def where_clauses(self):
 		'''
-		Filter expression that identifies row to which photo will be
-		attached
+		List of filter expressions that identify rows to which photo
+		will be attached
 		'''
 		
 		return None
@@ -305,7 +306,7 @@ class Attachment:
 			,'table_attachment'
 			,'table_name'
 			,'table_name_attachment'
-			,'where_clause'
+			,'where_clauses'
 		)
 		
 		
@@ -322,7 +323,10 @@ class Attachment:
 		
 		
 		
-	def check_target(self):
+	def check_target(
+		self
+		,rel_globalid
+	):
 		'''
 		Check if attachment already exists in geodatabase
 		
@@ -343,7 +347,7 @@ class Attachment:
 			in_table = table
 			,field_names = 'rel_globalid' # Arbitrary column
 			,where_clause = (
-				f"rel_globalid = '{self.rel_globalid}'"
+				f"rel_globalid = '{rel_globalid}'"
 				f" AND att_name = '{self.photo.file_name}'"
 			)
 		) as cursor:
@@ -355,7 +359,7 @@ class Attachment:
 				raise ValueError(
 					'Attachment already exists for:'
 					f'\n\tTable: {self.table_name}'
-					f'\n\tGlobal ID: {self.rel_globalid}'
+					f'\n\tGlobal ID: {rel_globalid}'
 					f'\n\tFile name: {self.photo.file_name}'
 				)
 				
@@ -368,57 +372,66 @@ class Attachment:
 
 	def load(self):
 		'''
-		Load source file to geodatabase attachment
+		Load source file to geodatabase attachment(s)
+		
+		Return list of errors for failed loads
 		'''
 		
+		errors = []
 		
-		# Verify that attachment does not already exist
 		
-		self.check_target()
+		for rel_globalid in self.rel_globalids:
 		
+			logging.debug(f'Loading attachment to {self.table_name_attachment} for rel_globalid {rel_globalid}')
+		
+		
+			# Verify that attachment does not already exist
+			
+			try:
+			
+				self.check_target(rel_globalid)
+				
+			
+			except ValueError as e:
+			
+				logging.debug('Failed to load attachment; collecting error for reporting after attempting all targets for this photo')
+				errors.append(e)
+				continue
+			
 
 
-		# Load attachment
-		
-		data = {
-			# Geodatabase column	Python attribute with value
-			'rel_globalid':		'rel_globalid'
-			,'content_type':	'content_type'
-			,'att_name':		'photo.file_name'
-			,'data_size':		'data_size'
-			,'data':		'photo.data'
-			,'globalid':		'globalid'
-			#,'attachmentid':	''
-			,'keywords':		'keywords'
-		}
-		
-		
-		with arcpy.da.InsertCursor(
-			in_table = self.table_attachment
-			,field_names = (
-				'rel_globalid'
-				,'content_type'
-				,'att_name'
-				,'data_size'
-				,'data'
-				#,'globalid'
-				#,'attachmentid'
-				,'keywords'
-			)
-		) as cursor:
-		
-			cursor.insertRow(
-				(
-					self.rel_globalid
-					,self.content_type
-					,self.photo.file_name
-					,self.data_size
-					,self.photo.data
-					#,self.globalid
-					#,self.attachmentid?????
-					,self.keywords
+			# Load attachment
+			
+			with arcpy.da.InsertCursor(
+				in_table = self.table_attachment
+				,field_names = (
+					'rel_globalid'
+					,'content_type'
+					,'att_name'
+					,'data_size'
+					,'data'
+					#,'globalid'
+					#,'attachmentid'
+					,'keywords'
 				)
-			)
+			) as cursor:
+			
+				cursor.insertRow(
+					(
+						rel_globalid
+						,self.content_type
+						,self.photo.file_name
+						,self.data_size
+						,self.photo.data
+						# ArcGIS generates globalid automatically
+						# ArcGIS generates attachmentid automatically
+						,self.keywords
+					)
+				)
+				
+		
+		
+		return errors
 			
 			
 		
@@ -430,8 +443,7 @@ class Attachment:
 		for f in (
 			self.transform_content_type
 			,self.transform_data_size
-			,self.transform_globalid
-			,self.transform_rel_globalid
+			,self.transform_rel_globalids
 		):
 		
 			logging.debug(f'Executing: {f.__name__}')
@@ -455,18 +467,10 @@ class Attachment:
 
 
 
-	def transform_globalid(self):
-		'''
-		Generate new Global ID, here in client
-		
-		Standardize on geodatabase format
-		'''
+	def transform_rel_globalids(self):
 	
-		self.globalid = str(uuid.uuid4()).upper()
-
-
-
-	def transform_rel_globalid(self):
+		self.rel_globalids = []
+		
 	
 		table = os.path.join(
 			self.gdb
@@ -474,37 +478,39 @@ class Attachment:
 		)
 		
 		
-		count_fetch = 0
+		for where_clause in self.where_clauses:
 		
-		with arcpy.da.SearchCursor(
-			in_table = table
-			,field_names = 'globalid'
-			,where_clause = self.where_clause
-		) as cursor:
-		
-			for row in cursor:
+			count_fetch = 0
 			
-				count_fetch += 1
+			with arcpy.da.SearchCursor(
+				in_table = table
+				,field_names = 'globalid'
+				,where_clause = where_clause
+			) as cursor:
+			
+				for row in cursor:
 				
-				if count_fetch > 1:
-				
-					raise ValueError(
-						f'rel_globalid: Found multiple rows for:'
-						f'\n\tTable: {self.table_name}'
-						f'\n\tFilter: {self.where_clause}'
-					)
+					count_fetch += 1
 					
-				
-				self.rel_globalid = row[0][1:-1] # Trim curly braces
-				
-				
-		if count_fetch == 0:
-		
-			raise ValueError(
-				f'rel_globalid: Did not find row for:'
-					f'\n\tTable: {self.table_name}'
-					f'\n\tFilter: {self.where_clause}'
-			)
+					if count_fetch > 1:
+					
+						raise ValueError(
+							f'rel_globalid: Found multiple rows for:'
+							f'\n\tTable: {self.table_name}'
+							f'\n\tFilter: {where_clause}'
+						)
+						
+					
+					self.rel_globalids.append(row[0][1:-1]) # Trim curly braces
+					
+					
+			if count_fetch == 0:
+			
+				raise ValueError(
+					f'rel_globalid: Did not find row for:'
+						f'\n\tTable: {self.table_name}'
+						f'\n\tFilter: {where_clause}'
+				)
 
 
 
@@ -564,13 +570,13 @@ class LocationAttachment(Attachment):
 	
 	
 	@property
-	def where_clause(self):
+	def where_clauses(self):
 		'''
-		Filter expression that identifies row to which photo will be
-		attached
+		List of filter expressions that identify rows to which photo
+		will be attached
 		'''
 		
-		return f"nwfid = '{self.photo.location}'"
+		return [f"nwfid = '{self.photo.location}'"]
 		
 	
 	
@@ -609,13 +615,13 @@ class MPAttachment(Attachment):
 	
 	
 	@property
-	def where_clause(self):
+	def where_clauses(self):
 		'''
-		Filter expression that identifies row to which photo will be
-		attached
+		List of filter expressions that identify rows to which photo
+		will be attached
 		'''
 		
-		return f"UPPER(aquariusid) = '{self.photo.mp_uuid}'"
+		return [f"UPPER(aquariusid) = '{id}'" for id in self.photo.mp_uuids]
 		
 	
 	
@@ -1265,7 +1271,7 @@ class Photo:
 		,'is_location'
 		,'is_mp'
 		,'location'
-		,'mp_uuid'
+		,'mp_uuids'
 		,'photo_dir'
 		,'photo_uuid'
 		,'tags'
@@ -1386,7 +1392,7 @@ class Photo:
 			,self.transform_is_location
 			,self.transform_is_mp
 			# Second tier derived attributes
-			,self.transform_mp_uuid
+			,self.transform_mp_uuids
 		):
 		
 			logging.debug(f'Executing: {f.__name__}')
@@ -1426,7 +1432,11 @@ class Photo:
 			
 			
 			
-	def transform_mp_uuid(self):
+	def transform_mp_uuids(self):
+	
+		self.mp_uuids = []
+		
+		
 
 		if self.is_mp == True:
 		
@@ -1441,18 +1451,13 @@ class Photo:
 				raise ValueError(f'Measuring Point photo missing Aquarius ID of related MP: {self.file_name}')
 				
 				
-			elif len(match) > 1:
-
-				raise ValueError(f'Measuring Point photo assigned to multiple MPs: {self.file_name}')
-				
-
-			else:
+			for mp_uuid in match:
 			
 				# Use UUID module to test/standardize value.
 				# Store result as upper-case string to match
 				# geodatabase format.
 
-				self.mp_uuid = str(uuid.UUID(match[0])).upper()
+				self.mp_uuids.append(str(uuid.UUID(mp_uuid)).upper())
 
 
 
@@ -1710,7 +1715,10 @@ def load_photos(
 				
 				except ValueError as e:
 				
-					logging.warning(f'Failed to generate attachment metadata: Location {photo.location}: File {photo.file_name}: {e}')
+					logging.warning(
+						f'Failed to generate attachment metadata: Location: {photo.location} File: {photo.file_name}'
+						f'\n{e}'
+					)
 					metrics_output.location_failed += 1
 					continue
 				
@@ -1719,21 +1727,27 @@ def load_photos(
 				# Load attachment
 				
 				logging.debug('Loading Location attachment')
-				try:
 				
-					attachment.load()
+				errors = attachment.load()
+					
+				if len(errors) > 0:
+				
+					for error in errors:
+					
+						logging.warning(
+							f'Failed to load attachment: Location: {photo.location} File: {photo.file_name}'
+							f'\n{error}'
+						)
+						metrics_output.location_failed += 1
 					
 					
-				except Exception as e:
-				
-					logging.warning(f'Failed to load attachment: Location {photo.location}: File {photo.file_name}: {e}')
-					metrics_output.location_failed += 1
 					continue
 				
 				
+				else:
 				
-				logging.debug('Loaded Location attachment')
-				metrics_output.location_succeeded += 1
+					logging.debug('Loaded Location attachment')
+					metrics_output.location_succeeded += 1
 				
 				
 				
@@ -1758,7 +1772,10 @@ def load_photos(
 				
 				except ValueError as e:
 				
-					logging.warning(f'Failed to generate attachment metadata: Location {photo.location}: Measuring Point {photo.mp_uuid}: File {photo.file_name}: {e}')
+					logging.warning(
+						f'Failed to generate attachment metadata: Location: {photo.location} File: {photo.file_name}'
+						f'\n{e}'
+					)
 					metrics_output.mp_failed += 1
 					continue
 				
@@ -1766,22 +1783,28 @@ def load_photos(
 					
 				# Load attachment
 				
-				logging.debug('Loading Measuring Point attachment')
-				try:
+				logging.debug('Loading Measuring Point attachments')
 				
-					attachment.load()
+				errors = attachment.load()
 					
-					
-				except Exception as e:
+				if len(errors) > 0:
 				
-					logging.warning(f'Failed to load attachment: Location {photo.location}: Measuring Point {photo.mp_uuid}: File {photo.file_name}: {e}')
-					metrics_output.mp_failed += 1
+					for error in errors:
+				
+						logging.warning(
+							f'Failed to load attachment: Location: {photo.location} File: {photo.file_name}'
+							f'\n{error}'
+						)
+						metrics_output.mp_failed += 1
+						
+					
 					continue
+					
+					
+				else:
 				
-				
-				
-				logging.debug('Loaded Measuring Point attachment')
-				metrics_output.mp_succeeded += 1
+					logging.debug('Loaded Measuring Point attachments')
+					metrics_output.mp_succeeded += 1
 				
 				
 				
