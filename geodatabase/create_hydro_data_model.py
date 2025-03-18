@@ -245,7 +245,7 @@ def create_domains(
 		)
 		,(
 			'Desiccant Maintenance', 'TEXT', (
-				('Verified', 'Verified')
+				('Verified', 'Verified')
 				,('Replaced', 'Replaced')
 				,('Needs replacement - No materials', 'Needs replacement - No materials')
 				,('NA', 'NA')
