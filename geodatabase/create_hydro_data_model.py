@@ -95,6 +95,7 @@
 #	                 Temperature Serial Number
 #	               Rename column LocationVisit.InventoryVerified to
 #	                 EqiupmentChange (#205)
+#	2025-03-11 MCM Update Data Logger Type domain (#211)
 #
 # To do:
 #	none
@@ -230,6 +231,7 @@ def create_domains(
 				,('Keller CTD', 'Keller CTD')
 				,('OTT Ecolog 1000', 'OTT Ecolog 1000')
 				,('OTT Orpheus Mini', 'OTT Orpheus Mini')
+				,('Sontek Argonaut ADV', 'Sontek Argonaut ADV')
 				,('Sutron 9210', 'Sutron 9210')
 				,('Sutron CDMALink', 'Sutron CDMALink')
 				,('Sutron Satlink 3', 'Sutron Satlink 3')

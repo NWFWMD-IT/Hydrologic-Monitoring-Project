@@ -51,6 +51,8 @@
 #	                 Rename property `LowVoltage` to `LowBattery`
 #	                 Add property `LowBatteryUnits`
 #	2025-02-01 MCM Migrate input data sources to all-geodatabase (#188)
+#	2025-03-11 MCM Add Data Logger Types (#211)
+#	               Remove 'Slab' from Measuring Point exclusion list (#212)
 #
 # To do:
 #	Switch from local asdict to mg.asdict
@@ -214,6 +216,7 @@ class DataLogger:
 			
 		elif self.Type.lower() in (
 			'high sierra 3208'
+			,'sontek argonaut adv'
 			,'sutron 9210'
 			,'sutron cdmalink'
 			,'sutron satlink 3'
@@ -232,7 +235,7 @@ class DataLogger:
 			'in-situ level troll 500'
 			,'in-situ level troll 700'
 			,'in-situ rugged baro troll'
-			,'in-situ rugged troll'
+			,'in-situ rugged troll 100'
 			,'keller ctd'
 		):
 		
@@ -847,11 +850,6 @@ class Location:
 				elif source_data.Name.lower().strip() == ('ngvd29 0ft'):
 				
 					reject_messages.append('IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'NGVD29 0ft\'')
-
-
-				elif source_data.Name.lower().strip() == ('slab'):
-				
-					reject_messages.append('IsMeasuredAgainstLocalAssumedDatum is FALSE and Name is \'Slab\'')
 
 
 
