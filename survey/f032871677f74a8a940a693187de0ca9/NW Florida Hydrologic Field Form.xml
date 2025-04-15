@@ -63,6 +63,15 @@
           <text id="static_instance-Conductivity_Serial_Number-1">
             <value>252531</value>
           </text>
+          <text id="static_instance-Conductivity_Serial_Number-2">
+            <value>00J1251</value>
+          </text>
+          <text id="static_instance-Conductivity_Serial_Number-3">
+            <value>21A105572</value>
+          </text>
+          <text id="static_instance-Conductivity_Serial_Number-4">
+            <value>22K100733</value>
+          </text>
           <text id="static_instance-Conductivity_Standard-0">
             <value>100</value>
           </text>
@@ -121,7 +130,7 @@
             <value>Other</value>
           </text>
           <text id="static_instance-Hydro_Staff-0">
-            <value>Candice Keeney</value>
+            <value>Hari Parasu</value>
           </text>
           <text id="static_instance-Hydro_Staff-1">
             <value>David Stanford</value>
@@ -207,6 +216,9 @@
           <text id="static_instance-Location_Issue_Type-18">
             <value>Other</value>
           </text>
+          <text id="static_instance-Location_Issue_Type-19">
+            <value>General Note</value>
+          </text>
           <text id="static_instance-Rainfall_Exception-0">
             <value>Raining</value>
           </text>
@@ -280,6 +292,21 @@
             <value>Transducer - NIST unavailable</value>
           </text>
           <text id="static_instance-Temperature_Serial_Number-6">
+            <value>00J1251</value>
+          </text>
+          <text id="static_instance-Temperature_Serial_Number-7">
+            <value>210843076</value>
+          </text>
+          <text id="static_instance-Temperature_Serial_Number-8">
+            <value>210910858</value>
+          </text>
+          <text id="static_instance-Temperature_Serial_Number-9">
+            <value>21A105572</value>
+          </text>
+          <text id="static_instance-Temperature_Serial_Number-10">
+            <value>22K100733</value>
+          </text>
+          <text id="static_instance-Temperature_Serial_Number-11">
             <value>Other</value>
           </text>
           <text id="static_instance-Temperature_Source-0">
@@ -305,6 +332,9 @@
           </text>
           <text id="static_instance-Done-0">
             <value>Done</value>
+          </text>
+          <text id="static_instance-Yes-0">
+            <value>Yes</value>
           </text>
         </translation>
       </itext>
@@ -334,19 +364,22 @@
           <StaffInput/>
           <StaffComments_null/>
           <StationEquipment>
-            <EquipmentNeedsUpdated/>
+            <EquipmentChangeText/>
             <NoteInventoryIncorrect/>
             <DataLogger jr:template="">
+              <IsActive/>
               <Type/>
               <SerialNumber/>
               <Comments/>
-              <LowVoltage/>
+              <LowBatteryUnits/>
+              <LowBattery/>
               <Sensor jr:template="">
+                <IsActive/>
                 <Type/>
                 <SerialNumber/>
                 <Comments/>
               </Sensor>
-              <generated_note_name_41/>
+              <generated_note_name_44/>
             </DataLogger>
           </StationEquipment>
           <MeasuringPoint jr:template="">
@@ -361,7 +394,7 @@
             <VisitDate/>
             <StaffComments/>
             <Staff/>
-            <InventoryVerified/>
+            <EquipmentChange/>
             <LocationIssue jr:template="">
               <Type/>
               <Comments/>
@@ -372,19 +405,19 @@
               <BatteryReplaced1/>
               <BatteryReplacementDate1/>
               <BatteryReplacementDate124/>
-              <BatteryNeedsReplacement/>
               <BatteryVoltage2dec_Text/>
               <BatteryVoltage2dec/>
               <BatteryVoltage0dec/>
-              <BatteryVoltage/>
+              <BatteryVoltagemAh/>
+              <BatteryLevel/>
               <WarningVoltage2dec/>
               <WarningVoltage0dec/>
               <WarningVoltage/>
               <NoteBatteryReplacement/>
               <NoteBatteryBehavior/>
+              <NotemAh/>
             </Battery_start>
             <LoggerTime_start>
-              <NoteBatteryDOARequired/>
               <NoteBatteryIsDOA/>
               <DataLoggerTime/>
               <DataLoggerTime24/>
@@ -503,7 +536,6 @@
                 <VerificationAdjustmentAmount/>
                 <DifVerification/>
                 <NoteVerificationLevelGreater/>
-                <NoteVerificationLevelLess/>
                 <SensorAdjustmentException/>
                 <SensorAdjustmentComments/>
               </ConductivityMeasurement>
@@ -588,7 +620,7 @@
               <BatteryReplacementDate224/>
               <BatteryReplacementDate/>
               <BatteryVoltage2_Text/>
-              <BatteryVoltage2/>
+              <BatteryLevel2/>
               <DataLoggerTime2/>
               <DataLoggerTime224/>
               <DataLoggerTimeActual2/>
@@ -729,6 +761,18 @@
             <itextId>static_instance-Conductivity_Serial_Number-1</itextId>
             <name>252531</name>
           </item>
+          <item>
+            <itextId>static_instance-Conductivity_Serial_Number-2</itextId>
+            <name>00J1251</name>
+          </item>
+          <item>
+            <itextId>static_instance-Conductivity_Serial_Number-3</itextId>
+            <name>21A105572</name>
+          </item>
+          <item>
+            <itextId>static_instance-Conductivity_Serial_Number-4</itextId>
+            <name>22K100733</name>
+          </item>
         </root>
       </instance>
       <instance id="Conductivity_Standard">
@@ -827,7 +871,7 @@
         <root>
           <item>
             <itextId>static_instance-Hydro_Staff-0</itextId>
-            <name>Candice_Keeney</name>
+            <name>Hari_Parasu</name>
           </item>
           <item>
             <itextId>static_instance-Hydro_Staff-1</itextId>
@@ -944,6 +988,10 @@
           <item>
             <itextId>static_instance-Location_Issue_Type-18</itextId>
             <name>Other</name>
+          </item>
+          <item>
+            <itextId>static_instance-Location_Issue_Type-19</itextId>
+            <name>General Note</name>
           </item>
         </root>
       </instance>
@@ -1063,6 +1111,26 @@
           </item>
           <item>
             <itextId>static_instance-Temperature_Serial_Number-6</itextId>
+            <name>00J1251</name>
+          </item>
+          <item>
+            <itextId>static_instance-Temperature_Serial_Number-7</itextId>
+            <name>210843076</name>
+          </item>
+          <item>
+            <itextId>static_instance-Temperature_Serial_Number-8</itextId>
+            <name>210910858</name>
+          </item>
+          <item>
+            <itextId>static_instance-Temperature_Serial_Number-9</itextId>
+            <name>21A105572</name>
+          </item>
+          <item>
+            <itextId>static_instance-Temperature_Serial_Number-10</itextId>
+            <name>22K100733</name>
+          </item>
+          <item>
+            <itextId>static_instance-Temperature_Serial_Number-11</itextId>
             <name>Other</name>
           </item>
         </root>
@@ -1119,272 +1187,282 @@
           </item>
         </root>
       </instance>
+      <instance id="Yes">
+        <root>
+          <item>
+            <itextId>static_instance-Yes-0</itextId>
+            <name>Yes</name>
+          </item>
+        </root>
+      </instance>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/Location_point" type="geopoint" readonly="true()"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/NWFID" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="6"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/Name" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="128"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/Project" type="int" readonly="true()" esri:fieldType="esriFieldTypeInteger"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/FLUWID" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="16"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/Comments" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/NWFID" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="6" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/Name" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="128" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/Project" type="int" esri:fieldType="esriFieldTypeInteger" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/FLUWID" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="16" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/Comments" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/Location_image" type="binary" readonly="true()" esri:parameters="max-size=100"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasDataLogger" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasDataLogger" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter" type="string" calculate=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger " esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasSensor" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasMeasuringPoint" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasRainfall" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasStage" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasGroundwater" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasConductivity" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasADVM" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasDischarge" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasTemperature" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasWaterQuality" type="select1" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/VisitDate_null" type="dateTime" required="true()" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasSensor" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasMeasuringPoint" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasRainfall" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasStage" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasGroundwater" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasConductivity" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasADVM" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasDischarge" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasTemperature" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/HasWaterQuality" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/VisitDate_null" type="dateTime" esri:fieldType="null" required="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/VisitDate24" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/VisitDate )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/VisitDate ,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StaffInput" type="select" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StaffComments_null" type="string" esri:fieldType="null" relevant="selected( /NW_Florida_Hydrologic_Field_Form/StaffInput ,'Other')"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StaffInput" type="select" esri:fieldType="null" required="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StaffComments_null" type="string" relevant="selected( /NW_Florida_Hydrologic_Field_Form/StaffInput ,'Other')" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/EquipmentNeedsUpdated" type="select1" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/NoteInventoryIncorrect" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/StationEquipment/EquipmentNeedsUpdated ='Yes'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/EquipmentChangeText" type="select1" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/NoteInventoryIncorrect" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/StationEquipment/EquipmentChangeText ='Yes'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger ='Yes'" esri:parameters="query allowAdds=false"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Type" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="64"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/SerialNumber" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Comments" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage" type="decimal" readonly="true()" esri:fieldType="esriFieldTypeDouble"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/IsActive" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Type" type="string" relevant="NW_Florida_Hydrologic_Field_Form/DataLogger/IsActive='yes'" esri:fieldLength="64" readonly="true()" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/SerialNumber" type="string" relevant="NW_Florida_Hydrologic_Field_Form/DataLogger/IsActive='yes'" esri:fieldLength="32" readonly="true()" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Comments" type="string" relevant="NW_Florida_Hydrologic_Field_Form/DataLogger/IsActive='yes'" esri:fieldLength="1024" readonly="true()" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits" type="string" relevant="NW_Florida_Hydrologic_Field_Form/DataLogger/IsActive='yes'" esri:fieldLength="16" readonly="true()" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBattery" type="decimal" relevant="NW_Florida_Hydrologic_Field_Form/DataLogger/IsActive='yes'" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor" relevant=" /NW_Florida_Hydrologic_Field_Form/HasSensor ='Yes'" esri:parameters="query allowAdds=false"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/Type" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/SerialNumber" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/Comments" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/generated_note_name_41" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasSensor ='Yes'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/IsActive" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="3" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/Type" type="string" relevant="NW_Florida_Hydrologic_Field_Form/Sensor/IsActive='yes'" esri:fieldLength="32" readonly="true()" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/SerialNumber" type="string" relevant="NW_Florida_Hydrologic_Field_Form/Sensor/IsActive='yes'" esri:fieldLength="32" readonly="true()" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/Comments" type="string" relevant="NW_Florida_Hydrologic_Field_Form/Sensor/IsActive='yes'" esri:fieldLength="1024" readonly="true()" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/generated_note_name_44" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasSensor ='Yes'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint" relevant=" /NW_Florida_Hydrologic_Field_Form/HasMeasuringPoint ='Yes'" esri:parameters="query=&quot;IsActive='Yes'&quot; allowAdds=false"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/Name" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="64"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/Description" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/Elevation" type="decimal" readonly="true()" esri:fieldType="esriFieldTypeDouble"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/Comments" type="string" readonly="true()" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/Name" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="64" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/Description" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/Elevation" type="decimal" esri:fieldType="esriFieldTypeDouble" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/Comments" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/MeasuringPoint/MeasuringPoint_image" type="binary" readonly="true()" esri:parameters="max-size=100"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit_count" type="string" readonly="true()" calculate="1"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/VisitDate" type="dateTime" calculate=" /NW_Florida_Hydrologic_Field_Form/VisitDate_null " esri:fieldType="esriFieldTypeDate"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/StaffComments" type="string" calculate=" /NW_Florida_Hydrologic_Field_Form/StaffComments_null " esri:fieldType="esriFieldTypeString" esri:fieldLength="1024"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Staff" type="string" calculate="pulldata(&quot;@javascript&quot;, &quot;functions.js&quot;, &quot;replacefunction&quot;,  /NW_Florida_Hydrologic_Field_Form/StaffInput )" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/InventoryVerified" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/StationEquipment/EquipmentNeedsUpdated )&gt;0, 'Yes','No')" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LocationIssue/Type" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/EquipmentChange" type="select1" calculate=" /NW_Florida_Hydrologic_Field_Form/StationEquipment/EquipmentChangeText " esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LocationIssue/Type" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="64"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LocationIssue/Comments" type="string" esri:fieldType="esriFieldTypeString" esri:fieldLength="1024"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LocationIssue/LocationIssue_Photo" type="binary" esri:parameters="max-size=100"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1" type="select1" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='Yes'" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplacementDate1" type="dateTime" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='Yes'" esri:fieldLength="3" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplacementDate1" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplacementDate124" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplacementDate1 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplacementDate1 ,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryNeedsReplacement" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No'" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text" type="string" esri:fieldType="null" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage &lt;20"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec" type="decimal" calculate="number( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text )" esri:fieldType="null" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage &lt;20"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec" type="int" esri:fieldType="null" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage &gt;=20"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage" type="string" calculate="concat( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec ,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec )" esri:fieldType="esriFieldTypeDouble" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/WarningVoltage2dec" readonly="true()" type="string" esri:fieldType="null" relevant="regex( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text , '^\d+\.\d{0,1}$') or regex( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text , '^\d+$')"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/WarningVoltage0dec" readonly="true()" type="string" esri:fieldType="null" relevant="regex( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec , '^\d*\.\d+$')"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/WarningVoltage" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec &gt;100 or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text &gt;100"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/NoteBatteryReplacement" readonly="true()" type="string" esri:fieldType="null" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryNeedsReplacement ='Yes' or ( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage &lt;  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage  and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage )&gt;0)) and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA !='Yes' and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage &lt;20"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/NoteBatteryBehavior" readonly="true()" type="string" esri:fieldType="null" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryNeedsReplacement ='Yes' or ( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage &lt;  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage  and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage )&gt;0)) and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA !='Yes' and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage &gt;=20"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text" type="string" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits ='Volts'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec" type="decimal" calculate="number( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text )" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits ='Volts'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec" type="int" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits ='Percent'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltagemAh" type="int" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits ='mAh'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryLevel" type="string" calculate="concat( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec ,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec ,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltagemAh )" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes'" esri:fieldType="esriFieldTypeDouble"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/WarningVoltage2dec" readonly="true()" type="string" relevant="regex( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text , '^\d+\.\d{0,1}$') or regex( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text , '^\d+$')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/WarningVoltage0dec" readonly="true()" type="string" relevant="regex( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec , '^\d*\.\d+$')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/WarningVoltage" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec &gt;100 or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text &gt;100" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/NoteBatteryReplacement" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryLevel &lt;  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBattery  and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits ='Volts' and (string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec )&gt;0)" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/NoteBatteryBehavior" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryLevel &gt; /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBattery  and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits ='Percent' and (string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec )&gt;0)" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/NotemAh" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryLevel &gt;= /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBattery  and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No' and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits ='mAh'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/NoteBatteryDOARequired" readonly="true()" type="string" esri:fieldType="null" relevant="string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA )=0"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/NoteBatteryIsDOA" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='No'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime24" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime ,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual24" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual ,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount" type="int" readonly="true()" calculate="sqrt(pow((decimal-time( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual ) - decimal-time( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime )) *24*60 , 2))" esri:fieldType="esriFieldTypeInteger" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='Yes') or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA ='No'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/NoteDataLoggerTimeAdj" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount &gt;1 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount )&gt;0"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjusted" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount &gt;1 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount )&gt;0" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjusted ='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjComments" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjException ='Other'" esri:fieldLength="1024"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjDate" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjusted ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjDate24" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjDate )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjDate ,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/NoteBatteryIsDOA" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='No'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime24" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual24" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount" type="int" calculate="sqrt(pow((decimal-time( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeActual ) - decimal-time( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTime )) *24*60 , 2))" esri:fieldType="esriFieldTypeInteger" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/NoteDataLoggerTimeAdj" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount &gt;1 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount )&gt;0" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjusted" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount &gt;1 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjAmount )&gt;0" esri:fieldLength="3" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjusted ='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjException ='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjDate" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjusted ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjDate24" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjDate )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/DataLoggerTimeAdjDate ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasRainfall ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketCleaned" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketCleaned ='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketComments" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketException ='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketCleaned ='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallBucketException ='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismChecked" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismChecked ='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismComments" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismException ='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismChecked ='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismException ='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallMechanismChecked ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipCount_Text" type="string" esri:fieldType="null" constraint="regex(., '^[0-9]+\.\d{2}$')" jr:constraintMsg="Please make sure you have 2 decimal places."/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipCount" type="decimal" calculate="number( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipCount_Text )" esri:fieldType="esriFieldTypeDouble"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipDate" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipDate24" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipDate )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipDate ,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipDate24" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipDate )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipDate ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Rainfall_start/RainfallFalseTips/FalseTipRemoved" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasGroundwater ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasureDate" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/GroundwaterMeasureDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasureDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasureDate,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/GroundwaterMeasureDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasureDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasureDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ReadingType" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/NoteSteelTape" readonly="true()" type="string" esri:fieldType="null" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Steel tape'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethodComments" type="string" esri:fieldType="esriFieldTypeString" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/NoteSteelTape" readonly="true()" type="string" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Steel tape'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethodComments" type="string" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasuringPoint_Groundwater" type="select1" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/LocationMP_Groundwater" type="string" calculate="/NW_Florida_Hydrologic_Field_Form/Name+&quot; - &quot;+ /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasuringPoint_Groundwater " esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasuringPointGlobalID" type="string" readonly="true()" calculate="pulldata('measuringpoint','locationglobalid','locationmpname', /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/LocationMP_Groundwater )" esri:fieldType="esriFieldTypeGUID"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/Elevation_Groundwater" type="decimal" readonly="true()" calculate="pulldata('measuringpoint','elevation','locationmpname', /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/LocationMP_Groundwater )" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevelHeld" type="decimal" esri:fieldType="esriFieldTypeDouble" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Steel tape'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevelWet" type="decimal" esri:fieldType="esriFieldTypeDouble" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Steel tape'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/MeasuringPointGlobalID" type="string" calculate="pulldata('measuringpoint','globalid','locationmpname', /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/LocationMP_Groundwater )" esri:fieldType="esriFieldTypeGUID" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/Elevation_Groundwater" type="decimal" calculate="pulldata('measuringpoint','elevation','locationmpname', /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/LocationMP_Groundwater )" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevelHeld" type="decimal" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Steel tape'" esri:fieldType="esriFieldTypeDouble"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevelWet" type="decimal" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Steel tape'" esri:fieldType="esriFieldTypeDouble"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevel" type="decimal" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualMethod='Steel tape', round( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevelWet - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevelHeld ,2), '')" esri:fieldType="esriFieldTypeDouble"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/WaterLevel" type="decimal" readonly="true()" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/Elevation_Groundwater + /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevel,2)" esri:fieldType="esriFieldTypeDouble" esri:parameters="calculationMode=always"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorLevel" type="decimal" esri:fieldType="esriFieldTypeDouble" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentAmount" type="decimal" readonly="true()" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/WaterLevel - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorLevel,2)" esri:fieldType="esriFieldTypeDouble" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:parameters="calculationMode=always"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/DifGroundwater" type="string" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentAmount&gt;0.02, 'Yes',if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentAmount&lt;-0.02,'Yes', 'No'))" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/NoteWaterLevel" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/DifGroundwater ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjusted" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/DifGroundwater ='Yes'" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjusted='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentComments" type="string" esri:fieldType="esriFieldTypeString" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentException='Other'" esri:fieldLength="1024"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentDate" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/GroundwaterSensorAdjustmentDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentDate,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/WaterLevel" type="decimal" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/Elevation_Groundwater + /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/ManualLevel,2)" esri:fieldType="esriFieldTypeDouble" readonly="true()" esri:parameters="calculationMode=always"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorLevel" type="decimal" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="esriFieldTypeDouble"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentAmount" type="decimal" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/WaterLevel - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorLevel,2)" esri:parameters="calculationMode=always" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" readonly="true()" esri:fieldType="esriFieldTypeDouble"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/DifGroundwater" type="string" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentAmount&gt;0.02, 'Yes',if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentAmount&lt;-0.02,'Yes', 'No'))" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/NoteWaterLevel" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/DifGroundwater ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjusted" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/DifGroundwater ='Yes'" esri:fieldLength="3" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjusted='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentComments" type="string" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentException='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentDate" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjusted='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/GroundwaterSensorAdjustmentDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/GroundwaterMeasurement/SensorAdjustmentDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPullDate" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPullDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualityPurgeStart" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualityPurgeStart24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualityPurgeStart)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualityPurgeStart,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySamplingEnd" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySamplingEnd24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySamplingEnd)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySamplingEnd,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorReinstallDate" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorReinstallDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorReinstallDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorReinstallDate,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/NoteGroundwaterMeasurement" type="select" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'" esri:fieldLength="3" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPullDate" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPullDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualityPurgeStart" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualityPurgeStart24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualityPurgeStart)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualityPurgeStart,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySamplingEnd" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySamplingEnd24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySamplingEnd)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySamplingEnd,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorReinstallDate" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorPulled ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorReinstallDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorReinstallDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/WaterQualitySensorReinstallDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Groundwater_start/WaterQuality_start/NoteGroundwaterMeasurement" type="select" relevant=" /NW_Florida_Hydrologic_Field_Form/HasWaterQuality ='Yes'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasStage ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasureDate" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/StageMeasureDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasureDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasureDate,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/StageMeasureDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasureDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasureDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/ManualMethod" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/ManualMethodComments" type="string" esri:fieldType="esriFieldTypeString" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/ManualMethod='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/ManualMethodComments" type="string" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/ManualMethod='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasuringPoint_Stage" type="select1" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/LocationMP_Stage" type="string" calculate="/NW_Florida_Hydrologic_Field_Form/Name+&quot; - &quot;+ /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasuringPoint_Stage " esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasuringPointGlobalID" type="string" readonly="true()" calculate="pulldata('measuringpoint','locationglobalid','locationmpname', /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/LocationMP_Stage )" esri:fieldType="esriFieldTypeGUID"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/Elevation_stage" type="decimal" readonly="true()" calculate="pulldata('measuringpoint','elevation','locationmpname', /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/LocationMP_Stage )" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/MeasuringPointGlobalID" type="string" calculate="pulldata('measuringpoint','globalid','locationmpname', /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/LocationMP_Stage )" esri:fieldType="esriFieldTypeGUID" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/Elevation_stage" type="decimal" calculate="pulldata('measuringpoint','elevation','locationmpname', /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/LocationMP_Stage )" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/ManualLevel" type="decimal" esri:fieldType="esriFieldTypeDouble"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/WaterLevel" type="decimal" readonly="true()" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/Elevation_stage + /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/ManualLevel,2)" esri:fieldType="esriFieldTypeDouble"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorLevel" type="decimal" esri:fieldType="esriFieldTypeDouble" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentAmount" type="decimal" readonly="true()" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/WaterLevel - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorLevel,2)" esri:fieldType="esriFieldTypeDouble" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/DifStage" type="string" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentAmount&gt;0.02,'Yes', if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentAmount&lt;-0.02, 'Yes', 'No'))" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/NoteWaterLevel" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/DifStage ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjusted" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/DifStage ='Yes'" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjusted='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentComments" type="string" esri:fieldType="esriFieldTypeString" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentException='Other'" esri:fieldLength="1024"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentDate" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/StageSensorAdjustmentDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentDate,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/WaterLevel" type="decimal" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/Elevation_stage + /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/ManualLevel,2)" esri:fieldType="esriFieldTypeDouble" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorLevel" type="decimal" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="esriFieldTypeDouble"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentAmount" type="decimal" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/WaterLevel - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorLevel,2)" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" readonly="true()" esri:fieldType="esriFieldTypeDouble"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/DifStage" type="string" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentAmount&gt;0.02,'Yes', if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentAmount&lt;-0.02, 'Yes', 'No'))" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/NoteWaterLevel" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/DifStage ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjusted" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/DifStage ='Yes'" esri:fieldLength="3" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjusted='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentComments" type="string" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentException='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentDate" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjusted='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/StageSensorAdjustmentDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Stage_start/StageMeasurement/SensorAdjustmentDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasConductivity ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/MeasureDate" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ConductivityMeasureDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/MeasureDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/MeasureDate,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ConductivityMeasureDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/MeasureDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/MeasureDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ReadingType" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SerialNumber" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ManualLevel" type="int" esri:fieldType="esriFieldTypeInteger"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorLevel" type="int" esri:fieldType="esriFieldTypeInteger" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount" type="int" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ManualLevel - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorLevel,2)" esri:fieldType="esriFieldTypeInteger" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_1" type="int" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount&lt;0, /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount*-1, /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount)" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_2" type="int" readonly="true()" calculate="round( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_1  div /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ManualLevel, 2)*100" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifConductivity" type="string" calculate="if( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_2 &gt;10, 'Yes', if( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_2 &lt;-10, 'Yes', 'No'))" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/NoteConductivityLevel" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifConductivity ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/FailedPreviously" type="select1" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifConductivity ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/FailedPreviously ='No'" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/CalibrationStandard" type="select1" esri:fieldType="esriFieldTypeInteger" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/PrecalibrationLevel" type="int" esri:fieldType="esriFieldTypeInteger" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentDate" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ConductivitySensorAdjustmentDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentDate,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationStandard" type="select1" esri:fieldType="esriFieldTypeInteger" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationLevel" type="int" esri:fieldType="esriFieldTypeInteger" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_1" type="decimal" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationStandard - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationLevel,2)" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_2" type="decimal" calculate="if( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_1 &lt;0,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_1 *-1,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_1 )" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount" type="decimal" readonly="true()" calculate="round( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_2  div /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationStandard, 2)*100" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifVerification" type="string" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount&gt;5, 'Yes',if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount&lt;-5,'Yes', 'No'))" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/NoteVerificationLevelGreater" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifVerification ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/NoteVerificationLevelLess" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifVerification ='No'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentException" type="select1" calculate="if( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/FailedPreviously ='Yes', 'Sensor failed after calibration', '')" esri:fieldType="esriFieldTypeString" relevant="( /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='No') or ( /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/FailedPreviously ='Yes') or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifVerification ='Yes'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentComments" type="string" esri:fieldType="esriFieldTypeString" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentException='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorLevel" type="int" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="esriFieldTypeInteger"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount" type="int" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ManualLevel - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorLevel,2)" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="esriFieldTypeInteger"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_1" type="int" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount&lt;0, /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount*-1, /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount)" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_2" type="int" calculate="round( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_1  div /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ManualLevel, 2)*100" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" readonly="true()" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifConductivity" type="string" calculate="if( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_2 &gt;10, 'Yes', if( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentAmount_2 &lt;-10, 'Yes', 'No'))" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/NoteConductivityLevel" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifConductivity ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/FailedPreviously" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifConductivity ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/FailedPreviously ='No'" esri:fieldLength="3" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/CalibrationStandard" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="esriFieldTypeInteger"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/PrecalibrationLevel" type="int" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="esriFieldTypeInteger"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentDate" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ConductivitySensorAdjustmentDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationStandard" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="esriFieldTypeInteger"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationLevel" type="int" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="esriFieldTypeInteger"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_1" type="decimal" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationStandard - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationLevel,2)" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_2" type="decimal" calculate="if( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_1 &lt;0,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_1 *-1,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_1 )" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount" type="decimal" calculate="round( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount_2  div /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationStandard, 2)*100" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" readonly="true()" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifVerification" type="string" calculate="if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount&gt;5, 'Yes',if(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationAdjustmentAmount&lt;-5,'Yes', 'No'))" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/NoteVerificationLevelGreater" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifVerification ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentException" type="select1" calculate="if( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/FailedPreviously ='Yes', 'Sensor failed after calibration', '')" relevant="( /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted='No') or ( /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/FailedPreviously ='Yes') or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/DifVerification ='Yes'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentComments" type="string" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentException='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordStart" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordStart24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordStart)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordStart,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordStart24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordStart)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordStart,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordEnd" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordEnd24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordEnd)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordEnd,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordEnd24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordEnd)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMRecordEnd,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMTimeSeries" type="binary" esri:parameters="max-size=100"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckedInitial" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckInitialException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckedInitial ='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckInitialComments" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckInitialException ='Other'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckInitialException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckedInitial ='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckInitialComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckInitialException ='Other'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleaned" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleanedException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleaned ='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleanedComments" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleanedException ='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleanedException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleaned ='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleanedComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMCleanedException ='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/NoteDebrisRemoval" readonly="true()" type="string" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckedSecondary" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckSecondaryException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckedSecondary ='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckSecondaryComments" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckSecondaryException ='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckSecondaryException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckedSecondary ='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckSecondaryComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMBeamCheckSecondaryException ='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMAdditionalMaintenance" type="select1" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMMaintenance" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMAdditionalMaintenance ='Yes'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMMaintenanceComments" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMMaintenance ='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMMaintenance" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMAdditionalMaintenance ='Yes'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMMaintenanceComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/ADVM_start/ADVM/ADVMMaintenance ='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasTemperature ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/MeasureDate" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureMeasureDate24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/MeasureDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/MeasureDate,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureMeasureDate24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/MeasureDate)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/MeasureDate,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/ReadingType" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SerialNumber" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SerialNumberComments" type="string" esri:fieldType="null" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SerialNumber='Other'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SerialNumberComments" type="string" relevant="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SerialNumber='Other'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/ManualLevel_Text" type="string" esri:fieldType="null" constraint="regex(., '^[0-9]+\.\d{1}$')" jr:constraintMsg="Please make sure you have 1 decimal places."/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/ManualLevel" type="decimal" calculate="number( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/ManualLevel_Text )" esri:fieldType="esriFieldTypeDouble"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput_Text" type="string" constraint="regex(., '^[0-9]+\.\d{1}$')" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" jr:constraintMsg="Please make sure you have 1 decimal places."/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput" type="decimal" calculate="number( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput_Text )" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput_Text" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" constraint="regex(., '^[0-9]+\.\d{1}$')" jr:constraintMsg="Please make sure you have 1 decimal places." esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput" type="decimal" calculate="number( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput_Text )" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits" type="select1" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevel" type="string" calculate="if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits ,'Fahrenheit'), round(( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput - 32) * 0.55555,1), if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits ,'Celsius'), /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput, ''))" esri:fieldType="esriFieldTypeDouble"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelCelsius" type="decimal" readonly="true()" calculate="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevel" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits ='Fahrenheit'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount" type="decimal" readonly="true()" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/ManualLevel - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevel, 2)" esri:fieldType="null" relevant="string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/ManualLevel)&gt;0 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput )&gt;0 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits )&gt;0"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelCelsius" type="decimal" calculate="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevel" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits ='Fahrenheit'" readonly="true()" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount" type="decimal" calculate="round(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/ManualLevel - /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevel, 2)" relevant="string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/ManualLevel)&gt;0 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput )&gt;0 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits )&gt;0" readonly="true()" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature" type="string" calculate="if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ,'ADVM') and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount &gt;2, 'Yes',
- if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ,'ADVM') and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount &lt;-2, 'Yes', if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ,'Transducer') and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount &gt;0.5, 'Yes', if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ,'Transducer') and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount &lt;-0.5,'Yes','No'))))" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/NoteTemperatureLevelADVM" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ='ADVM' and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput )&gt;0 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits )&gt;0"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/NoteTemperatureLevelOther" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ='Transducer' and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput )&gt;0 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits )&gt;0"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/InitialMeasurementCorrect" type="select1" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/NoteTemperatureRemeasure" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/InitialMeasurementCorrect ='No'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorFailed" type="select1" esri:fieldLength="3" readonly="true()" calculate="if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/InitialMeasurementCorrect ,'Yes'), 'Yes', '')" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/InitialMeasurementCorrect ='Yes'"/>
+ if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ,'ADVM') and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount &lt;-2, 'Yes', if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ,'Transducer') and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount &gt;0.5, 'Yes', if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ,'Transducer') and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/TemperatureDifferenceAmount &lt;-0.5,'Yes','No'))))" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/NoteTemperatureLevelADVM" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ='ADVM' and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput )&gt;0 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits )&gt;0" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/NoteTemperatureLevelOther" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorSource ='Transducer' and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelInput )&gt;0 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorLevelUnits )&gt;0" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/InitialMeasurementCorrect" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/NoteTemperatureRemeasure" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/InitialMeasurementCorrect ='No'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/SensorFailed" type="select1" calculate="if(selected( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/InitialMeasurementCorrect ,'Yes'), 'Yes', '')" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/DifTemperature ='Yes' and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Temperature_start/TemperatureMeasurement/InitialMeasurementCorrect ='Yes'" esri:fieldLength="3" readonly="true()" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDischarge ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/NoteMinuteInterval" type="select" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/NoteMinuteInterval" type="select" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/NoteStageStart" type="select" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordStart" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordStart24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordStart)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordStart,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordStart24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordStart)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordStart,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordEnd" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordEnd24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordEnd)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordEnd,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordEnd24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordEnd)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeRecordEnd,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeVolume" type="decimal" esri:fieldType="esriFieldTypeDouble"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeUncertainty" type="decimal" esri:fieldType="esriFieldTypeDouble"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/NoteStageEnd" type="select" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/NoteOriginalInterval" type="select" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/NoteOriginalInterval" type="select" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeTransectPhotos" type="binary" esri:parameters="max-size=100"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/DischargeDataFiles" type="binary" esri:parameters="max-size=100"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordStart" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordStart24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordStart)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordStart,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordEnd" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordEnd24" type="string" readonly="true()" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordEnd)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordEnd,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordStart" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordStart24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordStart)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordStart,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordEnd" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordEnd24" type="string" calculate="if(string-length(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordEnd)&gt;0, concat('24-Hour Time Format — ',format-date(/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischarge_RecordEnd,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Discharge_start/ADVMDischargeDataFiles" type="binary" relevant=" /NW_Florida_Hydrologic_Field_Form/HasADVM ='Yes'" esri:parameters="max-size=100"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start" relevant=" /NW_Florida_Hydrologic_Field_Form/HasDataLogger_GroupFilter ='Yes'"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordStart" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordStart24" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordStart )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordStart ,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordStart24" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordStart )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordStart ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordEnd" type="dateTime" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordEnd24" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordEnd )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordEnd ,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordEnd24" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordEnd )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerRecordEnd ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeSeries" type="binary" esri:parameters="max-size=100"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/NoteBatteryReplacement2" readonly="true()" type="string" esri:fieldType="null" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryNeedsReplacement ='Yes' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage &lt;  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage ) and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA !='Yes' and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage &lt;20"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2" type="select1" esri:fieldType="null" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryNeedsReplacement ='Yes' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage &lt;  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage ) and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA !='Yes' and  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage &lt;20"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/NoteBatteryReplacement2" readonly="true()" type="string" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryLevel &lt;  /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBattery ) and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA !='Yes' and ( /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits ='Volts' ) and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec ) &gt;0" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2" type="select1" relevant="( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryLevel &lt; /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBattery ) and  /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryDOA !='Yes'" esri:fieldType="null"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced" type="string" calculate="concat( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 )" esri:fieldType="esriFieldTypeString" esri:fieldLength="3"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementException" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='No'" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementComments" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementException ='Other'" esri:fieldLength="1024"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate2" type="dateTime" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate224" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate2 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate2 ,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementException" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplaced1 ='No' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='No'" esri:fieldLength="32" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementException ='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate2" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate224" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate2 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate2 ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate" type="string" calculate="concat( /NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplacementDate1 ,  /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplacementDate2 )" esri:fieldType="esriFieldTypeDate"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryVoltage2_Text" type="string" constraint="regex(., '^[0-9]+\.\d{2}$')" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'" jr:constraintMsg="Please make sure you have 2 decimal places."/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryVoltage2" type="decimal" calculate="number( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryVoltage2_Text )" esri:fieldType="esriFieldTypeDouble" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime224" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2 ,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual2" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual224" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual2 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual2 ,'%H:%M')),'')" esri:fieldType="null"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2" type="int" readonly="true()" calculate="sqrt(pow((decimal-time( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual2 ) - decimal-time( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2 )) *24*60 , 2))" esri:fieldType="esriFieldTypeInteger" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/NoteDataLoggerTimeAdj2" readonly="true()" type="string" esri:fieldType="null" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2 &gt;1 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2 )&gt;0"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjusted2" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2 &gt;1 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2 )&gt;0"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjException2" type="select1" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjusted2 ='No'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjComments2" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjException2 ='Other'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjDate2" type="dateTime" esri:fieldType="esriFieldTypeDate" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjusted2 ='Yes'"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjDate224" type="string" readonly="true()" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjDate2 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjDate2 ,'%H:%M')),'')" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryVoltage2_Text" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'" constraint="regex(., '^[0-9]+\.\d{2}$')" jr:constraintMsg="Please make sure you have 2 decimal places." esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryLevel2" type="decimal" calculate="number( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryVoltage2_Text )" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'" esri:fieldType="esriFieldTypeDouble"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime224" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2 ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual2" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual224" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual2 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual2 ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2" type="int" calculate="sqrt(pow((decimal-time( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeActual2 ) - decimal-time( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2 )) *24*60 , 2))" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryReplaced2 ='Yes'" readonly="true()" esri:fieldType="esriFieldTypeInteger"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/NoteDataLoggerTimeAdj2" readonly="true()" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2 &gt;1 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2 )&gt;0" esri:fieldType="null"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjusted2" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2 &gt;1 and string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2 )&gt;0" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjException2" type="select1" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjusted2 ='No'" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjComments2" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjException2 ='Other'" esri:fieldType="esriFieldTypeString"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjDate2" type="dateTime" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjusted2 ='Yes'" esri:fieldType="esriFieldTypeDate"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjDate224" type="string" calculate="if(string-length( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjDate2 )&gt;0, concat('24-Hour Time Format — ',format-date( /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjDate2 ,'%H:%M')),'')" esri:fieldType="null" readonly="true()"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DesiccantEnclosure" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DesiccantSensor" type="select1" esri:fieldType="esriFieldTypeString" esri:fieldLength="32"/>
-      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DesiccantComments" type="string" esri:fieldType="esriFieldTypeString" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DesiccantSensor ='Other' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DesiccantEnclosure ='Other'" esri:fieldLength="1024"/>
+      <bind nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DesiccantComments" type="string" relevant=" /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DesiccantSensor ='Other' or  /NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DesiccantEnclosure ='Other'" esri:fieldLength="1024" esri:fieldType="esriFieldTypeString"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
       <bind nodeset="/NW_Florida_Hydrologic_Field_Form/meta/instanceName" type="string" calculate="&quot;NWFID: &quot; +  /NW_Florida_Hydrologic_Field_Form/NWFID "/>
     </model>
@@ -1546,8 +1624,8 @@
     <select appearance="minimal" ref="/NW_Florida_Hydrologic_Field_Form/StaffInput">
       <label>Staff</label>
       <item>
-        <label>Candice Keeney</label>
-        <value>Candice_Keeney</value>
+        <label>Hari Parasu</label>
+        <value>Hari_Parasu</value>
       </item>
       <item>
         <label>David Stanford</label>
@@ -1591,15 +1669,11 @@
     </input>
     <group ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment">
       <label>Station Equipment</label>
-      <select1 appearance="horizontal-compact" ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/EquipmentNeedsUpdated">
+      <select1 appearance="horizontal-compact" ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/EquipmentChangeText">
         <label>Changes to Equipment Needed</label>
         <item>
           <label>Yes</label>
           <value>Yes</value>
-        </item>
-        <item>
-          <label>No</label>
-          <value>No</value>
         </item>
       </select1>
       <input ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/NoteInventoryIncorrect">
@@ -1608,6 +1682,9 @@
       <group ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger">
         <label>Data Logger</label>
         <repeat nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger">
+          <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/IsActive">
+            <label>Is the equipment Active</label>
+          </input>
           <input ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Type">
             <label>Data Logger Type</label>
           </input>
@@ -1617,13 +1694,20 @@
           <input ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Comments">
             <label>Comments</label>
           </input>
-          <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowVoltage">
+          <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBatteryUnits">
             <label>LowVoltage</label>
-            <hint>Datalogger is considered low if voltage is less than this value</hint>
+            <hint>The type of battery units recorded for datalogger</hint>
+          </input>
+          <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBattery">
+            <label>LowBatteryLevel</label>
+            <hint>The threshold that triggers low battery message</hint>
           </input>
           <group ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor">
             <label>Sensor</label>
             <repeat nodeset="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor">
+              <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/IsActive">
+                <label>Is the equipment Active</label>
+              </input>
               <input ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/Sensor/Type">
                 <label>Sensor Type</label>
               </input>
@@ -1635,7 +1719,7 @@
               </input>
             </repeat>
           </group>
-          <input ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/generated_note_name_41">
+          <input ref="/NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/generated_note_name_44">
             <label>Use the scroll to view additional sensors (if applicable)</label>
           </input>
         </repeat>
@@ -1670,9 +1754,17 @@
         <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Staff">
           <label>Staff Formatted</label>
         </input>
-        <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/InventoryVerified">
-          <label>Equipment Inventory Verified</label>
-        </input>
+        <select1 appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/EquipmentChange">
+          <label>Equipment Change</label>
+          <item>
+            <label>Yes</label>
+            <value>Yes</value>
+          </item>
+          <item>
+            <label>No</label>
+            <value>No</value>
+          </item>
+        </select1>
         <group ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LocationIssue">
           <label>Issue &amp; Comments</label>
           <repeat nodeset="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LocationIssue" appearance="compact">
@@ -1754,6 +1846,10 @@
                 <label>Other</label>
                 <value>Other</value>
               </item>
+              <item>
+                <label>General Note</label>
+                <value>General Note</value>
+              </item>
             </select1>
             <input appearance="multiline" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LocationIssue/Comments">
               <label>Record comment:</label>
@@ -1794,17 +1890,6 @@
           <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryReplacementDate124">
             <label>Battery Replacement Time (24 hour)</label>
           </input>
-          <select1 appearance="horizontal-compact" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryNeedsReplacement">
-            <label>Battery Needs Replaced?</label>
-            <item>
-              <label>Yes</label>
-              <value>Yes</value>
-            </item>
-            <item>
-              <label>No</label>
-              <value>No</value>
-            </item>
-          </select1>
           <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage2dec_Text">
             <label>Battery Level</label>
             <hint>Enter to the nearest 2 decimal places.</hint>
@@ -1813,8 +1898,11 @@
             <label>Battery Level</label>
           </input>
           <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltage0dec">
-            <label>Battery Level</label>
+            <label>Battery Level - Percentage Used</label>
             <hint>Enter a round number</hint>
+          </input>
+          <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/BatteryVoltagemAh">
+            <label>Battery Consumed - Milliamp hours (mAh)</label>
           </input>
           <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/WarningVoltage2dec">
             <label>&lt;font color="red"&gt;Please make sure you have 2 decimal places.&lt;/font&gt;</label>
@@ -1831,12 +1919,12 @@
           <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/NoteBatteryBehavior">
             <label>&lt;font color="red"&gt;The In-Situ Level Troll data logger battery has started to run low. If you noticed bad logger behavior please log this in the Location Issue section.&lt;/font&gt;</label>
           </input>
+          <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Battery_start/NotemAh">
+            <label> &lt;font color=&quot;red&quot;&gt; Battery usage has exceeded <output value=" /NW_Florida_Hydrologic_Field_Form/StationEquipment/DataLogger/LowBattery "/> mAH. Please order a new battery.&lt;/font&gt; </label>
+          </input>
         </group>
         <group appearance="compact" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start">
           <label>Logger Time</label>
-          <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/NoteBatteryDOARequired">
-            <label>&lt;font color="red"&gt;Complete the Battery section&lt;/font&gt;</label>
-          </input>
           <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerTime_start/NoteBatteryIsDOA">
             <label>&lt;font color="red"&gt;Battery is DOA - No Logger is Available&lt;/font&gt;</label>
           </input>
@@ -2329,6 +2417,18 @@
                   <label>252531</label>
                   <value>252531</value>
                 </item>
+                <item>
+                  <label>00J1251</label>
+                  <value>00J1251</value>
+                </item>
+                <item>
+                  <label>21A105572</label>
+                  <value>21A105572</value>
+                </item>
+                <item>
+                  <label>22K100733</label>
+                  <value>22K100733</value>
+                </item>
               </select1>
               <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/ManualLevel">
                 <label>Specific Conductance Value (uS/cm) from Verification Equipment</label>
@@ -2360,7 +2460,7 @@
                 </item>
               </select1>
               <select1 appearance="horizontal-compact" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjusted">
-                <label>Sensor Adjusted?</label>
+                <label>Will the sensor be calibrated?</label>
                 <item>
                   <label>Yes</label>
                   <value>Yes</value>
@@ -2419,7 +2519,7 @@
                 </item>
               </select1>
               <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationLevel">
-                <label>Verification Level</label>
+                <label>Verification Value</label>
               </input>
               <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/VerificationDate">
                 <label>Verification Date</label>
@@ -2438,10 +2538,7 @@
                 <label>% Difference between Verification and Logger</label>
               </input>
               <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/NoteVerificationLevelGreater">
-                <label>&lt;font color='red'&gt;The difference between the calculated verification standard and verification level is greater than 5%.&lt;/font&gt;</label>
-              </input>
-              <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/NoteVerificationLevelLess">
-                <label>&lt;font color='red'&gt;The difference between the calculated verification standard and verification level is less than 5%. Please remeasure the conductivity, correct the error.&lt;/font&gt;</label>
+                <label>&lt;font color='red'&gt;The difference between the calculated verification standard and verification value is greater than 5%.&lt;/font&gt;</label>
               </input>
               <select1 appearance="minimal" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/Conductivity_start/ConductivityMeasurement/SensorAdjustmentException">
                 <label>Reason Not Adjusted</label>
@@ -2659,6 +2756,26 @@
                 <item>
                   <label>Transducer - NIST unavailable</label>
                   <value>Transducer - NIST unavailable</value>
+                </item>
+                <item>
+                  <label>00J1251</label>
+                  <value>00J1251</value>
+                </item>
+                <item>
+                  <label>210843076</label>
+                  <value>210843076</value>
+                </item>
+                <item>
+                  <label>210910858</label>
+                  <value>210910858</value>
+                </item>
+                <item>
+                  <label>21A105572</label>
+                  <value>21A105572</value>
+                </item>
+                <item>
+                  <label>22K100733</label>
+                  <value>22K100733</value>
                 </item>
                 <item>
                   <label>Other</label>
@@ -2880,7 +2997,7 @@
             <label>Battery level</label>
             <hint>Enter to the nearest 2 decimal places.</hint>
           </input>
-          <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryVoltage2">
+          <input appearance="hidden" ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/BatteryLevel2">
             <label>Battery level</label>
           </input>
           <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTime2">
@@ -2898,7 +3015,7 @@
             <label>Laptop time (24 Hour)</label>
           </input>
           <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/DataLoggerTimeAdjAmount2">
-            <label>Time Adjustment (minutes)</label>
+            <label>Time Difference (minutes)</label>
           </input>
           <input ref="/NW_Florida_Hydrologic_Field_Form/LocationVisit/LoggerFile_start/NoteDataLoggerTimeAdj2">
             <label>&lt;font color="red"&gt;Please adjust the clock to match the laptop&lt;/font&gt;</label>

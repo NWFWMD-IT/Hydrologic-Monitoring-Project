@@ -1,12 +1,14 @@
 {
     "access": "org",
     "accessInformation": null,
+    "advancedSettings": null,
     "appCategories": [
     ],
     "avgRating": 0,
     "banner": null,
     "categories": [
     ],
+    "classification": null,
     "commentsEnabled": false,
     "created": 1668877680643,
     "culture": "en-us",
@@ -24,13 +26,14 @@
     "languages": [
     ],
     "largeThumbnail": null,
+    "lastViewed": -1,
     "licenseInfo": null,
     "listed": false,
-    "modified": 1717770200598,
+    "modified": 1744658304986,
     "name": "NW_Florida_Hydrologic_Field_Form.zip",
     "numComments": 0,
     "numRatings": 0,
-    "numViews": 341,
+    "numViews": 531,
     "orgId": "0123456789ABCDEF",
     "owner": "PortalPublisher",
     "ownerFolder": "00424ccd6b064428b4ba071946e412b9",
@@ -43,13 +46,16 @@
     "scoreCompleteness": 48,
     "screenshots": [
     ],
-    "size": 173459,
+    "size": 175765,
     "snippet": "Station Maintenance and Data Download",
     "spatialReference": null,
+    "subInfo": 0,
     "tags": [
     ],
     "thumbnail": "thumbnail/thumbnail1690493424187.png",
     "title": "Hydrologic Monitoring Field Collection",
+    "token1ExpirationDate": -1,
+    "token2ExpirationDate": -1,
     "type": "Form",
     "typeKeywords": [
         "Form",
