@@ -36,6 +36,23 @@ WITH
 GO
 
 
+GRANT -- For I-table procedures
+	EXECUTE
+ON SCHEMA::[hydro]
+TO
+	[HQ\hydro_admin]
+;
+
+GO
+
+
+ALTER ROLE [db_datareader]
+ADD MEMBER [HQ\hydro_admin]
+;
+
+GO
+
+
 ALTER ROLE [db_datawriter]
 ADD MEMBER [HQ\hydro_admin]
 ;
