@@ -7,7 +7,7 @@
 --	geodatabase
 --
 -- Environment:
---	ArcGIS Enterprise 10.8.1
+--	ArcGIS Enterprise 11.3
 --	SQL Server 2019
 --
 -- Notes:
@@ -98,12 +98,12 @@
 --	2023-08-23 MCM Add rmd_db group as end user
 --	2024-05-29 MCM Add [ESRI Service] group as end user
 --	2024-09-06 MCM Add [GIS_Admin] and [gis_staff] groups as end users (#192)
+--	2025-04-20 MCM Add user [HQ\hydro_admmin] (#217)
 --
 -- To do:
---	Localize for NWFWMD environment:
---		Add end users
+--	none
 --
--- Copyright 2003-2023. Mannion Geosystems, LLC. http://www.manniongeo.com
+-- Copyright 2003-2025. Mannion Geosystems, LLC. http://www.manniongeo.com
 --------------------------------------------------------------------------------
 
 
@@ -257,6 +257,27 @@ GO
 --
 -- End users
 --
+
+
+-- Writers
+
+CREATE USER [HQ\hydro_admin]
+WITH
+	DEFAULT_SCHEMA = [dbo]
+;
+
+GO
+
+
+ALTER ROLE [db_datawriter]
+ADD MEMBER [HQ\hydro_admin]
+;
+
+GO
+
+
+
+-- Readers
 
 CREATE USER [HQ\rmd_db]
 WITH
