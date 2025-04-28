@@ -7,6 +7,7 @@
 #
 #		- Add column `LocationIssue.IsActive` (#202)
 #		- Add column `LocationLastVisit.IssueCount` (#202)
+#		- Delete column `RainfallTips.FalseTipRemoved` (#222)
 #
 # Environment:
 #	ArcGIS Pro 3.4.2
@@ -64,6 +65,18 @@ def update_table_locationissue(
 		gdb
 		,'LocationIssue'
 	)
+	
+	
+	
+	#
+	# Add column
+	#
+	
+	logging.info(
+		'Adding columns'
+		,extra = {'indent_level': indent_level}
+	)
+	
 
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
@@ -77,7 +90,78 @@ def update_table_locationissue(
 		,fields_spec = attributes
 		,indent_level = indent_level + 1
 	)
+
+
+
+def update_table_locationvisit(
+	gdb
+	,indent_level = 0
+):
+
+	table = os.path.join(
+		gdb
+		,'LocationVisit'
+	)
 	
+	
+
+	#
+	# Drop columns
+	#
+	
+	logging.info(
+		'Dropping columns'
+		,extra = {'indent_level': indent_level}
+	)
+	
+	
+	
+	logging.info(
+		'BatteryNeedsReplacement'
+		,extra = {'indent_level': indent_level + 1}
+	)
+	
+	arcpy.management.DeleteField(
+		in_table = table
+		,drop_field = 'BatteryNeedsReplacement'
+		,method = 'DELETE_FIELDS'
+	)
+
+
+
+def update_table_rainfalltips(
+	gdb
+	,indent_level = 0
+):
+
+	table = os.path.join(
+		gdb
+		,'RainfallTips'
+	)
+	
+	
+
+	#
+	# Drop columns
+	#
+	
+	logging.info(
+		'Dropping columns'
+		,extra = {'indent_level': indent_level}
+	)
+	
+	
+	
+	logging.info(
+		'FalseTipRemoved'
+		,extra = {'indent_level': indent_level + 1}
+	)
+	
+	arcpy.management.DeleteField(
+		in_table = table
+		,drop_field = 'FalseTipRemoved'
+		,method = 'DELETE_FIELDS'
+	)
 
 
 
@@ -543,13 +627,39 @@ if __name__ == '__main__':
 
 
 	#
-	# Update table LocationIssue
+	# Update tables
 	#
+	
+	
+	# LocationIssue
 	
 	logging.info('Updating table: LocationIssue')
 	
 	update_table_locationissue(
 		gdb = gdb
+		,indent_level = 1
+	)
+	
+	
+	
+	# LocationVisit
+	
+	logging.info('Updating table: LocationVisit')
+	
+	update_table_locationvisit(
+		gdb = gdb
+		,indent_level = 1
+	)
+	
+	
+	
+	# RainfallTips
+	
+	logging.info('Updating table: RainfallTips')
+	
+	update_table_rainfalltips(
+		gdb = gdb
+		,indent_level = 1
 	)
 
 
