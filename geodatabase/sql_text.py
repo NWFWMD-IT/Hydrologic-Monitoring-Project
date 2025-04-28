@@ -26,6 +26,7 @@
 #
 # History:
 #	2024-10-22 MCM Created (#191)
+#	2025-04-25 MCM Add column SQL_VIEW_LOCATIONLASTVISIT.IssueCount (#202)
 #
 # To do:
 #	none
@@ -35,7 +36,22 @@
 
 
 SQL_VIEW_LOCATIONLASTVISIT = '''
-WITH lv (
+WITH li (
+	LocationGlobalID
+	,IssueCount
+) AS (
+	SELECT
+		lv.LocationGlobalID
+		,COUNT(*)
+	FROM hydro.LocationIssue_EVW li
+	INNER JOIN hydro.LocationVisit_EVW lv ON
+		li.LocationVisitGlobalID = lv.GlobalID
+	WHERE
+		li.IsActive = 'Yes'
+	GROUP BY
+		lv.LocationGlobalID
+)
+,lv (
 	LocationGlobalID
 	,LastVisit
 ) AS (
@@ -52,9 +68,12 @@ SELECT
 	,l.NWFID
 	,l.Name
 	,lv.LastVisit
+	,li.IssueCount
 FROM hydro.Location_EVW l
 LEFT JOIN lv ON
 	l.GlobalID = lv.LocationGlobalID
+LEFT JOIN li ON
+	l.GlobalID = li.LocationGlobalID
 '''
 
 

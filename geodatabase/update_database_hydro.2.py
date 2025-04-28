@@ -47,8 +47,8 @@ import tempfile
 # Custom
 
 import constants as C
+import create_hydro_data_model
 import mg
-import sql_text
 
 
 
@@ -161,6 +161,49 @@ def update_table_rainfalltips(
 		in_table = table
 		,drop_field = 'FalseTipRemoved'
 		,method = 'DELETE_FIELDS'
+	)
+
+
+
+def update_view_locationlastvisit(
+	gdb
+	,indent_level = 0
+):
+
+	view = os.path.join(
+		gdb
+		,'LocationLastVisit'
+	)
+	
+	
+	
+	#
+	# Drop view
+	#
+	
+	logging.info(
+		'Dropping view'
+		,extra = {'indent_level': indent_level}
+	)
+
+	arcpy.management.Delete(
+		in_data = view
+	)
+	
+	
+	
+	#
+	# Create view
+	#
+	
+	logging.info(
+		'Creating view'
+		,extra = {'indent_level': indent_level}
+	)
+	
+	create_hydro_data_model.create_view_locationlastvisit(
+		gdb = gdb
+		,indent_level = indent_level + 1
 	)
 
 
@@ -658,6 +701,20 @@ if __name__ == '__main__':
 	logging.info('Updating table: RainfallTips')
 	
 	update_table_rainfalltips(
+		gdb = gdb
+		,indent_level = 1
+	)
+
+
+
+	#
+	# Update Views
+	#
+	
+	
+	# LocationLastVisit
+	
+	update_view_locationlastvisit(
 		gdb = gdb
 		,indent_level = 1
 	)

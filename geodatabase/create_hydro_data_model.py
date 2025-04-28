@@ -96,6 +96,11 @@
 #	               Rename column LocationVisit.InventoryVerified to
 #	                 EqiupmentChange (#205)
 #	2025-03-11 MCM Update Data Logger Type domain (#211)
+#	2025-04-25 MCM Add column LocationIssue.IsActive (#202)
+#	               Add column LocationLastVisit.IssueCount (#202)
+#	               Drop columns (#222):
+#	                 LocationVisit.BatteryNeedsReplacement
+#	                 RainfallTips.FalseTipRemoved
 #
 # To do:
 #	none
@@ -745,6 +750,7 @@ def create_table_locationissue(
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Type'				,'TEXT'		,None		,None	,64		,'Issue Type'			,True		,False		,'Location Issue Type'			,None)
+		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,'Yes')
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
 	)
@@ -807,7 +813,6 @@ def create_table_locationvisit(
 		,('StaffComments'			,'TEXT'		,None		,None	,1024		,'Other Staff'				,True		,False		,None					,None)
 		,('EquipmentChange'			,'TEXT'		,None		,None	,3		,'Equipment Change Needed'		,True		,False		,'Yes/No'				,'No')
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
-		,('BatteryNeedsReplacement'		,'TEXT'		,None		,None	,3		,'Battery Needs Replacement'		,True		,False		,'Yes/No'				,None)
 		,('BatteryLevel'			,'DOUBLE'	,38		,2	,None		,'Battery Level'			,True		,False		,None					,None)
 		,('BatteryLevel2'			,'DOUBLE'	,38		,2	,None		,'Battery Level (new battery)'		,True		,False		,None					,None)
 		,('BatteryReplaced'			,'TEXT'		,None		,None	,3		,'Battery Replaced'			,True		,False		,'Yes/No'				,None)
@@ -983,7 +988,6 @@ def create_table_rainfalltips(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('FalseTipCount'		,'DOUBLE'	,38		,2	,None		,'False Tip Count (inches)'	,True		,False		,None					,None)
 		,('FalseTipDate'		,'DATE'		,None		,None	,None		,'False Tip Date'		,True		,False		,None					,None)
-		,('FalseTipRemoved'		,'TEXT'		,None		,None	,3		,'False Tip Removed'		,True		,False		,'Yes/No'				,None)
 		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
 	)
 
@@ -1289,6 +1293,7 @@ def create_view_locationlastvisit(
 		,('NWFID'		,'NWFID')
 		,('Name'		,'Name')
 		,('LastVisit'		,'Last Visit')
+		,('IssueCount'		,'Issue Count')
 	)
 	
 	privileges = (
@@ -1313,7 +1318,7 @@ def create_view_locationlastvisit(
 		,extent = extent
 		,field_aliases = field_aliases
 		,privileges = privileges
-		,indent_level = 0
+		,indent_level = indent_level
 	)
 	
 
