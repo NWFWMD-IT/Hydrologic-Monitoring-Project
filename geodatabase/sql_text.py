@@ -36,7 +36,7 @@
 
 
 SQL_VIEW_LOCATIONLASTVISIT = '''
-WITH lv AS (
+WITH lv_rank AS (
 	SELECT
 		*
 		,RANK () OVER (
@@ -46,6 +46,13 @@ WITH lv AS (
 				VisitDate DESC
 		) _rank
 	FROM hydro.LocationVisit_EVW
+)
+,lv AS (
+	SELECT
+		*
+	FROM lv_rank
+	WHERE
+		_rank = 1
 )
 ,li AS (
 	SELECT
@@ -149,10 +156,7 @@ LEFT JOIN lv ON
 	l.GlobalID = lv.LocationGlobalID
 LEFT JOIN li ON
 	l.GlobalID = li.LocationGlobalID
-WHERE
-	lv._rank = 1
 '''
-
 
 
 ################################################################################
