@@ -96,6 +96,12 @@
 #	               Rename column LocationVisit.InventoryVerified to
 #	                 EqiupmentChange (#205)
 #	2025-03-11 MCM Update Data Logger Type domain (#211)
+#	2025-04-25 MCM Add column LocationIssue.IsActive (#202)
+#	               Add column LocationLastVisit.IssueCount (#202)
+#	               Drop columns (#222):
+#	                 LocationVisit.BatteryNeedsReplacement
+#	                 RainfallTips.FalseTipRemoved
+#	2025-05-11 MCM Overhaul view LocationLastVisit (#223)
 #
 # To do:
 #	none
@@ -745,6 +751,7 @@ def create_table_locationissue(
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Type'				,'TEXT'		,None		,None	,64		,'Issue Type'			,True		,False		,'Location Issue Type'			,None)
+		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,'Yes')
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
 	)
@@ -807,7 +814,6 @@ def create_table_locationvisit(
 		,('StaffComments'			,'TEXT'		,None		,None	,1024		,'Other Staff'				,True		,False		,None					,None)
 		,('EquipmentChange'			,'TEXT'		,None		,None	,3		,'Equipment Change Needed'		,True		,False		,'Yes/No'				,'No')
 		,('BatteryDOA'				,'TEXT'		,None		,None	,3		,'Battery DOA'				,True		,False		,'Yes/No'				,None)
-		,('BatteryNeedsReplacement'		,'TEXT'		,None		,None	,3		,'Battery Needs Replacement'		,True		,False		,'Yes/No'				,None)
 		,('BatteryLevel'			,'DOUBLE'	,38		,2	,None		,'Battery Level'			,True		,False		,None					,None)
 		,('BatteryLevel2'			,'DOUBLE'	,38		,2	,None		,'Battery Level (new battery)'		,True		,False		,None					,None)
 		,('BatteryReplaced'			,'TEXT'		,None		,None	,3		,'Battery Replaced'			,True		,False		,'Yes/No'				,None)
@@ -983,7 +989,6 @@ def create_table_rainfalltips(
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('FalseTipCount'		,'DOUBLE'	,38		,2	,None		,'False Tip Count (inches)'	,True		,False		,None					,None)
 		,('FalseTipDate'		,'DATE'		,None		,None	,None		,'False Tip Date'		,True		,False		,None					,None)
-		,('FalseTipRemoved'		,'TEXT'		,None		,None	,3		,'False Tip Removed'		,True		,False		,'Yes/No'				,None)
 		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
 	)
 
@@ -1284,11 +1289,92 @@ def create_view_locationlastvisit(
 	extent = C.EXTENT_DISTRICT
 	
 	field_aliases = (
-		#name			,alias
-		('ID'			,'Geodatabase Unique ID')
-		,('NWFID'		,'NWFID')
-		,('Name'		,'Name')
-		,('LastVisit'		,'Last Visit')
+		#name					,alias
+		# Location
+		('ID'					,'Geodatabase Unique ID')
+		,('NWFID'				,'NWFID')
+		,('Name'				,'Name')
+		,('Project'				,'Project Number')
+		,('FLUWID'				,'FLUWID')
+		,('HasDataLogger'			,'Has Data Logger')
+		,('HasSensor'				,'Has Sensor')
+		,('HasMeasuringPoint'			,'Has Measuring Point')
+		,('HasRainfall'				,'Has Rainfall')
+		,('HasStage'				,'Has Stage')
+		,('HasGroundwater'			,'Has Groundwater')
+		,('HasConductivity'			,'Has Conductivity')
+		,('HasADVM'				,'Has ADVM')
+		,('HasDischarge'			,'Has Discharge')
+		,('HasTemperature'			,'Has Temperature')
+		,('HasWaterQuality'			,'Has Water Quality')
+		,('LocationComments'			,'Location Comments')
+		,('LocationGlobalID'			,'Location GlobalID')
+		# LocationVisit
+		,('VisitDate'				,'Visit Date')
+		,('Staff'				,'Visit Staff')
+		,('StaffComments'			,'Other Staff')
+		,('EquipmentChange'			,'Equipment Change Needed')
+		,('BatteryDOA'				,'Battery DOA')
+		,('BatteryLevel'			,'Battery Level')
+		,('BatteryLevel2'			,'Battery Level (new battery)')
+		,('BatteryReplaced'			,'Battery Replaced')
+		,('BatteryReplacementDate'		,'Battery Replacement Date')
+		,('BatteryReplacementException'		,'Battery Replacement Exception')
+		,('BatteryReplacementComments'		,'Battery Replacement Comments')
+		,('DesiccantEnclosure'			,'Enclosure Desiccant')
+		,('DesiccantSensor'			,'Sensor Desiccant')
+		,('DesiccantComments'			,'Desiccant Comments')
+		,('DataLoggerRecordStart'		,'Data Logger Record Start')
+		,('DataLoggerRecordEnd'			,'Data Logger Record End')
+		,('DataLoggerTime'			,'Data Logger Clock Time')
+		,('DataLoggerTimeActual'		,'Laptop Time')
+		,('DataLoggerTimeAdjAmount'		,'Data Logger Time Adjustment (minutes)')
+		,('DataLoggerTimeAdjusted'		,'Data Logger Time Adjusted')
+		,('DataLoggerTimeAdjDate'		,'Data Logger Time Adjustment Date')
+		,('DataLoggerTimeAdjException'		,'Data Logger Time Adjustment Exception')
+		,('DataLoggerTimeAdjComments'		,'Data Logger Time Adjustment Comments')
+		,('DataLoggerTime2'			,'Data Logger Clock Time (new battery)')
+		,('DataLoggerTimeActual2'		,'Laptop Time (new battery)')
+		,('DataLoggerTimeAdjAmount2'		,'Data Logger Time Adjustment (minutes; new battery)')
+		,('DataLoggerTimeAdjusted2'		,'Data Logger Time Adjusted (new battery)')
+		,('DataLoggerTimeAdjDate2'		,'Data Logger Time Adjustment Date (new battery)')
+		,('DataLoggerTimeAdjException2'		,'Data Logger Time Adjustment Exception (new battery)')
+		,('DataLoggerTimeAdjComments2'		,'Data Logger Time Adjustment Comments (new battery)')
+		,('RainfallBucketCleaned'		,'Rainfall Bucket Cleaned')
+		,('RainfallBucketException'		,'Rainfall Bucket Exception')
+		,('RainfallBucketComments'		,'Rainfall Bucket Comments')
+		,('RainfallMechanismChecked'		,'Tipping Mechanism Checked')
+		,('RainfallMechanismException'		,'Tipping Mechanism Exception')
+		,('RainfallMechanismComments'		,'Rainfall Mechanism Comments')
+		,('ADVMRecordStart'			,'ADVM Record Start')
+		,('ADVMRecordEnd'			,'ADVM Record End')
+		,('ADVMDischarge_RecordStart'		,'ADVM Discharge Record Start')
+		,('ADVMDischarge_RecordEnd'		,'ADVM Discharge Record End')
+		,('ADVMBeamCheckedInitial'		,'ADVM Initial Beam Checked')
+		,('ADVMBeamCheckInitialException'	,'ADVM Initial Beam Check Exception')
+		,('ADVMBeamCheckInitialComments'	,'ADVM Initial Beam Check Comments')
+		,('ADVMBeamCheckedSecondary'		,'ADVM Secondary Beam Checked')
+		,('ADVMBeamCheckSecondaryException'	,'nADVM Secondary Beam Check Exception')
+		,('ADVMBeamCheckSecondaryComments'	,'ADVM Secondary Beam Check Comments')
+		,('ADVMCleaned'				,'ADVM Cleaned')
+		,('ADVMCleanedException'		,'ADVM Cleaned Exception')
+		,('ADVMCleanedComments'			,'ADVM Cleaned Comments')
+		,('ADVMMaintenance'			,'ADVM Additional Maintenace')
+		,('ADVMMaintenanceComments'		,'ADVM Maintenance Comments')
+		,('DischargeRecordStart'		,'Discharge Record Start')
+		,('DischargeRecordEnd'			,'Discharge Record End')
+		,('DischargeVolume'			,'Discharge Volume')
+		,('DischargeUncertainty'		,'Discharge Uncertainty')
+		,('WaterQualitySensorPulled'		,'Water Quality Sensor Pulled')
+		,('WaterQualitySensorPullDate'		,'Water Quality Sensor Pull Date')
+		,('WaterQualityPurgeStart'		,'Water Quality Purge Start')
+		,('WaterQualitySamplingEnd'		,'Water Quality Sampling End')
+		,('WaterQualitySensorReinstallDate'	,'eWater Quality Sensor Reinstall Date')
+		,('LocationVisitGlobalID'		,'Location Visit GlobalID')
+		,('LocationVisitEmployee'		,'Location Visit Employee')
+		,('LocationVisitEditTimestamp'		,'Location Visit EditTimestamp')
+		# LocationIssue
+		,('IssueCount'				,'Issue Count')
 	)
 	
 	privileges = (
@@ -1313,7 +1399,7 @@ def create_view_locationlastvisit(
 		,extent = extent
 		,field_aliases = field_aliases
 		,privileges = privileges
-		,indent_level = 0
+		,indent_level = indent_level
 	)
 	
 
