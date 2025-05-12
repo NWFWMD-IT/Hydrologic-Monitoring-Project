@@ -36,13 +36,21 @@
 
 
 SQL_VIEW_LOCATIONLASTVISIT = '''
-WITH li (
-	LocationGlobalID
-	,IssueCount
-) AS (
+WITH lv AS (
+	SELECT
+		*
+		,RANK () OVER (
+			PARTITION BY
+				LocationGlobalID
+			ORDER BY
+				VisitDate DESC
+		) _rank
+	FROM hydro.LocationVisit_EVW
+)
+,li AS (
 	SELECT
 		lv.LocationGlobalID
-		,COUNT(*)
+		,COUNT(*) IssueCount
 	FROM hydro.LocationIssue_EVW li
 	INNER JOIN hydro.LocationVisit_EVW lv ON
 		li.LocationVisitGlobalID = lv.GlobalID
@@ -51,29 +59,98 @@ WITH li (
 	GROUP BY
 		lv.LocationGlobalID
 )
-,lv (
-	LocationGlobalID
-	,LastVisit
-) AS (
-	SELECT
-		LocationGlobalID
-		,MAX(VisitDate)
-	FROM hydro.LocationVisit_EVW
-	GROUP BY
-		LocationGlobalID
-)
 SELECT
-	l.Shape
-	,l.ObjectID ID
+	l.ObjectID ID
+	,l.Shape
+	,l.GDB_GEOMATTR_DATA
 	,l.NWFID
 	,l.Name
-	,lv.LastVisit
+	,l.Project
+	,l.FLUWID
+	,l.HasDataLogger
+	,l.HasSensor
+	,l.HasMeasuringPoint
+	,l.HasRainfall
+	,l.HasStage
+	,l.HasGroundwater
+	,l.HasConductivity
+	,l.HasADVM
+	,l.HasDischarge
+	,l.HasTemperature
+	,l.HasWaterQuality
+	,l.Comments LocationComments
+	,l.GlobalID LocationGlobalID
+	,lv.VisitDate
+	,lv.Staff
+	,lv.StaffComments
+	,lv.EquipmentChange
+	,lv.BatteryDOA
+	,lv.BatteryLevel
+	,lv.BatteryLevel2
+	,lv.BatteryReplaced
+	,lv.BatteryReplacementDate
+	,lv.BatteryReplacementException
+	,lv.BatteryReplacementComments
+	,lv.DesiccantEnclosure
+	,lv.DesiccantSensor
+	,lv.DesiccantComments
+	,lv.DataLoggerRecordStart
+	,lv.DataLoggerRecordEnd
+	,lv.DataLoggerTime
+	,lv.DataLoggerTimeActual
+	,lv.DataLoggerTimeAdjAmount
+	,lv.DataLoggerTimeAdjusted
+	,lv.DataLoggerTimeAdjDate
+	,lv.DataLoggerTimeAdjException
+	,lv.DataLoggerTimeAdjComments
+	,lv.DataLoggerTime2
+	,lv.DataLoggerTimeActual2
+	,lv.DataLoggerTimeAdjAmount2
+	,lv.DataLoggerTimeAdjusted2
+	,lv.DataLoggerTimeAdjDate2
+	,lv.DataLoggerTimeAdjException2
+	,lv.DataLoggerTimeAdjComments2
+	,lv.RainfallBucketCleaned
+	,lv.RainfallBucketException
+	,lv.RainfallBucketComments
+	,lv.RainfallMechanismChecked
+	,lv.RainfallMechanismException
+	,lv.RainfallMechanismComments
+	,lv.ADVMRecordStart
+	,lv.ADVMRecordEnd
+	,lv.ADVMDischarge_RecordStart
+	,lv.ADVMDischarge_RecordEnd
+	,lv.ADVMBeamCheckedInitial
+	,lv.ADVMBeamCheckInitialException
+	,lv.ADVMBeamCheckInitialComments
+	,lv.ADVMBeamCheckedSecondary
+	,lv.ADVMBeamCheckSecondaryException
+	,lv.ADVMBeamCheckSecondaryComments
+	,lv.ADVMCleaned
+	,lv.ADVMCleanedException
+	,lv.ADVMCleanedComments
+	,lv.ADVMMaintenance
+	,lv.ADVMMaintenanceComments
+	,lv.DischargeRecordStart
+	,lv.DischargeRecordEnd
+	,lv.DischargeVolume
+	,lv.DischargeUncertainty
+	,lv.WaterQualitySensorPulled
+	,lv.WaterQualitySensorPullDate
+	,lv.WaterQualityPurgeStart
+	,lv.WaterQualitySamplingEnd
+	,lv.WaterQualitySensorReinstallDate
+	,lv.GlobalID LocationVisitGlobalID
+	,lv.Employee LocationVisitEmployee
+	,lv.EditTimestamp LocationVisitEditTimestamp
 	,li.IssueCount
 FROM hydro.Location_EVW l
 LEFT JOIN lv ON
 	l.GlobalID = lv.LocationGlobalID
 LEFT JOIN li ON
 	l.GlobalID = li.LocationGlobalID
+WHERE
+	lv._rank = 1
 '''
 
 
