@@ -219,6 +219,14 @@ GO
 
 
 
+CREATE SCHEMA [sde]
+AUTHORIZATION [sde]
+;
+
+GO
+
+
+
 -- Data owner
 
 CREATE USER [hydro]
@@ -237,6 +245,14 @@ GRANT
 	,CREATE VIEW
 TO
 	[hydro]
+;
+
+GO
+
+
+
+CREATE SCHEMA [hydro]
+AUTHORIZATION [hydro]
 ;
 
 GO
@@ -354,40 +370,6 @@ GO
 
 ALTER ROLE [db_datareader]
 ADD MEMBER [HQ\gis_staff]
-;
-
-GO
-
-
-
---------------------------------------------------------------------------------
--- Schemas
---------------------------------------------------------------------------------
-
-USE [hydro]
-
-GO
-
-
-
---
--- Geodatabase system tables
---
-
-CREATE SCHEMA [sde]
-AUTHORIZATION [sde]
-;
-
-GO
-
-
-
---
--- Geodatabase data sets
---
-
-CREATE SCHEMA [hydro]
-AUTHORIZATION [hydro]
 ;
 
 GO
