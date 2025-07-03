@@ -102,6 +102,13 @@
 #	                 LocationVisit.BatteryNeedsReplacement
 #	                 RainfallTips.FalseTipRemoved
 #	2025-05-11 MCM Overhaul view LocationLastVisit (#223)
+#	2025-06-28 MCM Remove asset management objects (#229)
+#	                 - Table Sensor
+#	                 - Column DataLogger.SerialNumber
+#	                 - Domain Sensor Type
+#	               Remove LocationVisit.InventoryVerified (#232)
+#	               Update domain Location Issue Type (#242)
+#	               Add LocationVisit.IsActive (#245)
 #
 # To do:
 #	none
@@ -278,26 +285,25 @@ def create_domains(
 		)
 		,(
 			'Location Issue Type', 'TEXT', (
-				('Equipment - Data logger failure', 'Equipment - Data logger failure')
-				,('Equipment - Device changed', 'Equipment - Device changed')
+				('Battery swap', 'Battery swap')
+				,('Equipment - Device or SIM changed', 'Equipment - Device or SIM changed')
+				,('Equipment – Failure / unable to connect', 'Equipment – Failure / unable to connect')
+				,('Equipment - In-Situ low battery', 'Equipment - In-Situ low battery')
 				,('Equipment - None installed', 'Equipment - None installed')
-				,('Equipment - Solar panel issue', 'Equipment - Solar panel issue')
-				,('Equipment - Transducer failure', 'Equipment - Transducer failure')
-				,('Equipment - Unable to connect', 'Equipment - Unable to connect')
-				,('Follow up - Conduit adjustment/repair', 'Follow up - Conduit adjustment/repair')
-				,('Invalid data - Battery change', 'Invalid data - Battery change')
-				,('Invalid data - In-Situ low battery', 'Invalid data - In-Situ low battery')
-				,('Invalid data - Station maintenance', 'Invalid data - Station maintenance')
+				,('Equipment - Solar panel', 'Equipment - Solar panel')
+				,('Follow up - Maintenance required next visit', 'Follow up - Maintenance required next visit')
+				,('Follow up - Issues resolved', 'Follow up - Issues resolved')
+				,('Invalid data', 'Invalid data')
+				,('Inventory verification', 'Inventory verification')
 				,('MP - Inaccessible due to high water', 'MP - Inaccessible due to high water')
 				,('MP - Missing (washed away, etc.)', 'MP - Missing (washed away, etc.)')
 				,('MP - New', 'MP - New')
 				,('MP - No water at MP', 'MP - No water at MP')
-				,('Vandalism - Data logger', 'Vandalism - Data logger')
-				,('Vandalism - Enclosure', 'Vandalism - Enclosure')
-				,('Vandalism - Solar panel', 'Vandalism - Solar panel')
-				,('Vandalism - Transducer', 'Vandalism - Transducer')
+				,('No access', 'No access')
+				,('Photo – Site / MP', 'Photo – Site / MP')
+				,('Vandalism', 'Vandalism')
 				,('Other', 'Other')
-				,('General Note', 'General Note')
+				,('General note', 'General note')
 			)
 		)
 		,(
@@ -314,24 +320,6 @@ def create_domains(
 				,('Routine Before Sampling', 'Routine Before Sampling')
 				,('Routine After Sampling', 'Routine After Sampling')
 				,('After Calibration', 'After Calibration')
-			)
-		)
-		,(
-			'Sensor Type', 'TEXT', (
-				('Hydrological Services TB3', 'Hydrological Services TB3')
-				,('Hydrological Services TB4', 'Hydrological Services TB4')
-				,('In-Situ Aqua Troll 500', 'In-Situ Aqua Troll 500')
-				,('In-Situ Level Troll 500', 'In-Situ Level Troll 500')
-				,('Keller Acculevel', 'Keller Acculevel')
-				,('KPSI 500', 'KPSI 500')
-				,('OTT PLS', 'OTT PLS')
-				,('OTT PLS-C', 'OTT PLS-C')
-				,('RDI ChannelMaster', 'RDI ChannelMaster')
-				,('Sontek Argonaut ADV', 'Sontek Argonaut ADV')
-				,('Sontek SL 1500', 'Sontek SL 1500')
-				,('Sutron RLR', 'Sutron RLR')
-				,('WaterLog H-3311', 'WaterLog H-3311')
-				,('WaterLog Pulse Radar', 'WaterLog Pulse Radar')
 			)
 		)
 		,(
@@ -472,6 +460,7 @@ def create_fc_location(
 		,('HasDischarge'		,'TEXT'		,None		,None	,3		,'Has Discharge'		,True		,False		,'Yes/No'				,None)
 		,('HasTemperature'		,'TEXT'		,None		,None	,3		,'Has Temperature'		,True		,False		,'Yes/No'				,None)
 		,('HasWaterQuality'		,'TEXT'		,None		,None	,3		,'Has Water Quality'		,True		,False		,'Yes/No'				,None)
+		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,'Yes')
 		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
 	)
 
@@ -522,7 +511,6 @@ def create_tables(
 	create_table_locationvisit(gdb, indent_level)
 	create_table_measuringpoint(gdb, indent_level)
 	create_table_rainfalltips(gdb, indent_level)
-	create_table_sensor(gdb, indent_level)
 	create_table_stagemeasurement(gdb, indent_level)
 	create_table_temperaturemeasurement(gdb, indent_level)
 
@@ -621,7 +609,6 @@ def create_table_datalogger(
 	attributes = (
 		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
 		('Type'				,'TEXT'		,None		,None	,64		,'Data Logger Type'		,True		,False		,'Data Logger Type'			,None)
-		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
 		,('LowBattery'			,'DOUBLE'	,38		,2	,None		,'Low Battery Limit'		,True		,False		,None					,None)
 		,('LowBatteryUnits'		,'TEXT'		,None		,None	,16		,'Low Battery Units'		,True		,False		,'Battery Units'			,None)
 		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
@@ -683,11 +670,11 @@ def create_table_groundwatermeasurement(
 		('MeasureDate'			,'DATE'		,None		,None	,None		,'Measurement Date'		,True		,False		,None					,None)
 		,('ReadingType'			,'TEXT'		,None		,None	,32		,'Reading Type'			,True		,False		,'Reading Type'				,None)
 		,('ManualMethod'		,'TEXT'		,None		,None	,32		,'Manual Measurement Method'	,True		,False		,'Groundwater Method'			,None)
-		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Other Method'			,True	,False		,None					,None)
+		,('ManualMethodComments'	,'TEXT'		,None		,None	,1024		,'Other Method'			,True		,False		,None					,None)
 		,('ManualLevel'			,'DOUBLE'	,38		,2	,None		,'Manual Measurement (feet)'	,True		,False		,None					,None)
 		,('ManualLevelHeld'		,'DOUBLE'	,38		,2	,None		,'Steel Tape Held At (feet)'	,True		,False		,None					,None)
 		,('ManualLevelWet'		,'DOUBLE'	,38		,2	,None		,'Steel Tape Wet At (feet)'	,True		,False		,None					,None)
-		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Calculated Manual Water Level'	,True		,False		,None					,None)
+		,('WaterLevel'			,'DOUBLE'	,38		,2	,None		,'Calculated Manual Water Level'	,True	,False		,None					,None)
 		,('SensorLevel'			,'DOUBLE'	,38		,2	,None		,'Logger GWL'			,True		,False		,None					,None)
 		,('SensorAdjustmentAmount'	,'DOUBLE'	,38		,2	,None		,'Calculated Difference'	,True		,False		,None					,None)
 		,('SensorAdjusted'		,'TEXT'		,None		,None	,3		,'Sensor Adjusted'		,True		,False		,'Yes/No'				,None)
@@ -990,64 +977,6 @@ def create_table_rainfalltips(
 		('FalseTipCount'		,'DOUBLE'	,38		,2	,None		,'False Tip Count (inches)'	,True		,False		,None					,None)
 		,('FalseTipDate'		,'DATE'		,None		,None	,None		,'False Tip Date'		,True		,False		,None					,None)
 		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
-	)
-
-	subtypes = None
-
-	privileges = (
-		#user				read		write
-		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
-		,
-	)
-
-
-
-	# Create table
-
-	mg.create_table(
-		gdb = gdb
-		,table_name = table_name
-		,alias = alias
-		,attributes = attributes
-		,subtypes = subtypes
-		,global_id = global_id
-		,editor_tracking = editor_tracking
-		,archiving = archiving
-		,attachments = attachments
-		,privileges = privileges
-		,indent_level = indent_level
-	)
-
-
-
-def create_table_sensor(
-	gdb
-	,indent_level = 0
-):
-
-
-	# Configuration
-
-	table_name = 'Sensor'
-	alias = 'Sensor'
-
-	global_id = True
-	editor_tracking = True
-	archiving = True
-	attachments = False
-
-	table = os.path.join(
-		gdb
-		,table_name
-	)
-
-	attributes = (
-		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
-		('Type'				,'TEXT'		,None		,None	,32		,'Sensor Type'			,True		,False		,'Sensor Type'				,None)
-		,('SerialNumber'		,'TEXT'		,None		,None	,32		,'Serial Number'		,True		,False		,None					,None)
-		,('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,None)
-		,('Comments'			,'TEXT'		,None		,None	,1024		,'Comments'			,True		,False		,None					,None)
-		,('DataLoggerGlobalID'		,'GUID'		,None		,None	,None		,'Related Data Logger'		,True		,False		,None					,None)
 	)
 
 	subtypes = None

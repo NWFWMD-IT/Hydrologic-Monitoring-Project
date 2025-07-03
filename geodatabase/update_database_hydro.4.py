@@ -1,11 +1,16 @@
 ################################################################################
 # Name:
-#	update_database_hydro.3.py
+#	update_database_hydro.4.py
 #
 # Purpose:
 #	Update existing geodatabase to:
-#
-#		- Overhaul view LocationLastVisit (#223)
+#		Remove asset management objects (#229)
+#			- Table `Sensor`
+#			- Column `DataLogger.SerialNumber`
+#			- Domain `Sensor Type`
+#		Remove `LocationVisit.InventoryVerified` (#232)
+#		Update domain Location Issue Type (#242)
+#		Add column Location.IsActive (#245)
 #
 # Environment:
 #	ArcGIS Pro 3.4.2
@@ -18,7 +23,7 @@
 #	as the Windows user `hydro` on which the database user `hydro` is based.
 #
 # History:
-#	2025-04-25 MCM Created
+#	2025-06-28 MCM Created
 #
 # To do:
 #	none
@@ -54,48 +59,178 @@ import mg
 # Schema change functions
 ################################################################################
 
-def update_view_locationlastvisit(
+def add_field_location_isactive(
 	gdb
 	,indent_level = 0
 ):
 
-	view = os.path.join(
+	fc = os.path.join(
 		gdb
-		,'LocationLastVisit'
+		,'Location'
+	)
+
+	attributes = (
+		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
+		('IsActive'			,'TEXT'		,None		,None	,3		,'Is Active'			,True		,False		,'Yes/No'				,'Yes')
+		,
+	)
+	
+
+	logging.info(
+		'Adding fields: Location'
+		,extra = {'indent_level': indent_level}
+	)
+
+	mg.add_fields(
+		table = fc
+		,fields_spec = attributes
+		,indent_level = indent_level + 1
+	)
+	
+
+
+def delete_domain_sensor_type(
+	gdb
+	,indent_level = 0
+):
+
+	logging.info(
+		'Deleting domain: Sensor Type'
+		,extra = {'indent_level': indent_level}
+	)
+
+	arcpy.management.DeleteDomain(
+		in_workspace = gdb
+		,domain_name = 'Sensor Type'
 	)
 	
 	
+
+def delete_field_serialnumber(
+	gdb
+	,indent_level = 0
+):
+
+	table = os.path.join(
+		gdb
+		,'DataLogger'
+	)
 	
-	#
-	# Drop view
-	#
 	
 	logging.info(
-		'Dropping view'
+		'Deleting field: DataLogger.SerialNumber'
+		,extra = {'indent_level': indent_level}
+	)
+
+	arcpy.management.DeleteField(
+		in_table = table
+		,drop_field = 'SerialNumber'
+	)
+	
+	
+
+def delete_table_sensor(
+	gdb
+	,indent_level = 0
+):
+
+	table = os.path.join(
+		gdb
+		,'Sensor'
+	)
+	
+	
+	logging.info(
+		'Deleting table: Sensor'
 		,extra = {'indent_level': indent_level}
 	)
 
 	arcpy.management.Delete(
-		in_data = view
+		in_data = table
 	)
 	
 	
-	
-	#
-	# Create view
-	#
+
+def update_domain_location_issue_type(
+	gdb
+	,indent_level = 0
+):
+
+	name = 'Location Issue Type'
+
+	coded_values = (
+		('Battery swap', 'Battery swap')
+		,('Equipment - Device or SIM changed', 'Equipment - Device or SIM changed')
+		,('Equipment – Failure / unable to connect', 'Equipment – Failure / unable to connect')
+		,('Equipment - In-Situ low battery', 'Equipment - In-Situ low battery')
+		,('Equipment - None installed', 'Equipment - None installed')
+		,('Equipment - Solar panel', 'Equipment - Solar panel')
+		,('Follow up - Maintenance required next visit', 'Follow up - Maintenance required next visit')
+		,('Follow up - Issues resolved', 'Follow up - Issues resolved')
+		,('Invalid data', 'Invalid data')
+		,('Inventory verification', 'Inventory verification')
+		,('MP - Inaccessible due to high water', 'MP - Inaccessible due to high water')
+		,('MP - Missing (washed away, etc.)', 'MP - Missing (washed away, etc.)')
+		,('MP - New', 'MP - New')
+		,('MP - No water at MP', 'MP - No water at MP')
+		,('No access', 'No access')
+		,('Photo – Site / MP', 'Photo – Site / MP')
+		,('Vandalism', 'Vandalism')
+		,('Other', 'Other')
+		,('General note', 'General note')
+	)
+
 	
 	logging.info(
-		'Creating view'
+		'Updating domain: Location Issue Type'
 		,extra = {'indent_level': indent_level}
 	)
+
 	
-	create_hydro_data_model.create_view_locationlastvisit(
-		gdb = gdb
-		,indent_level = indent_level + 1
+	logging.info(
+		'Deleting existing coded values'
+		,extra = {'indent_level': indent_level + 1}
 	)
+	
+	domains = arcpy.da.ListDomains(gdb)
+	
+	for domain in domains:
+	
+		if domain.name == name:
+		
+			arcpy.management.DeleteCodedValueFromDomain(
+				in_workspace = gdb
+				,domain_name = name
+				,code = list(domain.codedValues.keys())
+			)
+			
+			break
+				
+		else:
+		
+			continue
 
-
+	
+	logging.info(
+		'Adding new coded values'
+		,extra = {'indent_level': indent_level + 1}
+	)
+	
+	for cv in coded_values:
+	
+		logging.info(
+			cv[0]
+			,extra = {'indent_level': indent_level + 2}
+		)
+	
+		arcpy.management.AddCodedValueToDomain(
+			in_workspace = gdb
+			,domain_name = name
+			,code = cv[0]
+			,code_description = cv[1]
+		)
+	
+	
 
 ################################################################################
 # Utility functions
@@ -418,7 +553,7 @@ def _print_banner(
 
 	banner = (
 		f'{mg.BANNER_DELIMITER_1}\n'
-		f'Hydrologic Data Model Geodatabase Update 3\n'
+		f'Hydrologic Data Model Geodatabase Update 4\n'
 		f'{mg.BANNER_DELIMITER_2}\n'
 		f'Target database server:  {args.server}\n'
 		f'Log level:               {args.log_level}\n'
@@ -559,13 +694,35 @@ if __name__ == '__main__':
 
 
 	#
-	# Update Views
+	# Delete objects
 	#
 	
 	
-	# LocationLastVisit
-	
-	update_view_locationlastvisit(
+	delete_table_sensor(
+		gdb = gdb
+		,indent_level = 1
+	)
+
+
+	delete_domain_sensor_type(
+		gdb = gdb
+		,indent_level = 1
+	)
+
+
+	delete_field_serialnumber(
+		gdb = gdb
+		,indent_level = 1
+	)
+
+
+	add_field_location_isactive(
+		gdb = gdb
+		,indent_level = 1
+	)
+
+
+	update_domain_location_issue_type(
 		gdb = gdb
 		,indent_level = 1
 	)

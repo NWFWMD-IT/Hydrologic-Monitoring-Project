@@ -38,6 +38,7 @@
 #	2023-03-14 MCM Replaced OS_USERNAMES_SDE with dynamic domain name
 #	2024-10-22 MCM Added view capability (#191)
 #	2024-11-05 MCM Added domain Battery Units (#195)
+#	2025-06-28 MCM Move objects to "Obsolete" (#229, 232)
 #
 # To do:
 #	none
@@ -92,10 +93,10 @@ ATTRIBUTE_TABLE_NAMES = (
 	,'LocationVisit'
 	,'MeasuringPoint'
 	,'RainfallTips'
-	,'Sensor'
 	,'StageMeasurement'
 	,'TemperatureMeasurement'
 	# Obsolete
+	,'Sensor'
 	,'VisitStaff'
 )
 
@@ -116,7 +117,6 @@ DOMAIN_NAMES = (
 	,'Location Issue Type'
 	,'Rainfall Exception'
 	,'Reading Type'
-	,'Sensor Type'
 	,'Stage Adjustment Exception'
 	,'Stage Method'
 	,'Temperature Serial Number'
@@ -128,6 +128,7 @@ DOMAIN_NAMES = (
 	,'Battery Replacement Time Adjustment'
 	,'Dessicant Maintenance' # Misspelled
 	,'Hydro Staff'
+	,'Sensor Type'
 	,'Temperature Units'
 	,'Time Adjustment Type'
 )
@@ -143,6 +144,7 @@ HISTORY_TABLE_NAMES = (
 )
 
 VIEW_NAMES = (
+	# Obsolete
 	'LocationLastVisit'
 	,
 )
