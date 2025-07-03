@@ -302,7 +302,7 @@ def create_domains(
 				,('No access', 'No access')
 				,('Photo – Site / MP', 'Photo – Site / MP')
 				,('Vandalism', 'Vandalism')
-				,('Other', 'Other')
+				,('Other issue', 'Other issue')
 				,('General note', 'General note')
 			)
 		)

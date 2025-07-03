@@ -176,7 +176,7 @@ def update_domain_location_issue_type(
 		,('No access', 'No access')
 		,('Photo – Site / MP', 'Photo – Site / MP')
 		,('Vandalism', 'Vandalism')
-		,('Other', 'Other')
+		,('Other issue', 'Other issue')
 		,('General note', 'General note')
 	)
 
