@@ -161,7 +161,7 @@ def update_domain_location_issue_type(
 	coded_values = (
 		('Battery swap', 'Battery swap')
 		,('Equipment - Device or SIM changed', 'Equipment - Device or SIM changed')
-		,('Equipment – Failure / unable to connect', 'Equipment – Failure / unable to connect')
+		,('Equipment - Failure / unable to connect', 'Equipment - Failure / unable to connect')
 		,('Equipment - In-Situ low battery', 'Equipment - In-Situ low battery')
 		,('Equipment - None installed', 'Equipment - None installed')
 		,('Equipment - Solar panel', 'Equipment - Solar panel')
@@ -174,7 +174,7 @@ def update_domain_location_issue_type(
 		,('MP - New', 'MP - New')
 		,('MP - No water at MP', 'MP - No water at MP')
 		,('No access', 'No access')
-		,('Photo – Site / MP', 'Photo – Site / MP')
+		,('Photo - Site / MP', 'Photo - Site / MP')
 		,('Vandalism', 'Vandalism')
 		,('Other issue', 'Other issue')
 		,('General note', 'General note')
