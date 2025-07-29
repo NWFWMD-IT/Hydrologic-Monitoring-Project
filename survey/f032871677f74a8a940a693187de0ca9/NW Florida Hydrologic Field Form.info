@@ -29,11 +29,31 @@
         "enabled": true,
         "required": false
     },
+    "notificationsInfo": {
+        "webhooks": [
+            {
+                "active": true,
+                "events": [
+                    "addData",
+                    "editData"
+                ],
+                "id": "2RCNs6x60",
+                "includePortalInfo": true,
+                "includeServiceRequest": true,
+                "includeServiceResponse": true,
+                "includeSurveyInfo": true,
+                "includeUserInfo": true,
+                "modified": 1751398778117,
+                "name": "MS-FLOW",
+                "url": "https://defaultbbddf378d8ce494999c1a992cfc32c.55.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/7650b2059b3e4ed6bcaa5d03046c17d2/triggers/When_a_survey_response_is_submitted/versions/08584502086132731376/run?api-version=1&tenantId=tId&environmentName=Default-bbddf378-d8ce-4949-99c1-a992cfc32c55&sp=%2Ftriggers%2FWhen_a_survey_response_is_submitted%2Fversions%2F08584502086132731376%2Frun%2C%2Ftriggers%2FWhen_a_survey_response_is_submitted%2Fversions%2F08584502086132731376%2Fread&sv=1.0&sig=7a9FcVD9Box-f4R5YkZGOk0dFjHpX4oXZjXDDVlIQQY"
+            }
+        ]
+    },
     "overviewInfo": {
         "enabled": false
     },
     "publishInfo": {
-        "connectVersion": "3.19.116",
+        "connectVersion": "3.23.48",
         "webFormTransform": true
     },
     "queryInfo": {
