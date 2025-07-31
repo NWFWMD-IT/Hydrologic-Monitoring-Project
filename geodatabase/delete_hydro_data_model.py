@@ -39,6 +39,9 @@
 #	2024-10-22 MCM Added view capability (#191)
 #	2024-11-05 MCM Added domain Battery Units (#195)
 #	2025-06-28 MCM Move objects to "Obsolete" (#229, 232)
+#	2025-07-13 MCM Add -d <database> argument to support development
+#	                 infrastructure
+#	               Change keep domain flag from -d to -D
 #
 # To do:
 #	none
@@ -394,6 +397,15 @@ def _configure_arguments():
 	)
 
 	g.add_argument(
+		'-d'
+		,'--database'
+		,dest = 'database'
+		,help = 'SQL Server database name'
+		,metavar = '<database>'
+		,required = True
+	)
+
+	g.add_argument(
 		'-L'
 		,'--log-level'
 		,choices = (
@@ -420,7 +432,7 @@ def _configure_arguments():
 	)
 
 	g.add_argument(
-		'-d'
+		'-D'
 		,'--keep-domains'
 		,dest = 'keep_domains'
 		,help = 'Do not delete domains'
@@ -480,6 +492,7 @@ def _configure_log_file(
 
 def _connect_gdb(
 	server
+	,database
 ):
 	'''
 	Create temporary geodatabase connection using OS authentication
@@ -519,7 +532,7 @@ def _connect_gdb(
 		,database_platform = 'SQL_SERVER'
 		,instance = server
 		,account_authentication = 'OPERATING_SYSTEM_AUTH'
-		,database = 'hydro'
+		,database = database
 	)
 	
 	
@@ -647,6 +660,7 @@ def _print_banner(
 		f'Hydrologic Data Model Deletion\n'
 		f'{mg.BANNER_DELIMITER_2}\n'
 		f'Target database server:  {args.server}\n'
+		f'Target database name:    {args.database}\n'
 		f'Log level:               {args.log_level}\n'
 		f'Keep domains:            {args.keep_domains}\n'
 		f'{mg.BANNER_DELIMITER_1}'
@@ -776,7 +790,10 @@ if __name__ == '__main__':
 		(
 			gdb
 			,temp_dir
-		) = _connect_gdb(args.server)
+		) = _connect_gdb(
+			server = args.server
+			,database = args.database
+		)
 		
 		
 	except RuntimeError as e:

@@ -101,6 +101,9 @@
 # History:
 #	2023-10-30 MCM Created (#109)
 #	2025-03-16 MCM Allow loading one photo to multiple Measuring Points (#213)
+#	2025-07-13 MCM Add -d <database> argument to support development
+#	                 infrastructure
+#	               Change photo directory flag from -d to -D
 #
 # To do:
 #	none
@@ -1876,6 +1879,15 @@ def _configure_arguments():
 
 	g.add_argument(
 		'-d'
+		,'--database'
+		,dest = 'database'
+		,help = 'Geodatabase database name'
+		,metavar = '<database>'
+		,required = True
+	)
+
+	g.add_argument(
+		'-D'
 		,'--photo-dir'
 		,dest = 'photo_dir'
 		,help = 'Photo directory'
@@ -1984,6 +1996,7 @@ def _configure_log_file(
 
 def _connect_gdb(
 	server
+	,database
 ):
 	'''
 	Create temporary geodatabase connection using OS authentication
@@ -2023,7 +2036,7 @@ def _connect_gdb(
 		,database_platform = 'SQL_SERVER'
 		,instance = server
 		,account_authentication = 'OPERATING_SYSTEM_AUTH'
-		,database = 'hydro'
+		,database = database
 	)
 
 
@@ -2244,6 +2257,7 @@ def _print_banner(
 		f'Photo index file:                  {args.index_file}\n'
 		f'Photo directory:                   {args.photo_dir}\n'
 		f'Geodatabase server:                {args.gdb_server}\n'
+		f'Geodatabase database name:         {args.database}\n'
 		f'Log level:                         {args.log_level}\n'
 		f'Log file:                          {args.log_file_name}\n'
 		f'Feedback:                          {args.feedback}\n'
@@ -2399,7 +2413,10 @@ if __name__ == '__main__':
 		(
 			gdb
 			,temp_dir
-		) = _connect_gdb(args.gdb_server)
+		) = _connect_gdb(
+			server = args.gdb_server
+			,database = args.database
+		)
 
 
 	except RuntimeError as e:

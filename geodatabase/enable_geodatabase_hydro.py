@@ -21,6 +21,8 @@
 #	2022-12-14 MCM Moved literals to constant OS_USERNAMES
 #	2023-02-22 MCM Moved constants to constants.py
 #	2023-03-13 MCM Replaced OS_USERNAMES_SDE with dynamic domain name
+#	2025-07-13 MCM Add -d <database> argument to support development
+#	                 infrastructure
 #
 # To do:
 #	none
@@ -119,6 +121,15 @@ def _configure_arguments():
 		,required = True
 	)
 	
+	g.add_argument(
+		'-d'
+		,'--database'
+		,dest = 'database'
+		,help = 'SQL Server database name'
+		,metavar = '<database>'
+		,required = True
+	)
+
 	g.add_argument(
 		'-a'
 		,'--authorization-file'
@@ -226,6 +237,7 @@ def _print_banner(
 		f'Enable Geodatabase Features for [hydro] Database\n'
 		f'{mg.BANNER_DELIMITER_2}\n'
 		f'SQL Server hostname:     {args.server}\n'
+		f'SQL Server database:     {args.database}\n'
 		f'Authorization file:      {args.auth_file}\n'
 		f'Log level:               {args.log_level}\n'
 		f'{mg.BANNER_DELIMITER_1}'
@@ -359,7 +371,7 @@ if __name__ == '__main__':
 			,database_platform = 'SQL_SERVER'
 			,instance = args.server
 			,account_authentication = 'OPERATING_SYSTEM_AUTH'
-			,database = 'hydro'
+			,database = args.database
 		)
 		
 		

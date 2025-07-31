@@ -109,6 +109,10 @@
 #	               Remove LocationVisit.InventoryVerified (#232)
 #	               Update domain Location Issue Type (#242)
 #	               Add LocationVisit.IsActive (#245)
+#	2025-07-13 MCM Move discharge data to a separate table (#237)
+#	               Add -d <database> argument to support development
+#	                 infrastructure
+#	               Change domain deletion flag from -d to -D
 #
 # To do:
 #	none
@@ -1391,6 +1395,15 @@ def _configure_arguments():
 	)
 
 	g.add_argument(
+		'-d'
+		,'--database'
+		,dest = 'database'
+		,help = 'SQL Server database name'
+		,metavar = '<database>'
+		,required = True
+	)
+
+	g.add_argument(
 		'-L'
 		,'--log-level'
 		,choices = (
@@ -1417,7 +1430,7 @@ def _configure_arguments():
 	)
 
 	g.add_argument(
-		'-d'
+		'-D'
 		,'--disable-domains'
 		,dest = 'disable_domains'
 		,help = 'Disable domain creation (for development/debugging)'
@@ -1477,6 +1490,7 @@ def _configure_log_file(
 
 def _connect_gdb(
 	server
+	,database
 ):
 	'''
 	Create temporary geodatabase connection using OS authentication
@@ -1516,7 +1530,7 @@ def _connect_gdb(
 		,database_platform = 'SQL_SERVER'
 		,instance = server
 		,account_authentication = 'OPERATING_SYSTEM_AUTH'
-		,database = 'hydro'
+		,database = database
 	)
 	
 	
@@ -1665,6 +1679,7 @@ def _print_banner(
 		f'Hydrologic Data Model Geodatabase Deployment\n'
 		f'{mg.BANNER_DELIMITER_2}\n'
 		f'Target database server:  {args.server}\n'
+		f'Target database name:    {args.database}\n'
 		f'Log level:               {args.log_level}\n'
 		f'Log file:                {args.log_file_name}\n'
 		f'Disable domain creation: {args.disable_domains}\n'
@@ -1792,7 +1807,10 @@ if __name__ == '__main__':
 		(
 			gdb
 			,temp_dir
-		) = _connect_gdb(args.server)
+		) = _connect_gdb(
+			server = args.server
+			,database = args.database
+		)
 		
 		
 	except RuntimeError as e:
