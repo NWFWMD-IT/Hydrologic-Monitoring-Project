@@ -29,16 +29,16 @@
     "lastViewed": -1,
     "licenseInfo": null,
     "listed": false,
-    "modified": 1744658304986,
+    "modified": 1753186560045,
     "name": "NW_Florida_Hydrologic_Field_Form.zip",
     "numComments": 0,
     "numRatings": 0,
-    "numViews": 531,
+    "numViews": 860,
     "orgId": "0123456789ABCDEF",
     "owner": "PortalPublisher",
     "ownerFolder": "00424ccd6b064428b4ba071946e412b9",
     "properties": {
-        "connectVersion": "3.19.116",
+        "connectVersion": "3.23.48",
         "isVersionLocked": true
     },
     "protected": true,
@@ -46,7 +46,7 @@
     "scoreCompleteness": 48,
     "screenshots": [
     ],
-    "size": 175765,
+    "size": 172393,
     "snippet": "Station Maintenance and Data Download",
     "spatialReference": null,
     "subInfo": 0,
