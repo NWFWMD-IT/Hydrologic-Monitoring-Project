@@ -113,6 +113,7 @@
 #	               Add -d <database> argument to support development
 #	                 infrastructure
 #	               Change domain deletion flag from -d to -D
+#	               Remove view LocationLastVisit (#261)
 #
 # To do:
 #	none
@@ -1189,154 +1190,6 @@ def create_rcs(
 
 
 
-####################
-# Views
-####################
-
-def create_views(
-	gdb
-	,indent_level = 0
-):
-
-	create_view_locationlastvisit(gdb, indent_level)
-
-
-
-def create_view_locationlastvisit(
-	gdb
-	,indent_level = 0
-):
-
-	
-	# Configuration
-	
-	view_name = 'LocationLastVisit'
-	view_text = sql_text.SQL_VIEW_LOCATIONLASTVISIT
-	view_alias = 'Location Last Visit'
-	
-	object_id_field_name = 'id'
-	shape_field_name = 'shape'
-	
-	geometry_type = 'POINT'
-	sr = C.SR_UTM16N_NAD83
-	extent = C.EXTENT_DISTRICT
-	
-	field_aliases = (
-		#name					,alias
-		# Location
-		('ID'					,'Geodatabase Unique ID')
-		,('NWFID'				,'NWFID')
-		,('Name'				,'Name')
-		,('Project'				,'Project Number')
-		,('FLUWID'				,'FLUWID')
-		,('HasDataLogger'			,'Has Data Logger')
-		,('HasSensor'				,'Has Sensor')
-		,('HasMeasuringPoint'			,'Has Measuring Point')
-		,('HasRainfall'				,'Has Rainfall')
-		,('HasStage'				,'Has Stage')
-		,('HasGroundwater'			,'Has Groundwater')
-		,('HasConductivity'			,'Has Conductivity')
-		,('HasADVM'				,'Has ADVM')
-		,('HasDischarge'			,'Has Discharge')
-		,('HasTemperature'			,'Has Temperature')
-		,('HasWaterQuality'			,'Has Water Quality')
-		,('LocationComments'			,'Location Comments')
-		,('LocationGlobalID'			,'Location GlobalID')
-		# LocationVisit
-		,('VisitDate'				,'Visit Date')
-		,('Staff'				,'Visit Staff')
-		,('StaffComments'			,'Other Staff')
-		,('EquipmentChange'			,'Equipment Change Needed')
-		,('BatteryDOA'				,'Battery DOA')
-		,('BatteryLevel'			,'Battery Level')
-		,('BatteryLevel2'			,'Battery Level (new battery)')
-		,('BatteryReplaced'			,'Battery Replaced')
-		,('BatteryReplacementDate'		,'Battery Replacement Date')
-		,('BatteryReplacementException'		,'Battery Replacement Exception')
-		,('BatteryReplacementComments'		,'Battery Replacement Comments')
-		,('DesiccantEnclosure'			,'Enclosure Desiccant')
-		,('DesiccantSensor'			,'Sensor Desiccant')
-		,('DesiccantComments'			,'Desiccant Comments')
-		,('DataLoggerRecordStart'		,'Data Logger Record Start')
-		,('DataLoggerRecordEnd'			,'Data Logger Record End')
-		,('DataLoggerTime'			,'Data Logger Clock Time')
-		,('DataLoggerTimeActual'		,'Laptop Time')
-		,('DataLoggerTimeAdjAmount'		,'Data Logger Time Adjustment (minutes)')
-		,('DataLoggerTimeAdjusted'		,'Data Logger Time Adjusted')
-		,('DataLoggerTimeAdjDate'		,'Data Logger Time Adjustment Date')
-		,('DataLoggerTimeAdjException'		,'Data Logger Time Adjustment Exception')
-		,('DataLoggerTimeAdjComments'		,'Data Logger Time Adjustment Comments')
-		,('DataLoggerTime2'			,'Data Logger Clock Time (new battery)')
-		,('DataLoggerTimeActual2'		,'Laptop Time (new battery)')
-		,('DataLoggerTimeAdjAmount2'		,'Data Logger Time Adjustment (minutes; new battery)')
-		,('DataLoggerTimeAdjusted2'		,'Data Logger Time Adjusted (new battery)')
-		,('DataLoggerTimeAdjDate2'		,'Data Logger Time Adjustment Date (new battery)')
-		,('DataLoggerTimeAdjException2'		,'Data Logger Time Adjustment Exception (new battery)')
-		,('DataLoggerTimeAdjComments2'		,'Data Logger Time Adjustment Comments (new battery)')
-		,('RainfallBucketCleaned'		,'Rainfall Bucket Cleaned')
-		,('RainfallBucketException'		,'Rainfall Bucket Exception')
-		,('RainfallBucketComments'		,'Rainfall Bucket Comments')
-		,('RainfallMechanismChecked'		,'Tipping Mechanism Checked')
-		,('RainfallMechanismException'		,'Tipping Mechanism Exception')
-		,('RainfallMechanismComments'		,'Rainfall Mechanism Comments')
-		,('ADVMRecordStart'			,'ADVM Record Start')
-		,('ADVMRecordEnd'			,'ADVM Record End')
-		,('ADVMDischarge_RecordStart'		,'ADVM Discharge Record Start')
-		,('ADVMDischarge_RecordEnd'		,'ADVM Discharge Record End')
-		,('ADVMBeamCheckedInitial'		,'ADVM Initial Beam Checked')
-		,('ADVMBeamCheckInitialException'	,'ADVM Initial Beam Check Exception')
-		,('ADVMBeamCheckInitialComments'	,'ADVM Initial Beam Check Comments')
-		,('ADVMBeamCheckedSecondary'		,'ADVM Secondary Beam Checked')
-		,('ADVMBeamCheckSecondaryException'	,'ADVM Secondary Beam Check Exception')
-		,('ADVMBeamCheckSecondaryComments'	,'ADVM Secondary Beam Check Comments')
-		,('ADVMCleaned'				,'ADVM Cleaned')
-		,('ADVMCleanedException'		,'ADVM Cleaned Exception')
-		,('ADVMCleanedComments'			,'ADVM Cleaned Comments')
-		,('ADVMMaintenance'			,'ADVM Additional Maintenace')
-		,('ADVMMaintenanceComments'		,'ADVM Maintenance Comments')
-		,('DischargeRecordStart'		,'Discharge Record Start')
-		,('DischargeRecordEnd'			,'Discharge Record End')
-		,('DischargeVolume'			,'Discharge Volume')
-		,('DischargeUncertainty'		,'Discharge Uncertainty')
-		,('WaterQualitySensorPulled'		,'Water Quality Sensor Pulled')
-		,('WaterQualitySensorPullDate'		,'Water Quality Sensor Pull Date')
-		,('WaterQualityPurgeStart'		,'Water Quality Purge Start')
-		,('WaterQualitySamplingEnd'		,'Water Quality Sampling End')
-		,('WaterQualitySensorReinstallDate'	,'Water Quality Sensor Reinstall Date')
-		,('LocationVisitGlobalID'		,'Location Visit GlobalID')
-		,('LocationVisitEmployee'		,'Location Visit Employee')
-		,('LocationVisitEditTimestamp'		,'Location Visit EditTimestamp')
-		# LocationIssue
-		,('IssueCount'				,'Issue Count')
-	)
-	
-	privileges = (
-		#user				read		write
-		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
-		,
-	)
-	
-	
-	
-	# Create view
-	
-	mg.create_view(
-		gdb = gdb
-		,view_name = view_name
-		,view_text = view_text
-		,view_alias = view_alias
-		,object_id_field_name = object_id_field_name
-		,shape_field_name = shape_field_name
-		,geometry_type = geometry_type
-		,sr = sr
-		,extent = extent
-		,field_aliases = field_aliases
-		,privileges = privileges
-		,indent_level = indent_level
-	)
-	
-
-
 ################################################################################
 # Utility functions
 ################################################################################
@@ -1877,19 +1730,6 @@ if __name__ == '__main__':
 	logging.info('Creating relationship classes')
 
 	create_rcs(
-		gdb = gdb
-		,indent_level = 1
-	)
-
-
-
-	#
-	# Create views
-	#
-
-	logging.info('Creating views')
-
-	create_views(
 		gdb = gdb
 		,indent_level = 1
 	)
