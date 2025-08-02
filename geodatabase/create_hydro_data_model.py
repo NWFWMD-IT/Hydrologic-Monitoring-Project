@@ -511,6 +511,7 @@ def create_tables(
 
 	create_table_conductivitymeasurement(gdb, indent_level)
 	create_table_datalogger(gdb, indent_level)
+	create_table_dischargemeasurement(gdb, indent_level)
 	create_table_groundwatermeasurement(gdb, indent_level)
 	create_table_locationissue(gdb, indent_level)
 	create_table_locationvisit(gdb, indent_level)
@@ -643,6 +644,67 @@ def create_table_datalogger(
 		,editor_tracking = editor_tracking
 		,archiving = archiving
 		,attachments = attachments
+		,privileges = privileges
+		,indent_level = indent_level
+	)
+
+
+
+def create_table_dischargemeasurement(
+	gdb
+	,indent_level = 0
+):
+
+
+	# Configuration
+
+	table_name = 'DischargeMeasurement'
+	alias = 'Discharge Measurement'
+
+	global_id = True
+	editor_tracking = True
+	archiving = True
+	attachments = True
+	attachments_upgrade = True
+
+	table = os.path.join(
+		gdb
+		,table_name
+	)
+
+	attributes = (
+		#name				,type		,precision	,scale	,length		,alias				,nullable	,required	,domain					,default
+		('RecordStart'			,'DATE'		,None		,None	,None		,'Discharge Record Start'	,True		,False		,None					,None)
+		,('RecordEnd'			,'DATE'		,None		,None	,None		,'Discharge Record End'		,True		,False		,None					,None)
+		,('Volume'			,'DOUBLE'	,38		,2	,None		,'Discharge Volume'		,True		,False		,None					,None)
+		,('Uncertainty'			,'DOUBLE'	,38		,2	,None		,'Discharge Uncertainty'	,True		,False		,None					,None)
+		,('IsReviewed'			,'TEXT'		,None		,None	,3		,'Is Reviewed'			,True		,False		,'Yes/No'				,'Yes')
+		,('LocationVisitGlobalID'	,'GUID'		,None		,None	,None		,'Related Location Visit'	,True		,False		,None					,None)
+	)
+
+	subtypes = None
+
+	privileges = (
+		#user				read		write
+		(f'{_get_domain()}\\arcgis'	,'GRANT'	,'GRANT')
+		,
+	)
+
+
+
+	# Create table
+
+	mg.create_table(
+		gdb = gdb
+		,table_name = table_name
+		,alias = alias
+		,attributes = attributes
+		,subtypes = subtypes
+		,global_id = global_id
+		,editor_tracking = editor_tracking
+		,archiving = archiving
+		,attachments = attachments
+		,attachments_upgrade = attachments_upgrade
 		,privileges = privileges
 		,indent_level = indent_level
 	)
@@ -1155,6 +1217,7 @@ def create_rcs(
 		,('Location'		,'DataLogger'			,'Location__DataLogger'				,'SIMPLE'	,'Data Logger'			,'Location'		,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationGlobalID'		,None		,None			,None)
 		,('Location'		,'LocationVisit'		,'Location__LocationVisit'			,'SIMPLE'	,'Location Visit'		,'Location'		,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationGlobalID'		,None		,None			,None)
 		,('Location'		,'MeasuringPoint'		,'Location__MeasuringPoint'			,'SIMPLE'	,'Measuring Point'		,'Location'		,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationGlobalID'		,None		,None			,None)
+		,('LocationVisit'	,'DischargeMeasurement'		,'LocationVisit_DischargeMeasurement'		,'SIMPLE'	,'Discharge Measurement'	,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)
 		,('LocationVisit'	,'LocationIssue'		,'LocationVisit__LocationIssue'			,'SIMPLE'	,'Location Issue'		,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)
 		,('LocationVisit'	,'RainfallTips'			,'LocationVisit__RainfallTips'			,'SIMPLE'	,'Rainfall Tips'		,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)
 		,('LocationVisit'	,'StageMeasurement'		,'LocationVisit__StageMeasurement'		,'SIMPLE'	,'Stage Measurement'		,'Location Visit'	,'NONE'			,'ONE_TO_MANY'		,'NONE'		,'GlobalID'	,'LocationVisitGlobalID'	,None		,None			,None)
