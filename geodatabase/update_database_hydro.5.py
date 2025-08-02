@@ -287,6 +287,14 @@ def migrate_data_discharge(
 					' OR DischargeRecordEnd IS NOT NULL'
 					' OR DischargeVolume IS NOT NULL'
 					' OR DischargeUncertainty IS NOT NULL'
+					' OR EXISTS('
+					'	SELECT'
+					'		LocationVisit__ATTACH_EVW.REL_GLOBALID'
+					'	FROM hydro.LocationVisit__ATTACH_EVW'
+					' WHERE'
+					'	LocationVisit__ATTACH_EVW.REL_GLOBALID = LocationVisit_EVW.GlobalID'
+					"	AND LocationVisit__ATTACH_EVW.KEYWORDS = 'DischargeDataFiles'"
+					' )'
 				)
 			) as cursor_source:
 			
