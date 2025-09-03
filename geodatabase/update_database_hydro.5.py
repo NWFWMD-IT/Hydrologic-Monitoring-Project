@@ -623,7 +623,7 @@ def _configure_arguments():
 
 	ap = argparse.ArgumentParser(
 		conflict_handler = 'resolve' # Allow overwriting built-in -h/--help to add to custom argument group
-		,description = 'Update hydrologic monitoring geodatabase with schema changeset 2'
+		,description = 'Update hydrologic monitoring geodatabase'
 	)
 
 
