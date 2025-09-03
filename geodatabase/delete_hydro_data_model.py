@@ -91,6 +91,7 @@ ATTACHMENT_TABLE_NAMES = (
 ATTRIBUTE_TABLE_NAMES = (
 	'ConductivityMeasurement'
 	,'DataLogger'
+	,'Discharge'
 	,'GroundwaterMeasurement'
 	,'LocationIssue'
 	,'LocationVisit'
