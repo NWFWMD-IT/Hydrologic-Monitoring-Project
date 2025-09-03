@@ -110,10 +110,12 @@
 #	               Update domain Location Issue Type (#242)
 #	               Add LocationVisit.IsActive (#245)
 #	2025-07-13 MCM Move discharge data to a separate table (#237)
+#	               Change domain deletion flag from -d to -D
+#	               Change Data Logger time columns (#250)
+#	               Change Data Logger / ADVM record columns (#265)
+#	               Remove view LocationLastVisit (#261)
 #	               Add -d <database> argument to support development
 #	                 infrastructure
-#	               Change domain deletion flag from -d to -D
-#	               Remove view LocationLastVisit (#261)
 #
 # To do:
 #	none
@@ -877,8 +879,10 @@ def create_table_locationvisit(
 		,('DesiccantEnclosure'			,'TEXT'		,None		,None	,32		,'Enclosure Desiccant'			,True		,False		,'Desiccant Maintenance'		,None)
 		,('DesiccantSensor'			,'TEXT'		,None		,None	,32		,'Sensor Desiccant'			,True		,False		,'Desiccant Maintenance'		,None)
 		,('DesiccantComments'			,'TEXT'		,None		,None	,1024		,'Desiccant Comments'			,True		,False		,None					,None)
-		,('DataLoggerRecordStart'		,'DATE'		,None		,None	,None		,'Data Logger Record Start'		,True		,False		,None					,None)
-		,('DataLoggerRecordEnd'			,'DATE'		,None		,None	,None		,'Data Logger Record End'		,True		,False		,None					,None)
+		,('DataLoggerRecordReviewed'		,'TEXT'		,None		,None	,3		,'Data Logger Record Reviewed'		,True		,False		,'Yes/No'				,None)
+		,('DataLoggerRecordReviewedComments'	,'TEXT'		,None		,None	,1024		,'Data Logger Record Review Comments'	,True		,False		,None					,None)
+		,('DataLoggerRecordIssue'		,'TEXT'		,None		,None	,3		,'Data Logger Record Issue'		,True		,False		,'Yes/No'				,None)
+		,('DataLoggerTimeCorrect'		,'TEXT'		,None		,None	,3		,'Data Logger Clock Time Correct'	,True		,False		,'Yes/No'				,None)
 		,('DataLoggerTime'			,'DATE'		,None		,None	,None		,'Data Logger Clock Time'		,True		,False		,None					,None)
 		,('DataLoggerTimeActual'		,'DATE'		,None		,None	,None		,'Laptop Time'				,True		,False		,None					,None)
 		,('DataLoggerTimeAdjAmount'		,'LONG'		,None		,None	,None		,'Data Logger Time Adjustment (minutes)'	,True	,False		,None					,None)
@@ -886,11 +890,8 @@ def create_table_locationvisit(
 		,('DataLoggerTimeAdjDate'		,'DATE'		,None		,None	,None		,'Data Logger Time Adjustment Date'	,True		,False		,None					,None)
 		,('DataLoggerTimeAdjException'		,'TEXT'		,None		,None	,32		,'Data Logger Time Adjustment Exception'	,True	,False		,'Time Adjustment Exception'		,None)
 		,('DataLoggerTimeAdjComments'		,'TEXT'		,None		,None	,1024		,'Data Logger Time Adjustment Comments'	,True		,False		,None					,None)
-		,('DataLoggerTime2'			,'DATE'		,None		,None	,None		,'Data Logger Clock Time (new battery)'	,True		,False		,None					,None)
-		,('DataLoggerTimeActual2'		,'DATE'		,None		,None	,None		,'Laptop Time (new battery)'		,True		,False		,None					,None)
-		,('DataLoggerTimeAdjAmount2'		,'LONG'		,None		,None	,None		,'Data Logger Time Adjustment (minutes; new battery)'	,True	,False	,None					,None)
+		,('DataLoggerTimeCorrect2'		,'TEXT'		,None		,None	,3		,'Data Logger Clock Time Correct (new battery)'	,True	,False		,'Yes/No'				,None)
 		,('DataLoggerTimeAdjusted2'		,'TEXT'		,None		,None	,3		,'Data Logger Time Adjusted (new battery)'	,True	,False		,'Yes/No'				,None)
-		,('DataLoggerTimeAdjDate2'		,'DATE'		,None		,None	,None		,'Data Logger Time Adjustment Date (new battery)'	,True	,False	,None					,None)
 		,('DataLoggerTimeAdjException2'		,'TEXT'		,None		,None	,32		,'Data Logger Time Adjustment Exception (new battery)'	,True	,False	,'Time Adjustment Exception'		,None)
 		,('DataLoggerTimeAdjComments2'		,'TEXT'		,None		,None	,1024		,'Data Logger Time Adjustment Comments (new battery)'	,True	,False	,None					,None)
 		,('RainfallBucketCleaned'		,'TEXT'		,None		,None	,3		,'Rainfall Bucket Cleaned'		,True		,False		,'Yes/No'				,None)
@@ -899,10 +900,9 @@ def create_table_locationvisit(
 		,('RainfallMechanismChecked'		,'TEXT'		,None		,None	,3		,'Tipping Mechanism Checked'		,True		,False		,'Yes/No'				,None)
 		,('RainfallMechanismException'		,'TEXT'		,None		,None	,32		,'Tipping Mechanism Exception'		,True		,False		,'Rainfall Exception'			,None)
 		,('RainfallMechanismComments'		,'TEXT'		,None		,None	,1024		,'Rainfall Mechanism Comments'		,True		,False		,None					,None)
-		,('ADVMRecordStart'			,'DATE'		,None		,None	,None		,'ADVM Record Start'			,True		,False		,None					,None)
-		,('ADVMRecordEnd'			,'DATE'		,None		,None	,None		,'ADVM Record End'			,True		,False		,None					,None)
-		,('ADVMDischarge RecordStart'		,'DATE'		,None		,None	,None		,'ADVM Discharge Record Start'		,True		,False		,None					,None)
-		,('ADVMDischarge RecordEnd'		,'DATE'		,None		,None	,None		,'ADVM Discharge Record End'		,True		,False		,None					,None)
+		,('ADVMRecordReviewed'			,'TEXT'		,None		,None	,3		,'ADVM Record Reviewed'			,True		,False		,'Yes/No'				,None)
+		,('ADVMRecordReviewedComments'		,'TEXT'		,None		,None	,1024		,'ADVM Record Review Comments'		,True		,False		,None					,None)
+		,('ADVMRecordIssue'			,'TEXT'		,None		,None	,3		,'ADVM Record Issue'			,True		,False		,'Yes/No'				,None)
 		,('ADVMBeamCheckedInitial'		,'TEXT'		,None		,None	,3		,'ADVM Initial Beam Checked'		,True		,False		,'Yes/No'				,None)
 		,('ADVMBeamCheckInitialException'	,'TEXT'		,None		,None	,32		,'ADVM Initial Beam Check Exception'	,True		,False		,'ADVM Beam Check Initial Exception'	,None)
 		,('ADVMBeamCheckInitialComments'	,'TEXT'		,None		,None	,1024		,'ADVM Initial Beam Check Comments'	,True		,False		,None					,None)

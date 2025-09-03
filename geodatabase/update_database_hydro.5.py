@@ -54,6 +54,80 @@ import mg
 # Schema change functions
 ################################################################################
 
+def alter_table_locationvisit(
+	gdb
+	,indent_level = 0
+):
+
+	table_name = 'LocationVisit'
+
+	table = os.path.join(
+		gdb
+		,table_name
+	)
+
+
+	# Delete fields
+
+	logging.info(
+		'Deleting attributes'
+		,extra = {'indent_level': indent_level}
+	)
+
+	field_names_delete = (
+		'ADVMDischarge_RecordEnd'
+		,'ADVMDischarge_RecordStart'
+		,'ADVMRecordEnd'
+		,'ADVMRecordStart'
+		,'DataLoggerRecordEnd'
+		,'DataLoggerRecordStart'
+		,'DataLoggerTime2'
+		,'DataLoggerTimeActual2'
+		,'DataLoggerTimeAdjAmount2'
+		,'DataLoggerTimeAdjDate2'
+	)
+
+	for field_name in field_names_delete:
+	
+		logging.info(
+			field_name
+			,extra = {'indent_level': indent_level + 1}
+		)
+	
+		arcpy.management.DeleteField(
+			in_table = table
+			,drop_field = field_name
+		)
+	
+
+
+	# Add fields
+	
+	logging.info(
+		'Adding attributes'
+		,extra = {'indent_level': indent_level}
+	)
+
+	attributes = (
+		#name					,type		,precision	,scale	,length		,alias						,nullable	,required	,domain		,default
+		('ADVMRecordIssue'			,'TEXT'		,None		,None	,3		,'ADVM Record Issue'				,True		,False		,'Yes/No'	,None)
+		,('ADVMRecordReviewed'			,'TEXT'		,None		,None	,3		,'ADVM Record Reviewed'				,True		,False		,'Yes/No'	,None)
+		,('ADVMRecordReviewedComments'		,'TEXT'		,None		,None	,1024		,'ADVM Record Review Comments'			,True		,False		,None		,None)
+		,('DataLoggerRecordIssue'		,'TEXT'		,None		,None	,3		,'Data Logger Record Issue'			,True		,False		,'Yes/No'	,None)
+		,('DataLoggerRecordReviewed'		,'TEXT'		,None		,None	,3		,'Data Logger Record Reviewed'			,True		,False		,'Yes/No'	,None)
+		,('DataLoggerRecordReviewedComments'	,'TEXT'		,None		,None	,1024		,'Data Logger Record Review Comments'		,True		,False		,None		,None)
+		,('DataLoggerTimeCorrect'		,'TEXT'		,None		,None	,3		,'Data Logger Clock Time Correct'		,True		,False		,'Yes/No'	,None)
+		,('DataLoggerTimeCorrect2'		,'TEXT'		,None		,None	,3		,'Data Logger Clock Time Correct (new battery)'	,True		,False		,'Yes/No'	,None)
+	)
+
+	subtype_domains = mg.add_fields(
+		table = table
+		,fields_spec = attributes
+		,indent_level = indent_level + 1
+	)
+
+
+
 def create_table_dischargemeasurement(
 	gdb
 	,indent_level = 0
@@ -995,6 +1069,19 @@ if __name__ == '__main__':
 	logging.info('Deleting view LocationLastVisit')
 	
 	delete_view_locationlastvisit(
+		gdb = gdb
+		,indent_level = 1
+	)
+	
+	
+	
+	#
+	# Alter table LocationVisit
+	#
+	
+	logging.info('Altering table LocationVisit')
+	
+	alter_table_locationvisit(
 		gdb = gdb
 		,indent_level = 1
 	)
