@@ -880,7 +880,7 @@ def create_table_locationvisit(
 		,('DesiccantSensor'			,'TEXT'		,None		,None	,32		,'Sensor Desiccant'			,True		,False		,'Desiccant Maintenance'		,None)
 		,('DesiccantComments'			,'TEXT'		,None		,None	,1024		,'Desiccant Comments'			,True		,False		,None					,None)
 		,('DataLoggerRecordReviewed'		,'TEXT'		,None		,None	,3		,'Data Logger Record Reviewed'		,True		,False		,'Yes/No'				,None)
-		,('DataLoggerRecordReviewedComments'	,'TEXT'		,None		,None	,1024		,'Data Logger Record Review Comments'	,True		,False		,None					,None)
+		,('DataLoggerRecordRevComments'		,'TEXT'		,None		,None	,1024		,'Data Logger Record Review Comments'	,True		,False		,None					,None)
 		,('DataLoggerRecordIssue'		,'TEXT'		,None		,None	,3		,'Data Logger Record Issue'		,True		,False		,'Yes/No'				,None)
 		,('DataLoggerTimeCorrect'		,'TEXT'		,None		,None	,3		,'Data Logger Clock Time Correct'	,True		,False		,'Yes/No'				,None)
 		,('DataLoggerTime'			,'DATE'		,None		,None	,None		,'Data Logger Clock Time'		,True		,False		,None					,None)
